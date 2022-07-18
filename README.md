@@ -15,7 +15,7 @@ Proto : https://adno.app/
     * https://fr.wikipedia.org/wiki/JPEG_2000
 * Ressources IIIF
   * https://gallica.bnf.fr/accueil/fr/content/accueil-fr
-  *  
+  * https://sketchfab.com/3d-models/la-grand-goule-e86fe915265c432c8ad0d49e25d2e0f3
 * Inspirations
   * https://static.emf.fr/annona/nautre/
   * https://planchesdesciences.fr/
