@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<script src="https://ncsu-libraries.github.io/annona/dist/annona.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://ncsu-libraries.github.io/annona/dist/annona.css">
+
+	<title>Document</title>
+</head>
+
+<body>
+
+
+	<!-- <iiif-storyboard annotationurl="https://dnoneill.github.io/annotate/annotations/wh234bz9013-0001-list.json"></iiif-storyboard> -->
+
+	<!-- <iiif-storyboard styling="toggleoverlay: true; tts:true;" annotationurl="http://localhost:3000/annotation"></iiif-storyboard> -->
+
+	<iiif-storyboard styling="toggleoverlay: true;" annotationurl="http://localhost:3003/annotation_r1"></iiif-storyboard>
+
+
+	<div id="annotations_list"></div>
+
+</body>
+
+<script>
+
+	fetch("http://localhost:3003/annotation_r1")
+	.then(rep => rep.json())
+	.then(annotations => {
+		annotations.map(annotation => {
+			console.log(annotation.body[0].value);
+			document.getElementById("annotations_list").innerHTML +=  "\n" + annotation.body[0].value
+		})
+	})
+
+
+
+</script>
+
+</html>

@@ -1,0 +1,42 @@
+{
+    "annotation_r1": [
+        {
+            "type": "Annotation",
+            "body": [
+                {
+                    "type": "TextualBody",
+                    "value": "test\n",
+                    "purpose": "commenting"
+                }
+            ],
+            "target": {
+                "source": "https://iiif.micr.io/dzzLm",
+                "selector": {
+                    "type": "SvgSelector",
+                    "value": "<svg><circle cx=\"25014.837890625\" cy=\"18481.05419921875\" r=\"3588.2865629128346\"></circle></svg>"
+                }
+            },
+            "@context": "http://www.w3.org/ns/anno.jsonld",
+            "id": "#83c9e43c-4003-40d6-8347-c7a5cdeb6661"
+        },
+        {
+            "type": "Annotation",
+            "body": [
+                {
+                    "type": "TextualBody",
+                    "value": "annotation",
+                    "purpose": "commenting"
+                }
+            ],
+            "target": {
+                "source": "https://iiif.micr.io/dzzLm",
+                "selector": {
+                    "type": "SvgSelector",
+                    "value": "<svg><ellipse cx=\"24284.287109375\" cy=\"17092.33349609375\" rx=\"1961.302734375\" ry=\"2059.90478515625\"></ellipse></svg>"
+                }
+            },
+            "@context": "http://www.w3.org/ns/anno.jsonld",
+            "id": "#c4840659-9d32-49cb-9f4c-bd87390f1f8c"
+        }
+    ]
+}

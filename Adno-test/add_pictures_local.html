@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js" integrity="sha512-UNM1njAgOFUa74Z0bADwAq8gbTcqZC8Ej4xPSzpnh0l6KMevwvkBvbldF9uR++qKeJ+MOZHRjV1HZjoRvjDfNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="uuid.js"></script>
+
+</head>
+<body>
+    
+
+
+    <button id="generate_projects">Generer des images</button>
+
+
+    <script>
+
+         let pictures = [
+             {
+                 "id": generateUUID(),
+                 "title": "p1",
+                 "description": "little description of your project",
+                 "creation_date": new Date(),
+                 "last_update": new Date(),
+                 "manifest": []
+             },
+             {
+                 "id": generateUUID(),
+                 "title": "p2",
+                 "description": "little description of your project",
+                 "creation_date": new Date(),
+                 "last_update": new Date(),
+                 "manifest": []
+             }
+         ]
+
+         document.getElementById("generate_projects").addEventListener('click', event => {
+             console.log("ajout");
+                localStorage.setItem("adno_projects", JSON.stringify(pictures))
+         })
+    </script>
+
+</body>
+</html>

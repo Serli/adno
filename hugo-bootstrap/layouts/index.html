@@ -1,0 +1,33 @@
+{{ define "main" }}
+
+<div class="container">
+
+    <div class="jumbotron mt-3">
+        <h1>ADNO</h1>
+        <p class="lead">Adno est une application web de visualisation, d’édition et de partage pair-à-pair de narrations et de parcours sur des images IIIF.</p>
+      </div>
+
+      <form id="myForm">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">URL</span>
+          <input type="text" id="image_url" class="form-control" placeholder="Renseignez ici l'url de votre image " aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Voir cette image</button>
+      </form>
+
+
+
+</div>
+
+<script>
+    var form = document.getElementById("myForm");
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    window.location.href = 'image.html?url=' + document.getElementById("image_url").value;
+  });
+</script>
+
+{{ end }}
