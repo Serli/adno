@@ -1,0 +1,1 @@
+document.getElementById("footer_copyrights").innerHTML += "&copy; ADNO " + new Date().getFullYear()

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@recogito/annotorious@2.7.6/dist/annotorious.min.css">
+
+	<script src="openseadragon.min.js"></script>
+</head>
+<body>
+
+
+	<div id="openseadragon1" style="width: 800px; height: 600px;">
+	</div>
+
+    
+    <script>
+        
+		var viewer = OpenSeadragon({
+			id: 'openseadragon1',
+			// tileSources: ['https://iiif.micr.io/dzzLm/info.json'],
+			// prefixUrl: 'https://openseadragon.github.io/openseadragon/images/'
+            tileSources : {
+                url:  'https://gallica.bnf.fr/iiif/ark:/12148/btv1b8626777x/f13/full/full/0/native.jpg',
+                type: 'image'
+            }
+           
+		});
+
+    </script>
+
+</body>
+</html>
