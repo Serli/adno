@@ -18,10 +18,17 @@
 
 
 
+<script src="https://ncsu-libraries.github.io/annona/dist/annona.js"></script>
+<link rel="stylesheet" type="text/css" href="https://ncsu-libraries.github.io/annona/dist/annona.css">
+
+
+
 </head>
 <body>
     
     <div id="project_container">
+
+      <h1>Visionneur IIIF</h1>
 
 
     ID du projet : <p id="project_id"></p>
@@ -33,10 +40,14 @@
           <h5 id="project_name" class="card-title"></h5>
           <p id="project_desc" class="card-text"></p>
         </div>
-        <img src="..." class="card-img-bottom" alt="...">
+
+        <div id="image_iiif"></div>
+
       </div>
 
     </div>
+
+    <button id="edit-project">Editer ce projet</button>
 
 
     <script src="js/project.js"></script>

@@ -49,6 +49,8 @@ document.getElementById("valider_creation").addEventListener('click', event => {
                     }
 
                    // alert("projet ajouté");
+
+
                     localStorage.removeItem("adno_image_url")
                     window.location.href = "/project.html?id=" + projectID; 
 
@@ -59,4 +61,12 @@ document.getElementById("valider_creation").addEventListener('click', event => {
                 alert("impossible de lire le manifest")
             }
         })
+})
+
+
+
+
+document.getElementById("annuler_creation").addEventListener("click", function(event){
+    event.preventDefault()
+    window.location.href = "/"
 })
