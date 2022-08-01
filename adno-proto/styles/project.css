@@ -1,0 +1,15 @@
+.picture-div{
+    width: 75vw;
+    margin: auto;
+}
+
+.project-body{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.projet-page-title{
+    text-align: center;
+    margin: 4vh auto 4vh auto;
+}

@@ -5,11 +5,12 @@
     border-radius: .3rem;  
 }
 
-/* footer{
+footer{
     position: absolute;
     width: 100vw;
-    top: 80vh;
-} */
+    top: 85vh;
+    height: 15vh;
+}
 
 #projects_list{
     width: 80vw;
@@ -19,4 +20,26 @@
     align-items: center;
     overflow: auto;
     height: 35vh;
+}
+
+
+.with_projects{
+    display: flex;
+    width: 100%;
+}
+
+.with_projects_left{
+    width: 50%;
+}
+.with_projects_right{
+    width: 50%;
+    padding: 15px;
+}
+
+.with_projects_right #projects_list{
+    width: 100%;
+}
+
+.import_project_separator{
+    text-align: center;
 }

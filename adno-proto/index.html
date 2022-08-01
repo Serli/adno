@@ -50,7 +50,8 @@
 <body>
 
 
-  <div class="container">
+  <!-- <div class="container">
+
     <div class="jumbotron mt-3">
       <h1>ADNO</h1>
       <p class="lead">Adno est une application web de visualisation, d’édition et de partage pair-à-pair de narrations
@@ -68,22 +69,84 @@
     </form>
 
       <div id="projects_list"></div>
+  </div> -->
+
+
+  <div id="container_without_projects" class="container">
+    <div class="jumbotron mt-3">
+      <h1>ADNO</h1>
+      <p class="lead">Adno est une application web de visualisation, d’édition et de partage pair-à-pair de narrations
+        et de parcours sur des images IIIF.</p>
+    </div>
+
+
+    <form id="myForm">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">URL</span>
+        <input type="text" id="adno_image_url_1" class="form-control" placeholder="Renseignez ici l'url de votre image "
+          aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+
+      <button id="create_project_1" type="submit" class="btn btn-success">Créer un nouveau projet</button>
+    </form>
+
+    <h2 class="import_project_separator">OU</h2>
+
+    <div class="import_project">
+      <input type="file" id="selectFiles" value="Import" onchange="uploadPicture1()" />
+      <button id="import_1" class="btn btn-primary" disabled=true>Import mon projet</button>
+    </div>
 
   </div>
 
 
-  
+<div id="container_with_projects" class="container">
+    <div class="with_projects">
+      <div class="with_projects_left">
 
-  <!-- <input type="file" id="selectFiles" value="Import" /><br />
-  <button id="import">Import</button>
-  <textarea id="result"></textarea> -->
+        <div class="jumbotron mt-3">
+          <h1>ADNO</h1>
+          <p class="lead">Adno est une application web de visualisation, d’édition et de partage pair-à-pair de
+            narrations
+            et de parcours sur des images IIIF.</p>
+        </div>
 
 
-  
+        <form id="myForm">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">URL</span>
+            <input type="text" id="adno_image_url_2" class="form-control"
+              placeholder="Renseignez ici l'url de votre image" >
+          </div>
+
+          <button id="create_project_2" type="submit" class="btn btn-success">Créer un nouveau projet</button>
+        </form>
+
+        <h2 class="import_project_separator">OU</h2>
+
+        <div class="import_project">
+          <input type="file" id="selectFiles" value="Import" onchange="uploadPicture2()" />
+          <button id="import_2" class="btn btn-primary" disabled=true>Import mon projet</button>
+        </div>
+
+      </div>
+
+      <div class="with_projects_right">
+        <div id="projects_list"></div>
+      </div>
+
+    </div>
+</div>
 
 
 
-  <footer class="py-3 my-4">
+
+
+
+
+
+
+  <footer>
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Copyrights</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Mentions Légales</a></li>
@@ -98,8 +161,10 @@
 
   <!-- Mes scripts -->
 
+  <script src="js/uuid.js"></script>
   <script src="js/home.js"></script>
   <script src="js/footer.js"></script>
+  <script src="js/import.js"></script>
 
 </body>
 

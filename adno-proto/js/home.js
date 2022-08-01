@@ -13,15 +13,11 @@ if(localStorage.getItem("adno_projects") === undefined || localStorage.getItem("
 
 
 function homeWithoutProjects(){
-    // document.getElementById("home_without_projects").style.display = "block"
-    // document.getElementById("home_with_projects").style.display = "none"
-    document.getElementById("projects_list").style.display = "none"
-    console.log("aucun projet");
+    document.getElementById("container_with_projects").style.display = "none";
 }
 
 function homeWithProjects(){
-    // document.getElementById("home_without_projects").style.display = "none"
-    // document.getElementById("home_with_projects").style.display = "block"
+    document.getElementById("container_without_projects").style.display = "none";
 
     var projects = JSON.parse(localStorage.getItem("adno_projects"))
 
@@ -53,10 +49,26 @@ function homeWithProjects(){
         document.getElementById("projects_list").innerHTML = projectsListDiv
 }
 
-document.getElementById("create_project").addEventListener("click", function(e){
+document.getElementById("create_project_1").addEventListener("click", function(e){
     e.preventDefault()
 
-    var url = document.getElementById("adno_image_url").value
+    var url = document.getElementById("adno_image_url_1").value
+
+    if(url !== "" && url !== undefined){
+        localStorage.setItem("adno_image_url", url)
+
+        window.location.href = "new_project.html";
+
+    }else{
+        alert("veuillez remplir ce champs correctement")
+    }
+})
+
+
+document.getElementById("create_project_2").addEventListener("click", function(e){
+    e.preventDefault()
+
+    var url = document.getElementById("adno_image_url_2").value
 
     if(url !== "" && url !== undefined){
         localStorage.setItem("adno_image_url", url)
@@ -86,17 +98,3 @@ function editProject(idProject){
     window.location.href = "/edit.html?id=" + idProject
 }
 
-// document.getElementById('import').onclick = function() {
-//     var files = document.getElementById('selectFiles').files;
-//     var fr = new FileReader();
-
-//     if(files[0]){
-//         fr.readAsText(files[0])
-
-//         fr.onload = function(e) { 
-//             console.log(JSON.parse(e.target.result));
-//         }
-//     }else{
-//         alert("Veuillez sélectionner un fichier ")
-//     }
-// };
