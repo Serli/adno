@@ -27,7 +27,6 @@ document.getElementById("valider_creation").addEventListener('click', event => {
                             "description": document.getElementById("project_desc").value,
                             "creation_date": new Date(),
                             "last_update": new Date(),
-                            "manifest": manifest,
                             "manifest_url": manifest_url
                         };
 

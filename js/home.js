@@ -44,6 +44,12 @@ function homeWithProjects(){
                     sourceImg = manifest["id"] + "/full/" + imgWidth + ",/0/default.jpg";
                 }
 
+                if(localStorage.getItem(elem.id + "_annotations")){
+                    nbAnnotations = JSON.parse(localStorage.getItem(elem.id + "_annotations")).length
+                }else{
+                    nbAnnotations = 0
+                }
+
                 projectsListDiv +=  '<div class="card mb-3" style="max-width: 540px;">'
                 projectsListDiv +=  '   <div class="row g-0">'
                 projectsListDiv +=  '       <div class="col-md-4">'
@@ -55,6 +61,7 @@ function homeWithProjects(){
                 projectsListDiv +=  '                   <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>'
                 projectsListDiv +=  '                   <p class="card-text"><small class="text-muted">Créé le ' + elem.creation_date + '</small></p>'
                 projectsListDiv +=  '                   <p class="card-text"><small class="text-muted">Dernière mise à jour : ' + elem.last_update + '</small></p>'
+                projectsListDiv +=  '                   <p class="card-text"><small class="text-muted">' + nbAnnotations + ' annotation(s)</small></p>'
                 projectsListDiv +=  '                   <button type="button" class="btn btn-danger btn-sm" onclick=deleteProject("' + elem.id +'")> Supprimer  </button>';
                 projectsListDiv +=  '                   <button type="button" class="btn btn-success btn-sm" onclick=editProject("' + elem.id +'")> Editer</button>';
                 projectsListDiv +=  '                   <button type="button" class="btn btn-primary btn-sm" onclick=showProject("' + elem.id +'")> Preview  </button>';
