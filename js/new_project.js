@@ -7,9 +7,9 @@ document.getElementById("valider_creation").addEventListener('click', event => {
     event.preventDefault()
 
 
-    if(document.getElementById("project_name").value === ""){
+    if (document.getElementById("project_name").value === "") {
         alert("Veuillez renseigner un titre à votre projet")
-    }else{
+    } else {
 
         var manifest_url = localStorage.getItem("adno_image_url")
 
@@ -34,21 +34,32 @@ document.getElementById("valider_creation").addEventListener('click', event => {
 
                         if (localStorage.getItem("adno_projects") === undefined || localStorage.getItem("adno_projects") === null) {
 
+                            // If projects in local storage don't exist create the array
                             var projects = []
-                            projects.push(project)
+                            projects.push(projectID)
 
+
+                            // Création du projet dans le localStorage
+                            localStorage.setItem(projectID, JSON.stringify(project))
+
+                            // Insertion de l'ID du projet créé dans le tableau des projets
                             localStorage.setItem("adno_projects", JSON.stringify(projects))
                         } else {
+
+                            // Création du projet dans le localStorage
+                            localStorage.setItem(projectID, JSON.stringify(project))
+
+                            // Insertion de l'ID du projet créé dans le tableau des projets
                             projects = JSON.parse(localStorage.getItem("adno_projects"))
-                            projects.push(project)
+                            projects.push(projectID)
                             localStorage.setItem("adno_projects", JSON.stringify(projects))
                         }
 
-                    // alert("projet ajouté");
+
 
 
                         localStorage.removeItem("adno_image_url")
-                        window.location.href = "/project.html?id=" + projectID; 
+                        window.location.href = "/project.html?id=" + projectID;
 
                     })
 
@@ -63,7 +74,7 @@ document.getElementById("valider_creation").addEventListener('click', event => {
 
 
 
-document.getElementById("annuler_creation").addEventListener("click", function(event){
+document.getElementById("annuler_creation").addEventListener("click", function (event) {
     event.preventDefault()
     window.location.href = "/"
 })
