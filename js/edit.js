@@ -86,20 +86,28 @@ anno.on('createAnnotation', function (annotation) {
     // Update annotations linked to the selected project in the localStorage
     localStorage.setItem(project_annotations_id, JSON.stringify(annotations))
 
-
-    generateAnnotations()
 });
 
 // Manage update of annotation
 anno.on('updateAnnotation', function (upated_anno) {
 
-    selected_anno = selected_project.annotations.filter(anno => anno.id === upated_anno.id)[0]
+    var annotations = JSON.parse(localStorage.getItem(selected_project.id + "_annotations"))
 
+    selected_anno = annotations.filter(anno => anno.id === upated_anno.id)[0]
 
     Object.assign(selected_anno, upated_anno);
 
+    // Update the last update in the project
     selected_project.last_update = new Date()
-
     localStorage.setItem(selected_project.id, JSON.stringify(selected_project))
-    generateAnnotations()
+
+    // Save the updated annotation in the localStorage
+    localStorage.setItem(selected_project.id + "_annotations", JSON.stringify(annotations))
 });
+
+anno.on('deleteAnnotation', function (del_anno) {
+    var annotations = JSON.parse(localStorage.getItem(selected_project.id + "_annotations"))
+
+    // Delete the annotation in the localStorage
+    localStorage.setItem(selected_project.id + "_annotations", JSON.stringify(annotations.filter(anno => anno.id !== del_anno.id)))
+})

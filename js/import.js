@@ -6,31 +6,47 @@ function uploadPicture2(){
     document.getElementById("import_2").disabled = false;
 }
 
+document.getElementById('import_2').onclick = function () {
+    loadImportedProject('selectFiles_2')
+};
 
-// document.getElementById('import').onclick = function () {
-//     var files = document.getElementById('selectFiles').files;
-//     var fr = new FileReader();
+document.getElementById('import_1').onclick = function () {
+    loadImportedProject('selectFiles_1')
+};
 
-//     if (files[0]) {
-//         fr.readAsText(files[0])
+function loadImportedProject(importNumber){
+    var files = document.getElementById(importNumber).files;
+    var fr = new FileReader();
 
-//         fr.onload = function (e) {
+    console.log(files[0]);
 
-//             // Generate a new ID and new last_update
+    if (files[0]) {
+        fr.readAsText(files[0])
 
-//             imported_project = JSON.parse(e.target.result)
-//             imported_project.last_update = new Date()
-//             imported_project.id = generateUUID()
+        fr.onload = function (e) {
 
-//             projects = JSON.parse(localStorage.getItem("adno_projects"))
-//             projects.push(imported_project)
+            // Generate a new ID and new last_update
 
-//             localStorage.setItem("adno_projects", JSON.stringify(projects))
+            imported_project = JSON.parse(e.target.result)
 
-//             window.location.reload(true)
+            proj = imported_project.project;
+            annos = imported_project.annotations
 
-//         }
-//     } else {
-//         alert("Veuillez sélectionner un fichier ")
-//     }
-// };
+            proj.last_update = new Date()
+            proj.id = generateUUID()
+
+            projects = JSON.parse(localStorage.getItem("adno_projects"))
+            projects.push(proj.id)
+
+            localStorage.setItem("adno_projects", JSON.stringify(projects))
+            localStorage.setItem(proj.id + "_annotations", JSON.stringify(annos))
+            localStorage.setItem(proj.id, JSON.stringify(proj))
+
+            window.location.reload(true)
+
+        }
+    } else {
+        alert("Veuillez sélectionner un fichier ")
+    }
+}
+
