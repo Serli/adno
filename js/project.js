@@ -38,7 +38,7 @@ function createViewer(selected_project) {
 
 
     // Check if there is at least one annotation
-    if (annos) {
+    if (annos && annos != JSON.stringify([])) {
         // Create the dataURI linked to the annotations
         const dataURI = "data:application/json;base64," + btoa(annos);
 

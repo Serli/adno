@@ -108,6 +108,12 @@ anno.on('updateAnnotation', function (upated_anno) {
 anno.on('deleteAnnotation', function (del_anno) {
     var annotations = JSON.parse(localStorage.getItem(selected_project.id + "_annotations"))
 
-    // Delete the annotation in the localStorage
-    localStorage.setItem(selected_project.id + "_annotations", JSON.stringify(annotations.filter(anno => anno.id !== del_anno.id)))
+
+    if (annotations && annotations.length === 1) {
+        localStorage.removeItem(selected_project.id + "_annotations")
+    } else {
+        // Delete the annotation in the localStorage
+        localStorage.setItem(selected_project.id + "_annotations", JSON.stringify(annotations.filter(anno => anno.id !== del_anno.id)))
+    }
+
 })

@@ -154,3 +154,11 @@ function downloadProjectWithAnnotations(projectID) {
 
     return URL.createObjectURL(new Blob([JSON.stringify(finalProject)], { type: "text/plain" }));
 }
+
+document.getElementById("goto-email").addEventListener("click", function(){
+    window.location.href = "mailto:dg@serli.com"
+})
+
+document.getElementById("goto-github").addEventListener("click", function(){
+    window.location.href = "https://github.com/emfccsti/adno.site"
+})
