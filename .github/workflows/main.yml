@@ -1,21 +1,20 @@
-name: Create ZIP Archive
+name: Release
 on:
   push:
     tags:
       - '*'
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: Archive Release
-      uses: thedoctor0/zip-release@main
-      with:
-        type: 'zip'
-        filename: 'adno.zip'
-        exclusions: '*.git* /*node_modules/* .editorconfig dl_projects'
-    - name: Upload Release
-      uses: ncipollo/release-action@v1
-      with:
-          artifacts: 'adno.zip'
+      - uses: actions/checkout@master
+      - name: Create Archive Release
+        uses: thedoctor0/zip-release@master
+        with:
+          filename: 'release.zip'
+          exclusions: '*.git*'
+      - name: Upload Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: 'release.zip'
           token: ${{ secrets.GITHUB_TOKEN }}
