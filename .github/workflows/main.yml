@@ -11,3 +11,8 @@ jobs:
         type: 'zip'
         filename: 'adno.zip'
         exclusions: '*.git* /*node_modules/* .editorconfig dl_projects'
+    - name: Upload Release
+      uses: ncipollo/release-action@v1
+      with:
+      artifacts: 'adno.zip'
+      token: ${{ secrets.GITHUB_TOKEN }}
