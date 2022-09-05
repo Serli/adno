@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { withRouter } from "react-router";
+import Swal from "sweetalert2";
 import { insertInLS } from "../../../Utils/utils";
 import ImportProject from "../ImportProject/ImportProject";
 import "./HomeWithoutProjects.css";
@@ -13,6 +14,8 @@ class HomeWithoutProjects extends Component {
         }
     }
 
+
+
     render() {
         const newProject = (e) => {
             e.preventDefault()
@@ -23,7 +26,13 @@ class HomeWithoutProjects extends Component {
                 this.props.history.push("/new");
 
             } else {
-                alert("veuillez remplir ce champs correctement")
+                Swal.fire({
+                    title: 'Veuillez renseigner une URL valide',
+                    showCancelButton: true,
+                    showConfirmButton: false,
+                    cancelButtonText: 'OK',
+                    icon: 'warning',
+                })
             }
         }
 
@@ -50,8 +59,6 @@ class HomeWithoutProjects extends Component {
                 <h2 className="import_project_separator_without_projects">OU</h2>
 
                 <ImportProject />
-
-
             </div>
         )
     }
