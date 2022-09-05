@@ -1,9 +1,10 @@
 import { Component } from "react";
 import { withRouter } from "react-router";
-import "./ImportProject.css";
-
-import { generateUUID } from "./../../../Utils/UUID"
+import Swal from "sweetalert2";
 import { insertInLS } from "../../../Utils/utils";
+import { generateUUID } from "./../../../Utils/UUID";
+// Import CSS
+import "./ImportProject.css";
 
 class ImportProject extends Component {
     constructor(props) {
@@ -44,10 +45,22 @@ class ImportProject extends Component {
 
                     }
                 } else {
-                    alert("Veuillez sélectionner un fichier ")
+                    Swal.fire({
+                        title: 'Veuillez sélectionner un fichier ',
+                        showCancelButton: true,
+                        showConfirmButton: false,
+                        cancelButtonText: 'OK',
+                        icon: 'warning',
+                    })
                 }
             } else {
-                alert("Impossible de lire ce type de fichier !")
+                Swal.fire({
+                    title: 'Impossible de lire ce type de fichier !',
+                    showCancelButton: true,
+                    showConfirmButton: false,
+                    cancelButtonText: 'OK',
+                    icon: 'warning',
+                })
             }
         }
 
