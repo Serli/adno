@@ -38,7 +38,7 @@ class HomeWithoutProjects extends Component {
 
 
         return (
-            <div id="container_without_projects" className="adno_container">
+            <div id="container_without_projects" className="adno_container_wp">
                 <div className="jumbotron mt-3">
                     <h1>ADNO</h1>
                     <p className="lead">Adno est une application web de visualisation, d’édition et de partage pair-à-pair de narrations

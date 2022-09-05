@@ -1,12 +1,8 @@
 import { Component } from "react";
 import { withRouter } from "react-router";
-
 import { insertInLS } from "../../../Utils/utils";
 import AnnotationCards from "./AnnotationCards/AnnotationCards";
-
-import "./Editor.css"
-
-
+import "./Editor.css";
 
 class Editor extends Component {
     constructor(props) {
@@ -202,9 +198,7 @@ class Editor extends Component {
 
 
                                     <div className="project-body-left">
-                                        <div id="toolbar-container">
-
-                                        </div>
+                                        <div id="toolbar-container"></div>
                                         <h5 id="project_name" className="card-title"></h5>
                                         <p id="project_desc" className="card-text"></p>
                                     </div>
@@ -213,16 +207,12 @@ class Editor extends Component {
                                         <button id="preview" className="btn btn-primary subbutton" onClick={() => this.props.history.push("/project/" + this.props.match.params.id)}>Preview</button>
                                     </div>
 
-
-
                                 </div>
 
                                 <div className="adno-editor">
-                                    <div id="openseadragon1" style={{ "width": "1200px", "height": "550px" }}>
-
-
-                                    </div>
-                                </div>                            </div>
+                                    <div id="openseadragon1" style={{ "width": "1200px", "height": "550px" }}></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

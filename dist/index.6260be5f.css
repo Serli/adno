@@ -13180,6 +13180,7 @@ textarea.form-control-lg {
 
 .import_project_separator_without_projects {
   text-align: center;
+  margin: 20px 0;
 }
 
 .picture-div {
@@ -13199,8 +13200,11 @@ textarea.form-control-lg {
   margin: 4vh auto;
 }
 
-.adno_container {
+.adno_container_wp {
   width: 90vw;
+  height: 70vh;
+  margin: auto;
+  overflow: auto;
 }
 
 #myFormWithoutProjects {
@@ -13347,11 +13351,10 @@ textarea.form-control-lg {
 
 .form-new-project {
   width: 70vw;
-  height: 100vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: auto;
+  margin: 10vh auto;
   display: flex;
 }
 
@@ -13483,6 +13486,24 @@ textarea.form-control-lg {
   overflow-wrap: break-word;
 }
 
+.tts_play {
+  box-shadow: none;
+  text-shadow: none;
+  opacity: .9;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  color: #fff;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 16px 32px;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1;
+  background-color: #055ada !important;
+  outline: none !important;
+}
+
 .edit-form {
   width: 70vw;
   background-color: #fff;
@@ -13606,6 +13627,18 @@ textarea.form-control-lg {
   justify-content: center;
   align-items: center;
   display: flex;
+}
+
+@media (max-width: 1500px) {
+  .adno-examples {
+    width: 80%;
+    height: 60vh;
+    flex-flow: wrap;
+    align-items: center;
+    margin: 5vh auto 0;
+    display: flex;
+    overflow: scroll;
+  }
 }
 
 /*# sourceMappingURL=index.6260be5f.css.map */

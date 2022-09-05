@@ -11,7 +11,7 @@ import "./AnnotationCards.css"
 import { useSpeechSynthesis } from "react-speech-kit";
 
 import "./../../../../Utils/customElems.js";
-
+import TTS from "../TTS/TTS";
 class AnnotationCards extends Component {
     constructor(props) {
         super(props);
@@ -109,6 +109,7 @@ class AnnotationCards extends Component {
 
         }
 
+
         return (
 
             <>
@@ -121,10 +122,9 @@ class AnnotationCards extends Component {
                             <div className="anno-card-body">
                                 <h5 className="card-title adno-card-title">{annotation.body[0] && annotation.body[0].value ? ReactHtmlParser(annotation.body[0].value) : "Aucun titre"}</h5>
 
-                                {/* <button onClick={() => useSpeechSynthesis(stripHtml(annotation.body[0].value))} >Text to speech </button> */}
+                                {/* <TTS text={stripHtml(annotation.body[0].value)}/> */}
 
-
-                                <button onClick={() => {addImageToAnnotation(annotation.body[0].value), index}}>add image</button>
+                                {/* <button onClick={() => {addImageToAnnotation(annotation.body[0].value), index}}>add image</button> */}
 
 
                                 <h6 className="card-subtitle mb-2 text-muted"> {buildTagsList(annotation)} </h6>

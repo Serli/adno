@@ -47,3 +47,15 @@
     justify-content: center;
     align-items: center;
 }
+
+@media (max-width: 1500px) {
+    .adno-examples{
+        width: 80%;
+        flex-flow: wrap;
+        align-items: center;
+        margin: 5vh auto 0;
+        display: flex;
+        overflow: scroll;
+        height: 60vh;
+    }
+}

@@ -1,11 +1,10 @@
 .form-new-project{
     width: 70vw;
-    margin: auto;
+    margin: 10vh auto;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100vh;
 }
 .mb-3 {
     width: 100%;
