@@ -1,0 +1,66 @@
+.jumbotron {
+    padding: 4rem 2rem;
+    margin-bottom: 2rem;
+    background-color: var(--bs-light);
+    border-radius: .3rem;  
+}
+
+#projects_list{
+    width: 80vw;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+    height: 35vh;
+}
+
+
+.with_projects{
+    display: flex;
+    width: 100%;
+}
+
+.with_projects_left{
+    width: 50%;
+}
+.with_projects_right{
+    width: 50%;
+    padding: 15px;
+}
+
+.with_projects_right #projects_list{
+    width: 100%;
+}
+
+.import_project_separator_without_projects{
+    text-align: center;
+}
+
+.picture-div{
+    width: 85%;
+    margin: 5vh auto 0 auto;
+    height: 90%;
+}
+
+.project-body{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.projet-page-title{
+    text-align: center;
+    margin: 4vh auto 4vh auto;
+}
+
+.adno_container{
+    width: 90vw;
+}
+
+#myFormWithoutProjects{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
