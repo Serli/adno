@@ -1,9 +1,13 @@
-import { useSpeechSynthesis } from 'react-speech-kit';
 import "./TTS.css";
 const TTS = (props) => {
-  const { speak } = useSpeechSynthesis()
+  function readAudio(textToRead) {
+    var msg = new SpeechSynthesisUtterance(textToRead);
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(msg);
+  }
+
   return (
-    <button className="tts_play" onClick={() => speak({ text: props.text })}>Speak</button>
+    <button className="tts_play" onClick={() => readAudio(props.text)}>READ AUDIO</button>
   )
 
 }

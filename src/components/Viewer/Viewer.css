@@ -42,15 +42,20 @@
 
     .adno-viewer-leftbar{
         top: 15vh;
-        height: 71vh;
+        height: 62vh;
     }
 
     #image_iiif{
         width: 800px !important;
-        height: 470px !important;
+        height: 360px !important;
     }
 
     .openseadragon-container{
         height: 70% !important;
+    }
+
+    .seadragonbox {
+        width: 100% !important;
+        height: 450px !important;
     }
  }

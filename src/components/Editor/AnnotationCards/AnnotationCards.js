@@ -67,7 +67,7 @@ class AnnotationCards extends Component {
 
                     insertInLS(this.props.match.params.id + "_annotations", JSON.stringify(annos))
 
-                    Swal.fire('La liste des projets a bien été mise à jour !', '', 'success')
+                    Swal.fire("L'annotation a bien été supprimée", '', 'success')
                         .then((result) => {
                             result.isConfirmed ? window.location.reload() : ""
                         })
@@ -122,10 +122,9 @@ class AnnotationCards extends Component {
                             <div className="anno-card-body">
                                 <h5 className="card-title adno-card-title">{annotation.body[0] && annotation.body[0].value ? ReactHtmlParser(annotation.body[0].value) : "Aucun titre"}</h5>
 
-                                {/* <TTS text={stripHtml(annotation.body[0].value)}/> */}
+                                <TTS text={stripHtml(annotation.body[0].value)}/>
 
                                 {/* <button onClick={() => {addImageToAnnotation(annotation.body[0].value), index}}>add image</button> */}
-
 
                                 <h6 className="card-subtitle mb-2 text-muted"> {buildTagsList(annotation)} </h6>
                                 <button className="btn btn-danger" onClick={() => deleteAnnotation(index)}> <FontAwesomeIcon icon={faTrashAlt} /> Supprimer</button>
