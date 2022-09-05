@@ -1,0 +1,24 @@
+{
+  "unversionedId": "annotorious",
+  "id": "annotorious",
+  "title": "Annotorious : Un plugin permettant d'enrichir des images à l'aide d'annotations",
+  "description": "Couplé avec Openseadragon (github.com)",
+  "source": "@site/docs/annotorious.md",
+  "sourceDirName": ".",
+  "slug": "/annotorious",
+  "permalink": "/docs/annotorious",
+  "draft": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/annotorious.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Annona : Lire les annotations",
+    "permalink": "/docs/annona"
+  },
+  "next": {
+    "title": "get-started",
+    "permalink": "/docs/get-started"
+  }
+}

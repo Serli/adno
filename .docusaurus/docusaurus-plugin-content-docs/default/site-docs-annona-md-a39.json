@@ -1,0 +1,24 @@
+{
+  "unversionedId": "annona",
+  "id": "annona",
+  "title": "Annona : Lire les annotations",
+  "description": "",
+  "source": "@site/docs/annona.md",
+  "sourceDirName": ".",
+  "slug": "/annona",
+  "permalink": "/docs/annona",
+  "draft": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/annona.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Translate your site",
+    "permalink": "/docs/tutorial-extras/translate-your-site"
+  },
+  "next": {
+    "title": "Annotorious : Un plugin permettant d'enrichir des images à l'aide d'annotations",
+    "permalink": "/docs/annotorious"
+  }
+}
