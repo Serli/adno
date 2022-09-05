@@ -19,6 +19,8 @@ import Viewer from "./components/Viewer/Viewer";
 import Editor from "./components/Editor/Editor";
 import Example from "./components/Example/Example";
 import Footer from "./components/Footer/Footer";
+import LegalNotice from "./components/LegalNotice/LegalNotice";
+import CGU from "./components/CGU/CGU";
 import { insertInLS } from "../Utils/utils";
 
 export default class App extends Component {
@@ -71,6 +73,13 @@ export default class App extends Component {
                             <Example />
                         </Route>
 
+                        <Route exact path="/cgu">
+                            <CGU />
+                        </Route>
+
+                        <Route exact path="/legal">
+                            <LegalNotice />
+                        </Route>
 
                         <Route path="/">
                             {

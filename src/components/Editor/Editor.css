@@ -73,3 +73,19 @@
 .autosave-text{
     color: white;
 }
+
+
+@media (max-width: 1500px) {
+    .left-bar{
+        width: 25vw !important;
+    }
+
+    .right-bar{
+        width: 75vw !important;
+        margin-left: 25vw !important;
+    }
+
+    #openseadragon1{
+        height: 340px !important;
+    }
+}

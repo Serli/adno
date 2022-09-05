@@ -15,22 +15,6 @@
     height: 55vh;
 }
 
-@media (max-width: 1500px) {
-    #projects_list{
-        width: 80vw;
-        margin: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        overflow: auto;
-        height: 50vh;
-    }
-
-    #container_with_projects {
-        margin-top: 2vh !important;
-    }
-}
-
 .with_projects{
     display: flex;
     width: 100%;
@@ -50,8 +34,6 @@
     justify-content: center;
     align-items: center;
 }
-
-
 
 .with_projects_right{
     width: 65%;
@@ -96,4 +78,24 @@
 .adno_container{
     width: 90vw;
     margin: auto;
+}
+
+.project-card:hover{
+    border: 2px solid red;
+}
+
+@media (max-width: 1500px) {
+    #projects_list{
+        width: 80vw;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow: auto;
+        height: 45vh;
+    }
+
+    #container_with_projects {
+        margin-top: 2vh !important;
+    }
 }

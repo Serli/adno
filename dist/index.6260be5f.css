@@ -13269,22 +13269,6 @@ textarea.form-control-lg {
   overflow: auto;
 }
 
-@media (max-width: 1500px) {
-  #projects_list {
-    width: 80vw;
-    height: 50vh;
-    flex-direction: column;
-    align-items: center;
-    margin: auto;
-    display: flex;
-    overflow: auto;
-  }
-
-  #container_with_projects {
-    margin-top: 2vh !important;
-  }
-}
-
 .with_projects {
   width: 100%;
   display: flex;
@@ -13347,6 +13331,26 @@ textarea.form-control-lg {
 .adno_container {
   width: 90vw;
   margin: auto;
+}
+
+.project-card:hover {
+  border: 2px solid red;
+}
+
+@media (max-width: 1500px) {
+  #projects_list {
+    width: 80vw;
+    height: 45vh;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    display: flex;
+    overflow: auto;
+  }
+
+  #container_with_projects {
+    margin-top: 2vh !important;
+  }
 }
 
 .form-new-project {
@@ -13580,6 +13584,21 @@ textarea.form-control-lg {
   color: #fff;
 }
 
+@media (max-width: 1500px) {
+  .left-bar {
+    width: 25vw !important;
+  }
+
+  .right-bar {
+    width: 75vw !important;
+    margin-left: 25vw !important;
+  }
+
+  #openseadragon1 {
+    height: 340px !important;
+  }
+}
+
 .adno-examples {
   width: 80%;
   height: 70vh;
@@ -13593,10 +13612,15 @@ textarea.form-control-lg {
 .example-card {
   width: 30%;
   height: 550px;
-  box-shadow: 0px 4px 8px rgba(black, .5);
-  border: 2px solid red;
+  border: 2px solid #007bff;
   border-radius: 6px;
-  margin: 10px;
+  margin: 20px;
+  transition: all .4s;
+  box-shadow: 1.95px 1.95px 2.6px #00000026;
+}
+
+.example-card:hover {
+  box-shadow: 15px 15px #00000026;
 }
 
 .example-card-body {
@@ -13631,14 +13655,44 @@ textarea.form-control-lg {
 
 @media (max-width: 1500px) {
   .adno-examples {
-    width: 80%;
-    height: 60vh;
+    width: 90vw;
+    height: 65vh;
     flex-flow: wrap;
     align-items: center;
-    margin: 5vh auto 0;
+    margin: 4vh auto 0;
     display: flex;
     overflow: scroll;
   }
+
+  .example-card {
+    width: 30%;
+    height: 550px;
+    border: 2px solid #007bff;
+    border-radius: 6px;
+    margin: 20px;
+    transition: all .4s;
+    box-shadow: 1.95px 1.95px 2.6px #00000026;
+  }
+
+  .example-card:hover {
+    box-shadow: 14px 14px #00000026;
+  }
+}
+
+.legal-notice {
+  width: 80vw;
+  height: 78vh;
+  margin: 5vh auto auto;
+  padding: 35px;
+  overflow: scroll;
+}
+
+.cgu {
+  width: 80vw;
+  height: 78vh;
+  margin: 5vh auto auto;
+  padding: 35px;
+  overflow: scroll;
 }
 
 /*# sourceMappingURL=index.6260be5f.css.map */

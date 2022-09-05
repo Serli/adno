@@ -7,6 +7,9 @@ import "./Editor.css";
 class Editor extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            mobileMode: false
+        }
     }
 
     componentDidMount() {
@@ -165,9 +168,7 @@ class Editor extends Component {
         return (
             <>
 
-
                 <div className="left-bar">
-
                     <div className="mb-3">
                         <label htmlFor="project_name" className="form-label">Titre</label>
                         <input type="text" id="project_name" className="form-control" placeholder="Donnez un titre à votre projet" />

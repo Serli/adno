@@ -113,7 +113,7 @@ class ProjectView extends Component {
         }
 
         return (
-            <div className="card mb-3">
+            <div className="card mb-3 project-card">
                 <div className="row g-0">
                     <div className="col-md-4 card-img-adno">
                         <img src={this.state.imgSource} className="img-fluid img-proj-view " alt="..." />

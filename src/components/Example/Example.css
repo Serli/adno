@@ -8,14 +8,18 @@
     height: 70vh;
 }
 
-
 .example-card{
     width: 30%;
-    margin: 10px;
+    margin: 20px;
     height: 550px;
-    border: 2px solid red;
-    box-shadow: 0px 4px 8px rgba(black, 0.5);
+    border: 2px solid #007BFF;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     border-radius: 6px;
+    transition: 0.4s;
+}
+
+.example-card:hover{
+    box-shadow: 15px 15px #00000026;
 }
 
 .example-card-body{
@@ -50,12 +54,26 @@
 
 @media (max-width: 1500px) {
     .adno-examples{
-        width: 80%;
+        width: 90vw;
         flex-flow: wrap;
         align-items: center;
-        margin: 5vh auto 0;
+        margin: 4vh auto 0;
         display: flex;
         overflow: scroll;
-        height: 60vh;
+        height: 65vh;
+    }
+
+    .example-card{
+        width: 30%;
+        margin: 20px;
+        height: 550px;
+        border: 2px solid #007BFF;
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        border-radius: 6px;
+        transition: 0.4s;
+    }
+    
+    .example-card:hover{
+        box-shadow: 14px 14px #00000026;
     }
 }
