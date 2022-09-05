@@ -1,1 +1,0 @@
-document.getElementById("footer_copyrights").innerHTML += "&copy; ADNO " + new Date().getFullYear() + " - Espace Mendès France, Poitiers. Ce projet a été soutenu par le ministère de la Culture."
