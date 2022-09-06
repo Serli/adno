@@ -24,7 +24,6 @@
 
 .adno-viewer-rightbar-without-annos{
     width: 90vw;
-    height: 100vh;
     margin: 0 5vw;
     position: absolute;
     top: 10vh;
@@ -36,18 +35,21 @@
 
 @media (max-width: 1440px) { 
     .adno-viewer-rightbar{
-        top: 15vh;
+        top: 12vh;
         height: 470px !important;
+        width: 65vw;
+        margin-left: 3vw;
     }
 
     .adno-viewer-leftbar{
-        top: 15vh;
-        height: 62vh;
+        top: 12vh;
+        height: 65vh;
+        width: 25vw;
     }
 
     #image_iiif{
-        width: 800px !important;
-        height: 360px !important;
+        width: 900px !important;
+        height: 420px !important;
     }
 
     .openseadragon-container{
@@ -56,6 +58,6 @@
 
     .seadragonbox {
         width: 100% !important;
-        height: 450px !important;
+        height: 510px !important;
     }
  }

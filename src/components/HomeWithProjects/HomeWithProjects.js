@@ -1,11 +1,11 @@
 import { Component } from "react";
-import ProjectsList from "../ProjectsList/ProjectsList";
-
-import "./HomeWithProjects.css"
-import ImportProject from "../ImportProject/ImportProject";
-import { insertInLS } from "../../../Utils/utils";
 import { withRouter } from "react-router";
-
+import Swal from "sweetalert2";
+import { insertInLS } from "../../../Utils/utils";
+import ImportProject from "../ImportProject/ImportProject";
+import ProjectsList from "../ProjectsList/ProjectsList";
+// Imports CSS
+import "./HomeWithProjects.css";
 
 class HomeWithProjects extends Component {
     constructor(props) {
@@ -26,7 +26,13 @@ class HomeWithProjects extends Component {
                 this.props.history.push("/new");
 
             } else {
-                alert("veuillez remplir ce champs correctement")
+                Swal.fire({
+                    title: 'Veuillez renseigner une URL valide',
+                    showCancelButton: true,
+                    showConfirmButton: false,
+                    cancelButtonText: 'OK',
+                    icon: 'warning',
+                })
             }
         }
 
@@ -38,16 +44,13 @@ class HomeWithProjects extends Component {
 
                         <div className="jumbotron mt-3">
                             <h1>ADNO</h1>
-                            <p className="lead">Adno est une application web de visualisation, d’édition et de partage pair-à-pair de
-                            narrations
-            et de parcours sur des images IIIF.</p>
+                            <p className="lead">Adno est une application web de visualisation, d’édition et de partage pair-à-pair de narrations et de parcours sur des images IIIF.</p>
                         </div>
-
 
                         <form id="myForm">
                             <div className="input-group mb-3">
                                 <span className="input-group-text" id="basic-addon1">URL</span>
-                                <input type="text" id="adno_image_url_2" className="form-control" value={this.state.adno_image_url} onChange={(e) => this.setState({adno_image_url: e.target.value})}
+                                <input type="text" id="adno_image_url_2" className="form-control" value={this.state.adno_image_url} onChange={(e) => this.setState({ adno_image_url: e.target.value })}
                                     placeholder="Renseignez ici votre fichier info.json ou votre image jpg/png" />
                             </div>
 

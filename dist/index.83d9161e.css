@@ -56,6 +56,10 @@ footer {
   overflow: scroll;
 }
 
+.hide-footer {
+  display: none;
+}
+
 @media (max-width: 1500px) {
   footer {
     width: 100vw;

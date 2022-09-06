@@ -1,10 +1,15 @@
 import { Component } from "react";
+import { withRouter } from "react-router";
 
 class Footer extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
 
-            <footer>
+            <footer className={this.props.location.pathname !== "/" || this.props.showFooter ? "" : "hide-footer"}>
                 <ul className="nav justify-content-center border-bottom pb-3 mb-3">
                     <li className="nav-item"><a href="https://creativecommons.org/licenses/by-sa/4.0/" className="nav-link px-2 text-muted">Copyrights</a></li>
                     <li className="nav-item"><a href="/legal" className="nav-link px-2 text-muted">Mentions Légales</a></li>
@@ -17,4 +22,4 @@ class Footer extends Component {
     }
 }
 
-export default Footer
+export default withRouter(Footer)

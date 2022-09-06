@@ -1,17 +1,15 @@
-import { faDownLong, faTrashAlt, faUpDown, faUpLong } from "@fortawesome/free-solid-svg-icons";
+import { faDownLong, faTrashAlt, faUpLong } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Component } from "react";
+import ReactHtmlParser from 'react-html-parser';
 import { withRouter } from "react-router";
 import Swal from "sweetalert2";
 import { insertInLS, stripHtml } from "../../../../Utils/utils";
-import ReactHtmlParser from 'react-html-parser';
-
-import "./AnnotationCards.css"
-
-import { useSpeechSynthesis } from "react-speech-kit";
-
-import "./../../../../Utils/customElems.js";
 import TTS from "../TTS/TTS";
+import "./../../../../Utils/customElems.js";
+//Imports CSS
+import "./AnnotationCards.css";
+
 class AnnotationCards extends Component {
     constructor(props) {
         super(props);
@@ -122,7 +120,7 @@ class AnnotationCards extends Component {
                             <div className="anno-card-body">
                                 <h5 className="card-title adno-card-title">{annotation.body[0] && annotation.body[0].value ? ReactHtmlParser(annotation.body[0].value) : "Aucun titre"}</h5>
 
-                                <TTS text={stripHtml(annotation.body[0].value)}/>
+                                <TTS text={stripHtml(annotation.body[0].value)} />
 
                                 {/* <button onClick={() => {addImageToAnnotation(annotation.body[0].value), index}}>add image</button> */}
 

@@ -22,6 +22,7 @@ import Footer from "./components/Footer/Footer";
 import LegalNotice from "./components/LegalNotice/LegalNotice";
 import CGU from "./components/CGU/CGU";
 import { insertInLS } from "../Utils/utils";
+import LandingPage from "./components/LandingPage/LandingPage";
 
 export default class App extends Component {
     constructor(props) {
@@ -50,8 +51,9 @@ export default class App extends Component {
     render() {
         return (
             <div>
-                <Navbar />
                 <Router history={history}>
+                <Navbar showNav={this.state.isProjects} />
+
                     <Switch>
                         <Route path="/about">
                             <About />
@@ -85,14 +87,15 @@ export default class App extends Component {
                             {
                                 this.state.isProjects ?
                                     <HomeWithProjects />
-                                    : <HomeWithoutProjects />
+                                    : <LandingPage />
                             }
                         </Route>
 
                     </Switch>
+                    <Footer showFooter={this.state.isProjects} />
+
                 </Router>
 
-                <Footer />
             </div>
         );
     }

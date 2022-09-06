@@ -1,33 +1,17 @@
 import { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import history from "../../../Utils/history"
 
 import "./Navbar.css"
 
 class Navbar extends Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
         return (
-            // <header className="p-3 text-bg-dark">
-            //     <div className="container">
-            //         <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            // <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            //     <li><a href="/" className="nav-link px-2 text-secondary">Accueil</a></li>
-            //     <li><a href="/about" className="nav-link px-2 text-white">À propos</a></li>
-            //     <li><a href="/example" className="nav-link px-2 text-white">Exemples</a></li>
-            //     <li><a href="/manual" className="nav-link px-2 text-white">Mode d'emploi</a></li>
-            // </ul>
-
-            //             <div className="text-end">
-            //                 <button type="button" className="btn btn-outline-light me-2" id="goto-github">Github</button>
-            //                 <button type="button" className="btn btn-warning" id="goto-email">Contact</button>
-            //             </div>
-            //         </div>
-            //     </div>
-            // </header>
-
-
-            <header className="adno-navbar">
+            <header className={this.props.location.pathname !== "/" || this.props.showNav ? "adno-navbar" : "hide-nav"}>
                 <div className="navbar-container">
 
                     <div className="adno-nav-left">
@@ -55,4 +39,4 @@ class Navbar extends Component {
     }
 }
 
-export default Navbar;
+export default withRouter(Navbar);

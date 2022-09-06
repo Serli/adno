@@ -1,11 +1,10 @@
 import { Component } from "react";
 import { withRouter } from "react-router-dom";
-
-import "../../libraries/annona-reworked/js/storyboard"
-import "../../libraries/openseadragon/openseadragon.min.js"
+import "../../libraries/annona-reworked/js/storyboard";
+import "../../libraries/openseadragon/openseadragon.min.js";
+// Imports CSS
+import "./Viewer.css";
 import ViewerAnnotationCards from "./ViewerAnnotationCards/ViewerAnnotationCards";
-
-import "./Viewer.css"
 
 class Viewer extends Component {
     constructor(props) {

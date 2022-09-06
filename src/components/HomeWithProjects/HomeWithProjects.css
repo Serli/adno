@@ -81,7 +81,7 @@
 }
 
 .project-card:hover{
-    border: 2px solid red;
+    border: 2px solid #007bff;
 }
 
 @media (max-width: 1500px) {

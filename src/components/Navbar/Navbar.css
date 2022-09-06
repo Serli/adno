@@ -88,6 +88,9 @@
     margin: 0 15px;
 }
 
+.hide-nav{
+    display: none;
+}
 
 
 @media (max-width: 1500px) {

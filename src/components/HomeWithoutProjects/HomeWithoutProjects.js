@@ -14,8 +14,6 @@ class HomeWithoutProjects extends Component {
         }
     }
 
-
-
     render() {
         const newProject = (e) => {
             e.preventDefault()
