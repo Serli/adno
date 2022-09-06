@@ -7,7 +7,7 @@ const TTS = (props) => {
   }
 
   return (
-    <button className="tts_play" onClick={() => readAudio(props.text)}>READ AUDIO</button>
+    <button className="tts_play" onClick={() => readAudio(props.text.trim().length === 0 ? "Aucune description saisie pour cette annotation" : props.text)}>READ AUDIO</button>
   )
 
 }
