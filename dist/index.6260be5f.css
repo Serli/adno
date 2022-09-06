@@ -13415,9 +13415,9 @@ textarea.form-control-lg {
 
 @media (max-width: 1440px) {
   .adno-viewer-rightbar {
-    width: 65vw;
-    margin-left: 3vw;
+    width: 70vw;
     top: 12vh;
+    left: 29vw;
     height: 470px !important;
   }
 
@@ -13425,10 +13425,11 @@ textarea.form-control-lg {
     height: 65vh;
     width: 25vw;
     top: 12vh;
+    left: 2vw;
   }
 
   #image_iiif {
-    width: 900px !important;
+    width: 1000px !important;
     height: 420px !important;
   }
 
@@ -13439,6 +13440,15 @@ textarea.form-control-lg {
   .seadragonbox {
     width: 100% !important;
     height: 510px !important;
+  }
+
+  .adno-viewer-rightbar-without-annos #image_iiif {
+    width: 1250px !important;
+    height: 450px !important;
+  }
+
+  .adno-viewer-rightbar-without-annos .openseadragon-container {
+    height: 95% !important;
   }
 }
 
@@ -13495,7 +13505,7 @@ textarea.form-control-lg {
 
 @media (max-width: 1500px) {
   .adno-viewer-list-annos {
-    height: 40vh;
+    height: 50vh;
   }
 }
 

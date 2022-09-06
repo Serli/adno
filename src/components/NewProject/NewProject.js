@@ -5,6 +5,7 @@ import "./NewProject.css"
 import { generateUUID } from "../../../Utils/UUID"
 import { insertInLS } from "../../../Utils/utils";
 import { withRouter } from "react-router";
+import Swal from "sweetalert2";
 
 class NewProject extends Component {
     constructor(props) {
@@ -35,11 +36,17 @@ class NewProject extends Component {
 
 
         const createProj = async (e) => {
+            e.preventDefault()
 
             if (document.getElementById("project_name").value === "") {
-                alert("Veuillez renseigner un titre à votre projet")
+                Swal.fire({
+                    title: "Veuillez renseigner un titre à votre projet",
+                    showCancelButton: true,
+                    showConfirmButton: false,
+                    cancelButtonText: 'OK',
+                    icon: 'warning',
+                })
             } else {
-                e.preventDefault()
 
                 this.setState({ isLoading: true })
                 console.log("loading ...")

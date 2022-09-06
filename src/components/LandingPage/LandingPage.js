@@ -2,9 +2,8 @@ import { Component } from "react";
 import { withRouter } from "react-router";
 import Swal from "sweetalert2";
 import { insertInLS } from "../../../Utils/utils";
-
 // Imports CSS
-import "./LandingPage.css"
+import "./LandingPage.css";
 
 class LandingPage extends Component {
     constructor(props) {
