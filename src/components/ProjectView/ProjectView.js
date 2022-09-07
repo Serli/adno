@@ -27,26 +27,28 @@ class ProjectView extends Component {
             fetch(this.props.project.manifest_url)
                 .then(rep => rep.json())
                 .then(manifest => {
-
-
-                    if (manifest["@id"] && manifest["sizes"] ) {
+                    if (manifest["@id"] && manifest["sizes"] && manifest["sizes"].length > 0) {
 
                         let manifestHeight = manifest["sizes"].sort((a, b) => b.width - a.width)[0].height
                         var manifestWidth = manifest["sizes"].sort((a, b) => b.width - a.width)[0].width
 
                         this.setState({ imgWidth: manifest["sizes"].sort((a, b) => b.width - a.width)[0].width })
-                        this.setState({ imgSource: manifest["@id"] + "/full/" + manifestWidth  + "," + manifestHeight + "/0/default.jpg" })
-                    
+                        this.setState({ imgSource: manifest["@id"] + "/full/" + manifestWidth + "," + manifestHeight + "/0/default.jpg" })
+
                     } else if (manifest["@id"] && manifest["tiles"] && manifest["tiles"][0]) {
                         this.setState({ imgWidth: manifest["tiles"][0].width })
                         this.setState({ imgSource: manifest["@id"] + "/full/" + manifest["tiles"][0].width + ",/0/default.jpg" })
                     } else if (manifest["id"] && manifest["tiles"]) {
                         this.setState({ imgWidth: manifest["tiles"][0].width })
                         this.setState({ imgSource: manifest["id"] + "/full/" + manifest["tiles"][0].width + ",/0/default.jpg" })
-                    } else if (manifest["@id"] && !manifest["tiles"]) {
-                        this.setState({ imgWidth: 250})
+                    } else if (manifest["@id"] && manifest["@context"] && manifest["@context"] === "http://library.stanford.edu/iiif/image-api/1.1/context.json") {
+                        this.setState({ imgWidth: 250 })
                         this.setState({ imgSource: manifest["@id"] + "/full/,250/0/native.jpg" })
-                    }else if (manifest["@id"] && manifest["@context"] && manifest["@context"] === "http://library.stanford.edu/iiif/image-api/1.1/context.json") {
+                    } else if (this.props.project.manifest_url.indexOf("info.json") !== -1) {
+                        this.setState({ imgWidth: 250 })
+                        this.setState({ imgSource: this.props.project.manifest_url.replace("info.json", "") + "/full/,250/0/native.jpg" })
+                    }
+                    else if (manifest["@id"] && !manifest["tiles"]) {
                         this.setState({ imgWidth: 250 })
                         this.setState({ imgSource: manifest["@id"] + "/full/,250/0/native.jpg" })
                     }
@@ -136,10 +138,10 @@ class ProjectView extends Component {
                             <p className="card-text"><small className="text-muted"> <span className="label-nb-annos">{this.state.nbAnnotations}</span>  annotation(s)</small></p>
 
                             <div className="buttons-group-proj-view">
-                                <button type="button" className="btn btn-danger btn-sm" onClick={() => deleteProj(this.props.project.id)}>    <FontAwesomeIcon icon={faTrash}  /> Supprimer  </button>
-                                <button type="button" className="btn btn-success btn-sm" onClick={() => this.props.history.push("/edit/" + this.props.project.id)}> <FontAwesomeIcon icon={faPenToSquare}  />  Editer</button>
-                                <button type="button" className="btn btn-primary btn-sm" onClick={() => this.props.history.push("/project/" + this.props.project.id)}> <FontAwesomeIcon icon={faMagnifyingGlass}  />  Prévisualiser  </button>
-                                <a id={"download_btn_" + this.props.project.id} href={downloadProjectWithAnnotations(this.props.project.id)} download={this.props.project.title + ".json"} className="btn btn-secondary btn-sm"> <FontAwesomeIcon icon={faDownload}  /> Télécharger  </a>
+                                <button type="button" className="btn btn-danger btn-sm" onClick={() => deleteProj(this.props.project.id)}>    <FontAwesomeIcon icon={faTrash} /> Supprimer  </button>
+                                <button type="button" className="btn btn-success btn-sm" onClick={() => this.props.history.push("/edit/" + this.props.project.id)}> <FontAwesomeIcon icon={faPenToSquare} />  Editer</button>
+                                <button type="button" className="btn btn-primary btn-sm" onClick={() => this.props.history.push("/project/" + this.props.project.id)}> <FontAwesomeIcon icon={faMagnifyingGlass} />  Prévisualiser  </button>
+                                <a id={"download_btn_" + this.props.project.id} href={downloadProjectWithAnnotations(this.props.project.id)} download={this.props.project.title + ".json"} className="btn btn-secondary btn-sm"> <FontAwesomeIcon icon={faDownload} /> Télécharger  </a>
                             </div>
 
                         </div>
