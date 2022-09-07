@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import {
     Router,
     Switch,
-    Route
+    Route,
+    HashRouter
 } from "react-router-dom";
 
 import About from "./components/About";
@@ -52,7 +53,7 @@ export default class App extends Component {
     render() {
         return (
             <div>
-                <Router history={history}>
+                <HashRouter history={history}>
                 <Navbar showNav={this.state.isProjects} />
 
                     <Switch>
@@ -99,7 +100,7 @@ export default class App extends Component {
                     </Switch>
                     <Footer showFooter={this.state.isProjects} />
 
-                </Router>
+                </HashRouter>
 
             </div>
         );
