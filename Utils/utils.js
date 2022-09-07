@@ -175,3 +175,44 @@ export const isValidUrl = (url) => {
   }
   return true;
 };
+
+export const getYoutubeVideoID = (url) => {
+
+  if (isValidUrl(url)) {
+      if (url.indexOf("https://www.youtube.com/watch?v=") !== -1) {
+          return url.split("https://www.youtube.com/watch?v=")[1]
+      } else {
+          return ""
+      }
+  } else {
+      return ""
+  }
+}
+
+export const buildYoutubeEmbed = (url, params) => {
+
+
+  // params.forEach(param => {
+  //     console.log(param);
+  // });
+
+  let embed = `https://www.youtube.com/embed/${getYoutubeVideoID(url)}`;
+
+  let iframe_ytb = document.createElement("iframe")
+  iframe_ytb.src = embed;
+
+  return iframe_ytb;
+
+}
+
+export const buildAudioPlayer = (source_url) => {
+ // let source_url = `https://www.youtube.com/embed/${getYoutubeVideoID(url)}`;
+
+  let audio_player = document.createElement("audio")
+  let audio_source = document.createElement("source")
+  audio_source.src = source_url
+  audio_player.appendChild(audio_source)
+  audio_player.controls = true;
+
+  return audio_player;
+}
