@@ -1,7 +1,10 @@
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Component } from "react";
 import { withRouter } from "react-router";
 import Swal from "sweetalert2";
 import { generateNautre, insertInLS, isValidUrl } from "../../../Utils/utils";
+import ImportProject from "../ImportProject/ImportProject";
 // Imports CSS
 import "./LandingPage.css";
 
@@ -15,7 +18,7 @@ class LandingPage extends Component {
     }
 
     render() {
-         const newProject = (e) => {
+        const newProject = (e) => {
             e.preventDefault()
 
             if (this.state.adno_image_url !== "" && this.state.adno_image_url !== undefined) {
@@ -81,6 +84,9 @@ class LandingPage extends Component {
             <div className="landing_page">
                 <div className="land-body">
 
+                    <button className="land-example-proj" onClick={() => { generateNautre() }}> Démarrer avec un exemple <FontAwesomeIcon icon={faArrowRight} /> </button>
+
+
                     <h1 className="land-title">ADNO - Editeur et visualiseur web IIIF</h1>
                     <p className="land-desc-adno">Adno est une application web de visualisation, d’édition et de partage pair-à-pair de narrations et de parcours sur des images IIIF.</p>
 
@@ -93,8 +99,10 @@ class LandingPage extends Component {
 
                     </form>
 
+                    <div className="land-import-proj">
+                        <ImportProject />
+                    </div>
 
-                    <button className="generate-btn" onClick={() => {generateNautre()}}>Démarrer avec un exemple</button>
 
                 </div>
 

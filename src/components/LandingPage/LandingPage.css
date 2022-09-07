@@ -6,8 +6,8 @@
 }
 
 .land-body{
-    width: 90vw;
-    height: 90vh;
+    width: 95vw;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,7 +23,7 @@
     color: #356AE6;
     padding: 20px;
     border-radius: 4px;
-    margin-top: 10vh;
+    margin-top: 20vh;
     margin-bottom: 5vh;
     transition: 0.4s;
     box-shadow: rgba(255, 255, 255, 0.24) 10px 10px;
@@ -31,7 +31,7 @@
 
 
 .land-desc-adno{
-    width: 57%;
+    width: 50%;
     margin: 4vh 0 6vh 0;
 }
 
@@ -62,4 +62,28 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.land-example-proj{
+    position: absolute;
+    padding: 15px;
+    border: none;
+    background-color: white;
+    color: #356AE6;
+    border-radius: 40px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    top: 5vh;
+    right: 2vw;
+    transition: 0.4s;
+    transition: padding 0.5s, box-shadow 0.5s;
+}
+
+.land-import-proj{
+    margin-top: 5vh;
+    width: 50%;
+}
+
+.land-example-proj:hover{
+    box-shadow: rgba(0, 0, 0, 0.35) 8px 8px;
+    padding: 20px;
 }

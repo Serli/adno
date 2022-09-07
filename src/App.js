@@ -10,8 +10,7 @@ import About from "./components/About";
 
 import history from "../Utils/history";
 
-// Import Bootstrap CSS
-import 'bootstrap/dist/css/bootstrap.min.css';
+// Imports CSS
 import Navbar from "./components/Navbar/Navbar";
 import HomeWithoutProjects from "./components/HomeWithoutProjects/HomeWithoutProjects";
 import HomeWithProjects from "./components/HomeWithProjects/HomeWithProjects";
