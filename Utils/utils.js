@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 export function insertInLS(itemName, itemValue) {
   try {
     localStorage.setItem(itemName, itemValue);
@@ -91,9 +93,16 @@ export function generateNautre() {
   // Create annotations object
   insertInLS(projectID + "_annotations", JSON.stringify(annotations))
 
-  console.log("Nautré généré : " + projectID);
-
-  alert("Tableau Siège de Poitiers par Coligny en 1569 ajouté aux projets avec succès")
+  Swal.fire({
+    title: 'Tableau Siège de Poitiers par Coligny en 1569 ajouté aux projets avec succès',
+    showCancelButton: false,
+    confirmButtonText: 'Ok',
+    icon: 'success',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location.reload()
+    }
+  })
 
 }
 
@@ -230,9 +239,9 @@ const buildWideImg = (source) => {
   wideImg.style.left = "10vw"
   wideImg.style.right = "10vw"
 
-  wideImg.ondblclick = function() {
+  wideImg.ondblclick = function () {
     this.remove()
-   }
+  }
 
   document.querySelector("body").appendChild(wideImg)
 
@@ -243,8 +252,8 @@ export const buildImage = (source_url) => {
   image.style.width = '200px';
   image.style.height = '150px';
   image.src = source_url
-  image.ondblclick = function() {
-   buildWideImg(source_url)
+  image.ondblclick = function () {
+    buildWideImg(source_url)
   }
 
   return image;

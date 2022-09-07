@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { withRouter } from "react-router";
 import Swal from "sweetalert2";
-import { insertInLS, isValidUrl } from "../../../Utils/utils";
+import { generateNautre, insertInLS, isValidUrl } from "../../../Utils/utils";
 // Imports CSS
 import "./LandingPage.css";
 
@@ -92,6 +92,9 @@ class LandingPage extends Component {
                         <button className="land-btn-first-proj" onClick={(e) => newProject(e)}>Créer mon premier projet ! </button>
 
                     </form>
+
+
+                    <button className="generate-btn" onClick={() => {generateNautre()}}>Démarrer avec un exemple</button>
 
                 </div>
 
