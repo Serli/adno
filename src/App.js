@@ -23,6 +23,7 @@ import LegalNotice from "./components/LegalNotice/LegalNotice";
 import CGU from "./components/CGU/CGU";
 import { insertInLS } from "../Utils/utils";
 import LandingPage from "./components/LandingPage/LandingPage";
+import NotFound from "./components/NotFound/NotFound";
 
 export default class App extends Component {
     constructor(props) {
@@ -55,11 +56,11 @@ export default class App extends Component {
                 <Navbar showNav={this.state.isProjects} />
 
                     <Switch>
-                        <Route path="/about">
+                        <Route exact path="/about">
                             <About />
                         </Route>
 
-                        <Route path="/new">
+                        <Route exact path="/new">
                             <NewProject />
                         </Route>
 
@@ -83,12 +84,16 @@ export default class App extends Component {
                             <LegalNotice />
                         </Route>
 
-                        <Route path="/">
+                        <Route exact path="/">
                             {
                                 this.state.isProjects ?
                                     <HomeWithProjects />
                                     : <LandingPage />
                             }
+                        </Route>
+
+                        <Route>
+                            <NotFound />
                         </Route>
 
                     </Switch>

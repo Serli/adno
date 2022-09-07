@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { withRouter } from "react-router";
 import Swal from "sweetalert2";
-import { insertInLS } from "../../../Utils/utils";
+import { insertInLS, isValidUrl } from "../../../Utils/utils";
 // Imports CSS
 import "./LandingPage.css";
 
@@ -15,49 +15,43 @@ class LandingPage extends Component {
     }
 
     render() {
-        const isValidUrl = (url) => {
-            try {
-                new URL(url);
-            } catch (e) {
-                console.error(e);
-                return false;
-            }
-            return true;
-        };
-
-
-        const newProject = (e) => {
+         const newProject = (e) => {
             e.preventDefault()
 
             if (this.state.adno_image_url !== "" && this.state.adno_image_url !== undefined) {
 
                 if (isValidUrl(this.state.adno_image_url)) {
-                    fetch(this.state.adno_image_url)
-                        .then(response => {
-                            console.log(response.status);
-                            if (response.status === 200 || response.status === 302) {
-                                insertInLS("adno_image_url", this.state.adno_image_url)
 
-                                this.props.history.push("/new");
-                            } else {
-                                Swal.fire({
-                                    title: "L'URL renseignée n'est pas valide !",
-                                    showCancelButton: true,
-                                    showConfirmButton: false,
-                                    cancelButtonText: 'OK',
-                                    icon: 'warning',
-                                })
-                            }
-                        })
-                        .catch(error => {
-                            Swal.fire({
-                                title: "L'URL renseignée n'est pas valide !",
-                                showCancelButton: true,
-                                showConfirmButton: false,
-                                cancelButtonText: 'OK',
-                                icon: 'warning',
-                            })
-                        })
+                    insertInLS("adno_image_url", this.state.adno_image_url)
+
+                    this.props.history.push("/new");
+
+                    // fetch(this.state.adno_image_url)
+                    //     .then(response => {
+                    //         console.log(response.status);
+                    //         if (response.status === 200 || response.status === 302) {
+                    //             insertInLS("adno_image_url", this.state.adno_image_url)
+
+                    //             this.props.history.push("/new");
+                    //         } else {
+                    //             Swal.fire({
+                    //                 title: "L'URL renseignée n'est pas valide !",
+                    //                 showCancelButton: true,
+                    //                 showConfirmButton: false,
+                    //                 cancelButtonText: 'OK',
+                    //                 icon: 'warning',
+                    //             })
+                    //         }
+                    //     })
+                    //     .catch(error => {
+                    //         Swal.fire({
+                    //             title: "L'URL renseignée n'est pas valide !",
+                    //             showCancelButton: true,
+                    //             showConfirmButton: false,
+                    //             cancelButtonText: 'OK',
+                    //             icon: 'warning',
+                    //         })
+                    //     })
 
 
                 } else {

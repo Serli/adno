@@ -1,3 +1,4 @@
+
 class AdnoLocation extends HTMLElement {
     constructor() {
         super();
@@ -23,3 +24,5 @@ class AdnoLocation extends HTMLElement {
     }
 }
 customElements.define('adno-loc', AdnoLocation);
+
+

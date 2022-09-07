@@ -28,7 +28,16 @@ class ProjectView extends Component {
                 .then(rep => rep.json())
                 .then(manifest => {
 
-                    if (manifest["@id"] && manifest["tiles"] && manifest["tiles"][0]) {
+
+                    if (manifest["@id"] && manifest["sizes"] ) {
+
+                        let manifestHeight = manifest["sizes"].sort((a, b) => b.width - a.width)[0].height
+                        var manifestWidth = manifest["sizes"].sort((a, b) => b.width - a.width)[0].width
+
+                        this.setState({ imgWidth: manifest["sizes"].sort((a, b) => b.width - a.width)[0].width })
+                        this.setState({ imgSource: manifest["@id"] + "/full/" + manifestWidth  + "," + manifestHeight + "/0/default.jpg" })
+                    
+                    } else if (manifest["@id"] && manifest["tiles"] && manifest["tiles"][0]) {
                         this.setState({ imgWidth: manifest["tiles"][0].width })
                         this.setState({ imgSource: manifest["@id"] + "/full/" + manifest["tiles"][0].width + ",/0/default.jpg" })
                     } else if (manifest["id"] && manifest["tiles"]) {

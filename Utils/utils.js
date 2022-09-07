@@ -156,8 +156,22 @@ export function findInfoJsonFromManifest(url) {
 }
 
 
+export const checkIfProjectExists = (id) => {
+  return localStorage.getItem(id) ? true : false;
+}
+
 export const stripHtml = (html) => {
   let tmp = document.createElement("DIV");
   tmp.innerHTML = html;
   return tmp.textContent || tmp.innerText || "";
-} 
+}
+
+export const isValidUrl = (url) => {
+  try {
+    new URL(url);
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+  return true;
+};

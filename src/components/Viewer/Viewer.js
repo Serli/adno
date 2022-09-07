@@ -1,5 +1,7 @@
 import { Component } from "react";
 import { withRouter } from "react-router-dom";
+import Swal from "sweetalert2";
+import { checkIfProjectExists } from "../../../Utils/utils";
 import "../../libraries/annona-reworked/js/storyboard";
 import "../../libraries/openseadragon/openseadragon.min.js";
 // Imports CSS
@@ -15,6 +17,11 @@ class Viewer extends Component {
     }
 
     componentDidMount() {
+
+        if (!checkIfProjectExists(this.props.match.params.id)) {
+            this.props.history.push("/")
+        }
+
         // Create viewer 
 
         // Find annotations from the localStorage in JSON format
@@ -38,7 +45,7 @@ class Viewer extends Component {
                 return url.split(/[#?]/)[0].split('.').pop().trim();
             }
 
-            if (JSON.parse(localStorage.getItem(this.props.match.params.id)).manifest_url) {
+            if (checkIfProjectExists(this.props.match.params.id) && JSON.parse(localStorage.getItem(this.props.match.params.id)).manifest_url) {
                 OpenSeadragon({
                     id: 'image_iiif',
                     tileSources: [JSON.parse(localStorage.getItem(this.props.match.params.id)).manifest_url],
@@ -49,7 +56,7 @@ class Viewer extends Component {
                     id: 'image_iiif',
                     tileSources: {
                         type: 'image',
-                        url: JSON.parse(localStorage.getItem(this.props.match.params.id)).img_url
+                        url: checkIfProjectExists(this.props.match.params.id) && JSON.parse(localStorage.getItem(this.props.match.params.id)).img_url
                     },
                     prefixUrl: 'https://openseadragon.github.io/openseadragon/images/'
                 });
@@ -80,8 +87,8 @@ class Viewer extends Component {
 
 
                                     <div className="project-body-left">
-                                        <h5 id="project_name" className="card-title">{JSON.parse(localStorage.getItem(this.props.match.params.id)).title}</h5>
-                                        <p id="project_desc" className="card-text">{JSON.parse(localStorage.getItem(this.props.match.params.id)).description}</p>
+                                        <h5 id="project_name" className="card-title">{checkIfProjectExists(this.props.match.params.id) && JSON.parse(localStorage.getItem(this.props.match.params.id)).title}</h5>
+                                        <p id="project_desc" className="card-text">{checkIfProjectExists(this.props.match.params.id) && JSON.parse(localStorage.getItem(this.props.match.params.id)).description}</p>
                                     </div>
 
                                     <div className="project-body-right">
