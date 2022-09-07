@@ -24,10 +24,10 @@ class Navbar extends Component {
                             <li><a href="/" className={history.location.pathname === "/" ? "nav-active" : "adno-nav-item"}>Accueil</a></li>
                             <li><a href="/about" className={history.location.pathname === "/about" ? "nav-active" : "adno-nav-item"}>À propos</a></li>
                             <li><a href="/example" className={history.location.pathname === "/example" ? "nav-active" : "adno-nav-item"}>Exemples</a></li>
-                            <li><a href="http://localhost:3000/docs" className={history.location.pathname === "/manual" ? "nav-active" : "adno-nav-item"}>Mode d'emploi</a></li>
+                            {/* <li><a href="http://localhost:3000/docs" className={history.location.pathname === "/manual" ? "nav-active" : "adno-nav-item"}>Mode d'emploi</a></li> */}
 
-                            <li><a href="https://github.com/Serli/adno" target="_blank" className="github-nav">Github</a></li>
-                            <li><a href="mailto:dg@serli.com" className="contact-nav">Contact</a></li>
+                            <li><a href="https://github.com/adnodev/adnodev.github.io" target="_blank" className="github-nav">Github</a></li>
+                            <li><a href="mailto:thierry.pasquier@emf.ccsti.eu" className="contact-nav">Contact</a></li>
                         </ul>
                     </div>
                 </div>

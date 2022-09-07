@@ -179,13 +179,13 @@ export const isValidUrl = (url) => {
 export const getYoutubeVideoID = (url) => {
 
   if (isValidUrl(url)) {
-      if (url.indexOf("https://www.youtube.com/watch?v=") !== -1) {
-          return url.split("https://www.youtube.com/watch?v=")[1]
-      } else {
-          return ""
-      }
-  } else {
+    if (url.indexOf("https://www.youtube.com/watch?v=") !== -1) {
+      return url.split("https://www.youtube.com/watch?v=")[1]
+    } else {
       return ""
+    }
+  } else {
+    return ""
   }
 }
 
@@ -206,7 +206,7 @@ export const buildYoutubeEmbed = (url, params) => {
 }
 
 export const buildAudioPlayer = (source_url) => {
- // let source_url = `https://www.youtube.com/embed/${getYoutubeVideoID(url)}`;
+  // let source_url = `https://www.youtube.com/embed/${getYoutubeVideoID(url)}`;
 
   let audio_player = document.createElement("audio")
   let audio_source = document.createElement("source")
@@ -215,4 +215,37 @@ export const buildAudioPlayer = (source_url) => {
   audio_player.controls = true;
 
   return audio_player;
+}
+
+const buildWideImg = (source) => {
+  let wideImg = document.createElement("img")
+
+  wideImg.src = source
+
+  wideImg.style.height = '650px'
+  wideImg.style.position = 'absolute'
+  wideImg.style.top = "10vh"
+  wideImg.style.width = "80vw"
+  wideImg.style.zIndex = 100000
+  wideImg.style.left = "10vw"
+  wideImg.style.right = "10vw"
+
+  wideImg.ondblclick = function() {
+    this.remove()
+   }
+
+  document.querySelector("body").appendChild(wideImg)
+
+}
+
+export const buildImage = (source_url) => {
+  let image = document.createElement("img")
+  image.style.width = '200px';
+  image.style.height = '150px';
+  image.src = source_url
+  image.ondblclick = function() {
+   buildWideImg(source_url)
+  }
+
+  return image;
 }

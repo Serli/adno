@@ -1,4 +1,4 @@
-import { buildAudioPlayer, buildYoutubeEmbed } from "./utils";
+import { buildAudioPlayer, buildYoutubeEmbed, buildImage } from "./utils";
 
 class AdnoLocation extends HTMLElement {
     constructor() {
@@ -71,3 +71,25 @@ class AdnoAudioPlayer extends HTMLElement {
 }
 
 customElements.define('adno-player', AdnoAudioPlayer);
+
+
+class AdnoImage extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {
+        // Create a shadow root
+        const shadow = this.attachShadow({ mode: 'open' });
+
+        // Create spans
+        const wrapper = document.createElement('span');
+        wrapper.setAttribute('class', 'wrapper');
+
+        shadow.appendChild(wrapper);
+        wrapper.appendChild(buildImage(this.getAttribute('url')));
+
+    }
+}
+
+customElements.define('adno-img', AdnoImage);
