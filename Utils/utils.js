@@ -1,4 +1,5 @@
 import Swal from "sweetalert2";
+import history from "./history"
 
 export function insertInLS(itemName, itemValue) {
   try {
@@ -24,10 +25,9 @@ function generateUUID() {
 
 export function generateNautre() {
   if (!localStorage.getItem("adno_projects")) {
-    console.log("aucun projet");
     insertInLS("adno_projects", JSON.stringify([]))
   }
-  projects = JSON.parse(localStorage.getItem("adno_projects"))
+  let projects = JSON.parse(localStorage.getItem("adno_projects"))
 
   var projectID = generateUUID()
 
@@ -109,10 +109,9 @@ export function generateNautre() {
 export function generateExamplePainting(title, description, manifest_url) {
 
   if (!localStorage.getItem("adno_projects")) {
-    console.log("aucun projet");
     insertInLS("adno_projects", JSON.stringify([]))
   }
-  projects = JSON.parse(localStorage.getItem("adno_projects"))
+  let projects = JSON.parse(localStorage.getItem("adno_projects"))
 
   var projectID = generateUUID()
 
@@ -135,7 +134,12 @@ export function generateExamplePainting(title, description, manifest_url) {
   // Create annotations object
   insertInLS(projectID + "_annotations", JSON.stringify([]))
 
-  alert("Tableau " + title + " ajouté aux projets avec succès")
+  Swal.fire({
+    title: `Tableau ${title} ajouté aux projets avec succès`,
+    showCancelButton: false,
+    confirmButtonText: 'Ok',
+    icon: 'success',
+  })
 }
 
 
