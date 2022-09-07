@@ -82,8 +82,8 @@ class ImportProject extends Component {
                                 document.getElementById("selectFiles_1").value = ""
                                 document.getElementById("label-upload").innerHTML = "Importer un projet"
                             }
-                            }>Reset</button>
-                            <button id="import_1" className="import-btn import-confirm" disabled={!this.state.isimporting} onClick={() => loadImportedProj()}>Import mon projet</button>
+                            }>Annuler l'importation</button>
+                            <button id="import_1" className="import-btn import-confirm" disabled={!this.state.isimporting} onClick={() => loadImportedProj()}>Importer mon projet</button>
                         </div>
 
                         : <></>
