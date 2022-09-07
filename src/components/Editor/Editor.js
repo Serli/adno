@@ -150,6 +150,7 @@ class Editor extends Component {
                 } else {
                     // Delete the annotation in the localStorage
                     insertInLS(selected_project.id + "_annotations", JSON.stringify(annotations.filter(anno => anno.id !== del_anno.id)))
+                    window.location.reload()
                 }
 
             })

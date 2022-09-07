@@ -32,10 +32,10 @@ class LandingPage extends Component {
             if (this.state.adno_image_url !== "" && this.state.adno_image_url !== undefined) {
 
                 if (isValidUrl(this.state.adno_image_url)) {
-
                     fetch(this.state.adno_image_url)
                         .then(response => {
-                            if (response.status === 200) {
+                            console.log(response.status);
+                            if (response.status === 200 || response.status === 302) {
                                 insertInLS("adno_image_url", this.state.adno_image_url)
 
                                 this.props.history.push("/new");

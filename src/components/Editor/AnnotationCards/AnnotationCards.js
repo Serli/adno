@@ -116,7 +116,8 @@ class AnnotationCards extends Component {
                 <div className="list_annotations">
 
                     {this.props.annotations.map((annotation, index) => {
-                        return (<div className="anno-card" key={"anno_" + index}>
+                        return (
+                        <div className="anno-card" key={"anno_" + index}>
                             <div className="anno-card-body">
                                 <h5 className="card-title adno-card-title">{annotation.body[0] && annotation.body[0].value ? ReactHtmlParser(annotation.body[0].value) : "Aucun titre"}</h5>
 

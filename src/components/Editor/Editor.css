@@ -85,7 +85,16 @@
         margin-left: 25vw !important;
     }
 
-    #openseadragon1{
-        height: 340px !important;
+    .adno-editor{
+        width: 950px;
+    }
+
+    .adno-editor #openseadragon1{
+        height: 420px !important;
+    }
+
+    .adno-editor .openseadragon-container {
+        height: 90% !important;
+        height: 410px !important;
     }
 }

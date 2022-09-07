@@ -12,15 +12,7 @@ class ViewerAnnotationCards extends Component {
         const buildTagsList = (annotation) => {
             var tags = annotation.body.filter(anno_body => anno_body.purpose === "tagging")
 
-            var tagLists = "Aucun tag"
-
-            if (tags && tags.length > 0) {
-                tagLists = '[TAGS]  [ '
-                tags.forEach((tag) => { tagLists += tag.value + " " })
-                tagLists += " ]"
-            }
-
-            return tagLists;
+            return tags && tags.length > 0 ? tags.reduce( (previousValue, currentValue) => previousValue + " " + currentValue.value, "[TAGS] " ) : "Aucun tag"
         }
 
         return (
@@ -30,7 +22,8 @@ class ViewerAnnotationCards extends Component {
                 <div className="adno-viewer-list-annos">
 
                     {this.props.annotations.map((annotation, index) => {
-                        return (<div className="adno-viewer-card" key={"viewer_anno_" + index}>
+                        return (
+                        <div className="adno-viewer-card" key={"viewer_anno_" + index}>
                             <div className="anno-card-body">
                                 <h6 className="card-subtitle mb-2 text-muted"> {buildTagsList(annotation)} </h6>
                                
