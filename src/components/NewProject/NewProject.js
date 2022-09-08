@@ -51,9 +51,7 @@ class NewProject extends Component {
                     icon: 'warning',
                 })
             } else {
-
                 this.setState({ isLoading: true })
-                console.log("loading ...")
 
                 var manifest_url = localStorage.getItem("adno_image_url")
 
@@ -117,8 +115,6 @@ class NewProject extends Component {
                                 if (rep.status === 200) {
 
                                     rep.json().then(manifest => {
-
-                                        console.log(manifest);
                                         let project;
 
                                         if (manifest["@type"] && manifest["@type"] === "sc:Manifest") {
@@ -146,10 +142,7 @@ class NewProject extends Component {
                                                 "creation_date": new Date(),
                                                 "last_update": new Date(),
                                                 "manifest_url": resultLink
-                                            };
-
-                                            console.log("project with manifest : ", project);
-
+                                            }
                                         } else {
                                             project =
                                             {
@@ -159,10 +152,7 @@ class NewProject extends Component {
                                                 "creation_date": new Date(),
                                                 "last_update": new Date(),
                                                 "manifest_url": manifest_url
-                                            };
-
-                                            console.log("project WITHOUt manifest : ", project);
-
+                                            }
                                         }
 
 
@@ -194,23 +184,14 @@ class NewProject extends Component {
                                     })
 
                                 } else {
-
-
                                     this.setState({ isLoading: false })
-                                    console.log(" NOT loading ...")
-
-
                                     alert("impossible de lire le manifest")
-
                                 }
                             })
                     }
 
                 } else {
-
-
                     this.setState({ isLoading: false })
-                    console.log(" NOT loading ...")
 
                     alert("Impossible de lire ce fichier, veuillez renseigner un fichier ayant un des formats suivant : png, jpg, json")
                 }

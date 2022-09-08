@@ -103,8 +103,8 @@ class AnnotationCards extends Component {
             // create an image 
             let newImg = '<img src ="https://cdn.pixabay.com/photo/2022/08/09/16/19/sea-7375377_960_720.jpg"></img>'
 
-            console.log(body += newImg)
-            console.log(this.props.match.params.id);
+            // console.log(body += newImg)
+            // console.log(this.props.match.params.id);
 
             // update annotation
 

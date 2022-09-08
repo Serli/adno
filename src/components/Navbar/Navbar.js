@@ -9,10 +9,6 @@ class Navbar extends Component {
         super(props);
     }
 
-    componentDidMount(){
-        console.log(this.props)
-    }
-
     render() {
         return (
             <header className={this.props.location.pathname !== "/" || this.props.showNav ? "adno-navbar" : "hide-nav"}>
