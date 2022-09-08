@@ -1,6 +1,9 @@
 import { Component } from "react";
 import { withRouter } from "react-router";
 
+// Import popup alerts
+import Swal from "sweetalert2";
+
 // Import utils
 import { insertInLS } from "../../../Utils/utils";
 
@@ -164,7 +167,13 @@ class Editor extends Component {
 
         } else {
             document.getElementById("project_container").innerHTML = ""
-            alert("Aucun projet n'a été sélectionné")
+            Swal.fire({
+                title: "Aucun projet n'a été sélectionné",
+                showCancelButton: true,
+                showConfirmButton: false,
+                cancelButtonText: 'OK',
+                icon: 'warning',
+            })
         }
     }
 

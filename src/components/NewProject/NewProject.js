@@ -131,7 +131,13 @@ class NewProject extends Component {
 
                                                 resultLink += "/info.json"
                                             } else {
-                                                alert("impossible de lire ce manifest")
+                                                Swal.fire({
+                                                    title: "Impossible de lire le manifest",
+                                                    showCancelButton: true,
+                                                    showConfirmButton: false,
+                                                    cancelButtonText: 'OK',
+                                                    icon: 'warning',
+                                                })
                                             }
 
                                             project =
@@ -185,15 +191,26 @@ class NewProject extends Component {
 
                                 } else {
                                     this.setState({ isLoading: false })
-                                    alert("impossible de lire le manifest")
+                                    Swal.fire({
+                                        title: "Impossible de lire le manifest",
+                                        showCancelButton: true,
+                                        showConfirmButton: false,
+                                        cancelButtonText: 'OK',
+                                        icon: 'warning',
+                                    })
                                 }
                             })
                     }
 
                 } else {
                     this.setState({ isLoading: false })
-
-                    alert("Impossible de lire ce fichier, veuillez renseigner un fichier ayant un des formats suivant : png, jpg, json")
+                    Swal.fire({
+                        title: "Impossible de lire ce fichier, veuillez renseigner un fichier ayant un des formats suivant : png, jpg, json",
+                        showCancelButton: true,
+                        showConfirmButton: false,
+                        cancelButtonText: 'OK',
+                        icon: 'warning',
+                    })
                 }
 
 
