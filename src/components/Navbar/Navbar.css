@@ -4,14 +4,21 @@
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
 }
 
+.adno-nav-log{
+    width: 10vw;
+    justify-content: center;
+    display: flex;
+}
+
 .navbar-container{
-    width: 75vw;
+    width: 80vw;
+    flex-wrap: wrap;
+    align-items: center;
     margin: auto;
     padding: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 .adno-nav-item{
