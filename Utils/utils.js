@@ -58,11 +58,11 @@ export function generateExamplePainting(title, description, manifest_url) {
     confirmButtonText: 'Ok',
     icon: 'success',
   })
-  .then((result) => {
-  if (result.isConfirmed) {
-    window.location.reload()
-  }
-})
+    .then((result) => {
+      if (result.isConfirmed) {
+        window.location.reload()
+      }
+    })
 }
 
 
@@ -194,4 +194,26 @@ export const buildTagsList = (annotation) => {
   var tags = annotation.body.filter(anno_body => anno_body.purpose === "tagging")
 
   return tags && tags.length > 0 ? tags.reduce((previousValue, currentValue) => previousValue + " " + currentValue.value, "[TAGS] ") : "Aucun tag"
+}
+
+export const buildJsonProjectWithManifest = (id, title, desc, cd, la, manifest) => {
+  return {
+    "id": id,
+    "title": title,
+    "description": desc,
+    "creation_date": cd,
+    "last_update": la,
+    "manifest_url": manifest
+  }
+}
+
+export const buildJsonProjectWithImg = (id, title, desc, cd, la, img) => {
+  return {
+    "id": id,
+    "title": title,
+    "description": desc,
+    "creation_date": cd,
+    "last_update": la,
+    "img_url": img
+  }
 }

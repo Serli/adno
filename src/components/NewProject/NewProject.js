@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 
 // Import utils
 import { generateUUID } from "../../../Utils/UUID"
-import { get_url_extension, insertInLS } from "../../../Utils/utils";
+import { insertInLS, buildJsonProjectWithImg, buildJsonProjectWithManifest, get_url_extension } from "../../../Utils/utils";
 
 // Import popup alerts
 import Swal from "sweetalert2";
@@ -64,22 +64,15 @@ class NewProject extends Component {
 
                 var projectID = generateUUID()
 
-
                 // we check if the url is an image (.jpg, .jpeg or .png) or a manifest or a json file (such as an info.json file)
                 if (get_url_extension(manifest_url) === "png" || get_url_extension(manifest_url) === "jpg" || get_url_extension(manifest_url) === "jpeg" || get_url_extension(manifest_url) === "json" || isUrlManifest["@type"] && isUrlManifest["@type"] === "sc:Manifest") {
                     // fichier accepté
 
                     if (get_url_extension(manifest_url) === "png" || get_url_extension(manifest_url) === "jpg" || get_url_extension(manifest_url) === "jpeg") {
 
-                        let project =
-                        {
-                            "id": projectID,
-                            "title": document.getElementById("project_name").value,
-                            "description": document.getElementById("project_desc").value,
-                            "creation_date": new Date(),
-                            "last_update": new Date(),
-                            "img_url": manifest_url
-                        };
+                        let project = buildJsonProjectWithImg(projectID, document.getElementById("project_name").value,   document.getElementById("project_desc").value,  new Date(),new Date(),manifest_url)
+
+
 
                         if (localStorage.getItem("adno_projects") === undefined || localStorage.getItem("adno_projects") === null) {
 
@@ -136,25 +129,10 @@ class NewProject extends Component {
                                                 })
                                             }
 
-                                            project =
-                                            {
-                                                "id": projectID,
-                                                "title": document.getElementById("project_name").value,
-                                                "description": document.getElementById("project_desc").value,
-                                                "creation_date": new Date(),
-                                                "last_update": new Date(),
-                                                "manifest_url": resultLink
-                                            }
+                                            project = buildJsonProjectWithManifest(projectID, document.getElementById("project_name").value,   document.getElementById("project_desc").value,  new Date(),new Date(),resultLink)
+                                            
                                         } else {
-                                            project =
-                                            {
-                                                "id": projectID,
-                                                "title": document.getElementById("project_name").value,
-                                                "description": document.getElementById("project_desc").value,
-                                                "creation_date": new Date(),
-                                                "last_update": new Date(),
-                                                "manifest_url": manifest_url
-                                            }
+                                            project =                                             project = buildJsonProjectWithManifest(projectID, document.getElementById("project_name").value,   document.getElementById("project_desc").value,  new Date(),new Date(), manifest_url)
                                         }
 
 
