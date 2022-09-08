@@ -22,6 +22,8 @@ function generateUUID() {
   return uuid;
 }
 
+// Function to create an IIIF example
+// You have to set a title, description and the manifest URL in order to generate your example
 export function generateExamplePainting(title, description, manifest_url) {
 
   if (!localStorage.getItem("adno_projects")) {
@@ -177,4 +179,8 @@ export const buildImage = (source_url) => {
   }
 
   return image;
+}
+
+export const get_url_extension = (url) => {
+  return url.split(/[#?]/)[0].split('.').pop().trim();
 }

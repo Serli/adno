@@ -25,12 +25,6 @@ class ProjectView extends Component {
     }
 
     componentDidMount() {
-
-        function get_url_extension(url) {
-            return url.split(/[#?]/)[0].split('.').pop().trim();
-        }
-
-
         if (this.props.project.manifest_url) {
             fetch(this.props.project.manifest_url)
                 .then(rep => rep.json())

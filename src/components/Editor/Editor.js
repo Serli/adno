@@ -55,13 +55,6 @@ class Editor extends Component {
 
             // let selected_project = JSON.parse(localStorage.getItem(this.props.match.params.id))
 
-
-
-
-            function get_url_extension(url) {
-                return url.split(/[#?]/)[0].split('.').pop().trim();
-            }
-
             if (JSON.parse(localStorage.getItem(this.props.match.params.id)).manifest_url) {
                 var viewer = OpenSeadragon({
                     id: 'openseadragon1',

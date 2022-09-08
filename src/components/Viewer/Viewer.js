@@ -50,10 +50,6 @@ class Viewer extends Component {
             document.getElementById("image_iiif").innerHTML = '<iiif-storyboard  styling="toggleoverlay: true; tts=true;" annotationurl="' + dataURI + '"></iiif-storyboard>';
 
         } else {
-            function get_url_extension(url) {
-                return url.split(/[#?]/)[0].split('.').pop().trim();
-            }
-
             if (checkIfProjectExists(this.props.match.params.id) && JSON.parse(localStorage.getItem(this.props.match.params.id)).manifest_url) {
                 OpenSeadragon({
                     id: 'image_iiif',

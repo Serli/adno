@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 
 // Import utils
 import { generateUUID } from "../../../Utils/UUID"
-import { insertInLS } from "../../../Utils/utils";
+import { get_url_extension, insertInLS } from "../../../Utils/utils";
 
 // Import popup alerts
 import Swal from "sweetalert2";
@@ -63,10 +63,6 @@ class NewProject extends Component {
                 }
 
                 var projectID = generateUUID()
-
-                function get_url_extension(url) {
-                    return url.split(/[#?]/)[0].split('.').pop().trim();
-                }
 
 
                 // we check if the url is an image (.jpg, .jpeg or .png) or a manifest or a json file (such as an info.json file)

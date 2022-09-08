@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router";
 
 // Import Utils
-import { generateExamplePainting, generateNautre } from "./../../../Utils/utils"
+import { generateExamplePainting } from "./../../../Utils/utils"
 
 // Import CSS
 import "./Example.css"
@@ -49,7 +49,6 @@ class Example extends Component {
 
                     <div className="example-card-btns">
                         <button className="generate-btn" onClick={() => generateExamplePainting("Blue Marble 2012", "Blue Marble 2012 - La Terre vue de l'espace. NASA, NOAA, GSFC, Suomi NPP, VIIRS, Norman Kuring.", "https://iiif.emf.fr/iiif/3/SuomiNPP_earth_full.jp2/info.json")}>Ajouter à mes projets</button>
-
                     </div>
                 </div>
 
@@ -77,7 +76,6 @@ class Example extends Component {
 
                     <div className="example-card-btns">
                         <button className="generate-btn" onClick={() => generateExamplePainting("James Webb", "Amas de galaxies SMACS 0723. Une des premières images envoyées par le télescope spatial James Webb. NASA, ESA, CSA, STScI.", "https://iiif.emf.fr/iiif/3/james-webb_1.png/info.json")}>Ajouter à mes projets</button>
-
                     </div>
                 </div>
                 
@@ -91,7 +89,6 @@ class Example extends Component {
 
                     <div className="example-card-btns">
                         <button className="generate-btn" onClick={() => generateExamplePainting("Tite Live", "Tite-Live, Histoire romaine, version française par Pierre Bersuire Manuscrits de la Bibliothèque Sainte-Geneviève.", "https://gallica.bnf.fr/iiif/ark:/12148/btv1b6001280q/f19/info.json")}>Ajouter à mes projets</button>
-
                     </div>
                 </div>
 
