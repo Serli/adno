@@ -184,3 +184,9 @@ export const buildImage = (source_url) => {
 export const get_url_extension = (url) => {
   return url.split(/[#?]/)[0].split('.').pop().trim();
 }
+
+export const buildTagsList = (annotation) => {
+  var tags = annotation.body.filter(anno_body => anno_body.purpose === "tagging")
+
+  return tags && tags.length > 0 ? tags.reduce( (previousValue, currentValue) => previousValue + " " + currentValue.value, "[TAGS] " ) : "Aucun tag"
+}

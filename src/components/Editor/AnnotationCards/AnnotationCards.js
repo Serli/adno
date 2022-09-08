@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 
 // JS Utils 
 import "./../../../../Utils/customElems.js";
-import { insertInLS } from "../../../../Utils/utils";
+import { buildTagsList, insertInLS } from "../../../../Utils/utils";
 
 //Imports CSS
 import "./AnnotationCards.css";
@@ -80,22 +80,6 @@ class AnnotationCards extends Component {
 
 
 
-        }
-
-
-        const buildTagsList = (annotation) => {
-            var tags = annotation.body.filter(anno_body => anno_body.purpose === "tagging")
-
-
-            var tagLists = "Aucun tag"
-
-            if (tags && tags.length > 0) {
-                tagLists = '[TAGS]  [ '
-                tags.forEach((tag) => { tagLists += tag.value + " " })
-                tagLists += " ]"
-            }
-
-            return tagLists;
         }
 
         const addImageToAnnotation = (body, index) => {
