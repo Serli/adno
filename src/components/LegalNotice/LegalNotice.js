@@ -1,5 +1,6 @@
 import { Component } from "react";
 
+// Import CSS
 import "./LegalNotice.css"
 
 export default class LegalNotice extends Component {

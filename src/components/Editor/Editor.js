@@ -1,7 +1,13 @@
 import { Component } from "react";
 import { withRouter } from "react-router";
+
+// Import utils
 import { insertInLS } from "../../../Utils/utils";
+
+// Import Components
 import AnnotationCards from "./AnnotationCards/AnnotationCards";
+
+// Import CSS
 import "./Editor.css";
 
 class Editor extends Component {

@@ -1,8 +1,13 @@
 import { Component } from "react";
 import { withRouter } from "react-router";
+
+// Import popup alerts
 import Swal from "sweetalert2";
+
+// Import utils
 import { insertInLS } from "../../../Utils/utils";
 import { generateUUID } from "./../../../Utils/UUID";
+
 // Import CSS
 import "./ImportProject.css";
 

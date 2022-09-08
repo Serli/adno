@@ -1,10 +1,17 @@
 import { Component } from "react";
 import { withRouter } from "react-router";
+
+// Import popup alerts
 import Swal from "sweetalert2";
+
+// Import utils
 import { insertInLS } from "../../../Utils/utils";
+
+// Import components
 import ImportProject from "../ImportProject/ImportProject";
 import ProjectsList from "../ProjectsList/ProjectsList";
-// Imports CSS
+
+// Import CSS
 import "./HomeWithProjects.css";
 
 class HomeWithProjects extends Component {
@@ -16,16 +23,18 @@ class HomeWithProjects extends Component {
     }
 
     render() {
-
+        // Create function which is called when clicking on the submit button
         const newProject = (e) => {
             e.preventDefault()
 
+            // We check if the url is not empty
             if (this.state.adno_image_url !== "" && this.state.adno_image_url !== undefined) {
                 insertInLS("adno_image_url", this.state.adno_image_url)
 
                 this.props.history.push("/new");
 
             } else {
+                // Display a warning popup if the URL is not filled
                 Swal.fire({
                     title: 'Veuillez renseigner une URL valide',
                     showCancelButton: true,
@@ -37,7 +46,6 @@ class HomeWithProjects extends Component {
         }
 
         return (
-
             <div id="container_with_projects" className="adno_container">
                 <div className="with_projects">
                     <div className="with_projects_left">
@@ -60,19 +68,15 @@ class HomeWithProjects extends Component {
                     </div>
 
                     <div className="with_projects_right">
+
                         <ImportProject />
 
                         <h2>Vos Projets</h2>
 
-                        <div id="projects_list">
-                            <ProjectsList />
-                        </div>
+                        <ProjectsList />
                     </div>
-
                 </div>
-
             </div>
-
         )
     }
 }

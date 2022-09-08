@@ -1,11 +1,20 @@
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Component } from "react";
 import { withRouter } from "react-router";
+
+// Import FontAwesome icons
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+// Import popup alerts
 import Swal from "sweetalert2";
+
+// Import utils
 import { generateNautre, insertInLS, isValidUrl } from "../../../Utils/utils";
+
+// Import components
 import ImportProject from "../ImportProject/ImportProject";
-// Imports CSS
+
+// Import CSS
 import "./LandingPage.css";
 
 class LandingPage extends Component {

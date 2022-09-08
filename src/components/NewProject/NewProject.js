@@ -1,11 +1,15 @@
 import { Component } from "react";
+import { withRouter } from "react-router";
 
-import "./NewProject.css"
-
+// Import utils
 import { generateUUID } from "../../../Utils/UUID"
 import { insertInLS } from "../../../Utils/utils";
-import { withRouter } from "react-router";
+
+// Import popup alerts
 import Swal from "sweetalert2";
+
+// Import CSS
+import "./NewProject.css"
 
 class NewProject extends Component {
     constructor(props) {

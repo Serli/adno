@@ -1,12 +1,21 @@
 import { Component } from "react";
 import { withRouter } from "react-router-dom";
+
+// Import popup alerts
 import Swal from "sweetalert2";
+
+// Import utils
 import { checkIfProjectExists } from "../../../Utils/utils";
+
+// Import libraries
 import "../../libraries/annona-reworked/js/storyboard";
 import "../../libraries/openseadragon/openseadragon.min.js";
+
+// Import React Components
+import ViewerAnnotationCards from "./ViewerAnnotationCards/ViewerAnnotationCards";
+
 // Imports CSS
 import "./Viewer.css";
-import ViewerAnnotationCards from "./ViewerAnnotationCards/ViewerAnnotationCards";
 
 class Viewer extends Component {
     constructor(props) {

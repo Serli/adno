@@ -6,13 +6,12 @@ import {
     HashRouter
 } from "react-router-dom";
 
-import About from "./components/About";
-
+// Import utils
 import history from "../Utils/history";
+import { insertInLS } from "../Utils/utils";
 
-// Imports CSS
+// Import React components
 import Navbar from "./components/Navbar/Navbar";
-import HomeWithoutProjects from "./components/HomeWithoutProjects/HomeWithoutProjects";
 import HomeWithProjects from "./components/HomeWithProjects/HomeWithProjects";
 import NewProject from "./components/NewProject/NewProject";
 import Viewer from "./components/Viewer/Viewer";
@@ -21,9 +20,9 @@ import Example from "./components/Example/Example";
 import Footer from "./components/Footer/Footer";
 import LegalNotice from "./components/LegalNotice/LegalNotice";
 import CGU from "./components/CGU/CGU";
-import { insertInLS } from "../Utils/utils";
 import LandingPage from "./components/LandingPage/LandingPage";
 import NotFound from "./components/NotFound/NotFound";
+import About from "./components/About";
 
 export default class App extends Component {
     constructor(props) {

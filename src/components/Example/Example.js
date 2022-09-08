@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 
+// Import Utils
 import { generateExamplePainting, generateNautre } from "./../../../Utils/utils"
 
+// Import CSS
 import "./Example.css"
 
 class Example extends Component {

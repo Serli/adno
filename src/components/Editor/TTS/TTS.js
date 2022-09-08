@@ -1,4 +1,6 @@
+// Import CSS
 import "./TTS.css";
+
 const TTS = (props) => {
   function readAudio(textToRead) {
     var msg = new SpeechSynthesisUtterance(textToRead);

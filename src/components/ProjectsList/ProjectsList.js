@@ -13,10 +13,15 @@ export default class ProjectsList extends Component {
 
         if (projects.length > 0) {
             return (
-                projects.map(project => {
-                    return (<ProjectView key={project.id} project={project} />)
-                })
+                <div id="projects_list">
+                    {
+                        projects.map(project => {
+                            return (<ProjectView key={project.id} project={project} />)
+                        })
+                    }
+                </div>
             )
+
         } else {
             return "Aucun projet"
         }

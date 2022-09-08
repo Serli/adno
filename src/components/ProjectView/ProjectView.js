@@ -1,9 +1,17 @@
-import { faDownload, faMagnifyingGlass, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Component } from "react";
 import { withRouter } from "react-router";
+
+// Import FontAwesome icons
+import { faDownload, faMagnifyingGlass, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+// Import popup alerts
 import Swal from 'sweetalert2';
+
+// Import utils
 import { insertInLS } from "../../../Utils/utils";
+
+// Import CSS
 import "./ProjectView.css";
 
 class ProjectView extends Component {

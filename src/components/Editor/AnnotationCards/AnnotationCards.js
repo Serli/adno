@@ -1,12 +1,18 @@
-import { faDownLong, faTrashAlt, faUpLong } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Component } from "react";
 import ReactHtmlParser from 'react-html-parser';
 import { withRouter } from "react-router";
+
+// Import FontAwesome for all icons
+import { faDownLong, faTrashAlt, faUpLong } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+// Import popup alerts
 import Swal from "sweetalert2";
-import { insertInLS, stripHtml } from "../../../../Utils/utils";
-import TTS from "../TTS/TTS";
+
+// JS Utils 
 import "./../../../../Utils/customElems.js";
+import { insertInLS } from "../../../../Utils/utils";
+
 //Imports CSS
 import "./AnnotationCards.css";
 
@@ -117,21 +123,21 @@ class AnnotationCards extends Component {
 
                     {this.props.annotations.map((annotation, index) => {
                         return (
-                        <div className="anno-card" key={"anno_" + index}>
-                            <div className="anno-card-body">
-                                <h5 className="card-title adno-card-title">{annotation.body[0] && annotation.body[0].value ? ReactHtmlParser(annotation.body[0].value) : "Aucun titre"}</h5>
+                            <div className="anno-card" key={"anno_" + index}>
+                                <div className="anno-card-body">
+                                    <h5 className="card-title adno-card-title">{annotation.body[0] && annotation.body[0].value ? ReactHtmlParser(annotation.body[0].value) : "Aucun titre"}</h5>
 
-                                <TTS text={stripHtml(annotation.body[0].value)} />
+                                    {/* <TTS text={stripHtml(annotation.body[0].value)} /> */}
 
-                                {/* <button onClick={() => {addImageToAnnotation(annotation.body[0].value), index}}>add image</button> */}
+                                    {/* <button onClick={() => {addImageToAnnotation(annotation.body[0].value), index}}>add image</button> */}
 
-                                <h6 className="card-subtitle mb-2 text-muted"> {buildTagsList(annotation)} </h6>
-                                <button className="btn btn-danger" onClick={() => deleteAnnotation(index)}> <FontAwesomeIcon icon={faTrashAlt} /> Supprimer</button>
-                                {/* <button onClick="clickAnnotation(1)"> Voir</button> */}
-                                {index < this.props.annotations.length - 1 ? <button className="btn btn-primary" onClick={() => annoSwitchDown(index)}> <FontAwesomeIcon icon={faDownLong} /> DOWN </button> : <></>}
-                                {index > 0 ? <button className="btn btn-primary" onClick={() => annoSwitchUp(index)}> <FontAwesomeIcon icon={faUpLong} />  UP </button> : <></>}
+                                    <h6 className="card-subtitle mb-2 text-muted"> {buildTagsList(annotation)} </h6>
+                                    <button className="btn btn-danger" onClick={() => deleteAnnotation(index)}> <FontAwesomeIcon icon={faTrashAlt} /> Supprimer</button>
+                                    {/* <button onClick="clickAnnotation(1)"> Voir</button> */}
+                                    {index < this.props.annotations.length - 1 ? <button className="btn btn-primary" onClick={() => annoSwitchDown(index)}> <FontAwesomeIcon icon={faDownLong} /> DOWN </button> : <></>}
+                                    {index > 0 ? <button className="btn btn-primary" onClick={() => annoSwitchUp(index)}> <FontAwesomeIcon icon={faUpLong} />  UP </button> : <></>}
+                                </div >
                             </div >
-                        </div >
                         )
                     })}
                 </div >
