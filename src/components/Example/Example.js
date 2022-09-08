@@ -21,8 +21,7 @@ class Example extends Component {
                     </div>
 
                     <div className="example-card-btns">
-                        <button className="generate-btn" onClick={() => generateNautre()}>Ajouter à mes projets</button>
-
+                        <button className="generate-btn" onClick={() => generateExamplePainting("Siège de Poitiers par Coligny en 1569", "Peinture de François Nautré, Musées de la ville de Poitiers et de la Société des Antiquaires de l’Ouest", "https://free.iiifhosting.com/iiif/1c8d49343676a04fffcd92979c02e9394e48bac96f590fffbadffc9133cd06b9/info.json")}>Ajouter à mes projets</button>
                     </div>
                 </div>
 
@@ -36,7 +35,6 @@ class Example extends Component {
 
                     <div className="example-card-btns">
                         <button className="generate-btn" onClick={() => generateExamplePainting("Tabula Peutingeriana", "Copie du XIIIe siècle d’une ancienne carte romaine où figurent les routes et les villes principales de l’Empire romain, fac-similé de Konrad Miller de 1887.", "https://iiif.emf.fr/iiif/3/peutinger.jp2/info.json")}>Ajouter à mes projets</button>
-
                     </div>
                 </div>
 
