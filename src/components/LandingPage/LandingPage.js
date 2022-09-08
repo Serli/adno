@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Swal from "sweetalert2";
 
 // Import utils
-import { generateNautre, insertInLS, isValidUrl } from "../../../Utils/utils";
+import { generateExamplePainting, insertInLS, isValidUrl } from "../../../Utils/utils";
 
 // Import components
 import ImportProject from "../ImportProject/ImportProject";
@@ -93,7 +93,7 @@ class LandingPage extends Component {
             <div className="landing_page">
                 <div className="land-body">
 
-                    <button className="land-example-proj" onClick={() => { generateNautre() }}> Démarrer avec un exemple <FontAwesomeIcon icon={faArrowRight} /> </button>
+                    <button className="land-example-proj" onClick={() => {generateExamplePainting("Siège de Poitiers par Coligny en 1569", "Peinture de François Nautré, Musées de la ville de Poitiers et de la Société des Antiquaires de l’Ouest", "https://free.iiifhosting.com/iiif/1c8d49343676a04fffcd92979c02e9394e48bac96f590fffbadffc9133cd06b9/info.json"); window.location.reload() }}> Démarrer avec un exemple <FontAwesomeIcon icon={faArrowRight} /> </button>
 
 
                     <h1 className="land-title">ADNO - Editeur et visualiseur web IIIF</h1>

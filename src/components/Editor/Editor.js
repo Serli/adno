@@ -88,7 +88,7 @@ class Editor extends Component {
             var annos = localStorage.getItem(annotations)
 
             // Generate dataURI and load annotations into Annotorious
-            const dataURI = "data:application/json;base64," + btoa(annos);
+            const dataURI = "data:application/json;base64," + btoa(unescape(encodeURIComponent(annos)));
             anno.loadAnnotations(dataURI)
 
 
@@ -125,7 +125,6 @@ class Editor extends Component {
 
             // Manage update of annotation
             anno.on('updateAnnotation', function (upated_anno) {
-
                 let annotations = JSON.parse(localStorage.getItem(selected_project.id + "_annotations"))
 
                 let selected_anno = annotations.filter(anno => anno.id === upated_anno.id)[0]
