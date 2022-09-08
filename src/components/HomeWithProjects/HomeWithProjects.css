@@ -84,6 +84,13 @@
     border: 2px solid #007bff;
 }
 
+.homewpbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 5px;
+}
+
 @media (max-width: 1500px) {
     #projects_list{
         width: 80vw;

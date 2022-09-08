@@ -45,6 +45,40 @@ class HomeWithProjects extends Component {
             }
         }
 
+        const deleteAllProjects = () => {
+            Swal.fire({
+                title: 'Êtes-vous sûr de vouloir supprimer tous vos projets ?',
+                showCancelButton: true,
+                showConfirmButton: true,
+                cancelButtonText: 'Annuler',
+                confirmButtonText: 'Oui, supprimer mes projets',
+                icon: 'warning',
+            })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    JSON.parse(localStorage.getItem("adno_projects")).forEach(project => {
+                        localStorage.removeItem(project)
+                        localStorage.removeItem(project + "_annotations")
+                    });
+
+                    localStorage.removeItem("adno_projects")
+
+                    Swal.fire({
+                        title: 'Vos projets ont été supprimés avec succès !',
+                        showCancelButton: false,
+                        showConfirmButton: true,
+                        cancelButtonText: 'OK',
+                        icon: 'success',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.reload()
+                        }
+                    })
+
+                }
+            })
+        }
+
         return (
             <div id="container_with_projects" className="adno_container">
                 <div className="with_projects">
@@ -70,8 +104,13 @@ class HomeWithProjects extends Component {
                     <div className="with_projects_right">
 
                         <ImportProject />
+                        
+                        <div className="homewpbar">
+                            <h2>Vos Projets</h2>
+                            <button className="btn btn-danger" onClick={() => deleteAllProjects()}>Supprimer mes projets</button>
+                        </div>
 
-                        <h2>Vos Projets</h2>
+                    
 
                         <ProjectsList />
                     </div>
