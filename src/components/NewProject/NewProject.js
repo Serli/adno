@@ -72,8 +72,6 @@ class NewProject extends Component {
 
                         let project = buildJsonProjectWithImg(projectID, document.getElementById("project_name").value,   document.getElementById("project_desc").value,  new Date(),new Date(),manifest_url)
 
-
-
                         if (localStorage.getItem("adno_projects") === undefined || localStorage.getItem("adno_projects") === null) {
 
                             // If projects in local storage don't exist create the array

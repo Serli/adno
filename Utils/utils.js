@@ -218,6 +218,29 @@ export const buildJsonProjectWithImg = (id, title, desc, cd, la, img) => {
   }
 }
 
+export const buildProjectAdnoFormat = (title, description, manifest) => {
+  return (
+    {
+      "@context": "http://www.w3.org/ns/anno.jsonld",
+      "id": generateUUID(),
+      "type": "AnnotationCollection",
+      "label": title,
+      "subject": description,
+      "date": new Date(),
+      "modified": new Date(),
+      "source": manifest,
+      "format": "Adno",
+      "total": 0,
+      "first": {
+        "id": "http://example.org/page1",
+        "type": "AnnotationPage",
+        "startIndex": 0,
+        "items": []
+      }
+    }
+  )
+}
+
 export const createExportProjectJsonFile = (projectID) => {
 
   // Get project from localStorage
@@ -226,27 +249,27 @@ export const createExportProjectJsonFile = (projectID) => {
   // Then, get all annotations
   var annotations = JSON.parse(localStorage.getItem(projectID + "_annotations"))
 
-  return (
-    {
+  finalProject =
+  {
 
-      "@context": "http://www.w3.org/ns/anno.jsonld",
-      "id": project.id,
-      "type": "AnnotationCollection",
-      "label": project.title,
-      "subject": project.description,
-      "date": project.creation_date,
-      "modified": project.last_update,
-      "source": project.manifest_url,
-      "format": "Adno",
-      "total": annotations.length,
-      "first": {
-        "id": "http://example.org/page1",
-        "type": "AnnotationPage",
-        "startIndex": 0,
-        "items": annotations
-      }
+    "@context": "http://www.w3.org/ns/anno.jsonld",
+    "id": project.id,
+    "type": "AnnotationCollection",
+    "label": project.title,
+    "subject": project.description,
+    "date": project.creation_date,
+    "modified": project.last_update,
+    "source": project.manifest_url ? project.manifest_url : project.img_url,
+    "format": "Adno",
+    "total": annotations && annotations.length ? annotations.length : 0,
+    "first": {
+      "id": "http://example.org/page1",
+      "type": "AnnotationPage",
+      "startIndex": 0,
+      "items": annotations && annotations.length > 0 ? annotations : [],
     }
-  )
+  }
+  return URL.createObjectURL(new Blob([JSON.stringify(finalProject)], { type: "text/plain" }));
 }
 
 export const importProjectJsonFile = (loadedProject) => {
@@ -262,9 +285,23 @@ export const importProjectJsonFile = (loadedProject) => {
     imported_project.id = generateUUID()
 
     let projects = JSON.parse(localStorage.getItem("adno_projects"))
-    projects.push(imported_project)
+    projects.push(imported_project.id)
+
+    let proj = {
+      "id": imported_project.id,
+      "title": imported_project.label,
+      "description": imported_project.subject,
+      "creation_date": imported_project.date,
+      "last_update": imported_project.modified,
+      "manifest_url": imported_project.source,
+    }
+
+    let annos = imported_project.first.items
 
     insertInLS("adno_projects", JSON.stringify(projects))
+    insertInLS(proj.id + "_annotations", JSON.stringify(annos))
+    insertInLS(proj.id, JSON.stringify(proj))
+
     window.location.reload()
 
   }

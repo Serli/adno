@@ -5,7 +5,7 @@ import { withRouter } from "react-router";
 import Swal from "sweetalert2";
 
 // Import utils
-import { insertInLS } from "../../../Utils/utils";
+import { importProjectJsonFile, insertInLS } from "../../../Utils/utils";
 import { generateUUID } from "./../../../Utils/UUID";
 
 // Import CSS
@@ -23,32 +23,35 @@ class ImportProject extends Component {
     render() {
         const loadImportedProj = () => {
             if (this.state.loadedProject.type === "application/json") {
-                let fr = new FileReader();
+                // let fr = new FileReader();
 
                 if (this.state.loadedProject) {
-                    fr.readAsText(this.state.loadedProject)
 
-                    fr.onload = function (e) {
+                    importProjectJsonFile(this.state.loadedProject)
 
-                        // Generate a new ID and new last_update
+                    // fr.readAsText(this.state.loadedProject)
 
-                        let imported_project = JSON.parse(e.target.result)
-                        let proj = imported_project.project;
-                        let annos = imported_project.annotations
+                    // fr.onload = function (e) {
 
-                        proj.last_update = new Date()
-                        proj.id = generateUUID()
+                    //     // Generate a new ID and new last_update
 
-                        let projects = JSON.parse(localStorage.getItem("adno_projects"))
-                        projects.push(proj.id)
+                    //     let imported_project = JSON.parse(e.target.result)
+                    //     let proj = imported_project.project;
+                    //     let annos = imported_project.annotations
 
-                        insertInLS("adno_projects", JSON.stringify(projects))
-                        insertInLS(proj.id + "_annotations", JSON.stringify(annos))
-                        insertInLS(proj.id, JSON.stringify(proj))
+                    //     proj.last_update = new Date()
+                    //     proj.id = generateUUID()
 
-                        window.location.reload(true)
+                    //     let projects = JSON.parse(localStorage.getItem("adno_projects"))
+                    //     projects.push(proj.id)
 
-                    }
+                    //     insertInLS("adno_projects", JSON.stringify(projects))
+                    //     insertInLS(proj.id + "_annotations", JSON.stringify(annos))
+                    //     insertInLS(proj.id, JSON.stringify(proj))
+
+                    //     window.location.reload(true)
+
+                    // }
                 } else {
                     Swal.fire({
                         title: 'Veuillez sélectionner un fichier ',
