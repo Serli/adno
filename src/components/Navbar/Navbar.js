@@ -16,8 +16,8 @@ class Navbar extends Component {
 
                     <div className="adno-nav-left">
                         <div className="adno-nav-log">
-                        <span className="adno-logo">ADNO</span>
-                        {/* <img src="https://cdn.pixabay.com/photo/2022/07/30/04/46/sunrise-7353034_960_720.jpg" style={{"width": "100px"}} /> */}
+                            <span className="adno-logo">ADNO</span>
+                            {/* <img src="https://cdn.pixabay.com/photo/2022/07/30/04/46/sunrise-7353034_960_720.jpg" style={{"width": "100px"}} /> */}
                         </div>
                     </div>
 

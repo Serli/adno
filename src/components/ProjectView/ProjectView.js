@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Swal from 'sweetalert2';
 
 // Import utils
-import { insertInLS } from "../../../Utils/utils";
+import { insertInLS , createExportProjectJsonFile} from "../../../Utils/utils";
 
 // Import CSS
 import "./ProjectView.css";
@@ -145,7 +145,6 @@ class ProjectView extends Component {
                                 <button type="button" className="btn btn-primary btn-sm" onClick={() => this.props.history.push("/project/" + this.props.project.id)}> <FontAwesomeIcon icon={faMagnifyingGlass} />  Prévisualiser  </button>
                                 <a id={"download_btn_" + this.props.project.id} href={downloadProjectWithAnnotations(this.props.project.id)} download={this.props.project.title + ".json"} className="btn btn-secondary btn-sm"> <FontAwesomeIcon icon={faDownload} /> Télécharger  </a>
                             </div>
-
                         </div>
                     </div>
                 </div>

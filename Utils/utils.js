@@ -217,3 +217,34 @@ export const buildJsonProjectWithImg = (id, title, desc, cd, la, img) => {
     "img_url": img
   }
 }
+
+export const createExportProjectJsonFile = (projectID) => {
+
+    // Get project from localStorage
+    var project = JSON.parse(localStorage.getItem(projectID))
+
+    // Then, get all annotations
+    var annotations = JSON.parse(localStorage.getItem(projectID + "_annotations"))
+
+  return (
+    {
+
+      "@context": "http://www.w3.org/ns/anno.jsonld",
+      "id": project.id,
+      "type": "AnnotationCollection",
+      "label": project.title,
+      "subject": project.description,
+      "date": project.creation_date,
+      "modified": project.last_update,
+      "source": project.manifest_url,
+      "format": "Adno",
+      "total": annotations.length,
+      "first": {
+        "id": "http://example.org/page1",
+        "type": "AnnotationPage",
+        "startIndex": 0,
+        "items": annotations
+      }
+    }
+  )
+}
