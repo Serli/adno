@@ -220,11 +220,11 @@ export const buildJsonProjectWithImg = (id, title, desc, cd, la, img) => {
 
 export const createExportProjectJsonFile = (projectID) => {
 
-    // Get project from localStorage
-    var project = JSON.parse(localStorage.getItem(projectID))
+  // Get project from localStorage
+  var project = JSON.parse(localStorage.getItem(projectID))
 
-    // Then, get all annotations
-    var annotations = JSON.parse(localStorage.getItem(projectID + "_annotations"))
+  // Then, get all annotations
+  var annotations = JSON.parse(localStorage.getItem(projectID + "_annotations"))
 
   return (
     {
@@ -247,4 +247,25 @@ export const createExportProjectJsonFile = (projectID) => {
       }
     }
   )
+}
+
+export const importProjectJsonFile = (loadedProject) => {
+  let fr = new FileReader();
+
+  fr.readAsText(loadedProject)
+
+  fr.onload = function (e) {
+    let imported_project = JSON.parse(e.target.result)
+
+    // Generate a new ID and new last_update
+    imported_project.modified = new Date()
+    imported_project.id = generateUUID()
+
+    let projects = JSON.parse(localStorage.getItem("adno_projects"))
+    projects.push(imported_project)
+
+    insertInLS("adno_projects", JSON.stringify(projects))
+    window.location.reload()
+
+  }
 }
