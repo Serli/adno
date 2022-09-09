@@ -143,8 +143,8 @@ class ProjectView extends Component {
                                 <button type="button" className="btn btn-danger btn-sm" onClick={() => deleteProj(this.props.project.id)}>    <FontAwesomeIcon icon={faTrash} /> Supprimer  </button>
                                 <button type="button" className="btn btn-success btn-sm" onClick={() => this.props.history.push("/edit/" + this.props.project.id)}> <FontAwesomeIcon icon={faPenToSquare} />  Editer</button>
                                 <button type="button" className="btn btn-primary btn-sm" onClick={() => this.props.history.push("/project/" + this.props.project.id)}> <FontAwesomeIcon icon={faMagnifyingGlass} />  Prévisualiser  </button>
-                                {/* <a id={"download_btn_" + this.props.project.id} href={downloadProjectWithAnnotations(this.props.project.id)} download={this.props.project.title + ".json"} className="btn btn-secondary btn-sm"> <FontAwesomeIcon icon={faDownload} /> Télécharger  </a> */}
-                                <a id={"download_btn_" + this.props.project.id} href={createExportProjectJsonFile(this.props.project.id)} download={this.props.project.title + ".json"} className="btn btn-secondary btn-sm"> <FontAwesomeIcon icon={faDownload} /> Télécharger V2 </a>
+                                <a id={"download_btn_" + this.props.project.id} href={downloadProjectWithAnnotations(this.props.project.id)} download={this.props.project.title + ".json"} className="btn btn-secondary btn-sm"> <FontAwesomeIcon icon={faDownload} /> Télécharger  </a>
+                                {/* <a id={"download_btn_" + this.props.project.id} href={createExportProjectJsonFile(this.props.project.id)} download={this.props.project.title + ".json"} className="btn btn-secondary btn-sm"> <FontAwesomeIcon icon={faDownload} /> Télécharger V2 </a> */}
                             </div>
                         </div>
                     </div>
