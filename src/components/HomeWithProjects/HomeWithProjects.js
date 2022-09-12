@@ -62,6 +62,7 @@ class HomeWithProjects extends Component {
             }
         }
 
+        // Function to remove all projects in the localStorage
         const deleteAllProjects = () => {
             Swal.fire({
                 title: 'Êtes-vous sûr de vouloir supprimer tous vos projets ?',
@@ -126,8 +127,6 @@ class HomeWithProjects extends Component {
                             <h2>Vos Projets</h2>
                             <button className="btn btn-danger" onClick={() => deleteAllProjects()}>Supprimer mes projets</button>
                         </div>
-
-                    
 
                         <ProjectsList />
                     </div>

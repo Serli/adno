@@ -32,6 +32,20 @@ class NewProject extends Component {
                     .then((data) => {
                         return resolve(data ? JSON.parse(data) : {})
                     })
+                    .catch(err => {
+                        Swal.fire({
+                            title: "Impossible de traiter l'url fournie",
+                            showCancelButton: false,
+                            showConfirmButton: true,
+                            confirmButtonText: 'OK',
+                            icon: 'error',
+                        })
+                        .then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "/"
+                            }
+                        })
+                    })
             }) 
         }
 

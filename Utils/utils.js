@@ -1,6 +1,8 @@
 import Swal from "sweetalert2";
 import history from "./history"
 
+// Function to insert something in the localStorage.
+// Will return an alert if the localStorage is full
 export function insertInLS(itemName, itemValue) {
   try {
     localStorage.setItem(itemName, itemValue);
@@ -12,6 +14,7 @@ export function insertInLS(itemName, itemValue) {
   }
 }
 
+// Function to generate a random UUID such as b9930ecc-6a18-43f5-8a09-93eb6262f590
 export function generateUUID() {
   var dt = new Date().getTime();
   var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
