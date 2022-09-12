@@ -168,7 +168,7 @@ class Editor extends Component {
 
                     {
                         this.state.annotations && this.state.annotations.length > 0 ?
-                            <AnnotationCards annotations={this.state.annotations} />
+                            <AnnotationCards annotations={this.state.annotations} updateAnnos={(updated_annos) => this.setState({annotations: updated_annos})}  />
                         : <></>
                     }
                 </div>

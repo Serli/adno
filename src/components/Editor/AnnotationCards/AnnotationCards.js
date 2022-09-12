@@ -33,8 +33,7 @@ class AnnotationCards extends Component {
 
             insertInLS(this.props.match.params.id + "_annotations", JSON.stringify(annos))
 
-            window.location.reload(true)
-
+            this.props.updateAnnos(annos)
         }
 
         const annoSwitchDown = (index) => {
@@ -47,9 +46,7 @@ class AnnotationCards extends Component {
 
             insertInLS(this.props.match.params.id + "_annotations", JSON.stringify(annos))
 
-            window.location.reload(true)
-
-
+            this.props.updateAnnos(annos)
         }
 
 
