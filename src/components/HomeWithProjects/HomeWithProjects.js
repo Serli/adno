@@ -29,9 +29,26 @@ class HomeWithProjects extends Component {
 
             // We check if the url is not empty
             if (this.state.adno_image_url !== "" && this.state.adno_image_url !== undefined) {
-                insertInLS("adno_image_url", this.state.adno_image_url)
 
-                this.props.history.push("/new");
+                fetch( this.state.adno_image_url)
+                .then(rep => {
+                    if(rep.status === 200 || rep.status === 302){
+                        insertInLS("adno_image_url", this.state.adno_image_url)
+
+                        this.props.history.push("/new");
+                    }else{
+                        throw new Error(rep.status)
+                    }
+                })
+                .catch(error => {
+                    Swal.fire({
+                        title: `Erreur - Manifest ou image introuvable`,
+                        showCancelButton: true,
+                        showConfirmButton: false,
+                        cancelButtonText: 'OK',
+                        icon: 'warning',
+                    })
+                })
 
             } else {
                 // Display a warning popup if the URL is not filled

@@ -32,9 +32,7 @@ class NewProject extends Component {
                     .then((data) => {
                         return resolve(data ? JSON.parse(data) : {})
                     })
-                    .catch(reject)
-            })
-
+            }) 
         }
 
 
