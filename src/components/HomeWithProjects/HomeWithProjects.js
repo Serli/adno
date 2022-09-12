@@ -5,7 +5,7 @@ import { withRouter } from "react-router";
 import Swal from "sweetalert2";
 
 // Import utils
-import { insertInLS } from "../../../Utils/utils";
+import { insertInLS, isValidUrl } from "../../../Utils/utils";
 
 // Import components
 import ImportProject from "../ImportProject/ImportProject";
@@ -30,25 +30,36 @@ class HomeWithProjects extends Component {
             // We check if the url is not empty
             if (this.state.adno_image_url !== "" && this.state.adno_image_url !== undefined) {
 
-                fetch( this.state.adno_image_url)
-                .then(rep => {
-                    if(rep.status === 200 || rep.status === 302){
-                        insertInLS("adno_image_url", this.state.adno_image_url)
+                if (isValidUrl(this.state.adno_image_url)) {
 
-                        this.props.history.push("/new");
-                    }else{
-                        throw new Error(rep.status)
-                    }
-                })
-                .catch(error => {
+                    fetch(this.state.adno_image_url)
+                        .then(rep => {
+                            if (rep.status === 200 || rep.status === 302) {
+                                insertInLS("adno_image_url", this.state.adno_image_url)
+
+                                this.props.history.push("/new");
+                            } else {
+                                throw new Error(rep.status)
+                            }
+                        })
+                        .catch(error => {
+                            Swal.fire({
+                                title: `Erreur - Manifest ou image introuvable`,
+                                showCancelButton: true,
+                                showConfirmButton: false,
+                                cancelButtonText: 'OK',
+                                icon: 'warning',
+                            })
+                        })
+                } else {
                     Swal.fire({
-                        title: `Erreur - Manifest ou image introuvable`,
+                        title: "L'URL renseignée n'est pas valide !",
                         showCancelButton: true,
                         showConfirmButton: false,
                         cancelButtonText: 'OK',
                         icon: 'warning',
                     })
-                })
+                }
 
             } else {
                 // Display a warning popup if the URL is not filled
@@ -72,29 +83,29 @@ class HomeWithProjects extends Component {
                 confirmButtonText: 'Oui, supprimer mes projets',
                 icon: 'warning',
             })
-            .then((result) => {
-                if (result.isConfirmed) {
-                    JSON.parse(localStorage.getItem("adno_projects")).forEach(project => {
-                        localStorage.removeItem(project)
-                        localStorage.removeItem(project + "_annotations")
-                    });
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        JSON.parse(localStorage.getItem("adno_projects")).forEach(project => {
+                            localStorage.removeItem(project)
+                            localStorage.removeItem(project + "_annotations")
+                        });
 
-                    localStorage.removeItem("adno_projects")
+                        localStorage.removeItem("adno_projects")
 
-                    Swal.fire({
-                        title: 'Vos projets ont été supprimés avec succès !',
-                        showCancelButton: false,
-                        showConfirmButton: true,
-                        cancelButtonText: 'OK',
-                        icon: 'success',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.reload()
-                        }
-                    })
+                        Swal.fire({
+                            title: 'Vos projets ont été supprimés avec succès !',
+                            showCancelButton: false,
+                            showConfirmButton: true,
+                            cancelButtonText: 'OK',
+                            icon: 'success',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.reload()
+                            }
+                        })
 
-                }
-            })
+                    }
+                })
         }
 
         return (
@@ -122,7 +133,7 @@ class HomeWithProjects extends Component {
                     <div className="with_projects_right">
 
                         <ImportProject />
-                        
+
                         <div className="homewpbar">
                             <h2>Vos Projets</h2>
                             <button className="btn btn-danger" onClick={() => deleteAllProjects()}>Supprimer mes projets</button>
