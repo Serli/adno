@@ -26,6 +26,14 @@ class LandingPage extends Component {
         }
     }
 
+    componentDidMount(){
+        let isProject = JSON.parse(localStorage.getItem("adno_projects")) && JSON.parse(localStorage.getItem("adno_projects")).length > 0 ? true : false
+
+        if(isProject){
+            window.location.reload()
+        }
+    }
+
     render() {
         const newProject = (e) => {
             e.preventDefault()

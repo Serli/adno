@@ -31,27 +31,22 @@ export default class App extends Component {
         }
     }
 
+
     componentDidMount() {
         if (localStorage.getItem("adno_projects") === undefined || localStorage.getItem("adno_projects") === null) {
 
             var projects = []
 
             insertInLS("adno_projects", JSON.stringify(projects))
-
-            this.setState({ isProjects: false })
-
-        } else if (JSON.parse(localStorage.getItem("adno_projects")).length < 1) {
-            this.setState({ isProjects: false })
-        } else {
-            this.setState({ isProjects: true })
         }
     }
+
 
     render() {
         return (
             <div>
                 <HashRouter history={history}>
-                <Navbar showNav={this.state.isProjects} />
+                    <Navbar showNav={JSON.parse(localStorage.getItem("adno_projects")) && JSON.parse(localStorage.getItem("adno_projects")).length > 0 ? true : false} />
 
                     <Switch>
                         <Route exact path="/about">
@@ -84,7 +79,7 @@ export default class App extends Component {
 
                         <Route exact path="/">
                             {
-                                this.state.isProjects ?
+                                JSON.parse(localStorage.getItem("adno_projects")) && JSON.parse(localStorage.getItem("adno_projects")).length > 0 ?
                                     <HomeWithProjects />
                                     : <LandingPage />
                             }
@@ -95,7 +90,7 @@ export default class App extends Component {
                         </Route>
 
                     </Switch>
-                    <Footer showFooter={this.state.isProjects} />
+                    <Footer showFooter={JSON.parse(localStorage.getItem("adno_projects")) && JSON.parse(localStorage.getItem("adno_projects")).length > 0 ? true : false} />
 
                 </HashRouter>
 

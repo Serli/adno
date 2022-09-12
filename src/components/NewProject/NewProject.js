@@ -127,7 +127,7 @@ class NewProject extends Component {
                                             project = buildJsonProjectWithManifest(projectID, document.getElementById("project_name").value,   document.getElementById("project_desc").value,  new Date(),new Date(),resultLink)
                                             
                                         } else {
-                                            project =                                             project = buildJsonProjectWithManifest(projectID, document.getElementById("project_name").value,   document.getElementById("project_desc").value,  new Date(),new Date(), manifest_url)
+                                            project = buildJsonProjectWithManifest(projectID, document.getElementById("project_name").value,   document.getElementById("project_desc").value,  new Date(),new Date(), manifest_url)
                                         }
 
 
