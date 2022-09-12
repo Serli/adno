@@ -2,8 +2,7 @@ import { Component } from "react";
 import { withRouter } from "react-router";
 
 // Import utils
-import { generateUUID } from "../../../Utils/UUID"
-import { insertInLS, buildJsonProjectWithImg, buildJsonProjectWithManifest, get_url_extension } from "../../../Utils/utils";
+import { insertInLS, buildJsonProjectWithImg, buildJsonProjectWithManifest, get_url_extension, generateUUID} from "../../../Utils/utils";
 
 // Import popup alerts
 import Swal from "sweetalert2";

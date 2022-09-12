@@ -5,8 +5,7 @@ import { withRouter } from "react-router";
 import Swal from "sweetalert2";
 
 // Import utils
-import { importProjectJsonFile, insertInLS } from "../../../Utils/utils";
-import { generateUUID } from "./../../../Utils/UUID";
+import { importProjectJsonFile, insertInLS, generateUUID } from "../../../Utils/utils";
 
 // Import CSS
 import "./ImportProject.css";

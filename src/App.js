@@ -22,7 +22,7 @@ import LegalNotice from "./components/LegalNotice/LegalNotice";
 import CGU from "./components/CGU/CGU";
 import LandingPage from "./components/LandingPage/LandingPage";
 import NotFound from "./components/NotFound/NotFound";
-import About from "./components/About";
+import About from "./components/About/About";
 
 export default class App extends Component {
     constructor(props) {
