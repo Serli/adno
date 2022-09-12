@@ -34,38 +34,25 @@ class LandingPage extends Component {
 
                 if (isValidUrl(this.state.adno_image_url)) {
 
-                    insertInLS("adno_image_url", this.state.adno_image_url)
+                    fetch(this.state.adno_image_url)
+                        .then(rep => {
+                            if (rep.status === 200 || rep.status === 302) {
+                                insertInLS("adno_image_url", this.state.adno_image_url)
 
-                    this.props.history.push("/new");
-
-                    // fetch(this.state.adno_image_url)
-                    //     .then(response => {
-                    //         console.log(response.status);
-                    //         if (response.status === 200 || response.status === 302) {
-                    //             insertInLS("adno_image_url", this.state.adno_image_url)
-
-                    //             this.props.history.push("/new");
-                    //         } else {
-                    //             Swal.fire({
-                    //                 title: "L'URL renseignée n'est pas valide !",
-                    //                 showCancelButton: true,
-                    //                 showConfirmButton: false,
-                    //                 cancelButtonText: 'OK',
-                    //                 icon: 'warning',
-                    //             })
-                    //         }
-                    //     })
-                    //     .catch(error => {
-                    //         Swal.fire({
-                    //             title: "L'URL renseignée n'est pas valide !",
-                    //             showCancelButton: true,
-                    //             showConfirmButton: false,
-                    //             cancelButtonText: 'OK',
-                    //             icon: 'warning',
-                    //         })
-                    //     })
-
-
+                                this.props.history.push("/new");
+                            } else {
+                                throw new Error(rep.status)
+                            }
+                        })
+                        .catch(error => {
+                            Swal.fire({
+                                title: `Erreur - Manifest ou image introuvable`,
+                                showCancelButton: true,
+                                showConfirmButton: false,
+                                cancelButtonText: 'OK',
+                                icon: 'warning',
+                            })
+                        })
                 } else {
                     Swal.fire({
                         title: "L'URL renseignée n'est pas valide !",
