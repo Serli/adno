@@ -27,9 +27,11 @@ class HomeWithProjects extends Component {
         const newProject = (e) => {
             e.preventDefault()
 
-            // We check if the url is not empty
-            if (this.state.adno_image_url !== "" && this.state.adno_image_url !== undefined) {
+            // Also, we check if the url is not empty, not undefined and not null
+            if (this.state.adno_image_url) {
 
+                // Then, we check if the given URL is valid
+                // Finally, we check if the URL is reachable
                 if (isValidUrl(this.state.adno_image_url)) {
 
                     fetch(this.state.adno_image_url)

@@ -26,10 +26,10 @@ class LandingPage extends Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         let isProject = JSON.parse(localStorage.getItem("adno_projects")) && JSON.parse(localStorage.getItem("adno_projects")).length > 0 ? true : false
 
-        if(isProject){
+        if (isProject) {
             window.location.reload()
         }
     }
@@ -38,7 +38,7 @@ class LandingPage extends Component {
         const newProject = (e) => {
             e.preventDefault()
 
-            if (this.state.adno_image_url !== "" && this.state.adno_image_url !== undefined) {
+            if (this.state.adno_image_url) {
 
                 if (isValidUrl(this.state.adno_image_url)) {
 
@@ -71,8 +71,6 @@ class LandingPage extends Component {
                     })
                 }
 
-
-
             } else {
                 Swal.fire({
                     title: 'Veuillez renseigner une URL valide',
@@ -84,12 +82,12 @@ class LandingPage extends Component {
             }
         }
 
+        // Function called to generate an example project to begin on the ADNO app.
         const generateDefaultProject = () => {
             generateExamplePainting("Siège de Poitiers par Coligny en 1569", "Peinture de François Nautré, Musées de la ville de Poitiers et de la Société des Antiquaires de l’Ouest", "https://free.iiifhosting.com/iiif/1c8d49343676a04fffcd92979c02e9394e48bac96f590fffbadffc9133cd06b9/info.json");
         }
 
         return (
-
             <div className="landing_page">
                 <div className="land-body">
 
