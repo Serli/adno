@@ -156,7 +156,7 @@ class Editor extends Component {
                 let annotations = JSON.parse(localStorage.getItem(`${selected_project.id}_annotations`))
 
                 if (annotations && annotations.length === 1) {
-                    localStorage.removeItem(selected_project.id + "_annotations")
+                    localStorage.removeItem(`${selected_project.id}_annotations`)
                     this.setState({annotations : annotations.filter(anno => anno.id !== del_anno.id)})
                 } else {
                     // Delete the annotation in the localStorage

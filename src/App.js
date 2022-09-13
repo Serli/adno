@@ -34,8 +34,7 @@ export default class App extends Component {
     componentDidMount() {
         // When the app load, check if it already exists some projects
         // If not then create the key "adno_projects" with empty array as value
-        if (localStorage.getItem("adno_projects") === undefined || localStorage.getItem("adno_projects") === null) {
-
+        if (!localStorage.getItem("adno_projects")) {
             insertInLS("adno_projects", JSON.stringify([]))
         }
     }

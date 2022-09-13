@@ -1,5 +1,4 @@
 import Swal from "sweetalert2";
-import history from "./history"
 
 // Function to insert something in the localStorage.
 // Will return an alert if the localStorage is full
@@ -53,7 +52,7 @@ export function generateExamplePainting(title, description, manifest_url) {
   insertInLS("adno_projects", JSON.stringify(projects))
 
   // Create annotations object
-  insertInLS(projectID + "_annotations", JSON.stringify([]))
+  insertInLS(`${projectID}_annotations`, JSON.stringify([]))
 
   Swal.fire({
     title: `Tableau ${title} ajouté aux projets avec succès`,
@@ -63,7 +62,7 @@ export function generateExamplePainting(title, description, manifest_url) {
   })
     .then((result) => {
       if (result.isConfirmed) {
-        window.location.reload()
+        window.location.href = "/"
       }
     })
 }

@@ -1,9 +1,6 @@
 import { Component } from "react";
 import { withRouter } from "react-router-dom";
 
-// Import popup alerts
-import Swal from "sweetalert2";
-
 // Import utils
 import { checkIfProjectExists } from "../../../Utils/utils";
 
@@ -21,7 +18,8 @@ class Viewer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annotation: []
+            annotations: [],
+            selectedProject: {}
         }
     }
 
@@ -30,19 +28,16 @@ class Viewer extends Component {
         if (!checkIfProjectExists(this.props.match.params.id)) {
             this.props.history.push("/")
         }
-
-        // Create viewer 
-
         // Find annotations from the localStorage in JSON format
-        var annotations = this.props.match.params.id + "_annotations"
 
-        this.setState({ annotations })
-
-        var annos = localStorage.getItem(annotations)
-
+        var annos = localStorage.getItem(`${this.props.match.params.id}_annotations`)
+        var actualProj = localStorage.getItem(this.props.match.params.id)
 
         // Check if there is at least one annotation
-        if (annos && annos != JSON.stringify([])) {
+        if (annos && JSON.parse(annos).length > 0) {
+
+            this.setState({ annotations: JSON.parse(annos), selectedProject: JSON.parse(actualProj) })
+
             // Create the dataURI linked to the annotations
             const dataURI = "data:application/json;base64," + btoa(annos);
 
@@ -75,16 +70,15 @@ class Viewer extends Component {
             <div className="adno-viewer">
 
                 {
-                    JSON.parse(localStorage.getItem(this.props.match.params.id + "_annotations")) && JSON.parse(localStorage.getItem(this.props.match.params.id + "_annotations")).length > 0 ?
+                    // Display every annotation
+                    this.state.annotations && this.state.annotations.length > 0 ?
                         <div className="adno-viewer-leftbar">
-                            <ViewerAnnotationCards annotations={JSON.parse(localStorage.getItem(this.props.match.params.id + "_annotations"))} />
+                            <ViewerAnnotationCards annotations={this.state.annotations} />
                         </div>
-                        : <></>
+                    : <></>
                 }
 
-
-
-                <div className={JSON.parse(localStorage.getItem(this.props.match.params.id + "_annotations")) && JSON.parse(localStorage.getItem(this.props.match.params.id + "_annotations")).length > 0 ? "adno-viewer-rightbar" : "adno-viewer-rightbar-without-annos"}>
+                <div className={this.state.annotations && this.state.annotations.length > 0 ? "adno-viewer-rightbar" : "adno-viewer-rightbar-without-annos"}>
                     <div className="col">
                         <div className="card mb-3">
                             <div className="card">
@@ -92,8 +86,8 @@ class Viewer extends Component {
 
 
                                     <div className="project-body-left">
-                                        <h5 id="project_name" className="card-title">{checkIfProjectExists(this.props.match.params.id) && JSON.parse(localStorage.getItem(this.props.match.params.id)).title}</h5>
-                                        <p id="project_desc" className="card-text">{checkIfProjectExists(this.props.match.params.id) && JSON.parse(localStorage.getItem(this.props.match.params.id)).description}</p>
+                                        <h5 id="project_name" className="card-title">{checkIfProjectExists(this.props.match.params.id) && this.state.selectedProject.title}</h5>
+                                        <p id="project_desc" className="card-text">{checkIfProjectExists(this.props.match.params.id) && this.state.selectedProject.description}</p>
                                     </div>
 
                                     <div className="project-body-right">
