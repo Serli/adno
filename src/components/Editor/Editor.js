@@ -20,6 +20,7 @@ class Editor extends Component {
         }
     }
 
+    // Function to update the name of the selected project
     updateProjectName(e){
 
         let project = this.state.selected_project
@@ -32,6 +33,7 @@ class Editor extends Component {
         insertInLS(project.id, JSON.stringify(project))
     }
 
+    // Function to update the description of the selected project
     updateProjectDesc(e){
 
         let project = this.state.selected_project
@@ -44,6 +46,24 @@ class Editor extends Component {
         insertInLS(project.id, JSON.stringify(project))
     }
 
+
+    createViewer(tileSources){
+        return OpenSeadragon({
+            id: 'openseadragon1',
+            tileSources: tileSources,
+            prefixUrl: 'https://openseadragon.github.io/openseadragon/images/'
+        });
+    }
+
+    functionToLoadAnnotorious(viewer){
+        return OpenSeadragon.Annotorious(viewer, {
+            locale: 'auto',
+            drawOnSingleClick: true,
+            allowEmpty: true,
+            disableEditor: false
+        });
+    }
+
     componentDidMount() {
 
         // First of all, verify if the UUID match to an real project in the localStorage
@@ -53,33 +73,34 @@ class Editor extends Component {
         } else {
             let selected_project = JSON.parse(localStorage.getItem(this.props.match.params.id))
 
+            let tileSources;
+
             if (JSON.parse(localStorage.getItem(this.props.match.params.id)).manifest_url) {
-                var viewer = OpenSeadragon({
-                    id: 'openseadragon1',
-                    tileSources: [JSON.parse(localStorage.getItem(this.props.match.params.id)).manifest_url],
-                    prefixUrl: 'https://openseadragon.github.io/openseadragon/images/'
-                });
+                
+                tileSources = [
+                    JSON.parse(localStorage.getItem(this.props.match.params.id)).manifest_url
+                ]
+
             } else {
-                var viewer = OpenSeadragon({
-                    id: 'openseadragon1',
-                    tileSources: {
-                        type: 'image',
-                        url: JSON.parse(localStorage.getItem(this.props.match.params.id)).img_url
-                    },
-                    prefixUrl: 'https://openseadragon.github.io/openseadragon/images/'
-                });
+                tileSources = {
+                    type: 'image',
+                    url: JSON.parse(localStorage.getItem(this.props.match.params.id)).img_url
+                }
             }
 
-            var anno = OpenSeadragon.Annotorious(viewer, {
-                locale: 'auto',
-                drawOnSingleClick: true,
-                allowEmpty: true,
-                disableEditor: false
-            });
+            let adnoViewer = this.createViewer(tileSources)
+
+            let anno = this.functionToLoadAnnotorious(adnoViewer)
+
+            // var anno = OpenSeadragon.Annotorious(viewer, {
+            //     locale: 'auto',
+            //     drawOnSingleClick: true,
+            //     allowEmpty: true,
+            //     disableEditor: false
+            // });
 
             // Find annotations from the localStorage in JSON format
-            var annotations = selected_project.id + "_annotations"
-            var annos = localStorage.getItem(annotations)
+            var annos = localStorage.getItem(`${selected_project.id}_annotations`)
 
             // Generate dataURI and load annotations into Annotorious
             const dataURI = "data:application/json;base64," + btoa(unescape(encodeURIComponent(annos)));
@@ -90,13 +111,9 @@ class Editor extends Component {
             Annotorious.BetterPolygon(anno);
             Annotorious.Toolbar(anno, document.getElementById('toolbar-container'));
 
-
-
             // Manage creation of new annotation
-            anno.on('createAnnotation', function (annotation) {
-                var project_annotations_id = selected_project.id + "_annotations";
-
-                var annotations = JSON.parse(localStorage.getItem(project_annotations_id))
+            anno.on('createAnnotation', (annotation) => {
+                var annotations = JSON.parse(localStorage.getItem(`${selected_project.id}_annotations`))
 
                 if (annotations === undefined || annotations === null) {
                     annotations = [
@@ -111,15 +128,15 @@ class Editor extends Component {
                 insertInLS(selected_project.id, JSON.stringify(selected_project))
 
                 // Update annotations linked to the selected project in the localStorage
-                insertInLS(project_annotations_id, JSON.stringify(annotations))
+                insertInLS(`${selected_project.id}_annotations`, JSON.stringify(annotations))
 
-                window.location.reload()
+                this.setState({annotations})
 
             });
 
             // Manage update of annotation
-            anno.on('updateAnnotation', function (upated_anno) {
-                let annotations = JSON.parse(localStorage.getItem(selected_project.id + "_annotations"))
+            anno.on('updateAnnotation', (upated_anno) => {
+                let annotations = JSON.parse(localStorage.getItem(`${selected_project.id}_annotations`))
 
                 let selected_anno = annotations.filter(anno => anno.id === upated_anno.id)[0]
 
@@ -130,22 +147,21 @@ class Editor extends Component {
                 insertInLS(selected_project.id, JSON.stringify(selected_project))
 
                 // Save the updated annotation in the localStorage
-                insertInLS(selected_project.id + "_annotations", JSON.stringify(annotations))
+                insertInLS(`${selected_project.id}_annotations`, JSON.stringify(annotations))
 
-                window.location.reload()
+                this.setState({annotations})
             });
 
-            anno.on('deleteAnnotation', function (del_anno) {
-                var annotations = JSON.parse(localStorage.getItem(selected_project.id + "_annotations"))
-
+            anno.on('deleteAnnotation', (del_anno) => {
+                let annotations = JSON.parse(localStorage.getItem(`${selected_project.id}_annotations`))
 
                 if (annotations && annotations.length === 1) {
                     localStorage.removeItem(selected_project.id + "_annotations")
-                    window.location.reload()
+                    this.setState({annotations : annotations.filter(anno => anno.id !== del_anno.id)})
                 } else {
                     // Delete the annotation in the localStorage
                     insertInLS(`${selected_project.id}_annotations`, JSON.stringify(annotations.filter(anno => anno.id !== del_anno.id)))
-                    window.location.reload()
+                    this.setState({annotations : annotations.filter(anno => anno.id !== del_anno.id)})
                 }
 
             })

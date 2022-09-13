@@ -22,6 +22,7 @@ class AnnotationCards extends Component {
     }
 
     render() {
+        // Function to move an annotation up one place
         const annoSwitchUp = (index) => {
 
             var annos = this.props.annotations;
@@ -31,11 +32,12 @@ class AnnotationCards extends Component {
             annos[index - 1] = annos[index]
             annos[index] = annoToSwitch
 
-            insertInLS(this.props.match.params.id + "_annotations", JSON.stringify(annos))
+            insertInLS(`${this.props.match.params.id}_annotations`, JSON.stringify(annos))
 
             this.props.updateAnnos(annos)
         }
 
+        // Function to move an annotation down one place
         const annoSwitchDown = (index) => {
             var annos = this.props.annotations;
 
@@ -44,12 +46,12 @@ class AnnotationCards extends Component {
             annos[index + 1] = annos[index]
             annos[index] = annoToSwitch
 
-            insertInLS(this.props.match.params.id + "_annotations", JSON.stringify(annos))
+            insertInLS(`${this.props.match.params.id}_annotations`, JSON.stringify(annos))
 
             this.props.updateAnnos(annos)
         }
 
-
+        // Function to delete an annotation
         const deleteAnnotation = (index) => {
 
             Swal.fire({
@@ -62,55 +64,36 @@ class AnnotationCards extends Component {
                 if (result.isConfirmed) {
                     var annos = this.props.annotations;
 
-                    if (index > -1) { // only splice array when item is found
-                        annos.splice(index, 1); // 2nd parameter means remove one item only
+                    // remove the selected annotation in the array
+                    if (index > -1) {
+                        annos.splice(index, 1);
                     }
 
-                    insertInLS(this.props.match.params.id + "_annotations", JSON.stringify(annos))
+                    // Update the localStorage without the removed item
+                    insertInLS(`${this.props.match.params.id}_annotations`, JSON.stringify(annos))
 
                     Swal.fire("L'annotation a bien été supprimée", '', 'success')
                         .then((result) => {
-                            result.isConfirmed ? window.location.reload() : ""
+                            result.isConfirmed ? this.props.updateAnnos(annos) : ""
                         })
                 }
             })
-
-
-
-        }
-
-        const addImageToAnnotation = (body, index) => {
-
-            // create an image 
-            let newImg = '<img src ="https://cdn.pixabay.com/photo/2022/08/09/16/19/sea-7375377_960_720.jpg"></img>'
-
-            // console.log(body += newImg)
-            // console.log(this.props.match.params.id);
-
-            // update annotation
-
-
-            // update annotations list in local storage
-
         }
 
 
         return (
+            <div className="list_annotations">
 
-            <>
                 <h3 className="adno-nb-annos"> {this.props.annotations.length} annotation(s) trouvée(s)</h3>
 
-                <div className="list_annotations">
-
-                    {this.props.annotations.map((annotation, index) => {
+                {
+                    this.props.annotations.map((annotation, index) => {
                         return (
-                            <div className="anno-card" key={"anno_" + index}>
+                            <div className="anno-card" key={`anno_${index}`}>
                                 <div className="anno-card-body">
                                     <h5 className="card-title adno-card-title">{annotation.body[0] && annotation.body[0].value ? ReactHtmlParser(annotation.body[0].value) : "Aucun titre"}</h5>
 
                                     {/* <TTS text={stripHtml(annotation.body[0].value)} /> */}
-
-                                    {/* <button onClick={() => {addImageToAnnotation(annotation.body[0].value), index}}>add image</button> */}
 
                                     <h6 className="card-subtitle mb-2 text-muted"> {buildTagsList(annotation)} </h6>
                                     <button className="btn btn-danger" onClick={() => deleteAnnotation(index)}> <FontAwesomeIcon icon={faTrashAlt} /> Supprimer</button>
@@ -120,10 +103,9 @@ class AnnotationCards extends Component {
                                 </div >
                             </div >
                         )
-                    })}
-                </div >
-            </>
-
+                    })
+                }
+            </div >
         )
     }
 }
