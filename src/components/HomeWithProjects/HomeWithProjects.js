@@ -145,7 +145,7 @@ class HomeWithProjects extends Component {
 
                     <div className="with_projects_right">
 
-                        <ImportProject projects={this.state.projects} updateProjects={(updatedList) => this.setState({projects: updatedList})} />
+                        <ImportProject projects={this.state.projects} updateProjects={(updatedList) => this.setState({projects: updatedList, adno_image_url: ""})} />
 
                         <div className="homewpbar">
                             <h2>Vos Projets</h2>

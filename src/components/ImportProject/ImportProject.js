@@ -19,6 +19,12 @@ class ImportProject extends Component {
         }
     }
 
+    resetImport = () => {
+        this.setState({ isimporting: false })
+        document.getElementById("selectFiles_1").value = ""
+        document.getElementById("label-upload").innerHTML = "Importer un projet"
+    }
+
     render() {
         const loadImportedProj = () => {
             if (this.state.loadedProject.type === "application/json") {
@@ -85,7 +91,7 @@ class ImportProject extends Component {
                             let proj = imported_project.project;
                             let annos = imported_project.annotations
 
-                           // proj.last_update = new Date()
+                            // proj.last_update = new Date()
                             proj.id = generateUUID()
 
                             let projects = JSON.parse(localStorage.getItem("adno_projects"))
@@ -96,9 +102,7 @@ class ImportProject extends Component {
                             insertInLS(proj.id, JSON.stringify(proj))
 
 
-                            if(this.props.projects){
-                                this.props.updateProjects([...this.props.projects, proj])
-                            }
+
 
 
                             Swal.fire({
@@ -109,7 +113,10 @@ class ImportProject extends Component {
                                 icon: 'success',
                             }).then((result) => {
                                 if (result.isConfirmed) {
-                                    window.location.reload()
+                                    if (this.props.projects) {
+                                        this.props.updateProjects([...this.props.projects, proj])
+                                        this.resetImport()
+                                    }
                                 }
                             })
                         }
@@ -148,9 +155,7 @@ class ImportProject extends Component {
                     this.state.isimporting ?
                         <div className="import-btns">
                             <button className="import-btn import-reset" disabled={!this.state.isimporting} onClick={() => {
-                                this.setState({ isimporting: false })
-                                document.getElementById("selectFiles_1").value = ""
-                                document.getElementById("label-upload").innerHTML = "Importer un projet"
+                                this.resetImport()
                             }
                             }>Annuler l'importation</button>
                             <button id="import_1" className="import-btn import-confirm" disabled={!this.state.isimporting} onClick={() => loadImportedProj()}>Importer mon projet</button>
