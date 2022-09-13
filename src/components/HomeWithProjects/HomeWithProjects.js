@@ -18,8 +18,19 @@ class HomeWithProjects extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            adno_image_url: ""
+            adno_image_url: "",
+            projects : []
         }
+    }
+
+    componentDidMount(){
+        var projects = []
+        var allProjectsID = JSON.parse(localStorage.getItem("adno_projects"))
+        allProjectsID.map(projectID => {
+            projects.push(JSON.parse(localStorage.getItem(projectID)))
+        })
+
+        this.setState({projects})
     }
 
     render() {
@@ -134,14 +145,19 @@ class HomeWithProjects extends Component {
 
                     <div className="with_projects_right">
 
-                        <ImportProject />
+                        <ImportProject projects={this.state.projects} updateProjects={(updatedList) => this.setState({projects: updatedList})} />
 
                         <div className="homewpbar">
                             <h2>Vos Projets</h2>
                             <button className="btn btn-danger" onClick={() => deleteAllProjects()}>Supprimer mes projets</button>
                         </div>
 
-                        <ProjectsList />
+                        {
+                            this.state.projects && this.state.projects.length > 0 ?
+                                <ProjectsList projects={this.state.projects}/>
+                            : <></>
+                        }
+
                     </div>
                 </div>
             </div>

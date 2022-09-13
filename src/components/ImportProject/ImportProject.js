@@ -32,13 +32,12 @@ class ImportProject extends Component {
 
                     fr.readAsText(this.state.loadedProject)
 
-                    fr.onload = function (e) {
+                    fr.onload = (e) => {
 
                         // Generate a new ID and new last_update
 
                         let imported_project = JSON.parse(e.target.result)
-
-                        console.log(Array.isArray(imported_project.annotations))
+                        imported_project.project.last_update = new Date().toISOString()
 
                         // First, check if the imported JSON contains two attributes (project & annotations)
                         if (!imported_project.project || !imported_project.annotations) {
@@ -53,6 +52,8 @@ class ImportProject extends Component {
                                     window.location.reload()
                                 }
                             })
+
+                            // if the imported JSON file contains two attributes, verify if the annotation's attribute is an real array
                         } else if (imported_project.project && imported_project.annotations && !Array.isArray(imported_project.annotations)) {
                             Swal.fire({
                                 title: "Erreur : ce fichier JSON n'a pas été formaté correctement",
@@ -65,6 +66,7 @@ class ImportProject extends Component {
                                     window.location.reload()
                                 }
                             })
+                            // Finally, check if the project contains all required attributes (title, description, creation_date, last_update, manifest_url)
                         } else if (imported_project.project && imported_project.annotations && Array.isArray(imported_project.annotations) && !checkProjectAttributes(imported_project.project)) {
 
                             Swal.fire({
@@ -78,12 +80,12 @@ class ImportProject extends Component {
                                     window.location.reload()
                                 }
                             })
-
+                            // If the JSON input was correctly fullfilled then import the project
                         } else {
                             let proj = imported_project.project;
                             let annos = imported_project.annotations
 
-                            proj.last_update = new Date()
+                           // proj.last_update = new Date()
                             proj.id = generateUUID()
 
                             let projects = JSON.parse(localStorage.getItem("adno_projects"))
@@ -93,11 +95,24 @@ class ImportProject extends Component {
                             insertInLS(proj.id + "_annotations", JSON.stringify(annos))
                             insertInLS(proj.id, JSON.stringify(proj))
 
-                            window.location.reload()
+
+                            if(this.props.projects){
+                                this.props.updateProjects([...this.props.projects, proj])
+                            }
+
+
+                            Swal.fire({
+                                title: "Projet importé avec succès !",
+                                showCancelButton: false,
+                                showConfirmButton: true,
+                                confirmButtonText: 'OK',
+                                icon: 'success',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.reload()
+                                }
+                            })
                         }
-
-
-
                     }
                 } else {
                     Swal.fire({
