@@ -5,7 +5,7 @@ import { withRouter } from "react-router";
 import Swal from "sweetalert2";
 
 // Import utils
-import { importProjectJsonFile, insertInLS, generateUUID } from "../../../Utils/utils";
+import { importProjectJsonFile, insertInLS, generateUUID, checkProjectAttributes } from "../../../Utils/utils";
 
 // Import CSS
 import "./ImportProject.css";
@@ -22,7 +22,7 @@ class ImportProject extends Component {
     render() {
         const loadImportedProj = () => {
             if (this.state.loadedProject.type === "application/json") {
-                
+
 
                 if (this.state.loadedProject) {
 
@@ -37,20 +37,66 @@ class ImportProject extends Component {
                         // Generate a new ID and new last_update
 
                         let imported_project = JSON.parse(e.target.result)
-                        let proj = imported_project.project;
-                        let annos = imported_project.annotations
 
-                        proj.last_update = new Date()
-                        proj.id = generateUUID()
+                        console.log(Array.isArray(imported_project.annotations))
 
-                        let projects = JSON.parse(localStorage.getItem("adno_projects"))
-                        projects.push(proj.id)
+                        // First, check if the imported JSON contains two attributes (project & annotations)
+                        if (!imported_project.project || !imported_project.annotations) {
+                            Swal.fire({
+                                title: 'Impossible de lire ce fichier JSON !',
+                                showCancelButton: false,
+                                showConfirmButton: true,
+                                confirmButtonText: 'OK',
+                                icon: 'warning',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.reload()
+                                }
+                            })
+                        } else if (imported_project.project && imported_project.annotations && !Array.isArray(imported_project.annotations)) {
+                            Swal.fire({
+                                title: "Erreur : ce fichier JSON n'a pas été formaté correctement",
+                                showCancelButton: false,
+                                showConfirmButton: true,
+                                confirmButtonText: 'OK',
+                                icon: 'warning',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.reload()
+                                }
+                            })
+                        } else if (imported_project.project && imported_project.annotations && Array.isArray(imported_project.annotations) && !checkProjectAttributes(imported_project.project)) {
 
-                        insertInLS("adno_projects", JSON.stringify(projects))
-                        insertInLS(proj.id + "_annotations", JSON.stringify(annos))
-                        insertInLS(proj.id, JSON.stringify(proj))
+                            Swal.fire({
+                                title: "Erreur : ce fichier JSON n'a pas été formaté correctement",
+                                showCancelButton: false,
+                                showConfirmButton: true,
+                                confirmButtonText: 'OK',
+                                icon: 'warning',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.reload()
+                                }
+                            })
 
-                        window.location.reload(true)
+                        } else {
+                            let proj = imported_project.project;
+                            let annos = imported_project.annotations
+
+                            proj.last_update = new Date()
+                            proj.id = generateUUID()
+
+                            let projects = JSON.parse(localStorage.getItem("adno_projects"))
+                            projects.push(proj.id)
+
+                            insertInLS("adno_projects", JSON.stringify(projects))
+                            insertInLS(proj.id + "_annotations", JSON.stringify(annos))
+                            insertInLS(proj.id, JSON.stringify(proj))
+
+                            window.location.reload()
+                        }
+
+
 
                     }
                 } else {

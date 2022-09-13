@@ -308,3 +308,8 @@ export const importProjectJsonFile = (loadedProject) => {
 
   }
 }
+
+
+export function checkProjectAttributes(imported_project){
+  return imported_project.hasOwnProperty('id') && imported_project.hasOwnProperty('title') && imported_project.hasOwnProperty('description') && imported_project.hasOwnProperty('creation_date') && imported_project.hasOwnProperty('last_update') && imported_project.hasOwnProperty('manifest_url') 
+}
