@@ -1,8 +1,10 @@
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Component } from "react";
 import { withRouter } from "react-router";
 
 // Import utils
-import { checkIfProjectExists, insertInLS } from "../../../Utils/utils";
+import { checkIfProjectExists, createExportProjectJsonFile, insertInLS } from "../../../Utils/utils";
 
 // Import Components
 import AnnotationCards from "./AnnotationCards/AnnotationCards";
@@ -16,38 +18,38 @@ class Editor extends Component {
         this.state = {
             mobileMode: false,
             selected_project: JSON.parse(localStorage.getItem(this.props.match.params.id)),
-            annotations : JSON.parse(localStorage.getItem(`${this.props.match.params.id}_annotations`))
+            annotations: JSON.parse(localStorage.getItem(`${this.props.match.params.id}_annotations`))
         }
     }
 
     // Function to update the name of the selected project
-    updateProjectName(e){
+    updateProjectName(e) {
 
         let project = this.state.selected_project
 
         project.title = e.target.value
         project.last_update = new Date()
 
-        this.setState({selected_project: project})
+        this.setState({ selected_project: project })
 
         insertInLS(project.id, JSON.stringify(project))
     }
 
     // Function to update the description of the selected project
-    updateProjectDesc(e){
+    updateProjectDesc(e) {
 
         let project = this.state.selected_project
 
         project.description = e.target.value
         project.last_update = new Date()
 
-        this.setState({selected_project: project})
+        this.setState({ selected_project: project })
 
         insertInLS(project.id, JSON.stringify(project))
     }
 
 
-    createViewer(tileSources){
+    createViewer(tileSources) {
         return OpenSeadragon({
             id: 'openseadragon1',
             tileSources: tileSources,
@@ -55,7 +57,7 @@ class Editor extends Component {
         });
     }
 
-    functionToLoadAnnotorious(viewer){
+    functionToLoadAnnotorious(viewer) {
         return OpenSeadragon.Annotorious(viewer, {
             locale: 'auto',
             drawOnSingleClick: true,
@@ -76,7 +78,7 @@ class Editor extends Component {
             let tileSources;
 
             if (JSON.parse(localStorage.getItem(this.props.match.params.id)).manifest_url) {
-                
+
                 tileSources = [
                     JSON.parse(localStorage.getItem(this.props.match.params.id)).manifest_url
                 ]
@@ -115,12 +117,23 @@ class Editor extends Component {
             anno.on('createAnnotation', (annotation) => {
                 var annotations = JSON.parse(localStorage.getItem(`${selected_project.id}_annotations`))
 
-                if (annotations === undefined || annotations === null) {
+                // reorganize properties 
+                const newAnnotation = {
+                    "@context": "http://www.w3.org/ns/anno.jsonld",
+                    "id": annotation.id,
+                    "type": annotation.type,
+                    "body": annotation.body,
+                    "target": annotation.target,
+                    "modified": new Date(),
+                    "created": new Date()
+                }
+
+                if (!annotations) {
                     annotations = [
-                        annotation
+                        newAnnotation
                     ]
                 } else {
-                    annotations.push(annotation)
+                    annotations.push(newAnnotation)
                 }
 
                 // Update the last update date for the selected project
@@ -130,7 +143,7 @@ class Editor extends Component {
                 // Update annotations linked to the selected project in the localStorage
                 insertInLS(`${selected_project.id}_annotations`, JSON.stringify(annotations))
 
-                this.setState({annotations})
+                this.setState({ annotations })
 
             });
 
@@ -149,7 +162,7 @@ class Editor extends Component {
                 // Save the updated annotation in the localStorage
                 insertInLS(`${selected_project.id}_annotations`, JSON.stringify(annotations))
 
-                this.setState({annotations})
+                this.setState({ annotations })
             });
 
             anno.on('deleteAnnotation', (del_anno) => {
@@ -157,11 +170,11 @@ class Editor extends Component {
 
                 if (annotations && annotations.length === 1) {
                     localStorage.removeItem(`${selected_project.id}_annotations`)
-                    this.setState({annotations : annotations.filter(anno => anno.id !== del_anno.id)})
+                    this.setState({ annotations: annotations.filter(anno => anno.id !== del_anno.id) })
                 } else {
                     // Delete the annotation in the localStorage
                     insertInLS(`${selected_project.id}_annotations`, JSON.stringify(annotations.filter(anno => anno.id !== del_anno.id)))
-                    this.setState({annotations : annotations.filter(anno => anno.id !== del_anno.id)})
+                    this.setState({ annotations: annotations.filter(anno => anno.id !== del_anno.id) })
                 }
 
             })
@@ -173,19 +186,19 @@ class Editor extends Component {
                 <div className="left-bar">
                     <div className="mb-3">
                         <label htmlFor="project_name" className="form-label">Titre</label>
-                        <input type="text" id="project_name" className="form-control" placeholder="Donnez un titre à votre projet" value={this.state.selected_project.title} onChange={(e) => this.updateProjectName(e)}/>
+                        <input type="text" id="project_name" className="form-control" placeholder="Donnez un titre à votre projet" value={this.state.selected_project.title} onChange={(e) => this.updateProjectName(e)} />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="project_desc" className="form-label">Description</label>
-                        <input id="project_desc" className="form-control" type="text" placeholder="Description de votre projet" value={this.state.selected_project.description} onChange={(e) => this.updateProjectDesc(e)}/>
+                        <input id="project_desc" className="form-control" type="text" placeholder="Description de votre projet" value={this.state.selected_project.description} onChange={(e) => this.updateProjectDesc(e)} />
                     </div>
 
                     <span className="autosave-text">* Le titre et la description sont sauvegardés automatiquement</span>
 
                     {
                         this.state.annotations && this.state.annotations.length > 0 ?
-                            <AnnotationCards annotations={this.state.annotations} updateAnnos={(updated_annos) => this.setState({annotations: updated_annos})}  />
-                        : <></>
+                            <AnnotationCards annotations={this.state.annotations} updateAnnos={(updated_annos) => this.setState({ annotations: updated_annos })} />
+                            : <></>
                     }
                 </div>
 
@@ -203,6 +216,7 @@ class Editor extends Component {
                                     </div>
 
                                     <div className="project-body-right">
+                                        <a id={"download_btn_" + this.state.selected_project.id} href={createExportProjectJsonFile(this.state.selected_project.id)} download={this.state.selected_project.title + ".json"} className="btn btn-secondary btn-sm"> <FontAwesomeIcon icon={faDownload} /> Télécharger </a>
                                         <button id="preview" className="btn btn-primary subbutton" onClick={() => this.props.history.push("/project/" + this.props.match.params.id)}>Preview</button>
                                     </div>
 

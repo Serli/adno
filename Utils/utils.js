@@ -265,7 +265,7 @@ export const createExportProjectJsonFile = (projectID) => {
     "format": "Adno",
     "total": annotations && annotations.length ? annotations.length : 0,
     "first": {
-      "id": "http://example.org/page1",
+      "id": "page1",
       "type": "AnnotationPage",
       "startIndex": 0,
       "items": annotations && annotations.length > 0 ? annotations : [],
@@ -273,6 +273,7 @@ export const createExportProjectJsonFile = (projectID) => {
   }
   return URL.createObjectURL(new Blob([JSON.stringify(finalProject)], { type: "text/plain" }));
 }
+
 
 export const importProjectJsonFile = (loadedProject) => {
   let fr = new FileReader();
@@ -298,7 +299,7 @@ export const importProjectJsonFile = (loadedProject) => {
       "manifest_url": imported_project.source,
     }
 
-    let annos = imported_project.first.items
+    let annos =  imported_project.total !== 0 ? imported_project.first.items : []
 
     insertInLS("adno_projects", JSON.stringify(projects))
     insertInLS(proj.id + "_annotations", JSON.stringify(annos))
@@ -310,6 +311,6 @@ export const importProjectJsonFile = (loadedProject) => {
 }
 
 
-export function checkProjectAttributes(imported_project){
-  return imported_project.hasOwnProperty('id') && imported_project.hasOwnProperty('title') && imported_project.hasOwnProperty('description') && imported_project.hasOwnProperty('creation_date') && imported_project.hasOwnProperty('last_update') && imported_project.hasOwnProperty('manifest_url') 
+export function checkProjectAttributes(imported_project) {
+  return imported_project.hasOwnProperty('id') && imported_project.hasOwnProperty('title') && imported_project.hasOwnProperty('description') && imported_project.hasOwnProperty('creation_date') && imported_project.hasOwnProperty('last_update') && imported_project.hasOwnProperty('manifest_url')
 }
