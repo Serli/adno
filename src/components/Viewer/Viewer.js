@@ -23,7 +23,8 @@ class Viewer extends Component {
             annotations: [],
             selectedProject: {},
             isPlaying: false,
-            compteur: 0
+            compteur: 0,
+            currentAnno: -1
         }
     }
 
@@ -70,6 +71,14 @@ class Viewer extends Component {
 
     displayActualIndex = () => {
         console.log(document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__.$children[0].position)
+        console.log(document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__.$children[0].annotations[0].section[0])
+        console.log(document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__.$children[0].viewer.world.getItemAt(0).imageToViewportRectangle())
+
+
+        console.log(document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__.$children[0].viewer.world.getItemAt(0).imageToViewportRectangle(1722.5394287109375,986.1527099609375,2024.2540283203125,2798.1160888671875))
+
+
+
 
         this.setState({ compteur: this.state.compteur + 1 })
     }
@@ -125,6 +134,11 @@ class Viewer extends Component {
         console.log(document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__.$children[0].position)
     }
 
+
+    nextAnno = () => {
+        document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__.$children[0].sendMessage({'function':'next', 'args': 0});
+    }
+    
     render() {
 
         if (!localStorage.getItem(this.props.match.params.id_project) || !localStorage.getItem(this.props.match.params.id_journey)) {
@@ -148,7 +162,7 @@ class Viewer extends Component {
                     // Display every annotation
                     this.state.annotations && this.state.annotations.length > 0 ?
                         <div className="adno-viewer-leftbar">
-                            <ViewerAnnotationCards annotations={this.state.annotations} />
+                            <ViewerAnnotationCards annotations={this.state.annotations} currentAnno={this.state.currentAnno} setCurrentAnno={(newPos) => this.setState({currentAnno: newPos})} />
                         </div>
                         : <></>
                 }
@@ -170,6 +184,7 @@ class Viewer extends Component {
                                     </div>
 
                                     <div className="project-body-right">
+                                        <button id="play-journey" className="btn btn-success" onClick={() => this.nextAnno()}> NEXTTTT</button>
                                         <button id="play-journey" className="btn btn-success" onClick={() => this.getProperties()}> GET ALL PROPERTIES</button>
                                         <button id="play-journey" className="btn btn-success" onClick={() => this.startJourney()}> {this.state.isPlaying ? "Stopper la lecture" : "Lire le parcours "}  <FontAwesomeIcon icon={this.state.isPlaying ? faStopCircle : faPlayCircle} /></button>
                                         <a id={"download_btn_" + this.props.match.params.id_project} href={createExportProjectJsonFile(this.props.match.params.id_project)} download={this.state.selectedProject.title + ".json"} className="btn btn-secondary btn-sm"> <FontAwesomeIcon icon={faDownload} /> Télécharger </a>

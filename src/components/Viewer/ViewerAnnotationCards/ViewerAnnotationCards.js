@@ -12,6 +12,14 @@ import ReactHtmlParser from 'react-html-parser';
 import "./ViewerAnnotationCards.css";
 
 class ViewerAnnotationCards extends Component {
+
+    selectAnno = (position) => {
+        document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__.$children[0].sendMessage({'function':'next', 'args': position});
+        
+        console.log(this.props.currentAnno)
+        this.props.setCurrentAnno(position)
+    }
+
     render() {
         return (
             <div className="adno-viewer-list-annos">
@@ -20,7 +28,7 @@ class ViewerAnnotationCards extends Component {
 
                 {this.props.annotations.map((annotation, index) => {
                     return (
-                        <div className="adno-viewer-card" key={`viewer_anno_${index}`}>
+                        <div key={`viewer_anno_${index}`} onClick={() => this.selectAnno(index)} className={this.props.currentAnno === index ? "adno-viewer-card selectedAnno": "adno-viewer-card"}>
                             <div className="anno-card-body">
                                 <h6 className="card-subtitle mb-2 text-muted"> {buildTagsList(annotation)} </h6>
 

@@ -1318,6 +1318,67 @@ table tr {
   outline: none !important;
 }
 
+.tts_play {
+  box-shadow: none;
+  text-shadow: none;
+  opacity: .9;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  color: #fff;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 16px 32px;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1;
+  background-color: #055ada !important;
+  outline: none !important;
+}
+
+.card-title iframe, .card-title img {
+  max-width: 100%;
+  max-height: 200px;
+}
+
+.adno-viewer-list-annos {
+  height: 53vh;
+  width: 100%;
+  flex-direction: column;
+  display: flex;
+  overflow: scroll;
+}
+
+.adno-viewer-card {
+  width: 90%;
+  background-color: #fff;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  margin: 10px auto;
+  padding: 15px;
+}
+
+.adno-viewer-card:hover {
+  cursor: pointer;
+  box-shadow: 0 10px 36px #00000029, 0 0 0 1px #0000000f;
+}
+
+.adno-viewer-nb-annos {
+  text-align: center;
+  color: #007bff;
+  margin: 30px 0;
+}
+
+.selectedAnno {
+  border: 2px solid gold !important;
+}
+
+@media (max-width: 1500px) {
+  .adno-viewer-list-annos {
+    height: 50vh;
+  }
+}
+
 .adno-viewer-leftbar {
   width: 20vw;
   height: 71vh;
@@ -1427,61 +1488,33 @@ table tr {
   }
 }
 
-.tts_play {
-  box-shadow: none;
-  text-shadow: none;
-  opacity: .9;
-  text-transform: uppercase;
-  letter-spacing: .4px;
-  color: #fff;
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 16px 32px;
-  font-size: 13px;
-  font-weight: bold;
-  line-height: 1;
-  background-color: #055ada !important;
-  outline: none !important;
-}
-
-.card-title iframe, .card-title img {
-  max-width: 100%;
-  max-height: 200px;
-}
-
-.adno-viewer-list-annos {
-  height: 53vh;
-  width: 100%;
+.add-journey {
+  width: 40%;
+  height: 200px;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
+  padding: 30px;
+  transition: all .3s;
   display: flex;
-  overflow: scroll;
+  box-shadow: 0 4px 8px #0003;
 }
 
-.adno-viewer-card {
-  width: 90%;
-  background-color: #fff;
-  border: 2px solid #007bff;
-  border-radius: 5px;
-  margin: 10px auto;
-  padding: 15px;
+.add-journey p {
+  margin: 0;
 }
 
-.adno-viewer-card:hover {
+.add-journey:hover {
   cursor: pointer;
-  box-shadow: 0 10px 36px #00000029, 0 0 0 1px #0000000f;
+  box-shadow: 0 6px 8px #0000004d;
 }
 
-.adno-viewer-nb-annos {
-  text-align: center;
-  color: #007bff;
-  margin: 30px 0;
-}
-
-@media (max-width: 1500px) {
-  .adno-viewer-list-annos {
-    height: 50vh;
-  }
+.add-journey-btn {
+  color: #fff;
+  background-color: #08c;
+  border: none;
+  border-radius: 20px;
 }
 
 .list_annotations {
@@ -1614,35 +1647,6 @@ table tr {
     height: 90% !important;
     height: 410px !important;
   }
-}
-
-.add-journey {
-  width: 40%;
-  height: 200px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 15px 0;
-  padding: 30px;
-  transition: all .3s;
-  display: flex;
-  box-shadow: 0 4px 8px #0003;
-}
-
-.add-journey p {
-  margin: 0;
-}
-
-.add-journey:hover {
-  cursor: pointer;
-  box-shadow: 0 6px 8px #0000004d;
-}
-
-.add-journey-btn {
-  color: #fff;
-  background-color: #08c;
-  border: none;
-  border-radius: 20px;
 }
 
 .adno-examples {
