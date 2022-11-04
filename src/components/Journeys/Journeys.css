@@ -1,0 +1,31 @@
+.journeys{
+    display: flex;
+    justify-content: space-between;
+    width: 85%;
+    margin: auto;
+    flex-wrap: wrap;
+    align-items: center;
+    overflow: auto;
+    height: 600px;
+}
+
+.journey_card{
+    transition: 0.3s;
+    width: 40%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    margin: 15px 0;
+}
+
+.journey_card p{
+    margin: 0;
+}
+
+.journey_card:hover{
+    cursor: pointer;
+    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.3);
+}

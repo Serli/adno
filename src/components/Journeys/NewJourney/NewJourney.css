@@ -1,0 +1,28 @@
+.add-journey{
+    transition: 0.3s;
+    width: 40%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    margin: 15px 0;
+    height: 200px;
+}
+
+.add-journey p{
+    margin: 0;
+}
+
+.add-journey:hover{
+    cursor: pointer;
+    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.3);
+}
+
+.add-journey-btn{
+    border-radius: 20px;
+    border: none;
+    color: white;
+    background-color: #0088cc;
+}

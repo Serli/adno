@@ -1,0 +1,38 @@
+.form-new-project{
+    width: 70vw;
+    margin: 10vh auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.mb-3 {
+    width: 100%;
+}
+
+.new_project_btns{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.project_name_valid:focus {
+    outline: none !important;
+    border: 2px solid green;
+    box-shadow: none
+  }
+  
+  .project_name_valid {
+    outline: none !important;
+    border: 2px solid green;
+    box-shadow: none
+  }
+
+.project_name_unvalid:focus {
+    outline: none !important;
+    border: 2px solid red;
+    box-shadow: none
+  }
+  

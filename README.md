@@ -26,3 +26,22 @@ Proto : https://adno.app/
 * Librairies
   * https://ncsu-libraries.github.io/annona/
   * https://openseadragon.github.io/
+
+
+## Démarrer le projet
+
+* Lancer l'application react : yarn start
+
+## Génération des fichiers statiques (dossier dist)
+* yarn build 
+
+## Stockage des projets 
+Les projets sont stockés dans le localStorage.
+Ils sont séparés en deux :
+* une partie pour les métadonnées du projet en lui-même 
+* une deuxième partie pour les annotations 
+
+## Quelques manifests pour démarrer :
+* https://ronallo.com/iiif-workshop/presentation/example-manifests.html
+* https://free.iiifhosting.com/iiif/1c8d49343676a04fffcd92979c02e9394e48bac96f590fffbadffc9133cd06b9/info.json
+* https://iiif.emf.fr/iiif/3/SuomiNPP_earth_full.jp2/info.json
