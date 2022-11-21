@@ -43,7 +43,7 @@ export default class App extends Component {
         return (
             <div>
                 <HashRouter history={history}>
-                    <Navbar showNav={JSON.parse(localStorage.getItem("adno_projects")) && JSON.parse(localStorage.getItem("adno_projects")).length > 0 ? true : false} />
+                    {/* <Navbar showNav={JSON.parse(localStorage.getItem("adno_projects")) && JSON.parse(localStorage.getItem("adno_projects")).length > 0 ? true : false} /> */}
 
                     <Switch>
                         <Route exact path="/about">
@@ -66,13 +66,13 @@ export default class App extends Component {
                             <Example />
                         </Route>
 
-                        <Route exact path="/cgu">
+                        {/* <Route exact path="/cgu">
                             <CGU />
                         </Route>
 
                         <Route exact path="/legal">
                             <LegalNotice />
-                        </Route>
+                        </Route> */}
 
                         <Route exact path="/">
                             {
@@ -87,7 +87,7 @@ export default class App extends Component {
                         </Route>
 
                     </Switch>
-                    <Footer showFooter={JSON.parse(localStorage.getItem("adno_projects")) && JSON.parse(localStorage.getItem("adno_projects")).length > 0 ? true : false} />
+                    {/* <Footer showFooter={JSON.parse(localStorage.getItem("adno_projects")) && JSON.parse(localStorage.getItem("adno_projects")).length > 0 ? true : false} /> */}
 
                 </HashRouter>
 

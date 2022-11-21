@@ -1,5 +1,5 @@
 .list_annotations{
-    height: 40vh;
+    height: 57vh;
     display: flex;
     flex-direction: column;
     overflow: scroll;
@@ -22,6 +22,12 @@
 
 .adno-card-title{
     overflow-wrap: break-word;
+}
+
+.anno-cards{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
 }
 
 @media (max-width: 1500px){

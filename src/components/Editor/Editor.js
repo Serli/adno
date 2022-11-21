@@ -1,4 +1,4 @@
-import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faDownload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Component } from "react";
 import { withRouter } from "react-router";
@@ -203,6 +203,10 @@ class Editor extends Component {
                 </div>
 
                 <div className="right-bar">
+
+                    <button className="btn btn-primary back-home-editor" onClick={() => this.props.history.push("/")}> <FontAwesomeIcon icon={faArrowLeft} /> Retour à l'accueil</button>
+
+
                     <div className="col picture-div">
                         <div className="card mb-3">
                             <div className="card">
@@ -222,9 +226,21 @@ class Editor extends Component {
 
                                 </div>
 
-                                <div className="adno-editor">
-                                    <div id="openseadragon1" style={{ "width": "1200px", "height": "550px" }}></div>
-                                </div>
+
+
+
+                                {
+                                    this.state.annotations.length >= 1 ?
+                                        <div className="adno-editor-annotations">
+                                            <div id="openseadragon1"></div>
+                                        </div>
+                                        :
+                                        <div className="adno-editor">
+                                            <div id="openseadragon1"></div>
+                                        </div>
+                                }
+
+
                             </div>
                         </div>
                     </div>

@@ -30,10 +30,29 @@
 }
 
 .openseadragon-container{
-    height: 90% !important;
+    /* height: 90% !important; */
 }
 
-@media (max-width: 1440px) { 
+.back-home-viewer{
+    margin: 2% 0 0 8%;
+}
+
+
+#image_iiif{
+    height: 750px;
+}
+
+#image_iiif_annotations #storyboard_viewer {
+    padding-bottom: 0px !important;
+}
+
+#image_iiif_annotations #storyboard_viewer .seadragonbox {
+    width: 100%;
+    height: 700px;
+    display: inline-block;
+}
+
+@media (min-width: 840px) and (max-width: 1440px) { 
     .adno-viewer-rightbar{
         top: 12vh;
         height: 470px !important;
@@ -49,12 +68,9 @@
     }
 
     #image_iiif{
-        width: 1000px !important;
-        height: 420px !important;
-    }
-
-    .openseadragon-container{
-        height: 70% !important;
+        width: 960px !important;
+        height: 450px !important;
+        margin: auto;
     }
 
     .seadragonbox {
@@ -63,11 +79,22 @@
     }
 
     .adno-viewer-rightbar-without-annos #image_iiif{
-        width: 1250px !important;
-        height: 450px !important;
+        width: 1200px !important;
+        height: 750px !important;
+        margin: auto;
     }
 
     .adno-viewer-rightbar-without-annos .openseadragon-container{
         height: 95% !important;
     }
  }
+
+
+
+@media (max-width: 840px) { 
+    .adno-viewer-rightbar-without-annos #image_iiif{
+        width: 600px !important;
+        height: 750px !important;
+        margin: auto;
+    }
+}

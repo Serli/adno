@@ -11,11 +11,9 @@
 }
 
 .adno-editor{
-    width: 90%;
+    width: 1200px;
+    height: 670px;
     margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .newsletter{
@@ -52,7 +50,7 @@
 .left-bar{
     width: 20vw;
     background-color: #1D1A1D;
-    height: calc(95vh - 125px);
+    height: 100vh;
     padding: 25px;
     position: absolute;
 }
@@ -74,8 +72,40 @@
     color: white;
 }
 
+.back-home-editor{
+    margin: 2% 0 0 8%;
+}
 
-@media (max-width: 1500px) {
+#openseadragon1{
+    height: 650px;
+}
+
+
+
+.adno-editor-annotations{
+    width: 1280px;
+    height: 670px;
+    margin: auto;
+}
+
+@media (min-width: 1440px) and (max-width: 1680px) {
+    .adno-editor-annotations{
+        width: 1100px;
+        height: 670px;
+        margin: auto;
+    }
+}
+
+
+@media (min-width: 1060px) and (max-width: 1440px) {
+    .adno-editor-annotations{
+        width: 840px;
+        height: 670px;
+        margin: auto;
+    }
+}
+
+@media (max-width: 1060px) {
     .left-bar{
         width: 25vw !important;
     }
@@ -85,16 +115,13 @@
         margin-left: 25vw !important;
     }
 
-    .adno-editor{
-        width: 950px;
-    }
-
     .adno-editor #openseadragon1{
         height: 420px !important;
     }
 
-    .adno-editor .openseadragon-container {
-        height: 90% !important;
-        height: 410px !important;
+    .adno-editor-annotations{
+        width: 560px;
+        height: 670px;
+        margin: auto;
     }
 }

@@ -13,6 +13,8 @@ import ViewerAnnotationCards from "./ViewerAnnotationCards/ViewerAnnotationCards
 
 // Imports CSS
 import "./Viewer.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 class Viewer extends Component {
     constructor(props) {
@@ -69,13 +71,15 @@ class Viewer extends Component {
         return (
             <div className="adno-viewer">
 
+                <button className="btn btn-primary back-home-viewer" onClick={() => this.props.history.push("/")}> <FontAwesomeIcon icon={faArrowLeft} /> Retour à l'accueil</button>
+
                 {
                     // Display every annotation
                     this.state.annotations && this.state.annotations.length > 0 ?
                         <div className="adno-viewer-leftbar">
                             <ViewerAnnotationCards annotations={this.state.annotations} />
                         </div>
-                    : <></>
+                        : <></>
                 }
 
                 <div className={this.state.annotations && this.state.annotations.length > 0 ? "adno-viewer-rightbar" : "adno-viewer-rightbar-without-annos"}>
@@ -96,7 +100,16 @@ class Viewer extends Component {
 
                                 </div>
 
-                                <div id="image_iiif" style={{ "width": "1200px", "height": "600px" }}></div>
+                                {/* Viewer IIIF */}
+
+                                {
+                                    this.state.annotations.length >= 1 ?
+                                        <div id="image_iiif_annotations"></div>
+                                        :
+                                        <div id="image_iiif"></div>
+                                }
+
+
                             </div>
                         </div>
                     </div>

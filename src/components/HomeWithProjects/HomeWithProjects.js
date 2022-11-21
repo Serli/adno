@@ -141,6 +141,9 @@ class HomeWithProjects extends Component {
                             <button id="create_project_2" type="submit" className="btn btn-success" onClick={(e) => newProject(e)}>Créer un nouveau projet</button>
                         </form>
 
+
+                        <button className="btn btn-primary" onClick={() => this.props.history.push("/example")}>Voir les Exemples</button>
+
                     </div>
 
                     <div className="with_projects_right">
