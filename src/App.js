@@ -101,7 +101,7 @@ export default class App extends Component {
                         </Route>
 
                     </Switch>
-                    <Footer showFooter={JSON.parse(localStorage.getItem("adno_projects")) && JSON.parse(localStorage.getItem("adno_projects")).length > 0 ? true : false} />
+                    {/* <Footer showFooter={JSON.parse(localStorage.getItem("adno_projects")) && JSON.parse(localStorage.getItem("adno_projects")).length > 0 ? true : false} /> */}
 
                 </HashRouter>
 

@@ -69,20 +69,6 @@ class Viewer extends Component {
         }
     }
 
-    displayActualIndex = () => {
-        console.log(document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__.$children[0].position)
-        console.log(document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__.$children[0].annotations[0].section[0])
-        console.log(document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__.$children[0].viewer.world.getItemAt(0).imageToViewportRectangle())
-
-
-        console.log(document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__.$children[0].viewer.world.getItemAt(0).imageToViewportRectangle(1722.5394287109375,986.1527099609375,2024.2540283203125,2798.1160888671875))
-
-
-
-
-        this.setState({ compteur: this.state.compteur + 1 })
-    }
-
     startJourney = () => {
         this.setState({ isPlaying: !this.state.isPlaying })
 
@@ -105,39 +91,6 @@ class Viewer extends Component {
 
 
     }
-
-
-    loadAnnotationMine = () => {
-
-
-        if (document.getElementById("annotation_text").children[0] && document.getElementById("annotation_text").children[0].children[0] && document.getElementById("annotation_text").children[0].children[0].children[0].children) {
-
-
-            console.log(`found ${document.getElementById("annotation_text").children[0].children[0].children[0].children.length} tags`);
-
-            var allChildren = document.getElementById("annotation_text").children[0].children[0].children[0].children
-
-            if (allChildren.length > 1) {
-                for (let index = 0; index < allChildren.length; index++) {
-                    console.log(allChildren[index])
-                }
-            }
-
-
-        }
-
-    }
-
-
-    getProperties = () => {
-        //get storyboard component from annona
-        console.log(document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__.$children[0].position)
-    }
-
-
-    nextAnno = () => {
-        document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__.$children[0].sendMessage({'function':'next', 'args': 0});
-    }
     
     render() {
 
@@ -154,8 +107,6 @@ class Viewer extends Component {
 
                 </div> */}
 
-
-                {/* <button onClick={() => this.loadAnnotationMine()}>Clic ici</button> */}
 
 
                 {
@@ -184,8 +135,6 @@ class Viewer extends Component {
                                     </div>
 
                                     <div className="project-body-right">
-                                        <button id="play-journey" className="btn btn-success" onClick={() => this.nextAnno()}> NEXTTTT</button>
-                                        <button id="play-journey" className="btn btn-success" onClick={() => this.getProperties()}> GET ALL PROPERTIES</button>
                                         <button id="play-journey" className="btn btn-success" onClick={() => this.startJourney()}> {this.state.isPlaying ? "Stopper la lecture" : "Lire le parcours "}  <FontAwesomeIcon icon={this.state.isPlaying ? faStopCircle : faPlayCircle} /></button>
                                         <a id={"download_btn_" + this.props.match.params.id_project} href={createExportProjectJsonFile(this.props.match.params.id_project)} download={this.state.selectedProject.title + ".json"} className="btn btn-secondary btn-sm"> <FontAwesomeIcon icon={faDownload} /> Télécharger </a>
                                         <button id="edit-project" className="btn btn-primary" onClick={() => this.props.history.push(`/${this.props.match.params.id_project}/journeys/${this.props.match.params.id_journey}/edit`)}>Editer ce parcours</button>
