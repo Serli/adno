@@ -1,7 +1,9 @@
-import { faArrowLeft, faDownload, faEye } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Component } from "react";
 import { withRouter } from "react-router";
+
+// Import FontAwesome and icons
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faDownload, faEye } from "@fortawesome/free-solid-svg-icons";
 
 // Import utils
 import { checkIfProjectExists, createExportProjectJsonFile, insertInLS } from "../../../Utils/utils";
@@ -93,13 +95,6 @@ class Editor extends Component {
             let adnoViewer = this.createViewer(tileSources)
 
             let anno = this.functionToLoadAnnotorious(adnoViewer)
-
-            // var anno = OpenSeadragon.Annotorious(viewer, {
-            //     locale: 'auto',
-            //     drawOnSingleClick: true,
-            //     allowEmpty: true,
-            //     disableEditor: false
-            // });
 
             // Find annotations from the localStorage in JSON format
             var annos = localStorage.getItem(`${selected_project.id}_annotations`)

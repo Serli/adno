@@ -23,6 +23,8 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import NotFound from "./components/NotFound/NotFound";
 import About from "./components/About/About";
 
+require('dotenv').config()
+
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -44,11 +46,10 @@ export default class App extends Component {
             <div>
                 <HashRouter history={history}>
                     {/* <Navbar showNav={JSON.parse(localStorage.getItem("adno_projects")) && JSON.parse(localStorage.getItem("adno_projects")).length > 0 ? true : false} /> */}
-
                     <Switch>
-                        <Route exact path="/about">
+                        {/* <Route exact path="/about">
                             <About />
-                        </Route>
+                        </Route> */}
 
                         <Route exact path="/new">
                             <NewProject />
@@ -58,9 +59,18 @@ export default class App extends Component {
                             <Viewer />
                         </Route>
 
+
+
                         <Route exact path="/edit/:id">
-                            <Editor />
+                            {
+                                process.env.ADNO_MODE === "FULL" ?
+                                    <Editor />
+                                    : <NotFound />
+
+                            }
+
                         </Route>
+
 
                         <Route exact path="/example">
                             <Example />
@@ -73,6 +83,8 @@ export default class App extends Component {
                         <Route exact path="/legal">
                             <LegalNotice />
                         </Route> */}
+
+
 
                         <Route exact path="/">
                             {

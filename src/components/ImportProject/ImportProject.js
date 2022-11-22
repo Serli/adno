@@ -1,13 +1,15 @@
-import { faUpload } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Component } from "react";
 import { withRouter } from "react-router";
+
+// Import FontAwesome and icons
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
 
 // Import popup alerts
 import Swal from "sweetalert2";
 
 // Import utils
-import { importProjectJsonFile, insertInLS, generateUUID, checkProjectAttributes} from "../../../Utils/utils";
+import { importProjectJsonFile } from "../../../Utils/utils";
 
 // Import CSS
 import "./ImportProject.css";
@@ -21,7 +23,9 @@ class ImportProject extends Component {
         }
     }
 
-    resetImport = () => {
+
+    // Function to cancel import
+    cancelImport = () => {
         this.setState({ isimporting: false })
         document.getElementById("selectFiles_1").value = ""
         document.getElementById("label-upload").innerHTML = "Importer un projet"
@@ -69,10 +73,9 @@ class ImportProject extends Component {
                 {
                     this.state.isimporting ?
                         <div className="import-btns">
-                            <button className="import-btn import-reset" disabled={!this.state.isimporting} onClick={() => {
-                                this.resetImport()
-                            }
-                            }>Annuler l'importation</button>
+                            <button className="import-btn import-reset" disabled={!this.state.isimporting} onClick={() => this.cancelImport()}
+                            
+                            >Annuler l'importation</button>
                             <button id="import_1" className="import-btn import-confirm" disabled={!this.state.isimporting} onClick={() => loadImportedProj()}>Importer mon projet</button>
                         </div>
 

@@ -1,6 +1,10 @@
 import { Component } from "react";
 import { withRouter } from "react-router-dom";
 
+// Import FontAwesome and icons
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faEdit } from "@fortawesome/free-solid-svg-icons";
+
 // Import utils
 import { checkIfProjectExists } from "../../../Utils/utils";
 
@@ -13,8 +17,6 @@ import ViewerAnnotationCards from "./ViewerAnnotationCards/ViewerAnnotationCards
 
 // Imports CSS
 import "./Viewer.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faEdit } from "@fortawesome/free-solid-svg-icons";
 
 class Viewer extends Component {
     constructor(props) {
@@ -94,13 +96,18 @@ class Viewer extends Component {
                                         <p id="project_desc" className="card-text">{checkIfProjectExists(this.props.match.params.id) && this.state.selectedProject.description}</p>
                                     </div>
 
-                                    <div className="project-body-right">
-                                        <button id="edit-project" className="btn btn-primary" onClick={() => this.props.history.push("/edit/" + this.props.match.params.id)}> <FontAwesomeIcon icon={faEdit} />  Editer ce projet</button>
-                                    </div>
+                                    {
+                                        process.env.ADNO_MODE === "FULL" ?
+                                            <div className="project-body-right">
+                                                <button id="edit-project" className="btn btn-primary" onClick={() => this.props.history.push("/edit/" + this.props.match.params.id)}> <FontAwesomeIcon icon={faEdit} />  Editer ce projet</button>
+                                            </div>
+
+                                            : <></>
+                                    }
+
+
 
                                 </div>
-
-                                {/* Viewer IIIF */}
 
                                 {
                                     this.state.annotations.length >= 1 ?

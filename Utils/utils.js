@@ -251,7 +251,7 @@ export const createExportProjectJsonFile = (projectID) => {
   // Then, get all annotations
   var annotations = JSON.parse(localStorage.getItem(projectID + "_annotations"))
 
-  finalProject =
+  var finalProject =
   {
 
     "@context": "http://www.w3.org/ns/anno.jsonld",

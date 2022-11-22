@@ -1,9 +1,9 @@
 import { Component } from "react";
 import { withRouter } from "react-router";
 
-// Import FontAwesome icons
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+// Import FontAwesome and icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 // Import popup alerts
 import Swal from "sweetalert2";

@@ -1,7 +1,9 @@
-import { faAdd, faBook, faLink, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Component } from "react";
 import { withRouter } from "react-router";
+
+// Import FontAwesome and icons
+import { faAdd, faBook, faLink, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Import popup alerts
 import Swal from "sweetalert2";
@@ -21,18 +23,19 @@ class HomeWithProjects extends Component {
         super(props);
         this.state = {
             adno_image_url: "",
-            projects : []
+            projects: []
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
+        // Get projects from localStorage
         var projects = []
         var allProjectsID = JSON.parse(localStorage.getItem("adno_projects"))
         allProjectsID.map(projectID => {
             projects.push(JSON.parse(localStorage.getItem(projectID)))
         })
 
-        this.setState({projects})
+        this.setState({ projects })
     }
 
     render() {
@@ -133,24 +136,36 @@ class HomeWithProjects extends Component {
                             <p className="lead">Adno est une application web de visualisation, d’édition et de partage pair-à-pair de narrations et de parcours sur des images IIIF.</p>
                         </div>
 
-                        <form id="myForm">
-                            <div className="input-group mb-3">
-                                <span className="input-group-text" id="basic-addon1"> <FontAwesomeIcon icon={faLink} /> URL</span>
-                                <input type="text" id="adno_image_url_2" className="form-control" value={this.state.adno_image_url} onChange={(e) => this.setState({ adno_image_url: e.target.value })}
-                                    placeholder="Renseignez ici votre fichier info.json ou votre image jpg/png" />
-                            </div>
+                        {
+                            process.env.ADNO_MODE === "FULL" ?
+                                <form id="myForm">
+                                    <div className="input-group mb-3">
+                                        <span className="input-group-text" id="basic-addon1"> <FontAwesomeIcon icon={faLink} /> URL</span>
+                                        <input type="text" id="adno_image_url_2" className="form-control" value={this.state.adno_image_url} onChange={(e) => this.setState({ adno_image_url: e.target.value })}
+                                            placeholder="Renseignez ici votre fichier info.json ou votre image jpg/png" />
+                                    </div>
 
-                            <button id="create_project_2" type="submit" className="btn btn-success" onClick={(e) => newProject(e)}> <FontAwesomeIcon icon={faAdd} /> Créer un nouveau projet</button>
-                        </form>
 
+                                    <button id="create_project_2" type="submit" className="btn btn-success" onClick={(e) => newProject(e)}> <FontAwesomeIcon icon={faAdd} /> Créer un nouveau projet</button>
 
-                        <button className="btn btn-primary btn-sh-examples" onClick={() => this.props.history.push("/example")}> <FontAwesomeIcon icon={faBook} /> Voir les Exemples</button>
+                                </form>
+
+                                : <></>
+
+                        }
+
+                        {
+                            process.env.ADNO_MODE === "FULL" ?
+                                <button className="btn btn-primary btn-sh-examples" onClick={() => this.props.history.push("/example")}> <FontAwesomeIcon icon={faBook} /> Voir les Exemples</button>
+
+                                : <></>
+                        }
 
                     </div>
 
                     <div className="with_projects_right">
 
-                        <ImportProject projects={this.state.projects} updateProjects={(updatedList) => this.setState({projects: updatedList, adno_image_url: ""})} />
+                        <ImportProject projects={this.state.projects} updateProjects={(updatedList) => this.setState({ projects: updatedList, adno_image_url: "" })} />
 
                         <div className="homewpbar">
                             <h2>Vos Projets</h2>
@@ -159,8 +174,8 @@ class HomeWithProjects extends Component {
 
                         {
                             this.state.projects && this.state.projects.length > 0 ?
-                                <ProjectsList projects={this.state.projects}/>
-                            : <></>
+                                <ProjectsList projects={this.state.projects} />
+                                : <></>
                         }
 
                     </div>
