@@ -47,6 +47,26 @@
     cursor: pointer;
 }
 
+.dl-button{
+    padding: 16px 32px;
+    border: none;
+    background: none;
+    box-shadow: none;
+    text-shadow: none;
+    opacity: 0.9;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 0.4px;
+    line-height: 1;
+    background-color: #19495c !important;
+    color: #fff;
+    outline: none !important;
+    cursor: pointer;
+    border-radius: 0.375rem;
+    text-decoration: none;
+}
+
 .left-bar{
     width: 20vw;
     background-color: #1D1A1D;
@@ -80,13 +100,16 @@
     height: 650px;
 }
 
-
-
 .adno-editor-annotations{
     width: 1280px;
     height: 670px;
     margin: auto;
 }
+
+.adno-editor .openseadragon-container{
+    border-radius: 10px;
+}
+
 
 @media (min-width: 1440px) and (max-width: 1680px) {
     .adno-editor-annotations{
@@ -98,6 +121,17 @@
 
 
 @media (min-width: 1060px) and (max-width: 1440px) {
+
+    .adno-editor{
+        width: 960px;
+        height: 480px;
+        margin: auto;
+    }
+
+    #openseadragon1{
+        height: 480px;
+    }
+
     .adno-editor-annotations{
         width: 840px;
         height: 670px;

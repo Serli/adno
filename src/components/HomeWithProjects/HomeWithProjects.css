@@ -7,12 +7,12 @@
 
 #projects_list{
     width: 80vw;
+    height: 61vh;
     margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow: auto;
-    height: 55vh;
 }
 
 .with_projects{
@@ -92,7 +92,11 @@
     align-items: center;
 }
 
-@media (max-width: 1500px) {
+.btn-sh-examples{
+    margin-top: 10px;
+}
+
+@media (max-width: 1440px) {
     #projects_list{
         width: 80vw;
         margin: auto;
@@ -100,10 +104,10 @@
         flex-direction: column;
         align-items: center;
         overflow: auto;
-        height: 45vh;
+        height: 75vh;
     }
 
     #container_with_projects {
-        margin-top: 2vh !important;
+        margin-top: 0 !important;
     }
 }

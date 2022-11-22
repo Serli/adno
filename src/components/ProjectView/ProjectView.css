@@ -13,8 +13,8 @@
 }
 
 .img-proj-view{
-    padding: 25px;
-    border-radius: 35px;
+    padding: 5px;
+    border-radius: 15px;
     max-height: 250px;
 }
 
@@ -35,5 +35,10 @@
     .buttons-group-proj-view{
         width: 90%;
         margin: auto;
+    }
+
+    .img-proj-view{
+        border-radius: 5px;
+        max-height: 250px;
     }
 }

@@ -1,3 +1,5 @@
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Component } from "react";
 import { withRouter } from "react-router";
 
@@ -57,7 +59,7 @@ class ImportProject extends Component {
         return (
             <div className="import_project">
 
-                <label className="adno-upload-file" id="label-upload" htmlFor="selectFiles_1">Importer un projet</label>
+                <label className="adno-upload-file" id="label-upload" htmlFor="selectFiles_1"> <FontAwesomeIcon icon={faUpload} /> Importer un projet</label>
 
                 <input accept="application/json" type="file" id="selectFiles_1" onChange={(e) => {
                     this.setState({ isimporting: true, loadedProject: e.target.files[0] })

@@ -1,4 +1,4 @@
-import { faArrowLeft, faDownload } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faDownload, faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Component } from "react";
 import { withRouter } from "react-router";
@@ -220,8 +220,8 @@ class Editor extends Component {
                                     </div>
 
                                     <div className="project-body-right">
-                                        <a id={"download_btn_" + this.state.selected_project.id} href={createExportProjectJsonFile(this.state.selected_project.id)} download={this.state.selected_project.title + ".json"} className="btn btn-secondary btn-sm"> <FontAwesomeIcon icon={faDownload} /> Télécharger </a>
-                                        <button id="preview" className="btn btn-primary subbutton" onClick={() => this.props.history.push("/project/" + this.props.match.params.id)}>Preview</button>
+                                        <a id={"download_btn_" + this.state.selected_project.id} href={createExportProjectJsonFile(this.state.selected_project.id)} download={this.state.selected_project.title + ".json"} className="dl-button"> <FontAwesomeIcon icon={faDownload} /> Télécharger </a>
+                                        <button id="preview" className="btn btn-primary subbutton" onClick={() => this.props.history.push("/project/" + this.props.match.params.id)}> <FontAwesomeIcon icon={faEye} /> Preview</button>
                                     </div>
 
                                 </div>

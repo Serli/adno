@@ -30,9 +30,11 @@ class ViewerAnnotationCards extends Component {
         
         this.setState({currentAnno: -1})
     }
-
+    
     render() {
         return (
+
+            
             <div className="adno-viewer-list-annos">
 
                 <h3 className="adno-viewer-nb-annos"> {this.props.annotations.length} annotation(s) trouvée(s)</h3>

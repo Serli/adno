@@ -328,6 +328,26 @@ footer {
   outline: none !important;
 }
 
+.dl-button {
+  box-shadow: none;
+  text-shadow: none;
+  opacity: .9;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  color: #fff;
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-radius: .375rem;
+  padding: 16px 32px;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1;
+  text-decoration: none;
+  background-color: #19495c !important;
+  outline: none !important;
+}
+
 .left-bar {
   width: 20vw;
   height: 100vh;
@@ -367,6 +387,10 @@ footer {
   margin: auto;
 }
 
+.adno-editor .openseadragon-container {
+  border-radius: 10px;
+}
+
 @media (min-width: 1440px) and (max-width: 1680px) {
   .adno-editor-annotations {
     width: 1100px;
@@ -376,6 +400,16 @@ footer {
 }
 
 @media (min-width: 1060px) and (max-width: 1440px) {
+  .adno-editor {
+    width: 960px;
+    height: 480px;
+    margin: auto;
+  }
+
+  #openseadragon1 {
+    height: 480px;
+  }
+
   .adno-editor-annotations {
     width: 840px;
     height: 670px;
@@ -444,7 +478,7 @@ footer {
 
 .adno-viewer-leftbar {
   width: 20vw;
-  height: 71vh;
+  height: 85vh;
   background-color: #fff;
   border-radius: 10px;
   padding: 15px;
@@ -479,6 +513,12 @@ footer {
 
 #image_iiif {
   height: 750px;
+  width: 1700px;
+  margin: auto;
+}
+
+#image_iiif .openseadragon-container {
+  border-radius: 10px !important;
 }
 
 #image_iiif_annotations #storyboard_viewer {
@@ -492,39 +532,41 @@ footer {
 }
 
 @media (min-width: 840px) and (max-width: 1440px) {
+  .adno-viewer-rightbar-without-annos {
+    width: 95vw;
+    margin: 1% auto;
+    position: relative;
+    top: 0;
+  }
+
   .adno-viewer-rightbar {
-    width: 70vw;
+    width: 76vw;
     top: 12vh;
-    left: 29vw;
+    left: 23vw;
     height: 470px !important;
   }
 
   .adno-viewer-leftbar {
-    height: 65vh;
-    width: 25vw;
+    height: 85vh;
+    width: 20vw;
     top: 12vh;
     left: 2vw;
   }
 
   #image_iiif {
     margin: auto;
-    width: 960px !important;
-    height: 450px !important;
+    width: 1320px !important;
+    height: 530px !important;
   }
 
-  .seadragonbox {
-    width: 100% !important;
-    height: 510px !important;
+  .back-home-viewer {
+    margin: 1% 0 0 5%;
   }
 
-  .adno-viewer-rightbar-without-annos #image_iiif {
-    margin: auto;
-    width: 1200px !important;
-    height: 750px !important;
-  }
-
-  .adno-viewer-rightbar-without-annos .openseadragon-container {
-    height: 95% !important;
+  #image_iiif_annotations #storyboard_viewer .seadragonbox {
+    width: 100%;
+    height: 470px;
+    display: inline-block;
   }
 }
 
@@ -542,7 +584,7 @@ footer {
 }
 
 .adno-viewer-list-annos {
-  height: 53vh;
+  height: 82vh;
   width: 100%;
   flex-direction: column;
   display: flex;
@@ -573,9 +615,9 @@ footer {
   border: 2px solid gold !important;
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 1440px) {
   .adno-viewer-list-annos {
-    height: 50vh;
+    height: 75vh;
   }
 }
 
@@ -627,7 +669,7 @@ footer {
 
 #projects_list {
   width: 80vw;
-  height: 55vh;
+  height: 61vh;
   flex-direction: column;
   align-items: center;
   margin: auto;
@@ -711,10 +753,14 @@ footer {
   display: flex;
 }
 
-@media (max-width: 1500px) {
+.btn-sh-examples {
+  margin-top: 10px;
+}
+
+@media (max-width: 1440px) {
   #projects_list {
     width: 80vw;
-    height: 45vh;
+    height: 75vh;
     flex-direction: column;
     align-items: center;
     margin: auto;
@@ -723,7 +769,7 @@ footer {
   }
 
   #container_with_projects {
-    margin-top: 2vh !important;
+    margin-top: 0 !important;
   }
 }
 
@@ -743,8 +789,8 @@ footer {
 
 .img-proj-view {
   max-height: 250px;
-  border-radius: 35px;
-  padding: 25px;
+  border-radius: 15px;
+  padding: 5px;
 }
 
 .label-nb-annos {
@@ -764,12 +810,18 @@ footer {
     width: 90%;
     margin: auto;
   }
+
+  .img-proj-view {
+    max-height: 250px;
+    border-radius: 5px;
+  }
 }
 
 .adno-upload-file {
   width: 100%;
   text-align: center;
   cursor: pointer;
+  color: #fff;
   background-color: #5cbdb9;
   border: none;
   border-radius: 5px;

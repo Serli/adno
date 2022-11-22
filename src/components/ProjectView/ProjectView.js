@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Swal from 'sweetalert2';
 
 // Import utils
-import { insertInLS , createExportProjectJsonFile} from "../../../Utils/utils";
+import { insertInLS, createExportProjectJsonFile } from "../../../Utils/utils";
 
 // Import CSS
 import "./ProjectView.css";
@@ -36,7 +36,6 @@ class ProjectView extends Component {
 
                         this.setState({ imgWidth: manifest["sizes"].sort((a, b) => b.width - a.width)[0].width })
                         this.setState({ imgSource: manifest["@id"] + "/full/" + manifestWidth + "," + manifestHeight + "/0/default.jpg" })
-
                     } else if (manifest["@id"] && manifest["tiles"] && manifest["tiles"][0]) {
                         this.setState({ imgWidth: manifest["tiles"][0].width })
                         this.setState({ imgSource: manifest["@id"] + "/full/" + manifest["tiles"][0].width + ",/0/default.jpg" })
@@ -60,6 +59,7 @@ class ProjectView extends Component {
                         this.setState({ nbAnnotations })
                     }
                 })
+
         } else if (this.props.project.img_url) {
             this.setState({ imgSource: this.props.project.img_url })
 
@@ -67,10 +67,7 @@ class ProjectView extends Component {
                 let nbAnnotations = JSON.parse(localStorage.getItem(this.props.project.id + "_annotations")).length
                 this.setState({ nbAnnotations })
             }
-
         }
-
-
     }
 
     render() {
@@ -89,7 +86,7 @@ class ProjectView extends Component {
 
             insertInLS("adno_projects", JSON.stringify(newProjectsList))
         }
-        
+
         function deleteProj(projID) {
             Swal.fire({
                 title: 'Voulez-vous vraiment supprimer ce projet ?',
@@ -112,7 +109,10 @@ class ProjectView extends Component {
             <div className="card mb-3 project-card">
                 <div className="row g-0">
                     <div className="col-md-4 card-img-adno">
-                        <img src={this.state.imgSource} className="img-fluid img-proj-view " alt="..." />
+                        <img src={this.state.imgSource} onError={({ currentTarget }) => {
+                            currentTarget.onerror = null; // prevents looping
+                            currentTarget.src = "https://www.pngkey.com/png/detail/212-2124171_404-error-404-pagina-no-encontrada.png"
+                        }} className="img-fluid img-proj-view " alt={this.props.project.title} />
                     </div>
                     <div className="col-md-8">
                         <div className="card-body">

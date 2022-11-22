@@ -14,7 +14,7 @@ import ViewerAnnotationCards from "./ViewerAnnotationCards/ViewerAnnotationCards
 // Imports CSS
 import "./Viewer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faEdit } from "@fortawesome/free-solid-svg-icons";
 
 class Viewer extends Component {
     constructor(props) {
@@ -95,7 +95,7 @@ class Viewer extends Component {
                                     </div>
 
                                     <div className="project-body-right">
-                                        <button id="edit-project" className="btn btn-primary" onClick={() => this.props.history.push("/edit/" + this.props.match.params.id)}>Editer ce projet</button>
+                                        <button id="edit-project" className="btn btn-primary" onClick={() => this.props.history.push("/edit/" + this.props.match.params.id)}> <FontAwesomeIcon icon={faEdit} />  Editer ce projet</button>
                                     </div>
 
                                 </div>

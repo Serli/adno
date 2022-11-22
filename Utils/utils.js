@@ -283,29 +283,50 @@ export const importProjectJsonFile = (loadedProject) => {
   fr.onload = function (e) {
     let imported_project = JSON.parse(e.target.result)
 
-    // Generate a new ID and new last_update
-    imported_project.modified = new Date()
-    imported_project.id = generateUUID()
+    if (imported_project.hasOwnProperty("@context")
+      && imported_project.hasOwnProperty("date")
+      && imported_project.hasOwnProperty("id")
+      && imported_project.hasOwnProperty("label")
+      && imported_project.hasOwnProperty("type")
+      && imported_project.hasOwnProperty("modified")
+      && imported_project.hasOwnProperty("source")
+      && imported_project.hasOwnProperty("subject")
+      && imported_project.hasOwnProperty("total")
+    ) {
 
-    let projects = JSON.parse(localStorage.getItem("adno_projects"))
-    projects.push(imported_project.id)
+      // Generate a new ID and new last_update
+      imported_project.modified = new Date()
+      imported_project.id = generateUUID()
 
-    let proj = {
-      "id": imported_project.id,
-      "title": imported_project.label,
-      "description": imported_project.subject,
-      "creation_date": imported_project.date,
-      "last_update": imported_project.modified,
-      "manifest_url": imported_project.source,
+      let projects = JSON.parse(localStorage.getItem("adno_projects"))
+      projects.push(imported_project.id)
+
+      let proj = {
+        "id": imported_project.id,
+        "title": imported_project.label,
+        "description": imported_project.subject,
+        "creation_date": imported_project.date,
+        "last_update": imported_project.modified,
+        "manifest_url": imported_project.source,
+      }
+
+      let annos = imported_project.total !== 0 ? imported_project.first.items : []
+
+      insertInLS("adno_projects", JSON.stringify(projects))
+      insertInLS(proj.id + "_annotations", JSON.stringify(annos))
+      insertInLS(proj.id, JSON.stringify(proj))
+
+      window.location.reload()
+
+    } else {
+      Swal.fire({
+        title: "Impossible de lire le fichier",
+        showCancelButton: true,
+        showConfirmButton: false,
+        cancelButtonText: 'OK',
+        icon: 'warning',
+      })
     }
-
-    let annos =  imported_project.total !== 0 ? imported_project.first.items : []
-
-    insertInLS("adno_projects", JSON.stringify(projects))
-    insertInLS(proj.id + "_annotations", JSON.stringify(annos))
-    insertInLS(proj.id, JSON.stringify(proj))
-
-    window.location.reload()
 
   }
 }
