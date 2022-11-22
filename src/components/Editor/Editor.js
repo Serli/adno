@@ -20,7 +20,7 @@ class Editor extends Component {
         this.state = {
             mobileMode: false,
             selected_project: JSON.parse(localStorage.getItem(this.props.match.params.id)),
-            annotations: JSON.parse(localStorage.getItem(`${this.props.match.params.id}_annotations`))
+            annotations: JSON.parse(localStorage.getItem(`${this.props.match.params.id}_annotations`)) 
         }
     }
 
@@ -225,7 +225,7 @@ class Editor extends Component {
 
 
                                 {
-                                    this.state.annotations.length >= 1 ?
+                                    this.state.annotations && this.state.annotations.length >= 1 ?
                                         <div className="adno-editor-annotations">
                                             <div id="openseadragon1"></div>
                                         </div>

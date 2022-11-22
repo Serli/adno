@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "parcel public/index.html",
+    "start": "yarn install && parcel public/index.html",
     "build": "parcel build public/index.html"
   },
   "keywords": [],
