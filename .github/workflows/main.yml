@@ -1,32 +1,110 @@
-name: ADNO RELEASE BOTH VERSIONS
+name: ADNO BUILD AND RELEASE BOTH VERSIONS
+
 on:
   push:
     tags:
       - '*'
+
 jobs:
-  release:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Create ADNO ZIP (FULL VERSION)
+      - name: Clone repository
+        uses: actions/checkout@v2
+      - name: Use YARN
+       - uses: mskelton/setup-yarn@v1
+          with:
+          node-version: '16.x'
+      - name: Install dependencies
+        run: yarn install
+      - name: Generate build
+        run: yarn build-all
+      # Share artifact inside workflow
+      - name: Share ADNO_FULL artifact inside workflow
+        uses: actions/upload-artifact@v1
+        with:
+          name: adno-full
+          path: adno-full
+      - name: Share ADNO_LIGHT artifact inside workflow
+        uses: actions/upload-artifact@v1
+        with:
+          name: adno-light
+          path: adno-light
+
+
+  zip_release:
+    steps:
+      # Download previously shared build
+      - name: Get FULL VERSION artifact
+        uses: actions/download-artifact@v1
+        with:
+          name: adno-full
+
+      - name: Get LIGHT VERSION artifact
+        uses: actions/download-artifact@v1
+        with:
+          name: adno-light
+
+
+      # Zip the build using external action
+      - name: Zip build FULL VERSION
         uses: thedoctor0/zip-release@master
         with:
-          filename: 'adno-full.zip'
-          path: 'adno-full/'
-      - name: Upload Release
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: 'adno-full.zip'
-          token: ${{ secrets.GITHUB_TOKEN }}
-          
-      - uses: actions/checkout@master
-      - name: Create ADNO ZIP (LIGHT VERSION)
+          filename: adno-full.zip
+          path: adno-full
+
+      - name: Zip build LIGHT VERSION
         uses: thedoctor0/zip-release@master
         with:
-          filename: 'adno-light.zip'
-          path: 'adno-light/'
-      - name: Upload Release
-        uses: ncipollo/release-action@v1
+          filename: adno-light.zip
+          path: adno-light
+
+      # Upload as an artifact of the current workflow
+      - name: Upload build zip artifact
+        uses: actions/upload-artifact@v1
         with:
-          artifacts: 'adno-light.zip'
-          token: ${{ secrets.GITHUB_TOKEN }}
+          name: adno-full.zip
+          path: adno-full.zip
+
+      - name: Upload build zip artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: adno-light.zip
+          path: adno-light.zip
+
+
+
+  build_release:
+    name: build_release
+    runs-on: ubuntu-latest
+    steps:
+      
+      - name: release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          tag_name: ${{ github.ref }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: upload full version artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./adno_full.zip
+          asset_name: adno_full.zip
+          asset_content_type: application/zip
+
+      - name: upload light version artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./adno_light.zip
+          asset_name: adno_light.zip
+          asset_content_type: application/zip
