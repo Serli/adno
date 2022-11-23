@@ -43,11 +43,13 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: adno-full
+          path: ./
 
       - name: Get LIGHT VERSION artifact
         uses: actions/download-artifact@v1
         with:
           name: adno-light
+          path: ./
 
 
       # Zip the build using external action
@@ -68,13 +70,13 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: adno-full.zip
-          path: adno-full.zip
+          path: ./adno-full.zip
 
       - name: Upload build zip artifact
         uses: actions/upload-artifact@v1
         with:
           name: adno-light.zip
-          path: adno-light.zip
+          path: ./adno-light.zip
 
 
 
@@ -90,11 +92,13 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: adno-full.zip
+          path: ./
 
       - name: Get LIGHT VERSION artifact
         uses: actions/download-artifact@v1
         with:
           name: adno-light.zip
+          path: ./
 
       # Create release
       - name: release
@@ -103,24 +107,29 @@ jobs:
         with:
           draft: false
           prerelease: false
+          release_name: Release ${{ github.ref }}
           tag_name: ${{ github.ref }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
-      - name: upload full version artifact
+
+      # The, upload assets to the current release
+      - name: upload full version release
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: adno-full.zip
           asset_name: adno-full.zip
           asset_content_type: application/zip
 
-      - name: upload light version artifact
+      - name: upload light version release
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: adno-light.zip
           asset_name: adno-light.zip
           asset_content_type: application/zip
