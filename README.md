@@ -32,6 +32,8 @@ Enjoy using Adno !
 * https://iiif.emf.fr/iiif/3/SuomiNPP_earth_full.jp2/info.json
 
 
+## Licence
+
 ## For developpers
 
 If you want to contribute to ADNO here are few steps to start 
@@ -41,3 +43,6 @@ If you want to contribute to ADNO here are few steps to start
     * Create a .env file and put the version you would like to use by using the variable ADNO_MODE=FULL or ADNO_MODE=LIGHT
   * To build the project you have to choose the version (full or light)
     * run **yarn build-full** to build full-version and **yarn build-light** to build the light version.
+
+
+

@@ -60,16 +60,12 @@ export default class App extends Component {
                         </Route>
 
 
-
-                        <Route exact path="/edit/:id">
-                            {
-                                process.env.ADNO_MODE === "FULL" ?
-                                    <Editor />
-                                    : <NotFound />
-
-                            }
-
-                        </Route>
+                        {
+                            process.env.ADNO_MODE === "FULL" &&
+                            <Route exact path="/edit/:id">
+                                <Editor />
+                            </Route>
+                        }
 
 
                         <Route exact path="/example">

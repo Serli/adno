@@ -77,11 +77,10 @@ class Viewer extends Component {
 
                 {
                     // Display every annotation
-                    this.state.annotations && this.state.annotations.length > 0 ?
-                        <div className="adno-viewer-leftbar">
-                            <ViewerAnnotationCards annotations={this.state.annotations} />
-                        </div>
-                        : <></>
+                    this.state.annotations && this.state.annotations.length > 0 &&
+                    <div className="adno-viewer-leftbar">
+                        <ViewerAnnotationCards annotations={this.state.annotations} />
+                    </div>
                 }
 
                 <div className={this.state.annotations && this.state.annotations.length > 0 ? "adno-viewer-rightbar" : "adno-viewer-rightbar-without-annos"}>
@@ -97,12 +96,10 @@ class Viewer extends Component {
                                     </div>
 
                                     {
-                                        process.env.ADNO_MODE === "FULL" ?
-                                            <div className="project-body-right">
-                                                <button id="edit-project" className="btn btn-primary" onClick={() => this.props.history.push("/edit/" + this.props.match.params.id)}> <FontAwesomeIcon icon={faEdit} />  Editer ce projet</button>
-                                            </div>
-
-                                            : <></>
+                                        process.env.ADNO_MODE === "FULL" &&
+                                        <div className="project-body-right">
+                                            <button id="edit-project" className="btn btn-primary" onClick={() => this.props.history.push("/edit/" + this.props.match.params.id)}> <FontAwesomeIcon icon={faEdit} />  Editer ce projet</button>
+                                        </div>
                                     }
 
 
@@ -115,8 +112,6 @@ class Viewer extends Component {
                                         :
                                         <div id="image_iiif"></div>
                                 }
-
-
                             </div>
                         </div>
                     </div>
