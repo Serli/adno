@@ -33,8 +33,6 @@ class ViewerAnnotationCards extends Component {
     
     render() {
         return (
-
-            
             <div className="adno-viewer-list-annos">
 
                 <h3 className="adno-viewer-nb-annos"> {this.props.annotations.length} annotation(s) trouvée(s)</h3>
@@ -47,8 +45,7 @@ class ViewerAnnotationCards extends Component {
 
                                 <h5 className="card-title adno-card-title">{annotation.body[0] && annotation.body[0].value ? ReactHtmlParser(annotation.body[0].value) : "Aucun titre"}</h5>
 
-                                <h6>{annotation.body.length - 1} réponse(s) associée(s)</h6>
-
+                                {/* <h6>{annotation.body.filter(anno => anno.purpose === "commenting").length - 1} réponse(s) associée(s)</h6> */}
 
                                 {/* <TTS text={stripHtml(annotation.body[0].value)} /> */}
                             </div >
