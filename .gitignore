@@ -129,4 +129,8 @@ out
 .yarn/install-state.gz
 .pnp.*
 
-yarn.lock
+
+# Remove BUILDS
+dist
+adno-full
+adno-light/
