@@ -7,14 +7,15 @@ on:
 
 jobs:
   build:
+    name: build app
     runs-on: ubuntu-latest
     steps:
       - name: Clone repository
         uses: actions/checkout@v2
       - name: Use YARN
-       - uses: mskelton/setup-yarn@v1
+        uses: mskelton/setup-yarn@v1
           with:
-          node-version: '16.x'
+            node-version: '16.x'
       - name: Install dependencies
         run: yarn install
       - name: Generate build
