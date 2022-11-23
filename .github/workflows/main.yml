@@ -100,7 +100,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./adno_full.zip
+          asset_path: adno_full.zip
           asset_name: adno_full.zip
           asset_content_type: application/zip
 
@@ -110,6 +110,6 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./adno_light.zip
+          asset_path: adno_light.zip
           asset_name: adno_light.zip
           asset_content_type: application/zip
