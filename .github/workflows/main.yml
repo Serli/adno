@@ -84,6 +84,19 @@ jobs:
     needs: zip_release
 
     steps:
+
+      # Download previously shared build
+      - name: Get FULL VERSION artifact
+        uses: actions/download-artifact@v1
+        with:
+          name: adno-full.zip
+
+      - name: Get LIGHT VERSION artifact
+        uses: actions/download-artifact@v1
+        with:
+          name: adno-light.zip
+
+      # Create release
       - name: release
         uses: actions/create-release@v1
         id: create_release
