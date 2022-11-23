@@ -1,0 +1,20 @@
+name: ADNO RELEASE FULL VERSION
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Create ADNO ZIP (FULL VERSION)
+        uses: thedoctor0/zip-release@master
+        with:
+          filename: 'adno-full.zip'
+          path: 'adno-full/'
+      - name: Upload Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: 'adno-full.zip'
+          token: ${{ secrets.GITHUB_TOKEN }}

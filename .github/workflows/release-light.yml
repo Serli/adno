@@ -1,0 +1,20 @@
+name: ADNO RELEASE LIGHT VERSION
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Create ADNO ZIP (LIGHT VERSION)
+        uses: thedoctor0/zip-release@master
+        with:
+          filename: 'adno-light.zip'
+          path: 'adno-light/'
+      - name: Upload Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: 'adno-light.zip'
+          token: ${{ secrets.GITHUB_TOKEN }}
