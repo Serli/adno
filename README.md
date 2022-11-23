@@ -1,47 +1,43 @@
-# Projet Adno
+# ADNO
 
-Adno est une application web de visualisation, d’édition et de partage pair-à-pair de narrations et de parcours sur des images fixes de haute qualité. Potentiellement, elle pourra s’étendre à l’audio, à la vidéo et à la 3D.
+Adno is a web application to visualize, edit and a peer-to-peer sharing for static high quality pictures.
 
-Proto : https://adno.app/
+ADNO has 2 available versions : a Full version including the Editor and Viewer and the Light one including only the Viewer.
 
-## Quelques liens
+## How to start with ADNO ?
 
-* Standards utiles
-  * IIIF
-    * https://iiif.io/
-    * https://doc.biblissima.fr/introduction-iiif
-    * https://projet.biblissima.fr/fr/introduction-protocoles-iiif-formation-enssib-2019
-  * JPEG 2000
-    * https://fr.wikipedia.org/wiki/JPEG_2000
-* Ressources IIIF
-  * https://gallica.bnf.fr/accueil/fr/content/accueil-fr
-  * https://sketchfab.com/3d-models/la-grand-goule-e86fe915265c432c8ad0d49e25d2e0f3
-* Inspirations
-  * https://static.emf.fr/annona/nautre/
-  * https://planchesdesciences.fr/
-  * Tesselle
-    * https://medialab.sciencespo.fr/outils/tesselle/
-    * https://medialab.github.io/tesselle/#/
-  * https://www.exhibit.so/
-* Librairies
-  * https://ncsu-libraries.github.io/annona/
-  * https://openseadragon.github.io/
+First, go to https://github.com/Serli/adno/releases/ and download the version you would like to use ( FULL or LIGHT )
+Then, if you want to use it locally you have to use a web server.
+Unzip the ADNO package to your web server and start it.
 
 
-## Démarrer le projet
+## Host ADNO with Github Pages
 
-* Lancer l'application react : yarn start
+Download the latest release of Adno with the version of your choice ( full-version or light-version) from  https://github.com/Serli/adno/releases/ 
 
-## Génération des fichiers statiques (dossier dist)
-* yarn build 
+Unzip the archive to your folder and push it to your Github repository.
 
-## Stockage des projets 
-Les projets sont stockés dans le localStorage.
-Ils sont séparés en deux :
-* une partie pour les métadonnées du projet en lui-même 
-* une deuxième partie pour les annotations 
+Once you’ve pushed to Github you need to go to Github’s website, select your repository and click on the “settings” tab.
 
-## Quelques manifests pour démarrer :
+Then, select the tab “Pages” on the left panel.
+
+You’ll have to select the branch you want to deploy the website from and save your choice.
+
+Enjoy using Adno !
+
+
+## IIIF pictures examples
 * https://ronallo.com/iiif-workshop/presentation/example-manifests.html
 * https://free.iiifhosting.com/iiif/1c8d49343676a04fffcd92979c02e9394e48bac96f590fffbadffc9133cd06b9/info.json
 * https://iiif.emf.fr/iiif/3/SuomiNPP_earth_full.jp2/info.json
+
+
+## For developpers
+
+If you want to contribute to ADNO here are few steps to start 
+  * clone the project from github (https://github.com/Serli/adno.git)
+  * switch to adno-react branch
+  * Start the project with the following command : **yarn start**
+    * Create a .env file and put the version you would like to use by using the variable ADNO_MODE=FULL or ADNO_MODE=LIGHT
+  * To build the project you have to choose the version (full or light)
+    * run **yarn build-full** to build full-version and **yarn build-light** to build the light version.
