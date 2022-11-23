@@ -43,13 +43,11 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: adno-full
-          path: ./
 
       - name: Get LIGHT VERSION artifact
         uses: actions/download-artifact@v1
         with:
           name: adno-light
-          path: ./
 
 
       # Zip the build using external action
@@ -70,13 +68,13 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: adno-full.zip
-          path: ./adno-full.zip
+          path: adno-full.zip
 
       - name: Upload build zip artifact
         uses: actions/upload-artifact@v1
         with:
           name: adno-light.zip
-          path: ./adno-light.zip
+          path: adno-light.zip
 
 
 
