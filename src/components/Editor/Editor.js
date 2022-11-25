@@ -20,7 +20,7 @@ class Editor extends Component {
         this.state = {
             mobileMode: false,
             selected_project: JSON.parse(localStorage.getItem(this.props.match.params.id)),
-            annotations: JSON.parse(localStorage.getItem(`${this.props.match.params.id}_annotations`)) 
+            annotations: JSON.parse(localStorage.getItem(`${this.props.match.params.id}_annotations`))
         }
     }
 
@@ -191,9 +191,8 @@ class Editor extends Component {
                     <span className="autosave-text">* Le titre et la description sont sauvegardés automatiquement</span>
 
                     {
-                        this.state.annotations && this.state.annotations.length > 0 ?
-                            <AnnotationCards annotations={this.state.annotations} updateAnnos={(updated_annos) => this.setState({ annotations: updated_annos })} />
-                            : <></>
+                        this.state.annotations && this.state.annotations.length > 0 &&
+                        <AnnotationCards annotations={this.state.annotations} updateAnnos={(updated_annos) => this.setState({ annotations: updated_annos })} />
                     }
                 </div>
 

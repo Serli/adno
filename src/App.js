@@ -45,12 +45,7 @@ export default class App extends Component {
         return (
             <div>
                 <HashRouter history={history}>
-                    {/* <Navbar showNav={JSON.parse(localStorage.getItem("adno_projects")) && JSON.parse(localStorage.getItem("adno_projects")).length > 0 ? true : false} /> */}
                     <Switch>
-                        {/* <Route exact path="/about">
-                            <About />
-                        </Route> */}
-
                         <Route exact path="/new">
                             <NewProject />
                         </Route>
@@ -58,7 +53,6 @@ export default class App extends Component {
                         <Route exact path="/project/:id">
                             <Viewer />
                         </Route>
-
 
                         {
                             process.env.ADNO_MODE === "FULL" &&
@@ -72,16 +66,6 @@ export default class App extends Component {
                             <Example />
                         </Route>
 
-                        {/* <Route exact path="/cgu">
-                            <CGU />
-                        </Route>
-
-                        <Route exact path="/legal">
-                            <LegalNotice />
-                        </Route> */}
-
-
-
                         <Route exact path="/">
                             {
                                 JSON.parse(localStorage.getItem("adno_projects")) && JSON.parse(localStorage.getItem("adno_projects")).length > 0 ?
@@ -90,13 +74,14 @@ export default class App extends Component {
                             }
                         </Route>
 
+
+
+
                         <Route>
                             <NotFound />
                         </Route>
 
                     </Switch>
-                    {/* <Footer showFooter={JSON.parse(localStorage.getItem("adno_projects")) && JSON.parse(localStorage.getItem("adno_projects")).length > 0 ? true : false} /> */}
-
                 </HashRouter>
 
             </div>

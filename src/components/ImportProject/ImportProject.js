@@ -33,22 +33,10 @@ class ImportProject extends Component {
 
     render() {
         const loadImportedProj = () => {
-            if (this.state.loadedProject.type === "application/json") {
+            if (this.state.loadedProject && this.state.loadedProject.type === "application/json") {
+                // Call function to load the project
+                importProjectJsonFile(this.state.loadedProject)
 
-
-                if (this.state.loadedProject) {
-
-                    // Call function to load the project
-                    importProjectJsonFile(this.state.loadedProject)
-                } else {
-                    Swal.fire({
-                        title: 'Veuillez sélectionner un fichier ',
-                        showCancelButton: true,
-                        showConfirmButton: false,
-                        cancelButtonText: 'OK',
-                        icon: 'warning',
-                    })
-                }
             } else {
                 Swal.fire({
                     title: 'Impossible de lire ce type de fichier !',
@@ -71,16 +59,11 @@ class ImportProject extends Component {
                 }} />
 
                 {
-                    this.state.isimporting ?
-                        <div className="import-btns">
-                            <button className="import-btn import-reset" disabled={!this.state.isimporting} onClick={() => this.cancelImport()}
-                            
-                            >Annuler l'importation</button>
-                            <button id="import_1" className="import-btn import-confirm" disabled={!this.state.isimporting} onClick={() => loadImportedProj()}>Importer mon projet</button>
-                        </div>
-
-                        : <></>
-
+                    this.state.isimporting &&
+                    <div className="import-btns">
+                        <button className="import-btn import-reset" disabled={!this.state.isimporting} onClick={() => this.cancelImport()}>Annuler l'importation</button>
+                        <button id="import_1" className="import-btn import-confirm" disabled={!this.state.isimporting} onClick={() => loadImportedProj()}>Importer mon projet</button>
+                    </div>
                 }
 
 

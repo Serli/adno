@@ -43,7 +43,7 @@ class Viewer extends Component {
             this.setState({ annotations: JSON.parse(annos), selectedProject: JSON.parse(actualProj) })
 
             // Create the dataURI linked to the annotations
-            const dataURI = "data:application/json;base64," + btoa(annos);
+            const dataURI = "data:application/json;base64," + btoa(unescape(encodeURIComponent(annos)));
 
             // Create and display an annona storyboard 
             document.getElementById("image_iiif").innerHTML = '<iiif-storyboard  styling="toggleoverlay: true; tts=true;" annotationurl="' + dataURI + '"></iiif-storyboard>';

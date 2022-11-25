@@ -138,6 +138,15 @@ class NewProject extends Component {
                                                 })
                                             }
 
+                                            // var annotations = []
+
+                                            // if (manifest.sequences[0].canvases && manifest.sequences[0].canvases.length > 0) {
+                                            //     manifest.sequences[0].canvases.forEach(canva => {
+                                            //         annotations.push(canva.images[0])
+                                            //     });
+                                            // } 
+                                            // insertInLS(`${projectID}_annotations`, JSON.stringify(annotations))
+
                                             project = buildJsonProjectWithManifest(projectID, document.getElementById("project_name").value,   document.getElementById("project_desc").value,  new Date(),new Date(),resultLink)
                                             
                                         } else {

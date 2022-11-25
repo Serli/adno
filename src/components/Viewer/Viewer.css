@@ -35,7 +35,7 @@
 
 #image_iiif{
     height: 750px;
-    width: 1700px;
+    width: 98% !important;
     margin: auto;
 }
 
@@ -77,9 +77,9 @@
     }
 
     #image_iiif{
-        width: 1320px !important;
-        height: 530px !important;
+        height: 780px !important;
         margin: auto;
+        padding-bottom: 2%;
     }
 
     .back-home-viewer {
@@ -98,8 +98,8 @@
 
 @media (max-width: 840px) { 
     .adno-viewer-rightbar-without-annos #image_iiif{
-        width: 600px !important;
         height: 750px !important;
         margin: auto;
+        padding-bottom: 2%;
     }
 }
