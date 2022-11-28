@@ -12,7 +12,6 @@
 
 .adno-editor{
     width: 1200px;
-    height: 670px;
     margin: auto;
 }
 
@@ -101,8 +100,7 @@
 }
 
 .adno-editor-annotations{
-    width: 1280px;
-    height: 670px;
+    width: 100%;
     margin: auto;
 }
 
@@ -113,8 +111,6 @@
 
 @media (min-width: 1440px) and (max-width: 1680px) {
     .adno-editor-annotations{
-        width: 1100px;
-        height: 670px;
         margin: auto;
     }
 }
@@ -123,8 +119,6 @@
 @media (min-width: 1060px) and (max-width: 1440px) {
 
     .adno-editor{
-        width: 960px;
-        height: 480px;
         margin: auto;
     }
 
@@ -133,8 +127,6 @@
     }
 
     .adno-editor-annotations{
-        width: 840px;
-        height: 670px;
         margin: auto;
     }
 }
@@ -154,8 +146,6 @@
     }
 
     .adno-editor-annotations{
-        width: 560px;
-        height: 670px;
         margin: auto;
     }
 }

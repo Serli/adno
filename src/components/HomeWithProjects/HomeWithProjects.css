@@ -6,7 +6,6 @@
 }
 
 #projects_list{
-    width: 80vw;
     height: 61vh;
     margin: auto;
     display: flex;
@@ -29,10 +28,10 @@
 
 #myForm{
     width: 100%;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    display: flex;
+    margin: 20px auto;
 }
 
 .with_projects_right{
@@ -96,15 +95,23 @@
     margin-top: 10px;
 }
 
+#create_project_2{
+    width: 30%;
+    margin-left: 15px;
+}
+
+.add_url{
+    margin-bottom: 0 !important;
+}
+
 @media (max-width: 1440px) {
     #projects_list{
-        width: 80vw;
         margin: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
         overflow: auto;
-        height: 75vh;
+        height: 62vh;
     }
 
     #container_with_projects {

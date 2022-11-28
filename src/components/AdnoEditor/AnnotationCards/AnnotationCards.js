@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Swal from "sweetalert2";
 
 // JS Utils 
-import "./../../../../Utils/customElems.js";
+import "../../../../Utils/customElems.js";
 import { buildTagsList, insertInLS } from "../../../../Utils/utils";
 
 //Imports CSS

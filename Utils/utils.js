@@ -335,3 +335,24 @@ export const importProjectJsonFile = (loadedProject) => {
 export function checkProjectAttributes(imported_project) {
   return imported_project.hasOwnProperty('id') && imported_project.hasOwnProperty('title') && imported_project.hasOwnProperty('description') && imported_project.hasOwnProperty('creation_date') && imported_project.hasOwnProperty('last_update') && imported_project.hasOwnProperty('manifest_url')
 }
+
+
+export function duplicateProject(projectID){
+  const project = JSON.parse(localStorage.getItem(projectID))
+  const project_annos = JSON.parse(localStorage.getItem(`${projectID}_annotations`))
+  
+  const target = {};
+
+  Object.assign(target, project);
+
+  target.id = generateUUID()
+  target.last_update = new Date().toLocaleString()
+  target.creation_date = new Date().toLocaleString()
+
+  insertInLS(target.id, JSON.stringify(target))
+  insertInLS(`${target.id}_annotations`, JSON.stringify(project_annos))
+
+  var projects = JSON.parse(localStorage.getItem("adno_projects"))
+  projects.push(target.id)
+  insertInLS("adno_projects", JSON.stringify(projects))
+}

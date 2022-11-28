@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import {
-    Switch,
-    Route,
-    HashRouter
+    HashRouter, Route, Switch
 } from "react-router-dom";
 
 // Import utils
@@ -10,18 +8,10 @@ import history from "../Utils/history";
 import { insertInLS } from "../Utils/utils";
 
 // Import React components
-import Navbar from "./components/Navbar/Navbar";
 import HomeWithProjects from "./components/HomeWithProjects/HomeWithProjects";
 import NewProject from "./components/NewProject/NewProject";
-import Viewer from "./components/Viewer/Viewer";
-import Editor from "./components/Editor/Editor";
-import Example from "./components/Example/Example";
-import Footer from "./components/Footer/Footer";
-import LegalNotice from "./components/LegalNotice/LegalNotice";
-import CGU from "./components/CGU/CGU";
-import LandingPage from "./components/LandingPage/LandingPage";
 import NotFound from "./components/NotFound/NotFound";
-import About from "./components/About/About";
+import Project from "./components/Project/Project";
 
 require('dotenv').config()
 
@@ -51,31 +41,12 @@ export default class App extends Component {
                         </Route>
 
                         <Route exact path="/project/:id">
-                            <Viewer />
+                            <Project />
                         </Route>
-
-                        {
-                            process.env.ADNO_MODE === "FULL" &&
-                            <Route exact path="/edit/:id">
-                                <Editor />
-                            </Route>
-                        }
-
-
-                        <Route exact path="/example">
-                            <Example />
-                        </Route>
-
+                        
                         <Route exact path="/">
-                            {
-                                JSON.parse(localStorage.getItem("adno_projects")) && JSON.parse(localStorage.getItem("adno_projects")).length > 0 ?
-                                    <HomeWithProjects />
-                                    : <LandingPage />
-                            }
+                            <HomeWithProjects />
                         </Route>
-
-
-
 
                         <Route>
                             <NotFound />

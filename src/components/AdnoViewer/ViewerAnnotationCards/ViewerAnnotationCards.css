@@ -9,11 +9,9 @@
 }
 
 .adno-viewer-list-annos{
-    height: 82vh;
     width: 100%;
     flex-direction: column;
     display: flex;
-    overflow: scroll;
 }
 
 .adno-viewer-card{
@@ -38,10 +36,4 @@
 
 .selectedAnno{
     border: 2px solid gold !important;
-}
-
-@media (max-width: 1440px){
-   .adno-viewer-list-annos {
-       height: 75vh;
-   } 
 }

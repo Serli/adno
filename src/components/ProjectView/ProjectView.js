@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Swal from 'sweetalert2';
 
 // Import utils
-import { insertInLS, createExportProjectJsonFile } from "../../../Utils/utils";
+import { insertInLS, createExportProjectJsonFile, duplicateProject } from "../../../Utils/utils";
 
 // Import CSS
 import "./ProjectView.css";
@@ -105,6 +105,24 @@ class ProjectView extends Component {
             })
         }
 
+        function duplicate(projID) {
+            Swal.fire({
+                title: 'Voulez-vous vraiment dupliquer ce projet ?',
+                showCancelButton: true,
+                confirmButtonText: 'Dupliquer mon projet',
+                cancelButtonText: 'Annuler',
+                icon: 'warning',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    duplicateProject(projID)
+                    Swal.fire('La liste des projets a bien été mise à jour !', '', 'success')
+                        .then((result) => {
+                            result.isConfirmed ? window.location.reload() : ""
+                        })
+                }
+            })
+        }
+
         return (
             <div className="card mb-3 project-card">
                 <div className="row g-0">
@@ -122,6 +140,9 @@ class ProjectView extends Component {
                             <p className="card-text"><small className="text-muted">Dernière mise à jour : {this.props.project.last_update}</small></p>
                             <p className="card-text"><small className="text-muted"> <span className="label-nb-annos">{this.state.nbAnnotations}</span>  annotation(s)</small></p>
 
+
+
+
                             <div className="buttons-group-proj-view">
                                 {
                                     process.env.ADNO_MODE === "FULL" &&
@@ -130,6 +151,7 @@ class ProjectView extends Component {
                                         <button type="button" className="btn btn-success btn-sm" onClick={() => this.props.history.push("/edit/" + this.props.project.id)}> <FontAwesomeIcon icon={faPenToSquare} />  Editer</button>
                                     </div>
                                 }
+                                <button type="button" className="btn btn-warning btn-sm" onClick={() => duplicate(this.props.project.id)}>Duplicate</button>
                                 <button type="button" className="btn btn-primary btn-sm" onClick={() => this.props.history.push("/project/" + this.props.project.id)}> <FontAwesomeIcon icon={faMagnifyingGlass} />  Prévisualiser  </button>
                                 <a id={"download_btn_" + this.props.project.id} href={createExportProjectJsonFile(this.props.project.id)} download={this.props.project.title + ".json"} className="btn btn-secondary btn-sm"> <FontAwesomeIcon icon={faDownload} /> Télécharger </a>
                             </div>

@@ -8,13 +8,10 @@ import { faArrowLeft, faDownload, faEye } from "@fortawesome/free-solid-svg-icon
 // Import utils
 import { checkIfProjectExists, createExportProjectJsonFile, insertInLS } from "../../../Utils/utils";
 
-// Import Components
-import AnnotationCards from "./AnnotationCards/AnnotationCards";
-
 // Import CSS
-import "./Editor.css";
+import "./AdnoEditor.css";
 
-class Editor extends Component {
+class AdnoEditor extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,33 +20,6 @@ class Editor extends Component {
             annotations: JSON.parse(localStorage.getItem(`${this.props.match.params.id}_annotations`))
         }
     }
-
-    // Function to update the name of the selected project
-    updateProjectName(e) {
-
-        let project = this.state.selected_project
-
-        project.title = e.target.value
-        project.last_update = new Date()
-
-        this.setState({ selected_project: project })
-
-        insertInLS(project.id, JSON.stringify(project))
-    }
-
-    // Function to update the description of the selected project
-    updateProjectDesc(e) {
-
-        let project = this.state.selected_project
-
-        project.description = e.target.value
-        project.last_update = new Date()
-
-        this.setState({ selected_project: project })
-
-        insertInLS(project.id, JSON.stringify(project))
-    }
-
 
     createViewer(tileSources) {
         return OpenSeadragon({
@@ -138,8 +108,7 @@ class Editor extends Component {
                 // Update annotations linked to the selected project in the localStorage
                 insertInLS(`${selected_project.id}_annotations`, JSON.stringify(annotations))
 
-                this.setState({ annotations })
-
+                this.props.updateAnnos(annotations)
             });
 
             // Manage update of annotation
@@ -177,71 +146,29 @@ class Editor extends Component {
     }
     render() {
         return (
-            <>
-                <div className="left-bar">
-                    <div className="mb-3">
-                        <label htmlFor="project_name" className="form-label">Titre</label>
-                        <input type="text" id="project_name" className="form-control" placeholder="Donnez un titre à votre projet" value={this.state.selected_project.title} onChange={(e) => this.updateProjectName(e)} />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="project_desc" className="form-label">Description</label>
-                        <input id="project_desc" className="form-control" type="text" placeholder="Description de votre projet" value={this.state.selected_project.description} onChange={(e) => this.updateProjectDesc(e)} />
-                    </div>
+            <div className="">
 
-                    <span className="autosave-text">* Le titre et la description sont sauvegardés automatiquement</span>
-
-                    {
-                        this.state.annotations && this.state.annotations.length > 0 &&
-                        <AnnotationCards annotations={this.state.annotations} updateAnnos={(updated_annos) => this.setState({ annotations: updated_annos })} />
-                    }
+                <div className="card-body project-body">
+                    <div className="project-body-left">
+                        <div id="toolbar-container"></div>
+                    </div>
                 </div>
 
-                <div className="right-bar">
-
-                    <button className="btn btn-primary back-home-editor" onClick={() => this.props.history.push("/")}> <FontAwesomeIcon icon={faArrowLeft} /> Retour à l'accueil</button>
-
-
-                    <div className="col picture-div">
-                        <div className="card mb-3">
-                            <div className="card">
-                                <div className="card-body project-body">
-
-
-                                    <div className="project-body-left">
-                                        <div id="toolbar-container"></div>
-                                        <h5 id="project_name" className="card-title"></h5>
-                                        <p id="project_desc" className="card-text"></p>
-                                    </div>
-
-                                    <div className="project-body-right">
-                                        <a id={"download_btn_" + this.state.selected_project.id} href={createExportProjectJsonFile(this.state.selected_project.id)} download={this.state.selected_project.title + ".json"} className="dl-button"> <FontAwesomeIcon icon={faDownload} /> Télécharger </a>
-                                        <button id="preview" className="btn btn-primary subbutton" onClick={() => this.props.history.push("/project/" + this.props.match.params.id)}> <FontAwesomeIcon icon={faEye} /> Preview</button>
-                                    </div>
-
-                                </div>
-
-
-
-
-                                {
-                                    this.state.annotations && this.state.annotations.length >= 1 ?
-                                        <div className="adno-editor-annotations">
-                                            <div id="openseadragon1"></div>
-                                        </div>
-                                        :
-                                        <div className="adno-editor">
-                                            <div id="openseadragon1"></div>
-                                        </div>
-                                }
-
-
-                            </div>
+                {
+                    this.state.annotations && this.state.annotations.length >= 1 ?
+                        <div className="adno-editor-annotations">
+                            <div id="openseadragon1"></div>
                         </div>
-                    </div>
-                </div>
-            </>
+                        :
+                        <div className="adno-editor">
+                            <div id="openseadragon1"></div>
+                        </div>
+                }
+
+
+            </div>
         )
     }
 }
 
-export default withRouter(Editor)
+export default withRouter(AdnoEditor)

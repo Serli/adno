@@ -31,7 +31,7 @@ class HomeWithProjects extends Component {
         // Get projects from localStorage
         var projects = []
         var allProjectsID = JSON.parse(localStorage.getItem("adno_projects"))
-        allProjectsID.map(projectID => {
+        allProjectsID && allProjectsID.length > 0 && allProjectsID.map(projectID => {
             projects.push(JSON.parse(localStorage.getItem(projectID)))
         })
 
@@ -128,52 +128,41 @@ class HomeWithProjects extends Component {
 
         return (
             <div id="container_with_projects" className="adno_container">
-                <div className="with_projects">
-                    <div className="with_projects_left">
 
-                        <div className="jumbotron mt-3">
-                            <h1>ADNO</h1>
-                            <p className="lead">Adno est une application web de visualisation, d’édition et de partage pair-à-pair de narrations et de parcours sur des images IIIF.</p>
+                <h1>ADNO</h1>
+                {
+                    process.env.ADNO_MODE === "FULL" &&
+                    <form id="myForm">
+                        <div className="input-group mb-3 add_url">
+                            <span className="input-group-text" id="basic-addon1"> <FontAwesomeIcon icon={faLink} /> URL</span>
+                            <input type="text" id="adno_image_url_2" className="form-control" value={this.state.adno_image_url} onChange={(e) => this.setState({ adno_image_url: e.target.value })}
+                                placeholder="Renseignez ici votre fichier info.json ou votre image jpg/png" />
                         </div>
 
-                        {
-                            process.env.ADNO_MODE === "FULL" &&
-                            <form id="myForm">
-                                <div className="input-group mb-3">
-                                    <span className="input-group-text" id="basic-addon1"> <FontAwesomeIcon icon={faLink} /> URL</span>
-                                    <input type="text" id="adno_image_url_2" className="form-control" value={this.state.adno_image_url} onChange={(e) => this.setState({ adno_image_url: e.target.value })}
-                                        placeholder="Renseignez ici votre fichier info.json ou votre image jpg/png" />
-                                </div>
 
+                        <button id="create_project_2" type="submit" className="btn btn-success" onClick={(e) => newProject(e)}> <FontAwesomeIcon icon={faAdd} /> Créer un nouveau projet</button>
 
-                                <button id="create_project_2" type="submit" className="btn btn-success" onClick={(e) => newProject(e)}> <FontAwesomeIcon icon={faAdd} /> Créer un nouveau projet</button>
+                    </form>
+                }
 
-                            </form>
-                        }
+                <ImportProject projects={this.state.projects} updateProjects={(updatedList) => this.setState({ projects: updatedList, adno_image_url: "" })} />
 
-                        {
-                            process.env.ADNO_MODE === "FULL" &&
-                            <button className="btn btn-primary btn-sh-examples" onClick={() => this.props.history.push("/example")}> <FontAwesomeIcon icon={faBook} /> Voir les Exemples</button>
-                        }
-
-                    </div>
-
-                    <div className="with_projects_right">
-
-                        <ImportProject projects={this.state.projects} updateProjects={(updatedList) => this.setState({ projects: updatedList, adno_image_url: "" })} />
+                {
+                    this.state.projects && this.state.projects.length > 0 ?
+                    <div>
 
                         <div className="homewpbar">
                             <h2>Vos Projets</h2>
                             <button className="btn btn-danger" onClick={() => deleteAllProjects()}> <FontAwesomeIcon icon={faTrashAlt} /> Supprimer mes projets</button>
                         </div>
 
-                        {
-                            this.state.projects && this.state.projects.length > 0 &&
-                            <ProjectsList projects={this.state.projects} />
-                        }
 
+                        <ProjectsList projects={this.state.projects} />
                     </div>
-                </div>
+                    : 
+                    <p>Aucun projet disponible pour le moment</p>
+                }
+
             </div>
         )
     }

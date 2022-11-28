@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "yarn install && parcel public/index.html",
+    "start": "yarn install && clear && parcel public/index.html",
     "build-all": "yarn build-full && yarn build-light",
     "build-full": "ADNO_MODE=FULL parcel build public/index.html --dist-dir adno-full",
     "build-light": "ADNO_MODE=LIGHT parcel build public/index.html --dist-dir adno-light"

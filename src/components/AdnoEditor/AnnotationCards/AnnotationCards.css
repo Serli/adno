@@ -1,8 +1,6 @@
 .list_annotations{
-    height: 57vh;
     display: flex;
     flex-direction: column;
-    overflow: scroll;
     width: 100%;
 }
 
@@ -28,10 +26,4 @@
     display: flex;
     justify-content: space-between;
     width: 90%;
-}
-
-@media (max-width: 1500px){
-    .list_annotations {
-        height: 30vh !important;
-    }
 }
