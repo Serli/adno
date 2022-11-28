@@ -6,6 +6,7 @@ import {
 // Import utils
 import history from "../Utils/history";
 import { insertInLS } from "../Utils/utils";
+import AdnoUrls from "./components/AdnoUrls/AdnoUrls";
 
 // Import React components
 import HomeWithProjects from "./components/HomeWithProjects/HomeWithProjects";
@@ -42,6 +43,10 @@ export default class App extends Component {
 
                         <Route exact path="/project/:id">
                             <Project />
+                        </Route>
+                        
+                        <Route exact path="/search">
+                            <AdnoUrls />
                         </Route>
                         
                         <Route exact path="/">
