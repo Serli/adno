@@ -1,0 +1,9 @@
+.adno-rich-editor{
+    height: 100%;
+    width: 100%;
+}
+
+#editorJS{
+    max-height: 50vh;
+    overflow: auto;
+}

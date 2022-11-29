@@ -3,10 +3,10 @@ import { withRouter } from "react-router-dom";
 
 // Import FontAwesome and icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faBook, faEdit, faEye } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 // Import utils
-import { checkIfProjectExists } from "../../../Utils/utils";
+import { checkIfProjectExists, createDate, insertInLS } from "../../../Utils/utils";
 
 // Import libraries
 import "../../libraries/annona-reworked/js/storyboard";
@@ -17,6 +17,7 @@ import "./Project.css";
 import AdnoViewer from "../AdnoViewer/AdnoViewer";
 import AdnoEditor from "../AdnoEditor/AdnoEditor";
 import SidebarAnnotations from "../SidebarAnnotations/SidebarAnnotations";
+import AdnoRichText from "../AdnoRichText/AdnoRichText";
 
 class Project extends Component {
     constructor(props) {
@@ -25,7 +26,9 @@ class Project extends Component {
             annotations: [],
             selectedProject: {},
             editingMode: false,
-            sidebarOpened: false
+            sidebarOpened: false,
+            updateAnnotation: false,
+            selectedAnnotation: {}
         }
     }
 
@@ -33,13 +36,13 @@ class Project extends Component {
     openNav() {
         document.getElementById("mySidebar").style.width = "350px";
         document.getElementById("adno-viewer").style.marginLeft = "350px";
-        document.getElementById("right-card").style.width =  "75%"
+        document.getElementById("right-card").style.width = "75%"
     }
 
     closeNav() {
         document.getElementById("mySidebar").style.width = "0";
         document.getElementById("adno-viewer").style.marginLeft = "0";
-        document.getElementById("right-card").style.width =  "100%"
+        document.getElementById("right-card").style.width = "100%"
     }
 
     componentDidMount() {
@@ -58,52 +61,45 @@ class Project extends Component {
             this.setState({ annotations: JSON.parse(annos), selectedProject: JSON.parse(actualProj) })
 
         }
-
-    }
-
-    // Function to update the name of the selected project
-    updateProjectName(e) {
-
-        let project = this.state.selected_project
-
-        project.title = e.target.value
-        project.last_update = new Date()
-
-        this.setState({ selected_project: project })
-
-        insertInLS(project.id, JSON.stringify(project))
-    }
-
-    // Function to update the description of the selected project
-    updateProjectDesc(e) {
-
-        let project = this.state.selected_project
-
-        project.description = e.target.value
-        project.last_update = new Date()
-
-        this.setState({ selected_project: project })
-
-        insertInLS(project.id, JSON.stringify(project))
     }
 
 
-    // Function to update the description of the selected project
-    updateProjectAutor(e) {
+    // Update project values
+    updateProjectTitle(newTitle) {
+        this.setState({ selectedProject: { ...this.state.selectedProject, "title": newTitle } })
+        insertInLS(this.state.selectedProject.id, JSON.stringify({ ...this.state.selectedProject, "title": newTitle, "modified": createDate() }))
+    }
 
-        let project = this.state.selected_project
+    updateProjectDesc(newDesc) {
+        this.setState({ selectedProject: { ...this.state.selectedProject, "description": newDesc } })
+        insertInLS(this.state.selectedProject.id, JSON.stringify({ ...this.state.selectedProject, "description": newDesc, "modified": createDate() }))
+    }
 
-        project.autor = e.target.value
-        project.last_update = new Date()
+    updateProjectAutor(newAutor) {
+        this.setState({ selectedProject: { ...this.state.selectedProject, "autor": newAutor } })
+        insertInLS(this.state.selectedProject.id, JSON.stringify({ ...this.state.selectedProject, "autor": newAutor, "modified": createDate() }))
+    }
 
-        this.setState({ selected_project: project })
-
-        insertInLS(project.id, JSON.stringify(project))
+    updateProjectEditor(newEditor) {
+        this.setState({ selectedProject: { ...this.state.selectedProject, "editor": newEditor } })
+        insertInLS(this.state.selectedProject.id, JSON.stringify({ ...this.state.selectedProject, "editor": newEditor, "modified": createDate() }))
     }
 
     render() {
         return (
             <div className="adno-viewer" id="adno-viewer">
+
+
+                {
+                    this.state.updateAnnotation &&
+                    <div className="text-rich">
+                        <div className="text-rich-content">
+                            {/* <p>Anno content...</p> */}
+                            <AdnoRichText updateAnnos={(annos) => this.setState({ annotations: annos })} closeRichEditor={() => this.setState({ updateAnnotation: false })} selectedAnnotation={this.state.selectedAnnotation} selectedProjectId={this.props.match.params.id} annotations={this.state.annotations} />
+                        </div>
+                    </div>
+                }
+
 
 
                 <SidebarAnnotations
@@ -125,37 +121,8 @@ class Project extends Component {
 
                 }
 
-
-
                 <button className="btn btn-primary back-home-viewer" onClick={() => this.props.history.push("/")}> <FontAwesomeIcon icon={faArrowLeft} /> Retour à l'accueil</button>
 
-                {/* <input type="text" disabled={!this.state.editingMode} value={checkIfProjectExists(this.props.match.params.id) && this.state.selectedProject.title} />   <input type="text" disabled={!this.state.editingMode} value={checkIfProjectExists(this.props.match.params.id) && this.state.selectedProject.description} />
-
-
-                <div className="input-group mb-3">
-                    <span className="input-group-text" id="basic-addon1"> <FontAwesomeIcon icon={faBook} /> Description</span>
-                    <input type="text" id="adno_image_url_2" className="form-control" value={this.state.adno_image_url} onChange={(e) => this.setState({ adno_image_url: e.target.value })}
-                        placeholder="Renseignez ici votre fichier info.json ou votre image jpg/png" />
-                </div> */}
-
-
-                {/* {
-
-                    this.state.editingMode ?
-
-                        this.state.annotations && this.state.annotations.length > 0 &&
-                        <div className="adno-viewer-leftbar">
-
-                            <AnnotationCards annotations={this.state.annotations} updateAnnos={(updated_annos) => this.setState({ annotations: updated_annos })} />
-                        </div>
-                        :
-
-                        // Display every annotation
-                        this.state.annotations && this.state.annotations.length > 0 &&
-                        <div className="adno-viewer-leftbar">
-                            <ViewerAnnotationCards editingMode={this.state.editingMode} annotations={this.state.annotations} />
-                        </div>
-                } */}
 
                 <div className="adno-viewer-rightbar-without-annos">
                     <div className="col">
@@ -164,12 +131,32 @@ class Project extends Component {
                                 <div className="card-body project-body">
 
 
-                                    <div className="project-body-left">
-                                        <h5 id="project_name" className="card-title">{checkIfProjectExists(this.props.match.params.id) && this.state.selectedProject.title}</h5>
-                                        <p id="project_desc" className="card-text">{checkIfProjectExists(this.props.match.params.id) && this.state.selectedProject.description}</p>
-                                    </div>
+
+                                    {
+                                        !process.env.ADNO_MODE === "FULL" || !this.state.editingMode &&
+                                        <div className="project-body-left">
+                                            <h5 id="project_name" className="card-title">{checkIfProjectExists(this.props.match.params.id) && this.state.selectedProject.title}</h5>
+                                            <p id="project_desc" className="card-text">{checkIfProjectExists(this.props.match.params.id) && this.state.selectedProject.description}</p>
+                                        </div>
+                                    }
 
 
+
+                                    {
+                                        process.env.ADNO_MODE === "FULL" && this.state.editingMode &&
+                                        <div className="project-body-left">                                            <label>Intitulé du projet</label>
+                                            <input type="text" value={this.state.selectedProject.title} onChange={(e) => this.updateProjectTitle(e.target.value)} placeholder="Titre" />
+
+                                            <label>Description du projet</label>
+                                            <input type="text" value={this.state.selectedProject.description} onChange={(e) => this.updateProjectDesc(e.target.value)} placeholder="Description" />
+
+                                            <label>Editeur du projet</label>
+                                            <input type="text" value={this.state.selectedProject.editor} onChange={(e) => this.updateProjectEditor(e.target.value)} placeholder="Editeur" />
+
+                                            <label>Auteur du projet</label>
+                                            <input type="text" value={this.state.selectedProject.autor} onChange={(e) => this.updateProjectAutor(e.target.value)} placeholder="Auteur" />
+                                        </div>
+                                    }
 
 
 
@@ -190,9 +177,10 @@ class Project extends Component {
 
 
                                 {
-                                    this.state.editingMode ?
-                                        <AdnoEditor updateAnnos={(annos) => this.setState({ annotations: annos })} />
-                                        :
+                                    !this.state.updateAnnotation
+                                        && this.state.editingMode ?
+                                        <AdnoEditor updateAnnos={(annos) => this.setState({ annotations: annos })} openRichEditor={(annotation) => this.setState({ updateAnnotation: true, selectedAnnotation: annotation })} />
+                                        : !this.state.updateAnnotation &&
                                         <AdnoViewer updateAnnos={(annos) => this.setState({ annotations: annos })} />
                                 }
 

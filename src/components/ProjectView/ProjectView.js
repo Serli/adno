@@ -151,7 +151,7 @@ class ProjectView extends Component {
                                     </div>
                                 }
                                 <button type="button" className="btn btn-warning btn-sm" onClick={() => duplicate(this.props.project.id)}>Duplicate</button>
-                                <button type="button" className="btn btn-primary btn-sm" onClick={() => this.props.history.push("/project/" + this.props.project.id)}> <FontAwesomeIcon icon={faMagnifyingGlass} />  Prévisualiser  {process.env.ADNO_MODE === "FULL" && <div> / <FontAwesomeIcon icon={faPenToSquare} />  Editer </div>} </button>
+                                <button type="button" className="btn btn-primary btn-sm" onClick={() => this.props.history.push("/project/" + this.props.project.id)}> <FontAwesomeIcon icon={faMagnifyingGlass} />  Prévisualiser  {process.env.ADNO_MODE === "FULL" && <p> / <FontAwesomeIcon icon={faPenToSquare} />  Editer </p>} </button>
                                 <a id={"download_btn_" + this.props.project.id} href={createExportProjectJsonFile(this.props.project.id)} download={this.props.project.title + ".json"} className="btn btn-secondary btn-sm"> <FontAwesomeIcon icon={faDownload} /> Télécharger </a>
                             </div>
                         </div>

@@ -356,3 +356,7 @@ export function duplicateProject(projectID){
   projects.push(target.id)
   insertInLS("adno_projects", JSON.stringify(projects))
 }
+
+export function createDate(){
+  return new Date().toISOString().slice(0, 10);
+}

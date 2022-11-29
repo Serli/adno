@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faDownload, faEye } from "@fortawesome/free-solid-svg-icons";
 
 // Import utils
-import { checkIfProjectExists, createExportProjectJsonFile, insertInLS } from "../../../Utils/utils";
+import { checkIfProjectExists, createExportProjectJsonFile, generateUUID, insertInLS } from "../../../Utils/utils";
 
 // Import CSS
 import "./AdnoEditor.css";
@@ -34,12 +34,11 @@ class AdnoEditor extends Component {
             locale: 'auto',
             drawOnSingleClick: true,
             allowEmpty: true,
-            disableEditor: false
+            disableEditor: true
         });
     }
 
     componentDidMount() {
-
         // First of all, verify if the UUID match to an real project in the localStorage
         // If not, then redirect the user to the HomePage
         if (!this.props.match.params.id || !checkIfProjectExists(this.props.match.params.id)) {
@@ -78,16 +77,19 @@ class AdnoEditor extends Component {
             Annotorious.BetterPolygon(anno);
             Annotorious.Toolbar(anno, document.getElementById('toolbar-container'));
 
-            // Manage creation of new annotation
-            anno.on('createAnnotation', (annotation) => {
+            //Manage creation of new annotation
+            anno.on('createSelection', (annotation) => {
+
+                console.log("createSelection", annotation);
+
                 var annotations = JSON.parse(localStorage.getItem(`${selected_project.id}_annotations`))
 
                 // reorganize properties 
                 const newAnnotation = {
                     "@context": "http://www.w3.org/ns/anno.jsonld",
-                    "id": annotation.id,
+                    "id": generateUUID(),
                     "type": annotation.type,
-                    "body": annotation.body,
+                    "body": [],
                     "target": annotation.target,
                     "modified": new Date(),
                     "created": new Date()
@@ -109,50 +111,59 @@ class AdnoEditor extends Component {
                 insertInLS(`${selected_project.id}_annotations`, JSON.stringify(annotations))
 
                 this.props.updateAnnos(annotations)
+
+                this.props.openRichEditor(newAnnotation)
+
+                anno.saveSelected();
+
+
             });
+
 
             // Manage update of annotation
-            anno.on('updateAnnotation', (upated_anno) => {
-                let annotations = JSON.parse(localStorage.getItem(`${selected_project.id}_annotations`))
+            // anno.on('updateAnnotation', (upated_anno) => {
 
-                let selected_anno = annotations.filter(anno => anno.id === upated_anno.id)[0]
 
-                Object.assign(selected_anno, upated_anno);
+            //     let annotations = JSON.parse(localStorage.getItem(`${selected_project.id}_annotations`))
 
-                // Update the last update in the project
-                selected_project.last_update = new Date()
-                insertInLS(selected_project.id, JSON.stringify(selected_project))
+            //     let selected_anno = annotations.filter(anno => anno.id === upated_anno.id)[0]
 
-                // Save the updated annotation in the localStorage
-                insertInLS(`${selected_project.id}_annotations`, JSON.stringify(annotations))
+            //     Object.assign(selected_anno, upated_anno);
 
-                this.setState({ annotations })
-            });
+            //     // Update the last update in the project
+            //     selected_project.last_update = new Date()
+            //     insertInLS(selected_project.id, JSON.stringify(selected_project))
 
-            anno.on('deleteAnnotation', (del_anno) => {
-                let annotations = JSON.parse(localStorage.getItem(`${selected_project.id}_annotations`))
+            //     // Save the updated annotation in the localStorage
+            //     insertInLS(`${selected_project.id}_annotations`, JSON.stringify(annotations))
 
-                if (annotations && annotations.length === 1) {
-                    localStorage.removeItem(`${selected_project.id}_annotations`)
-                    this.setState({ annotations: annotations.filter(anno => anno.id !== del_anno.id) })
-                } else {
-                    // Delete the annotation in the localStorage
-                    insertInLS(`${selected_project.id}_annotations`, JSON.stringify(annotations.filter(anno => anno.id !== del_anno.id)))
-                    this.setState({ annotations: annotations.filter(anno => anno.id !== del_anno.id) })
-                }
+            //     this.setState({ annotations })
+            // });
 
+            // anno.on('deleteAnnotation', (del_anno) => {
+            //     let annotations = JSON.parse(localStorage.getItem(`${selected_project.id}_annotations`))
+
+            //     if (annotations && annotations.length === 1) {
+            //         localStorage.removeItem(`${selected_project.id}_annotations`)
+            //         this.setState({ annotations: annotations.filter(anno => anno.id !== del_anno.id) })
+            //     } else {
+            //         // Delete the annotation in the localStorage
+            //         insertInLS(`${selected_project.id}_annotations`, JSON.stringify(annotations.filter(anno => anno.id !== del_anno.id)))
+            //         this.setState({ annotations: annotations.filter(anno => anno.id !== del_anno.id) })
+            //     }
+
+            // })
+
+
+            anno.on('selectAnnotation', (annotation) => {
+                this.props.openRichEditor(annotation)
             })
         }
     }
     render() {
         return (
-            <div className="">
-
-                <div className="card-body project-body">
-                    <div className="project-body-left">
-                        <div id="toolbar-container"></div>
-                    </div>
-                </div>
+            <div>
+                <div id="toolbar-container"></div>
 
                 {
                     this.state.annotations && this.state.annotations.length >= 1 ?
@@ -164,6 +175,7 @@ class AdnoEditor extends Component {
                             <div id="openseadragon1"></div>
                         </div>
                 }
+
 
 
             </div>

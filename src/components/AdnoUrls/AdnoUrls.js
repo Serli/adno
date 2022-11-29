@@ -6,11 +6,14 @@ import { manageUrls } from "./manageUrls";
 class AdnoUrls extends Component {
 
     componentDidMount() {
-        let url = (new URLSearchParams(this.props.location.search)).get("url")
-        console.log(url);
+        let url = (new URLSearchParams(this.props.location.search))
+        let manifest_url =  url.get("url")
+        let file_type = url.get("url_type")
+        console.log(manifest_url);
+        console.log(file_type);
 
         Swal.fire({
-            title: `Voulez-vous charger ce fichier ? ${url}`,
+            title: `Voulez-vous charger ce fichier ? ${manifest_url}`,
             showCancelButton: true,
             confirmButtonText: 'Oui, charger ce fichier',
             cancelButtonText: 'Annuler',
@@ -18,7 +21,7 @@ class AdnoUrls extends Component {
         }).then((result) => {
             if (result.isConfirmed) {
              
-                            manageUrls(this.props, url)
+                            manageUrls(this.props, manifest_url)
                             console.log("fichier chargé");
                         
                         // else {

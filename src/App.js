@@ -6,6 +6,7 @@ import {
 // Import utils
 import history from "../Utils/history";
 import { insertInLS } from "../Utils/utils";
+import AdnoRichText from "./components/AdnoRichText/AdnoRichText";
 import AdnoUrls from "./components/AdnoUrls/AdnoUrls";
 
 // Import React components
