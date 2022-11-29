@@ -259,6 +259,8 @@ export const createExportProjectJsonFile = (projectID) => {
     "type": "AnnotationCollection",
     "label": project.title,
     "subject": project.description,
+    "autor": project.autor || "",
+    "editor": project.editor || "",
     "date": project.creation_date,
     "modified": project.last_update,
     "source": project.manifest_url ? project.manifest_url : project.img_url,

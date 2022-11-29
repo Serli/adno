@@ -3,10 +3,10 @@ import { withRouter } from "react-router-dom";
 
 // Import FontAwesome and icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faDownload } from "@fortawesome/free-solid-svg-icons";
 
 // Import utils
-import { checkIfProjectExists, createDate, insertInLS } from "../../../Utils/utils";
+import { checkIfProjectExists, createDate, createExportProjectJsonFile, insertInLS } from "../../../Utils/utils";
 
 // Import libraries
 import "../../libraries/annona-reworked/js/storyboard";
@@ -171,6 +171,12 @@ class Project extends Component {
                                             </label>
                                         </div>
                                     }
+
+                                    {
+                                        this.state.selectedProject.id &&
+                                        <a id={"download_btn_" + this.state.selectedProject.id} href={createExportProjectJsonFile(this.state.selectedProject.id)} download={this.state.selectedProject.title + ".json"} className="btn btn-secondary btn-sm"> <FontAwesomeIcon icon={faDownload} /> Télécharger </a>
+                                    }
+
 
 
                                 </div>
