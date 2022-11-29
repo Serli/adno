@@ -198,25 +198,29 @@ export const buildTagsList = (annotation) => {
   return tags && tags.length > 0 ? tags.reduce((previousValue, currentValue) => previousValue + " " + currentValue.value, "[TAGS] ") : "Aucun tag"
 }
 
-export const buildJsonProjectWithManifest = (id, title, desc, cd, la, manifest) => {
+export const buildJsonProjectWithManifest = (id, title, desc, manifest) => {
   return {
     "id": id,
     "title": title,
     "description": desc,
     "creation_date": createDate(),
     "last_update": createDate(),
-    "manifest_url": manifest
+    "manifest_url": manifest,
+    "editor": "",
+    "autor": ""
   }
 }
 
-export const buildJsonProjectWithImg = (id, title, desc, cd, la, img) => {
+export const buildJsonProjectWithImg = (id, title, desc, img) => {
   return {
     "id": id,
     "title": title,
     "description": desc,
     "creation_date": createDate(),
     "last_update": createDate(),
-    "img_url": img
+    "img_url": img,
+    "editor": "",
+    "autor": ""
   }
 }
 
@@ -231,6 +235,8 @@ export const buildProjectAdnoFormat = (title, description, manifest) => {
       "date": new Date(),
       "modified": new Date(),
       "source": manifest,
+      "editor": "",
+      "autor": "",
       "format": "Adno",
       "total": 0,
       "first": {

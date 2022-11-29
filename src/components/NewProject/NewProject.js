@@ -81,7 +81,7 @@ class NewProject extends Component {
 
                     if (get_url_extension(manifest_url) === "png" || get_url_extension(manifest_url) === "jpg" || get_url_extension(manifest_url) === "jpeg") {
 
-                        let project = buildJsonProjectWithImg(projectID, document.getElementById("project_name").value,   document.getElementById("project_desc").value,  new Date(),new Date(),manifest_url)
+                        let project = buildJsonProjectWithImg(projectID, document.getElementById("project_name").value, document.getElementById("project_desc").value, manifest_url)
 
                         if (localStorage.getItem("adno_projects") === undefined || localStorage.getItem("adno_projects") === null) {
 
@@ -147,10 +147,10 @@ class NewProject extends Component {
                                             // } 
                                             // insertInLS(`${projectID}_annotations`, JSON.stringify(annotations))
 
-                                            project = buildJsonProjectWithManifest(projectID, document.getElementById("project_name").value,   document.getElementById("project_desc").value,  new Date(),new Date(),resultLink)
+                                            project = buildJsonProjectWithManifest(projectID, document.getElementById("project_name").value,   document.getElementById("project_desc").value, resultLink)
                                             
                                         } else {
-                                            project = buildJsonProjectWithManifest(projectID, document.getElementById("project_name").value,   document.getElementById("project_desc").value,  new Date(),new Date(), manifest_url)
+                                            project = buildJsonProjectWithManifest(projectID, document.getElementById("project_name").value,   document.getElementById("project_desc").value, manifest_url)
                                         }
 
 

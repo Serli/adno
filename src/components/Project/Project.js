@@ -52,15 +52,11 @@ class Project extends Component {
         }
         // Find annotations from the localStorage in JSON format
 
-        var annos = localStorage.getItem(`${this.props.match.params.id}_annotations`)
-        var actualProj = localStorage.getItem(this.props.match.params.id)
+        var annos = JSON.parse(localStorage.getItem(`${this.props.match.params.id}_annotations`)) || []
+        var actualProj = JSON.parse(localStorage.getItem(this.props.match.params.id))
 
-        // Check if there is at least one annotation
-        if (annos && JSON.parse(annos).length > 0) {
-
-            this.setState({ annotations: JSON.parse(annos), selectedProject: JSON.parse(actualProj) })
-
-        }
+        // Save to local state the project and annotations if founded
+         this.setState({ annotations: annos, selectedProject: actualProj })
     }
 
 
@@ -94,7 +90,6 @@ class Project extends Component {
                     this.state.updateAnnotation &&
                     <div className="text-rich">
                         <div className="text-rich-content">
-                            {/* <p>Anno content...</p> */}
                             <AdnoRichText updateAnnos={(annos) => this.setState({ annotations: annos })} closeRichEditor={() => this.setState({ updateAnnotation: false })} selectedAnnotation={this.state.selectedAnnotation} selectedProjectId={this.props.match.params.id} annotations={this.state.annotations} />
                         </div>
                     </div>

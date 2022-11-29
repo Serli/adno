@@ -31,7 +31,7 @@ export async function manageUrls(props, url) {
 
                                         // console.log(manifest.hasAttribute("source") && manifest.hasAttribute("label") && manifest.hasAttribute("subject"));
 
-                                        let project = buildJsonProjectWithManifest(projectID, manifest.label, manifest.subject, new Date(), new Date(), manifest.source)
+                                        let project = buildJsonProjectWithManifest(projectID, manifest.label, manifest.subject, manifest.source)
 
                                         // Création du projet dans le localStorage
                                         insertInLS(projectID, JSON.stringify(project))

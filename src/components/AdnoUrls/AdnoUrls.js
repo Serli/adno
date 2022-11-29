@@ -13,7 +13,7 @@ class AdnoUrls extends Component {
         console.log(file_type);
 
         Swal.fire({
-            title: `Voulez-vous charger ce fichier ? ${manifest_url}`,
+            title: "Voulez-vous charger ce fichier ?",
             showCancelButton: true,
             confirmButtonText: 'Oui, charger ce fichier',
             cancelButtonText: 'Annuler',
