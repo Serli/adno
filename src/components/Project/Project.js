@@ -135,8 +135,10 @@ class Project extends Component {
                                     {
                                         !process.env.ADNO_MODE === "FULL" || !this.state.editingMode &&
                                         <div className="project-body-left">
-                                            <h5 id="project_name" className="card-title">{checkIfProjectExists(this.props.match.params.id) && this.state.selectedProject.title}</h5>
-                                            <p id="project_desc" className="card-text">{checkIfProjectExists(this.props.match.params.id) && this.state.selectedProject.description}</p>
+                                            {this.state.selectedProject.title && <p id="project_title" className="card-text">{this.state.selectedProject.title}</p>}
+                                            {this.state.selectedProject.autor && <p id="project_desc" className="card-text">{this.state.selectedProject.description}</p>}
+                                            {this.state.selectedProject.editor && <p id="project_editor" className="card-text">{this.state.selectedProject.editor}</p>}
+                                            {this.state.selectedProject.autor && <p id="project_autor" className="card-text">{this.state.selectedProject.autor}</p>}
                                         </div>
                                     }
 
@@ -144,17 +146,30 @@ class Project extends Component {
 
                                     {
                                         process.env.ADNO_MODE === "FULL" && this.state.editingMode &&
-                                        <div className="project-body-left">                                            <label>Intitulé du projet</label>
-                                            <input type="text" value={this.state.selectedProject.title} onChange={(e) => this.updateProjectTitle(e.target.value)} placeholder="Titre" />
+                                        <div className="project-body-left">
 
-                                            <label>Description du projet</label>
-                                            <input type="text" value={this.state.selectedProject.description} onChange={(e) => this.updateProjectDesc(e.target.value)} placeholder="Description" />
+                                            <div class="form-group">
+                                                <label>Intitulé du projet</label>
+                                                <input type="text" value={this.state.selectedProject.title} onChange={(e) => this.updateProjectTitle(e.target.value)} placeholder="Titre" />
+                                            </div>
 
-                                            <label>Editeur du projet</label>
-                                            <input type="text" value={this.state.selectedProject.editor} onChange={(e) => this.updateProjectEditor(e.target.value)} placeholder="Editeur" />
+                                            <div class="form-group">
+                                                <label>Description du projet</label>
+                                                <input type="text" value={this.state.selectedProject.description} onChange={(e) => this.updateProjectDesc(e.target.value)} placeholder="Description" />
+                                            </div>
 
-                                            <label>Auteur du projet</label>
-                                            <input type="text" value={this.state.selectedProject.autor} onChange={(e) => this.updateProjectAutor(e.target.value)} placeholder="Auteur" />
+                                            <div class="form-group">
+                                                <label>Editeur du projet</label>
+                                                <input type="text" value={this.state.selectedProject.editor} onChange={(e) => this.updateProjectEditor(e.target.value)} placeholder="Editeur" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Auteur du projet</label>
+                                                <input type="text" value={this.state.selectedProject.autor} onChange={(e) => this.updateProjectAutor(e.target.value)} placeholder="Auteur" />
+                                            </div>
+
+                                            <small id="autosaving-txt" class="form-text text-muted">Les données que vous saisissez sont enregistrées automatiquement</small>
+
                                         </div>
                                     }
 
