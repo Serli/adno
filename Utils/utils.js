@@ -203,8 +203,8 @@ export const buildJsonProjectWithManifest = (id, title, desc, cd, la, manifest) 
     "id": id,
     "title": title,
     "description": desc,
-    "creation_date": cd,
-    "last_update": la,
+    "creation_date": createDate(),
+    "last_update": createDate(),
     "manifest_url": manifest
   }
 }
@@ -214,8 +214,8 @@ export const buildJsonProjectWithImg = (id, title, desc, cd, la, img) => {
     "id": id,
     "title": title,
     "description": desc,
-    "creation_date": cd,
-    "last_update": la,
+    "creation_date": createDate(),
+    "last_update": createDate(),
     "img_url": img
   }
 }
@@ -310,6 +310,8 @@ export const importProjectJsonFile = (loadedProject) => {
         "creation_date": imported_project.date,
         "last_update": imported_project.modified,
         "manifest_url": imported_project.source,
+        "autor": imported_project.autor || "",
+        "editor": imported_project.editor || ""
       }
 
       let annos = imported_project.total !== 0 ? imported_project.first.items : []
@@ -348,8 +350,8 @@ export function duplicateProject(projectID){
   Object.assign(target, project);
 
   target.id = generateUUID()
-  target.last_update = new Date().toLocaleString()
-  target.creation_date = new Date().toLocaleString()
+  target.last_update = createDate()
+  target.creation_date = createDate()
 
   insertInLS(target.id, JSON.stringify(target))
   insertInLS(`${target.id}_annotations`, JSON.stringify(project_annos))

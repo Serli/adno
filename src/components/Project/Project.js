@@ -130,8 +130,6 @@ class Project extends Component {
                             <div className="card">
                                 <div className="card-body project-body">
 
-
-
                                     {
                                         !process.env.ADNO_MODE === "FULL" || !this.state.editingMode &&
                                         <div className="project-body-left">
@@ -141,8 +139,6 @@ class Project extends Component {
                                             {this.state.selectedProject.autor && <p id="project_autor" className="card-text">{this.state.selectedProject.autor}</p>}
                                         </div>
                                     }
-
-
 
                                     {
                                         process.env.ADNO_MODE === "FULL" && this.state.editingMode &&
