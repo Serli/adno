@@ -56,7 +56,7 @@ class Project extends Component {
         var actualProj = JSON.parse(localStorage.getItem(this.props.match.params.id))
 
         // Save to local state the project and annotations if founded
-         this.setState({ annotations: annos, selectedProject: actualProj })
+        this.setState({ annotations: annos, selectedProject: actualProj })
     }
 
 
@@ -103,7 +103,9 @@ class Project extends Component {
                         this.closeNav()
                     }
                     }
-                    editingMode={this.state.editingMode} annotations={this.state.annotations} updateAnnos={(updated_annos) => this.setState({ annotations: updated_annos })} />
+                    openRichEditor={(annotation) => this.setState({ updateAnnotation: true, selectedAnnotation: annotation })}
+                    editingMode={this.state.editingMode} annotations={this.state.annotations} updateAnnos={(updated_annos) => this.setState({ annotations: updated_annos })}
+                />
 
 
 
@@ -128,10 +130,10 @@ class Project extends Component {
                                     {
                                         !process.env.ADNO_MODE === "FULL" || !this.state.editingMode &&
                                         <div className="project-body-left">
-                                            {this.state.selectedProject.title && <p id="project_title" className="card-text">{this.state.selectedProject.title}</p>}
-                                            {this.state.selectedProject.autor && <p id="project_desc" className="card-text">{this.state.selectedProject.description}</p>}
-                                            {this.state.selectedProject.editor && <p id="project_editor" className="card-text">{this.state.selectedProject.editor}</p>}
-                                            {this.state.selectedProject.autor && <p id="project_autor" className="card-text">{this.state.selectedProject.autor}</p>}
+                                            {this.state.selectedProject.title && <p id="project_title" className="card-text">Titre : {this.state.selectedProject.title}</p>}
+                                            {this.state.selectedProject.description && <p id="project_desc" className="card-text">Description : {this.state.selectedProject.description}</p>}
+                                            {this.state.selectedProject.editor && <p id="project_editor" className="card-text">Editeur : {this.state.selectedProject.editor}</p>}
+                                            {this.state.selectedProject.autor && <p id="project_autor" className="card-text">Auteur :{this.state.selectedProject.autor}</p>}
                                         </div>
                                     }
 

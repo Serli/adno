@@ -99,16 +99,23 @@ class AdnoRichText extends Component {
 
           <button className="btn btn-outline-primary" onClick={() => {
 
-            console.log(this.props.selectedAnnotation);
-
             let txt = "";
             this.editor.save().then(outputData => {
               outputData.blocks.forEach(block => {
-                console.log(block.data.text)
-                txt += block.data.text + " \n";
+                console.log(block);
+
+                switch (block.type) {
+                  case "header":
+                    let html_tag = `<h${block.data.level}>`;
+                    let html_closing_tag = `</h${block.data.level}>`;
+                    txt += `${html_tag}${block.data.text }${html_closing_tag}`;
+                    break;
+                  default:
+                    txt += `<p>${block.data.text}</p>`;
+                }
+
               })
 
-              console.log("final text : ", txt);
               let annos = JSON.parse(localStorage.getItem(`${this.props.selectedProjectId}_annotations`))
 
               let current_anno = {
@@ -126,7 +133,7 @@ class AdnoRichText extends Component {
               annos.filter(anno => anno.id === this.props.selectedAnnotation.id)[0].body = [current_anno, current_anno_with_blocks]
 
               insertInLS(`${this.props.selectedProjectId}_annotations`, JSON.stringify(annos))
-
+              this.props.updateAnnos(annos)
               this.props.closeRichEditor()
 
             })

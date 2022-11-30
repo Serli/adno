@@ -3,7 +3,7 @@ import ReactHtmlParser from 'react-html-parser';
 import { withRouter } from "react-router";
 
 // Import FontAwesome for all icons
-import { faDownLong, faTrashAlt, faUpLong } from "@fortawesome/free-solid-svg-icons";
+import { faDownLong, faEdit, faTrashAlt, faUpLong } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Import popup alerts
@@ -101,6 +101,7 @@ class AnnotationCards extends Component {
 
                                         <div className="anno-cards">
                                             <button className="btn btn-danger" onClick={() => deleteAnnotation(index)}> <FontAwesomeIcon icon={faTrashAlt} /></button>
+                                            <button className="btn btn-success" onClick={() => this.props.openRichEditor(annotation)}> <FontAwesomeIcon icon={faEdit} /></button>
                                             {index < this.props.annotations.length - 1 ? <button className="btn btn-primary" onClick={() => annoSwitchDown(index)}> <FontAwesomeIcon icon={faDownLong} /> </button> : <></>}
                                             {index > 0 ? <button className="btn btn-primary" onClick={() => annoSwitchUp(index)}> <FontAwesomeIcon icon={faUpLong} /> </button> : <></>}
                                         </div>

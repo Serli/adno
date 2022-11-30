@@ -12,7 +12,7 @@ import ReactHtmlParser from 'react-html-parser';
 import "./ViewerAnnotationCards.css";
 
 class ViewerAnnotationCards extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             currentAnno: -1
@@ -20,26 +20,39 @@ class ViewerAnnotationCards extends Component {
     }
 
     selectAnno = (position) => {
-        document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__.$children[0].sendMessage({'function':'next', 'args': position});
-        
-        this.setState({currentAnno: position})
+        document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__.$children[0].sendMessage({ 'function': 'next', 'args': position });
+
+        this.setState({ currentAnno: position })
     }
 
     unselectAnno = () => {
-        document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__.$children[0].sendMessage({'function':'next', 'args': -1});
-        
-        this.setState({currentAnno: -1})
+        document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__.$children[0].sendMessage({ 'function': 'next', 'args': -1 });
+
+        this.setState({ currentAnno: -1 })
     }
-    
+
+
+
     render() {
         return (
             <div className="adno-viewer-list-annos">
+
+
+                {/* {
+                    document.getElementsByTagName("iiif-storyboard")[0] &&
+                    document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__
+                    &&
+                    document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__.$children[0].position
+                    && <p>{document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__.$children[0].position}</p>
+                }
+
+                <button onClick={() => console.log(document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__.$children[0].position)}>Click</button> */}
 
                 <h3 className="adno-viewer-nb-annos"> {this.props.annotations.length} annotation(s) trouvée(s)</h3>
 
                 {this.props.annotations.map((annotation, index) => {
                     return (
-                        <div key={`viewer_anno_${index}`} onClick={() => this.state.currentAnno === index ? this.unselectAnno() : this.selectAnno(index)} className={this.state.currentAnno === index ? "adno-viewer-card selectedAnno": "adno-viewer-card"}>
+                        <div key={`viewer_anno_${index}`} onClick={() => this.state.currentAnno === index ? this.unselectAnno() : this.selectAnno(index)} className={this.state.currentAnno === index ? "adno-viewer-card selectedAnno" : "adno-viewer-card"}>
                             <div className="anno-card-body">
                                 <h6 className="card-subtitle mb-2 text-muted"> {buildTagsList(annotation)} </h6>
 

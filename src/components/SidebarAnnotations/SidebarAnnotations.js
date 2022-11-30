@@ -14,7 +14,7 @@ class SidebarAnnotations extends Component {
 
                 {
                     this.props.editingMode ?
-                        <AnnotationCards annotations={this.props.annotations} updateAnnos={(updated_annos) => this.props.updateAnnos(updated_annos)} />
+                        <AnnotationCards openRichEditor={(annotation) => {this.props.openRichEditor(annotation)}} annotations={this.props.annotations} updateAnnos={(updated_annos) => this.props.updateAnnos(updated_annos)} />
                         :
                         <ViewerAnnotationCards editingMode={this.props.editingMode} annotations={this.props.annotations} />
                 }
