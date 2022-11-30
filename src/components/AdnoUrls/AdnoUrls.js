@@ -7,11 +7,7 @@ class AdnoUrls extends Component {
 
     componentDidMount() {
         let url = (new URLSearchParams(this.props.location.search))
-        let manifest_url =  url.get("url")
-        let file_type = url.get("url_type")
-        console.log(manifest_url);
-        console.log(file_type);
-
+        let manifest_url = url.get("url")
         Swal.fire({
             title: "Voulez-vous charger ce fichier ?",
             showCancelButton: true,
@@ -20,19 +16,7 @@ class AdnoUrls extends Component {
             icon: 'warning',
         }).then((result) => {
             if (result.isConfirmed) {
-             
-                            manageUrls(this.props, manifest_url)
-                            console.log("fichier chargé");
-                        
-                        // else {
-                        //     Swal.fire({
-                        //         title: `Impossible de charger ce fichier ${url}`,
-                        //         showCancelButton: false,
-                        //         confirmButtonText: 'OK',
-                        //         icon: 'danger',
-                        //     })
-                        // }
-                    
+                manageUrls(this.props, manifest_url)
             }
         })
     }

@@ -94,8 +94,6 @@ class AdnoRichText extends Component {
             let txt = "";
             this.editor.save().then(outputData => {
               outputData.blocks.forEach(block => {
-                console.log(block);
-
                 switch (block.type) {
                   case "header":
                     let html_tag = `<h${block.data.level}>`;
