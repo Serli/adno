@@ -32,8 +32,7 @@ export async function manageUrls(props, url) {
 
 
 
-    } else if (get_url_extension(url) === "json") {
-
+    } else {
         fetch(url)
             .then(res => {
                 if (res.status == 200 || res.status == 201) {
@@ -99,8 +98,7 @@ export async function manageUrls(props, url) {
                             } else {
                                 // format non ADNO
 
-
-                                if ((manifest.hasOwnProperty("@context") || manifest.hasOwnProperty("context")) && manifest.hasOwnProperty("profile") && (manifest.hasOwnProperty("@id") || manifest.hasOwnProperty("id"))) {
+                                if ((manifest.hasOwnProperty("@context") || manifest.hasOwnProperty("context")) && (manifest.hasOwnProperty("@id") || manifest.hasOwnProperty("id"))) {
                                     insertInLS("adno_image_url", url)
                                     props.history.push("/new")
 
@@ -143,20 +141,5 @@ export async function manageUrls(props, url) {
                     })
             })
 
-    } else {
-        Swal.fire({
-            title: `Erreur de lecture du fichier`,
-            showCancelButton: false,
-            showConfirmButton: true,
-            confirmButtonText: 'OK',
-            icon: 'error'
-        })
-            .then((result) => {
-                if (result.isConfirmed) {
-                    props.history.push("/")
-                }
-            })
     }
-
-
 }

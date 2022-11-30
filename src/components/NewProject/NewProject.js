@@ -18,6 +18,13 @@ class NewProject extends Component {
         }
     }
 
+    componentDidMount(){
+        // Checking if there is an url inserted in the localStorage
+        if(!localStorage.getItem("adno_image_url")){
+            this.props.history.push("/")
+        }
+    }
+
     render() {
         async function isManifest(url) {
             return new Promise((resolve, reject) => {
@@ -42,6 +49,7 @@ class NewProject extends Component {
                         })
                         .then((result) => {
                             if (result.isConfirmed) {
+                                localStorage.removeItem("adno_image_url")
                                 window.location.href = "/"
                             }
                         })
@@ -224,7 +232,7 @@ class NewProject extends Component {
                     <input id="manifest_url" value={localStorage.getItem("adno_image_url")} type="text" className="form-control" disabled={true} placeholder="liendumanifest.json" />
                 </div>
                 <div className="new_project_btns">
-                    <button id="annuler_creation" type="submit" className="btn btn-danger" onClick={() => this.props.history.push("/")}>Annuler</button>
+                    <button id="annuler_creation" type="submit" className="btn btn-danger" onClick={() => {localStorage.removeItem("adno_image_url") , this.props.history.push("/")}}>Annuler</button>
                     <button id="valider_creation" type="submit" className="btn btn-primary" onClick={(e) => createProj(e)}>Créer mon projet</button>
                 </div>
             </form>
