@@ -10,11 +10,6 @@
     padding: 8px 18px 8px 18px;
 }
 
-.adno-editor{
-    width: 1200px;
-    margin: auto;
-}
-
 .newsletter{
     background: #eff1f4;
     border: none;
@@ -123,10 +118,6 @@
         margin: auto;
     }
 
-    #openseadragon1{
-        height: 480px;
-    }
-
     .adno-editor-annotations{
         margin: auto;
     }
@@ -140,10 +131,6 @@
     .right-bar{
         width: 75vw !important;
         margin-left: 25vw !important;
-    }
-
-    .adno-editor #openseadragon1{
-        height: 420px !important;
     }
 
     .adno-editor-annotations{
