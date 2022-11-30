@@ -13,7 +13,7 @@ import Quote from '@editorjs/quote';
 import Raw from '@editorjs/raw';
 import Table from '@editorjs/table';
 import Warning from '@editorjs/warning';
-import { faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Paragraph from "editorjs-paragraph-with-alignment";
 import { Component } from "react";
@@ -23,6 +23,12 @@ import { insertInLS } from '../../../Utils/utils';
 import "./AdnoRichText.css"
 
 class AdnoRichText extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isDeleting: false
+    }
+  }
 
   editor = new EditorJS({
     holder: "editorJS",
@@ -55,27 +61,13 @@ class AdnoRichText extends Component {
   });
 
 
-  deleteAnnotation = (annotationID) => {
+  deleteAnnotation = () => {
+    var annotationID = this.props.selectedAnnotation.id  
+    var annos = this.props.annotations;
 
-    Swal.fire({
-      title: 'Voulez-vous vraiment supprimer cette annotation ?',
-      showCancelButton: true,
-      confirmButtonText: 'Oui, supprimer mon annotation',
-      cancelButtonText: 'Annuler',
-      icon: 'warning',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        var annos = this.props.annotations;
-
-        // Update the localStorage without the removed item
-        insertInLS(`${this.props.match.params.id}_annotations`, JSON.stringify(annos.filter(annotation => annotation.id != annotationID)))
-
-        Swal.fire("L'annotation a bien été supprimée", '', 'success')
-          .then((result) => {
-            result.isConfirmed ? this.props.updateAnnos(annos.filter(annotation => annotation.id != annotationID)) : ""
-          })
-      }
-    })
+      // Update the localStorage without the removed item
+      insertInLS(`${this.props.selectedProjectId}_annotations`, JSON.stringify(annos.filter(annotation => annotation.id != annotationID)))
+      this.props.updateAnnos(annos.filter(annotation => annotation.id != annotationID))
   }
 
 
@@ -108,7 +100,7 @@ class AdnoRichText extends Component {
                   case "header":
                     let html_tag = `<h${block.data.level}>`;
                     let html_closing_tag = `</h${block.data.level}>`;
-                    txt += `${html_tag}${block.data.text }${html_closing_tag}`;
+                    txt += `${html_tag}${block.data.text}${html_closing_tag}`;
                     break;
                   default:
                     txt += `<p>${block.data.text}</p>`;
@@ -141,7 +133,9 @@ class AdnoRichText extends Component {
           }
           }> <FontAwesomeIcon icon={faSave} /> Save</button>
 
-          <button className="btn btn-outline-danger" onClick={() => this.deleteAnnotation()}> <FontAwesomeIcon icon={faTrash} /> Delete</button>
+          {/* <button className="btn btn-outline-danger" onClick={() => this.deleteAnnotation()}> <FontAwesomeIcon icon={faTrash} /> Delete</button> */}
+          {!this.state.isDeleting && <button className="btn btn-outline-danger" onClick={() => this.setState({ isDeleting: true })}> <FontAwesomeIcon icon={faTrash} /> Delete </button>}
+          {this.state.isDeleting && <button className="btn btn-outline-success" onClick={() => {this.setState({ isDeleting: false }), this.deleteAnnotation(), this.props.closeRichEditor()}}> <FontAwesomeIcon icon={faCheckCircle} /> Confirm</button>}
 
 
         </div>
