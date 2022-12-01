@@ -38,15 +38,45 @@ class ViewerAnnotationCards extends Component {
             <div className="adno-viewer-list-annos">
 
 
-                {/* {
-                    document.getElementsByTagName("iiif-storyboard")[0] &&
-                    document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__
-                    &&
-                    document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__.$children[0].position
-                    && <p>{document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__.$children[0].position}</p>
+                {
+                    this.props.selectedProject.title &&
+                    <>
+                        <label className="label">
+                            <span className="label-text">Titre</span>
+                        </label>
+                        <input type="text" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.title} disabled />
+                    </>
                 }
 
-                <button onClick={() => console.log(document.getElementsByTagName("iiif-storyboard")[0].__vue_custom_element__.$children[0].position)}>Click</button> */}
+                {
+                    this.props.selectedProject.description &&
+                    <>
+                        <label className="label">
+                            <span className="label-text">Description</span>
+                        </label>
+                        <input type="text" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.description} disabled />
+                    </>
+                }
+
+                {
+                    this.props.selectedProject.autor &&
+                    <>
+                        <label className="label">
+                            <span className="label-text">Auteur</span>
+                        </label>
+                        <input type="text" className="input input-bordered w-full max-w-xs" alue={this.props.selectedProject.editor} disabled />
+                    </>
+                }
+
+                {
+                    this.props.selectedProject.editor &&
+                    <>
+                        <label className="label">
+                            <span className="label-text">Editeur</span>
+                        </label>
+                        <input type="text" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.autor} disabled />
+                    </>
+                }
 
                 <h3 className="adno-viewer-nb-annos"> {this.props.annotations.length} annotation(s) trouvée(s)</h3>
 

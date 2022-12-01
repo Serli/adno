@@ -29,10 +29,6 @@
     top: 10vh;
 }
 
-.back-home-viewer{
-    margin: 2% 0 0 8%;
-}
-
 #image_iiif{
     height: 750px;
     width: 98% !important;
@@ -166,10 +162,6 @@
         height: 780px !important;
         margin: auto;
         padding-bottom: 2%;
-    }
-
-    .back-home-viewer {
-        margin: 1% 0 0 5%;
     }
 
     #image_iiif_annotations #storyboard_viewer .seadragonbox {

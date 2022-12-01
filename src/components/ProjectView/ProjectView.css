@@ -13,9 +13,22 @@
 }
 
 .img-proj-view{
-    padding: 5px;
-    border-radius: 15px;
     max-height: 250px;
+    max-width: 350px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.project-view-card{
+    margin: 10px 0;
+    border: 1px solid #4d6f94;
+}
+
+.project-view-card .card-body{
+    gap: 0;
+}
+
+.project-view-card:hover{
+    border: 2px solid #007bff;
 }
 
 .label-nb-annos{
@@ -30,15 +43,56 @@
     font-family: sans-serif;
 }
 
+.project-card-img{
+    width: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-@media (max-width: 1500px) {
+.project-card-img:hover{
+    cursor: pointer;
+}
+
+@media (max-width: 1440px) {
     .buttons-group-proj-view{
         width: 90%;
         margin: auto;
     }
 
+    .project-card-img {
+        width: 450px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+}
+
+@media (max-width: 800px){
+    .card-side {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .project-card-img {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+
     .img-proj-view{
-        border-radius: 5px;
-        max-height: 250px;
+        max-height: 200px;
+        max-width: 350px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        margin-top: 15px;
+    }
+
+    .card-actions {
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem;
+        display: flex;
+        justify-content: center;
     }
 }

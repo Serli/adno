@@ -17,3 +17,15 @@
     align-items: center;
     width: 100%;
 }
+
+.new_project_input{
+    margin-bottom: 30px;
+}
+
+.new_project_span{
+    width: 175px;
+}
+
+.project_vw_btns{
+    margin-top: 25px;
+}

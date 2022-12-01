@@ -29,10 +29,6 @@
     top: 10vh;
 }
 
-.back-home-viewer{
-    margin: 2% 0 0 8%;
-}
-
 #image_iiif{
     height: 750px;
     width: 98% !important;
@@ -49,7 +45,7 @@
 
 #image_iiif_annotations #storyboard_viewer .seadragonbox {
     width: 100%;
-    height: 700px;
+    height: 780px;
     display: inline-block;
 }
 
@@ -173,8 +169,41 @@
     display: flex;
 }
 
+.project-main-bar{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.dl_toggle{
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    margin-right: 90px;
+}
   
+.label-toggle{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
 @media (min-width: 840px) and (max-width: 1440px) { 
+    .label-toggle{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        margin-left: 10px;
+    }
+
+    .dl_toggle{
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        margin-right: 30px;
+    }
 
     .adno-viewer-rightbar-without-annos {
         width: 95vw;
@@ -203,10 +232,6 @@
         padding-bottom: 2%;
     }
 
-    .back-home-viewer {
-        margin: 1% 0 0 5%;
-    }
-
     #image_iiif_annotations #storyboard_viewer .seadragonbox {
         width: 100%;
         display: inline-block;
@@ -221,5 +246,19 @@
         height: 750px !important;
         margin: auto;
         padding-bottom: 2%;
+    }
+
+    .dl_toggle{
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        margin-right: 35px;
+    }
+
+    .label-toggle{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        margin-left: 10px;
     }
 }

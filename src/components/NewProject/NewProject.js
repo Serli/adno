@@ -2,7 +2,7 @@ import { Component } from "react";
 import { withRouter } from "react-router";
 
 // Import utils
-import { insertInLS, buildJsonProjectWithImg, buildJsonProjectWithManifest, get_url_extension, generateUUID} from "../../../Utils/utils";
+import { insertInLS, buildJsonProjectWithImg, buildJsonProjectWithManifest, get_url_extension, generateUUID } from "../../../Utils/utils";
 
 // Import popup alerts
 import Swal from "sweetalert2";
@@ -18,9 +18,9 @@ class NewProject extends Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         // Checking if there is an url inserted in the localStorage
-        if(!localStorage.getItem("adno_image_url")){
+        if (!localStorage.getItem("adno_image_url")) {
             this.props.history.push("/")
         }
     }
@@ -47,14 +47,14 @@ class NewProject extends Component {
                             confirmButtonText: 'OK',
                             icon: 'error',
                         })
-                        .then((result) => {
-                            if (result.isConfirmed) {
-                                localStorage.removeItem("adno_image_url")
-                                window.location.href = "/"
-                            }
-                        })
+                            .then((result) => {
+                                if (result.isConfirmed) {
+                                    localStorage.removeItem("adno_image_url")
+                                    window.location.href = "/"
+                                }
+                            })
                     })
-            }) 
+            })
         }
 
 
@@ -155,10 +155,10 @@ class NewProject extends Component {
                                             // } 
                                             // insertInLS(`${projectID}_annotations`, JSON.stringify(annotations))
 
-                                            project = buildJsonProjectWithManifest(projectID, document.getElementById("project_name").value,   document.getElementById("project_desc").value, resultLink)
-                                            
+                                            project = buildJsonProjectWithManifest(projectID, document.getElementById("project_name").value, document.getElementById("project_desc").value, resultLink)
+
                                         } else {
-                                            project = buildJsonProjectWithManifest(projectID, document.getElementById("project_name").value,   document.getElementById("project_desc").value, manifest_url)
+                                            project = buildJsonProjectWithManifest(projectID, document.getElementById("project_name").value, document.getElementById("project_desc").value, manifest_url)
                                         }
 
 
@@ -219,21 +219,26 @@ class NewProject extends Component {
 
         return (
             <form className="form-new-project">
-                <div className="mb-3">
-                    <label htmlFor="project_name" className="form-label">Titre</label>
-                    <input id="project_name" type="text" className="form-control" placeholder="Donnez un titre à votre projet" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="project_desc" className="form-label">Description</label>
-                    <input id="project_desc" className="form-control" type="text" placeholder="Description de votre projet" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="manifest_url" className="form-label">URL du Manifest</label>
-                    <input id="manifest_url" value={localStorage.getItem("adno_image_url")} type="text" className="form-control" disabled={true} placeholder="liendumanifest.json" />
-                </div>
+
+                <label className="input-group new_project_input">
+                    <span className="new_project_span">Titre</span>
+                    <input id="project_name" className="input input-bordered w-full" type="text" placeholder="Donnez un titre à votre projet" />
+                </label>
+
+                <label className="input-group new_project_input">
+                    <span className="new_project_span">Description</span>
+                    <input id="project_desc" className="input input-bordered w-full" type="text" placeholder="Description de votre projet" />
+                </label>
+
+                <label className="input-group new_project_input">
+                    <span className="new_project_span">URL du Manifest</span>
+                    <input id="manifest_url" className="input input-bordered w-full" value={localStorage.getItem("adno_image_url")} type="text" disabled={true} placeholder="liendumanifest.json" />
+                </label>
+             
+              
                 <div className="new_project_btns">
-                    <button id="annuler_creation" type="submit" className="btn btn-danger" onClick={() => {localStorage.removeItem("adno_image_url") , this.props.history.push("/")}}>Annuler</button>
-                    <button id="valider_creation" type="submit" className="btn btn-primary" onClick={(e) => createProj(e)}>Créer mon projet</button>
+                    <button id="annuler_creation" type="submit" className="btn btn-error" onClick={() => { localStorage.removeItem("adno_image_url"), this.props.history.push("/") }}>Annuler</button>
+                    <button id="valider_creation" type="submit" className="btn btn-success" onClick={(e) => createProj(e)}>Créer mon projet</button>
                 </div>
             </form>
         )

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faDownload, faEye } from "@fortawesome/free-solid-svg-icons";
 
 // Import utils
-import { checkIfProjectExists, createExportProjectJsonFile, generateUUID, insertInLS } from "../../../Utils/utils";
+import { checkIfProjectExists, createDate, createExportProjectJsonFile, generateUUID, insertInLS } from "../../../Utils/utils";
 
 // Import CSS
 import "./AdnoEditor.css";
@@ -91,8 +91,8 @@ class AdnoEditor extends Component {
                     "type": annotation.type,
                     "body": [],
                     "target": annotation.target,
-                    "modified": new Date(),
-                    "created": new Date()
+                    "modified": createDate(),
+                    "created": createDate(),
                 }
 
                 if (!annotations) {

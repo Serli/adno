@@ -15,6 +15,9 @@ import NewProject from "./components/NewProject/NewProject";
 import NotFound from "./components/NotFound/NotFound";
 import Project from "./components/Project/Project";
 
+// Import css
+import "./index.css"
+
 require('dotenv').config()
 
 export default class App extends Component {
@@ -35,7 +38,6 @@ export default class App extends Component {
 
     render() {
         return (
-            <div>
                 <HashRouter history={history}>
                     <Switch>
                         <Route exact path="/new">
@@ -60,8 +62,6 @@ export default class App extends Component {
 
                     </Switch>
                 </HashRouter>
-
-            </div>
         );
     }
 

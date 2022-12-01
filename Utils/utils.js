@@ -349,7 +349,7 @@ export function checkProjectAttributes(imported_project) {
 
 export function duplicateProject(projectID){
   const project = JSON.parse(localStorage.getItem(projectID))
-  const project_annos = JSON.parse(localStorage.getItem(`${projectID}_annotations`))
+  const project_annos = JSON.parse(localStorage.getItem(`${projectID}_annotations`)) || []
   
   const target = {};
 

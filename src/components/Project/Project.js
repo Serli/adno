@@ -1,9 +1,9 @@
 import { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 // Import FontAwesome and icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faDownload } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faDownload, faHome } from "@fortawesome/free-solid-svg-icons";
 
 // Import utils
 import { checkIfProjectExists, createDate, createExportProjectJsonFile, insertInLS } from "../../../Utils/utils";
@@ -59,28 +59,6 @@ class Project extends Component {
         this.setState({ annotations: annos, selectedProject: actualProj })
     }
 
-
-    // Update project values
-    updateProjectTitle(newTitle) {
-        this.setState({ selectedProject: { ...this.state.selectedProject, "title": newTitle } })
-        insertInLS(this.state.selectedProject.id, JSON.stringify({ ...this.state.selectedProject, "title": newTitle, "modified": createDate() }))
-    }
-
-    updateProjectDesc(newDesc) {
-        this.setState({ selectedProject: { ...this.state.selectedProject, "description": newDesc } })
-        insertInLS(this.state.selectedProject.id, JSON.stringify({ ...this.state.selectedProject, "description": newDesc, "modified": createDate() }))
-    }
-
-    updateProjectAutor(newAutor) {
-        this.setState({ selectedProject: { ...this.state.selectedProject, "autor": newAutor } })
-        insertInLS(this.state.selectedProject.id, JSON.stringify({ ...this.state.selectedProject, "autor": newAutor, "modified": createDate() }))
-    }
-
-    updateProjectEditor(newEditor) {
-        this.setState({ selectedProject: { ...this.state.selectedProject, "editor": newEditor } })
-        insertInLS(this.state.selectedProject.id, JSON.stringify({ ...this.state.selectedProject, "editor": newEditor, "modified": createDate() }))
-    }
-
     render() {
         return (
             <div className="adno-viewer" id="adno-viewer">
@@ -105,89 +83,66 @@ class Project extends Component {
                     }
                     openRichEditor={(annotation) => this.setState({ updateAnnotation: true, selectedAnnotation: annotation })}
                     editingMode={this.state.editingMode} annotations={this.state.annotations} updateAnnos={(updated_annos) => this.setState({ annotations: updated_annos })}
+                    selectedProject={this.state.selectedProject}
+                    updateProject={(updatedProject) => this.setState({ selectedProject: updatedProject })}
                 />
 
+                <div className="navbar bg-neutral text-neutral-content">
+
+                    {
+                        !this.state.sidebarOpened &&
+                        <button class="openbtn" onClick={() => {
+                            this.setState({ sidebarOpened: true })
+                            this.openNav()
+                        }}>☰</button>
+
+                    }
+
+                    <Link to={"/"} className="btn btn-ghost normal-case text-xl">Adno</Link>
+
+                    {
+                        process.env.ADNO_MODE === "FULL" &&
+                        <div className="dl_toggle">
+                            {
+                                this.state.selectedProject.id &&
+                                <a id={"download_btn_" + this.state.selectedProject.id} href={createExportProjectJsonFile(this.state.selectedProject.id)} download={this.state.selectedProject.title + ".json"} className="btn btn-secondary btn-md"> <FontAwesomeIcon icon={faDownload} /> </a>
+                            }
+                            <label className="cursor-pointer label label-toggle">
+                                <label>Mode édition</label>
+                                <input type="checkbox" className="toggle toggle-lg toggle-success" value={this.state.editingMode}
+                                    onClick={() => {
+
+                                        if (!this.state.sidebarOpened && !this.state.editingMode) {
+                                            this.setState({ sidebarOpened: true })
+                                            this.openNav()
+                                        }
+
+                                        this.setState({ editingMode: !this.state.editingMode })
+                                    }}
+                                    checked={this.state.editingMode} />
+                            </label>
 
 
-                {
-                    !this.state.sidebarOpened &&
-                    <button class="openbtn" onClick={() => {
-                        this.setState({ sidebarOpened: true })
-                        this.openNav()
-                    }}>☰</button>
+                        </div>
+                    }
 
-                }
-
-                <button className="btn btn-primary back-home-viewer" onClick={() => this.props.history.push("/")}> <FontAwesomeIcon icon={faArrowLeft} /> Retour à l'accueil</button>
+                </div>
 
 
                 <div className="adno-viewer-rightbar-without-annos">
                     <div className="col">
                         <div id="right-card" className="card mb-3">
                             <div className="card">
-                                <div className="card-body project-body">
 
-                                    {
-                                        !process.env.ADNO_MODE === "FULL" || !this.state.editingMode &&
-                                        <div className="project-body-left">
-                                            {this.state.selectedProject.title && <p id="project_title" className="card-text">Titre : {this.state.selectedProject.title}</p>}
-                                            {this.state.selectedProject.description && <p id="project_desc" className="card-text">Description : {this.state.selectedProject.description}</p>}
-                                            {this.state.selectedProject.editor && <p id="project_editor" className="card-text">Editeur : {this.state.selectedProject.editor}</p>}
-                                            {this.state.selectedProject.autor && <p id="project_autor" className="card-text">Auteur :{this.state.selectedProject.autor}</p>}
-                                        </div>
-                                    }
-
-                                    {
-                                        process.env.ADNO_MODE === "FULL" && this.state.editingMode &&
-                                        <div className="project-body-left">
-
-                                            <div class="form-group">
-                                                <label>Intitulé du projet</label>
-                                                <input type="text" value={this.state.selectedProject.title} onChange={(e) => this.updateProjectTitle(e.target.value)} placeholder="Titre" />
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label>Description du projet</label>
-                                                <input type="text" value={this.state.selectedProject.description} onChange={(e) => this.updateProjectDesc(e.target.value)} placeholder="Description" />
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label>Editeur du projet</label>
-                                                <input type="text" value={this.state.selectedProject.editor} onChange={(e) => this.updateProjectEditor(e.target.value)} placeholder="Editeur" />
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label>Auteur du projet</label>
-                                                <input type="text" value={this.state.selectedProject.autor} onChange={(e) => this.updateProjectAutor(e.target.value)} placeholder="Auteur" />
-                                            </div>
-
-                                            <small id="autosaving-txt" class="form-text text-muted">Les données que vous saisissez sont enregistrées automatiquement</small>
-
-                                        </div>
-                                    }
-
-
-
-
-                                    {
-                                        process.env.ADNO_MODE === "FULL" &&
-                                        <div className="editing-container">
-                                            <p>Editing mode</p>
-                                            <label className="switch">
-                                                <input type="checkbox" value={this.state.editingMode} onClick={() => this.setState({ editingMode: !this.state.editingMode })} />
-                                                <span className="slider round"></span>
-                                            </label>
-                                        </div>
-                                    }
-
-                                    {
-                                        this.state.selectedProject.id &&
-                                        <a id={"download_btn_" + this.state.selectedProject.id} href={createExportProjectJsonFile(this.state.selectedProject.id)} download={this.state.selectedProject.title + ".json"} className="btn btn-secondary btn-sm"> <FontAwesomeIcon icon={faDownload} /> Télécharger </a>
-                                    }
-
-
-
-                                </div>
+                                {
+                                    !process.env.ADNO_MODE === "FULL" || !this.state.editingMode &&
+                                    <div className="project-body-left">
+                                        {this.state.selectedProject.title && <p id="project_title" className="card-text">Titre : {this.state.selectedProject.title}</p>}
+                                        {this.state.selectedProject.description && <p id="project_desc" className="card-text">Description : {this.state.selectedProject.description}</p>}
+                                        {this.state.selectedProject.editor && <p id="project_editor" className="card-text">Editeur : {this.state.selectedProject.editor}</p>}
+                                        {this.state.selectedProject.autor && <p id="project_autor" className="card-text">Auteur :{this.state.selectedProject.autor}</p>}
+                                    </div>
+                                }
 
 
                                 {

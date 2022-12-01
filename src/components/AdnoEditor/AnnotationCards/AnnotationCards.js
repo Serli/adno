@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 
 // JS Utils 
 import "../../../../Utils/customElems.js";
-import { buildTagsList, insertInLS } from "../../../../Utils/utils";
+import { buildTagsList, createDate, insertInLS } from "../../../../Utils/utils";
 
 //Imports CSS
 import "./AnnotationCards.css";
@@ -20,6 +20,28 @@ class AnnotationCards extends Component {
     constructor(props) {
         super(props);
     }
+
+    // Update project values
+    updateProjectTitle(newTitle) {
+        this.props.updateProject({ ...this.props.selectedProject, "title": newTitle })
+        insertInLS(this.props.selectedProject.id, JSON.stringify({ ...this.props.selectedProject, "title": newTitle, "modified": createDate() }))
+    }
+
+    updateProjectDesc(newDesc) {
+        this.props.updateProject({ ...this.props.selectedProject, "description": newDesc })
+        insertInLS(this.props.selectedProject.id, JSON.stringify({ ...this.props.selectedProject, "description": newDesc, "modified": createDate() }))
+    }
+
+    updateProjectAutor(newAutor) {
+        this.props.updateProject({ ...this.props.selectedProject, "autor": newAutor })
+        insertInLS(this.props.selectedProject.id, JSON.stringify({ ...this.props.selectedProject, "autor": newAutor, "modified": createDate() }))
+    }
+
+    updateProjectEditor(newEditor) {
+        this.props.updateProject({ ...this.props.selectedProject, "editor": newEditor })
+        insertInLS(this.props.selectedProject.id, JSON.stringify({ ...this.props.selectedProject, "editor": newEditor, "modified": createDate() }))
+    }
+
 
     render() {
         // Function to move an annotation up one place
@@ -86,6 +108,31 @@ class AnnotationCards extends Component {
                 <h3 className="adno-nb-annos"> {this.props.annotations.length} annotation(s) trouvée(s)</h3>
 
                 <div className="list_annotations">
+
+                    <label className="label">
+                        <span className="label-text">Titre</span>
+                    </label>
+                    <input type="text" placeholder="Votre titre" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.title} onChange={(e) => this.updateProjectTitle(e.target.value)} />
+
+
+                    <label className="label">
+                        <span className="label-text">Description</span>
+                    </label>
+                    <input type="text" placeholder="Renseignez ici la description" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.description} onChange={(e) => this.updateProjectDesc(e.target.value)} />
+
+
+                    <label className="label">
+                        <span className="label-text">Auteur</span>
+                    </label>
+                    <input type="text" placeholder="Renseignez ici l'auteur" className="input input-bordered w-full max-w-xs" alue={this.props.selectedProject.editor} onChange={(e) => this.updateProjectEditor(e.target.value)} />
+
+                    <label className="label">
+                        <span className="label-text">Editeur</span>
+                    </label>
+                    <input type="text" placeholder="Renseignez ici l'editeur" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.autor} onChange={(e) => this.updateProjectAutor(e.target.value)} />
+
+                    <small id="autosaving-txt" class="form-text text-muted">Les données que vous saisissez sont enregistrées automatiquement</small>
+
 
 
                     {

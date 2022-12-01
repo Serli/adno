@@ -30,7 +30,6 @@ class AdnoViewer extends Component {
             this.props.history.push("/")
         }
         // Find annotations from the localStorage in JSON format
-
         var annos = localStorage.getItem(`${this.props.match.params.id}_annotations`)
         var actualProj = localStorage.getItem(this.props.match.params.id)
 
@@ -43,7 +42,7 @@ class AdnoViewer extends Component {
             const dataURI = "data:application/json;base64," + btoa(unescape(encodeURIComponent(annos)));
 
             // Create and display an annona storyboard 
-            document.getElementById("image_iiif").innerHTML = '<iiif-storyboard  styling="toggleoverlay: true; tts=true;" annotationurl="' + dataURI + '"></iiif-storyboard>';
+            document.getElementById("image_iiif").innerHTML = '<iiif-storyboard  styling="toggleoverlay: true; tts:false;" annotationurl="' + dataURI + '"></iiif-storyboard>';
 
         } else {
             if (checkIfProjectExists(this.props.match.params.id) && JSON.parse(localStorage.getItem(this.props.match.params.id)).manifest_url) {

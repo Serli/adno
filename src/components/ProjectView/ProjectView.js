@@ -2,7 +2,7 @@ import { Component } from "react";
 import { withRouter } from "react-router";
 
 // Import FontAwesome icons
-import { faDownload, faMagnifyingGlass, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faCopy, faDownload, faMagnifyingGlass, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Import popup alerts
@@ -63,8 +63,8 @@ class ProjectView extends Component {
         } else if (this.props.project.img_url) {
             this.setState({ imgSource: this.props.project.img_url })
 
-            if (localStorage.getItem(this.props.project.id + "_annotations")) {
-                let nbAnnotations = JSON.parse(localStorage.getItem(this.props.project.id + "_annotations")).length
+            if (localStorage.getItem(`${this.props.project.id}_annotations`)) {
+                let nbAnnotations = (JSON.parse(localStorage.getItem(this.props.project.id + "_annotations")) && JSON.parse(localStorage.getItem(this.props.project.id + "_annotations")).length) || 0
                 this.setState({ nbAnnotations })
             }
         }
@@ -124,39 +124,35 @@ class ProjectView extends Component {
         }
 
         return (
-            <div className="card mb-3 project-card">
-                <div className="row g-0">
-                    <div className="col-md-4 card-img-adno">
-                        <img src={this.state.imgSource} onError={({ currentTarget }) => {
+            <div className="card card-side bg-base-100 shadow-xl project-view-card" style={{"width": "80%"}}>
+                <div className="project-card-img" onClick={() => this.props.history.push("/project/" + this.props.project.id)}>
+                <img src={this.state.imgSource} onError={({ currentTarget }) => {
                             currentTarget.onerror = null; // prevents looping
                             currentTarget.src = "https://www.pngkey.com/png/detail/212-2124171_404-error-404-pagina-no-encontrada.png"
                         }} className="img-fluid img-proj-view " alt={this.props.project.title} />
-                    </div>
-                    <div className="col-md-8">
+                    
+                </div>
                         <div className="card-body">
-                            <h5 className="card-title">{this.props.project.title}</h5>
+                            <h2 className="card-title">{this.props.project.title}</h2>
                             <p className="card-text">{this.props.project.description ? this.props.project.description : "Aucune description disponible pour ce projet"}</p>
                             <p className="card-text"><small className="text-muted">Créé le {this.props.project.creation_date}</small></p>
                             <p className="card-text"><small className="text-muted">Dernière mise à jour : {this.props.project.last_update}</small></p>
-                            <p className="card-text"><small className="text-muted"> <span className="label-nb-annos">{this.state.nbAnnotations}</span>  annotation(s)</small></p>
+                            <p className="card-text"><small className="text-muted">  <div className="badge badge-primary badge-lg">{this.state.nbAnnotations}</div> annotation(s)</small></p>
+                           
 
 
-
-
-                            <div className="buttons-group-proj-view">
+                            <div className="card-actions project_vw_btns">
                                 {
                                     process.env.ADNO_MODE === "FULL" &&
                                     <div className="full-mode-buttons">
-                                        <button type="button" className="btn btn-danger btn-sm" onClick={() => deleteProj(this.props.project.id)}>    <FontAwesomeIcon icon={faTrash} /> Supprimer  </button>
+                                        <button type="button" className="btn btn-md	btn-error" onClick={() => deleteProj(this.props.project.id)}>    <FontAwesomeIcon icon={faTrash} />  </button>
                                     </div>
                                 }
-                                <button type="button" className="btn btn-warning btn-sm" onClick={() => duplicate(this.props.project.id)}>Duplicate</button>
-                                <button type="button" className="btn btn-primary btn-sm" onClick={() => this.props.history.push("/project/" + this.props.project.id)}> <FontAwesomeIcon icon={faMagnifyingGlass} />  Prévisualiser  {process.env.ADNO_MODE === "FULL" && <p> / <FontAwesomeIcon icon={faPenToSquare} />  Editer </p>} </button>
-                                <a id={"download_btn_" + this.props.project.id} href={createExportProjectJsonFile(this.props.project.id)} download={this.props.project.title + ".json"} className="btn btn-secondary btn-sm"> <FontAwesomeIcon icon={faDownload} /> Télécharger </a>
+                                <button type="button" className="btn btn-md btn-error" onClick={() => duplicate(this.props.project.id)}><FontAwesomeIcon icon={faCopy} /></button>
+                                <button type="button" className="btn btn-md btn-primary" onClick={() => this.props.history.push("/project/" + this.props.project.id)}> <FontAwesomeIcon icon={faMagnifyingGlass} />  {process.env.ADNO_MODE === "FULL" && <p> / <FontAwesomeIcon icon={faPenToSquare} /> </p>} </button>
+                                <a id={"download_btn_" + this.props.project.id} href={createExportProjectJsonFile(this.props.project.id)} download={this.props.project.title + ".json"} className="btn btn-md btn-secondar"> <FontAwesomeIcon icon={faDownload} />  </a>
                             </div>
                         </div>
-                    </div>
-                </div>
             </div>
         )
     }

@@ -135,7 +135,7 @@ class HomeWithProjects extends Component {
                     <form id="myForm">
                         <div className="input-group mb-3 add_url">
                             <span className="input-group-text" id="basic-addon1"> <FontAwesomeIcon icon={faLink} /> URL</span>
-                            <input type="text" id="adno_image_url_2" className="form-control" value={this.state.adno_image_url} onChange={(e) => this.setState({ adno_image_url: e.target.value })}
+                            <input type="text" id="adno_image_url_2" className="input input-bordered input-primary w-full"  value={this.state.adno_image_url} onChange={(e) => this.setState({ adno_image_url: e.target.value })}
                                 placeholder="Renseignez ici votre fichier info.json ou votre image jpg/png" />
                         </div>
 
@@ -153,7 +153,7 @@ class HomeWithProjects extends Component {
 
                         <div className="homewpbar">
                             <h2>Vos Projets</h2>
-                            <button className="btn btn-danger" onClick={() => deleteAllProjects()}> <FontAwesomeIcon icon={faTrashAlt} /> Supprimer mes projets</button>
+                            {/* <button className="btn btn-error" onClick={() => deleteAllProjects()}> <FontAwesomeIcon icon={faTrashAlt} /> Supprimer mes projets</button> */}
                         </div>
 
 
