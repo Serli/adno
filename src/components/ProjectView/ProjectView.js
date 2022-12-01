@@ -124,35 +124,36 @@ class ProjectView extends Component {
         }
 
         return (
-            <div className="card card-side bg-base-100 shadow-xl project-view-card" style={{"width": "80%"}}>
+            <div className="card card-side bg-base-100 shadow-xl project-view-card" style={{ "width": "80%" }}>
                 <div className="project-card-img" onClick={() => this.props.history.push("/project/" + this.props.project.id)}>
-                <img src={this.state.imgSource} onError={({ currentTarget }) => {
-                            currentTarget.onerror = null; // prevents looping
-                            currentTarget.src = "https://www.pngkey.com/png/detail/212-2124171_404-error-404-pagina-no-encontrada.png"
-                        }} className="img-fluid img-proj-view " alt={this.props.project.title} />
-                    
+                    <img src={this.state.imgSource} onError={({ currentTarget }) => {
+                        currentTarget.onerror = null; // prevents looping
+                        currentTarget.src = "https://www.pngkey.com/png/detail/212-2124171_404-error-404-pagina-no-encontrada.png"
+                    }} className="img-fluid img-proj-view " alt={this.props.project.title} />
+
+
                 </div>
-                        <div className="card-body">
-                            <h2 className="card-title">{this.props.project.title}</h2>
-                            <p className="card-text">{this.props.project.description ? this.props.project.description : "Aucune description disponible pour ce projet"}</p>
-                            <p className="card-text"><small className="text-muted">Créé le {this.props.project.creation_date}</small></p>
-                            <p className="card-text"><small className="text-muted">Dernière mise à jour : {this.props.project.last_update}</small></p>
-                            <p className="card-text"><small className="text-muted">  <div className="badge badge-primary badge-lg">{this.state.nbAnnotations}</div> annotation(s)</small></p>
-                           
+                <div className="card-body">
+                    <h2 className="card-title">{this.props.project.title}</h2>
+                    <p className="card-text">{this.props.project.description ? this.props.project.description : "Aucune description disponible pour ce projet"}</p>
+                    <p className="card-text"><small className="text-muted">Créé le {this.props.project.creation_date}</small></p>
+                    <p className="card-text"><small className="text-muted">Dernière mise à jour : {this.props.project.last_update}</small></p>
+                    <p className="card-text"><small className="text-muted">  <div className="badge badge-primary badge-lg">{this.state.nbAnnotations}</div> annotation(s)</small></p>
 
 
-                            <div className="card-actions project_vw_btns">
-                                {
-                                    process.env.ADNO_MODE === "FULL" &&
-                                    <div className="full-mode-buttons">
-                                        <button type="button" className="btn btn-md	btn-error" onClick={() => deleteProj(this.props.project.id)}>    <FontAwesomeIcon icon={faTrash} />  </button>
-                                    </div>
-                                }
-                                <button type="button" className="btn btn-md btn-error" onClick={() => duplicate(this.props.project.id)}><FontAwesomeIcon icon={faCopy} /></button>
-                                <button type="button" className="btn btn-md btn-primary" onClick={() => this.props.history.push("/project/" + this.props.project.id)}> <FontAwesomeIcon icon={faMagnifyingGlass} />  {process.env.ADNO_MODE === "FULL" && <p> / <FontAwesomeIcon icon={faPenToSquare} /> </p>} </button>
-                                <a id={"download_btn_" + this.props.project.id} href={createExportProjectJsonFile(this.props.project.id)} download={this.props.project.title + ".json"} className="btn btn-md btn-secondar"> <FontAwesomeIcon icon={faDownload} />  </a>
+
+                    <div className="card-actions project_vw_btns">
+                        {
+                            process.env.ADNO_MODE === "FULL" &&
+                            <div className="full-mode-buttons">
+                                <button type="button" className="btn btn-md	btn-error" onClick={() => deleteProj(this.props.project.id)}>    <FontAwesomeIcon icon={faTrash} />  </button>
                             </div>
-                        </div>
+                        }
+                        <button type="button" className="btn btn-md btn-error" onClick={() => duplicate(this.props.project.id)}><FontAwesomeIcon icon={faCopy} /></button>
+                        <button type="button" className="btn btn-md btn-primary" onClick={() => this.props.history.push("/project/" + this.props.project.id)}> <FontAwesomeIcon icon={faMagnifyingGlass} />  {process.env.ADNO_MODE === "FULL" && <p> / <FontAwesomeIcon icon={faPenToSquare} /> </p>} </button>
+                        <a id={"download_btn_" + this.props.project.id} href={createExportProjectJsonFile(this.props.project.id)} download={this.props.project.title + ".json"} className="btn btn-md btn-secondar"> <FontAwesomeIcon icon={faDownload} />  </a>
+                    </div>
+                </div>
             </div>
         )
     }

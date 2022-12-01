@@ -36,7 +36,52 @@ class ViewerAnnotationCards extends Component {
     render() {
         return (
             <div className="adno-viewer-list-annos">
+                {
+                    this.props.selectedProject.id &&
+                    <>
+                        <label className="label">
+                            <span className="label-text">Identifier</span>
+                        </label>
+                        <input type="text" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.id} disabled />
+                    </>
+                }
 
+
+                {
+                    this.props.selectedProject.manifest_url &&
+                    <>
+                        <label className="label">
+                            <span className="label-text">manifest_url</span>
+                        </label>
+                        <input type="text" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.manifest_url} disabled />
+                    </>
+                }
+                {
+                    this.props.selectedProject.img_url &&
+                    <>
+                        <label className="label">
+                            <span className="label-text">img_url</span>
+                        </label>
+                        <input type="text" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.img_url} disabled />
+                    </>
+                }
+                { this.props.selectedProject.creation_date &&
+                    <>
+                        <label className="label">
+                            <span className="label-text">creation_date</span>
+                        </label>
+                        <input type="text" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.creation_date} disabled />
+                    </>
+
+                }
+                {
+                    this.props.selectedProject.modified && <>
+                        <label className="label">
+                            <span className="label-text">modified</span>
+                        </label>
+                        <input type="text" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.modified} disabled />
+                    </>
+                }
 
                 {
                     this.props.selectedProject.title &&

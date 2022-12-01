@@ -33,13 +33,26 @@ class AdnoViewer extends Component {
         var annos = localStorage.getItem(`${this.props.match.params.id}_annotations`)
         var actualProj = localStorage.getItem(this.props.match.params.id)
 
+
+        var newAnnos =
+            (
+                JSON.parse(annos).map(annotation => {
+                    var newAnno = annotation;
+                    newAnno.body = annotation.body.filter(annoBody => annoBody.type !== "AdnoRichText");
+
+                    return newAnno
+                })
+            )
+
         // Check if there is at least one annotation
         if (annos && JSON.parse(annos).length > 0) {
 
             this.setState({ annotations: JSON.parse(annos), selectedProject: JSON.parse(actualProj) })
 
+
             // Create the dataURI linked to the annotations
-            const dataURI = "data:application/json;base64," + btoa(unescape(encodeURIComponent(annos)));
+            const dataURI = "data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(newAnnos))));
+
 
             // Create and display an annona storyboard 
             document.getElementById("image_iiif").innerHTML = '<iiif-storyboard  styling="toggleoverlay: true; tts:false;" annotationurl="' + dataURI + '"></iiif-storyboard>';

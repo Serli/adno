@@ -67,9 +67,7 @@ class Project extends Component {
                 {
                     this.state.updateAnnotation &&
                     <div className="text-rich">
-                        <div className="text-rich-content">
-                            <AdnoRichText updateAnnos={(annos) => this.setState({ annotations: annos })} closeRichEditor={() => this.setState({ updateAnnotation: false })} selectedAnnotation={this.state.selectedAnnotation} selectedProjectId={this.props.match.params.id} annotations={this.state.annotations} />
-                        </div>
+                        <AdnoRichText updateAnnos={(annos) => this.setState({ annotations: annos })} closeRichEditor={() => this.setState({ updateAnnotation: false })} selectedAnnotation={this.state.selectedAnnotation} selectedProjectId={this.props.match.params.id} annotations={this.state.annotations} />
                     </div>
                 }
 
@@ -134,7 +132,7 @@ class Project extends Component {
                         <div id="right-card" className="card mb-3">
                             <div className="card">
 
-                                {
+                                {/* {
                                     !process.env.ADNO_MODE === "FULL" || !this.state.editingMode &&
                                     <div className="project-body-left">
                                         {this.state.selectedProject.title && <p id="project_title" className="card-text">Titre : {this.state.selectedProject.title}</p>}
@@ -142,13 +140,16 @@ class Project extends Component {
                                         {this.state.selectedProject.editor && <p id="project_editor" className="card-text">Editeur : {this.state.selectedProject.editor}</p>}
                                         {this.state.selectedProject.autor && <p id="project_autor" className="card-text">Auteur :{this.state.selectedProject.autor}</p>}
                                     </div>
-                                }
+                                } */}
 
 
                                 {
                                     !this.state.updateAnnotation
                                         && this.state.editingMode ?
-                                        <AdnoEditor updateAnnos={(annos) => this.setState({ annotations: annos })} openRichEditor={(annotation) => this.setState({ updateAnnotation: true, selectedAnnotation: annotation })} />
+                                        <AdnoEditor updateAnnos={(annos) => this.setState({ annotations: annos })} openRichEditor={(annotation) => this.setState({ updateAnnotation: true, selectedAnnotation: annotation })} closeNav={() => {
+                                            this.setState({ sidebarOpened: false })
+                                            this.closeNav()
+                                        }} />
                                         : !this.state.updateAnnotation &&
                                         <AdnoViewer updateAnnos={(annos) => this.setState({ annotations: annos })} />
                                 }

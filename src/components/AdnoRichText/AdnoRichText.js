@@ -17,7 +17,6 @@ import { faCheckCircle, faSave, faTrash } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Paragraph from "editorjs-paragraph-with-alignment";
 import { Component } from "react";
-import Swal from 'sweetalert2';
 import { insertInLS } from '../../../Utils/utils';
 
 import "./AdnoRichText.css"
@@ -62,79 +61,72 @@ class AdnoRichText extends Component {
 
 
   deleteAnnotation = () => {
-    var annotationID = this.props.selectedAnnotation.id  
+    var annotationID = this.props.selectedAnnotation.id
     var annos = this.props.annotations;
 
-      // Update the localStorage without the removed item
-      insertInLS(`${this.props.selectedProjectId}_annotations`, JSON.stringify(annos.filter(annotation => annotation.id != annotationID)))
-      this.props.updateAnnos(annos.filter(annotation => annotation.id != annotationID))
+    // Update the localStorage without the removed item
+    insertInLS(`${this.props.selectedProjectId}_annotations`, JSON.stringify(annos.filter(annotation => annotation.id != annotationID)))
+    this.props.updateAnnos(annos.filter(annotation => annotation.id != annotationID))
   }
 
+  saveAnnotationText = () => {
+
+    let txt = "";
+    this.editor.save().then(outputData => {
+      outputData.blocks.forEach(block => {
+        switch (block.type) {
+          case "header":
+            let html_tag = `<h${block.data.level}>`;
+            let html_closing_tag = `</h${block.data.level}>`;
+            txt += `${html_tag}${block.data.text}${html_closing_tag}`;
+            break;
+          default:
+            txt += `<p>${block.data.text}</p>`;
+        }
+
+      })
+
+      let annos = JSON.parse(localStorage.getItem(`${this.props.selectedProjectId}_annotations`))
+
+      let current_anno = {
+        "type": "TextualBody",
+        "value": txt,
+        "purpose": "commenting"
+      }
+
+      let current_anno_with_blocks = {
+        "type": "AdnoRichText",
+        "value": outputData.blocks,
+        "purpose": "richtext"
+      }
+
+      annos.filter(anno => anno.id === this.props.selectedAnnotation.id)[0].body = [current_anno, current_anno_with_blocks]
+
+      insertInLS(`${this.props.selectedProjectId}_annotations`, JSON.stringify(annos))
+      this.props.updateAnnos(annos)
+      this.props.closeRichEditor()
+
+    })
+
+  }
 
   render() {
     return (
-
-      <div class="card adno-rich-editor">
-        <div class="card-header" style={{ "display": "flex", "justifyContent": "space-between" }}>
-          <p> Adno Rich Text Editor</p>
-          <button className="btn btn-danger" onClick={() => this.props.closeRichEditor()}>x</button></div>
-        <div class="card-body over-hidden">
-          <div class="card-text">
-            <div id="editorJS" class="p-3"></div>
+      <div className="card w-96 bg-base-100 shadow-xl rich-card-editor">
+        <div className="card-body">
+          <div className="card-actions justify-end">
+            <button className="btn btn-square btn-sm" onClick={() => this.props.closeRichEditor()}>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
           </div>
-        </div>
-        <div class="card-footer text-right">
-
-          {/* <button id="btnReset" class="btn" onClick={() => this.editor.clear()}>Reset</button> */}
-
-          {/* <button id="btn_readonly" class="btn">Read ONLY</button> */}
-
-          <button className="btn btn-outline-primary" onClick={() => {
-
-            let txt = "";
-            this.editor.save().then(outputData => {
-              outputData.blocks.forEach(block => {
-                switch (block.type) {
-                  case "header":
-                    let html_tag = `<h${block.data.level}>`;
-                    let html_closing_tag = `</h${block.data.level}>`;
-                    txt += `${html_tag}${block.data.text}${html_closing_tag}`;
-                    break;
-                  default:
-                    txt += `<p>${block.data.text}</p>`;
-                }
-
-              })
-
-              let annos = JSON.parse(localStorage.getItem(`${this.props.selectedProjectId}_annotations`))
-
-              let current_anno = {
-                "type": "TextualBody",
-                "value": txt,
-                "purpose": "commenting"
-              }
-
-              let current_anno_with_blocks = {
-                "type": "AdnoRichText",
-                "value": outputData.blocks,
-                "purpose": "richtext"
-              }
-
-              annos.filter(anno => anno.id === this.props.selectedAnnotation.id)[0].body = [current_anno, current_anno_with_blocks]
-
-              insertInLS(`${this.props.selectedProjectId}_annotations`, JSON.stringify(annos))
-              this.props.updateAnnos(annos)
-              this.props.closeRichEditor()
-
-            })
-
-          }
-          }> <FontAwesomeIcon icon={faSave} /> Save</button>
-
-          {/* <button className="btn btn-outline-danger" onClick={() => this.deleteAnnotation()}> <FontAwesomeIcon icon={faTrash} /> Delete</button> */}
-          {!this.state.isDeleting && <button className="btn btn-outline-danger" onClick={() => this.setState({ isDeleting: true })}> <FontAwesomeIcon icon={faTrash} /> Delete </button>}
-          {this.state.isDeleting && <button className="btn btn-outline-success" onClick={() => {this.setState({ isDeleting: false }), this.deleteAnnotation(), this.props.closeRichEditor()}}> <FontAwesomeIcon icon={faCheckCircle} /> Confirm</button>}
-
+          <div class="card-body over-hidden">
+            <div class="card-text">
+              <div id="editorJS" class="p-3"></div>
+            </div>
+          </div>
+          <button className="btn" onClick={() => this.saveAnnotationText()}><FontAwesomeIcon icon={faSave} /> Save</button>
+          {!this.state.isDeleting && <button className="btn btn-error" onClick={() => this.setState({ isDeleting: true })}> <FontAwesomeIcon icon={faTrash} /> Delete </button>}
+          {this.state.isDeleting && <button className="btn btn-success" onClick={() => { this.setState({ isDeleting: false }), this.deleteAnnotation(), this.props.closeRichEditor() }}> <FontAwesomeIcon icon={faCheckCircle} /> Confirm</button>}
 
         </div>
       </div>
