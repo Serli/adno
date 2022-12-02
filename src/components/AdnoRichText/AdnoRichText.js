@@ -125,14 +125,6 @@ class AdnoRichText extends Component {
             </div>
           </div>
 
-          <button
-          onClick={() => {
-            this.editor.save().then(outputData => {
-              console.log(outputData);
-            });
-          }}
-          >Test save</button>
-
           <div className="rich-card-editor-btns">
             <button className="btn" onClick={() => this.saveAnnotationText()}><FontAwesomeIcon icon={faSave} /> Save</button>
             {!this.state.isDeleting && <button className="btn btn-error" onClick={() => this.setState({ isDeleting: true })}> <FontAwesomeIcon icon={faTrash} /> Delete </button>}
