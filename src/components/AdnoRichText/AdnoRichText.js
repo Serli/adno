@@ -17,6 +17,7 @@ import { faCheckCircle, faSave, faTrash } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Paragraph from "editorjs-paragraph-with-alignment";
 import { Component } from "react";
+import { TagsInput } from 'react-tag-input-component';
 import { insertInLS } from '../../../Utils/utils';
 
 import "./AdnoRichText.css"
@@ -25,14 +26,15 @@ class AdnoRichText extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isDeleting: false
+      isDeleting: false,
+      selectedTags:  this.props.selectedAnnotation.body && this.props.selectedAnnotation.body.filter(anno => anno.purpose === "tagging").reduce(   (a, b) => [...a, b.value], []) || []
     }
   }
 
   editor = new EditorJS({
     holder: "editorJS",
     data: {
-      "blocks": this.props.selectedAnnotation.body[1] ? this.props.selectedAnnotation.body[1].value : []
+      "blocks": this.props.selectedAnnotation.body ? this.props.selectedAnnotation.body.filter(anno => anno.type === "AdnoRichText")[0].value : []
     },
     tools: {
       embed: {
@@ -100,7 +102,21 @@ class AdnoRichText extends Component {
         "purpose": "richtext"
       }
 
-      annos.filter(anno => anno.id === this.props.selectedAnnotation.id)[0].body = [current_anno, current_anno_with_blocks]
+
+      let allTags = this.state.selectedTags.map(tag => {
+        return(
+           {
+            "type": "TextualBody",
+            "value": tag,
+            "purpose": "tagging"
+          }
+        )
+      })
+      
+      let newBody = [current_anno, current_anno_with_blocks, ...allTags]
+
+      // annos.filter(anno => anno.id === this.props.selectedAnnotation.id)[0].body = [current_anno, current_anno_with_blocks]
+      annos.filter(anno => anno.id === this.props.selectedAnnotation.id)[0].body = newBody
 
       insertInLS(`${this.props.selectedProjectId}_annotations`, JSON.stringify(annos))
       this.props.updateAnnos(annos)
@@ -125,11 +141,16 @@ class AdnoRichText extends Component {
             </div>
           </div>
 
+          <TagsInput
+            value={this.state.selectedTags}
+            onChange={(tags) => this.setState({selectedTags: tags})}
+            placeHolder="Ajouter un tag"
+          />
+
           <div className="rich-card-editor-btns">
-            <button className="btn" onClick={() => this.saveAnnotationText()}><FontAwesomeIcon icon={faSave} /> Save</button>
             {!this.state.isDeleting && <button className="btn btn-error" onClick={() => this.setState({ isDeleting: true })}> <FontAwesomeIcon icon={faTrash} /> Delete </button>}
             {this.state.isDeleting && <button className="btn btn-success" onClick={() => { this.setState({ isDeleting: false }), this.deleteAnnotation(), this.props.closeRichEditor() }}> <FontAwesomeIcon icon={faCheckCircle} /> Confirm</button>}
-
+            <button className="btn" onClick={() => this.saveAnnotationText()}><FontAwesomeIcon icon={faSave} /> Save</button>
           </div>
 
         </div>
