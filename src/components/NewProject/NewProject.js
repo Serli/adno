@@ -121,72 +121,93 @@ class NewProject extends Component {
                                 if (rep.status === 200) {
 
                                     rep.json().then(manifest => {
-                                        let project;
 
-                                        if (manifest["@type"] && manifest["@type"] === "sc:Manifest") {
-                                            // type manifest
 
-                                            if (manifest.sequences[0].canvases && manifest.sequences[0].canvases.length > 0) {
-                                                var resultLink = manifest.sequences[0].canvases[0].images[0].resource.service["@id"] + "/info.json"
-                                            } else if (manifest.logo["@id"]) {
-                                                var resultLink = manifest.logo["@id"].split("/")[0] + "//"
+                                        if ((manifest.hasOwnProperty("@context") || manifest.hasOwnProperty("context")) && (manifest.hasOwnProperty("@id") || manifest.hasOwnProperty("id"))) {
 
-                                                for (let index = 1; index < manifest.logo["@id"].split("/").length - 4; index++) {
-                                                    resultLink += manifest.logo["@id"].split("/")[index] + "/";
+
+                                            let project;
+
+                                            if (manifest["@type"] && manifest["@type"] === "sc:Manifest") {
+                                                // type manifest
+
+                                                if (manifest.sequences[0].canvases && manifest.sequences[0].canvases.length > 0) {
+                                                    var resultLink = manifest.sequences[0].canvases[0].images[0].resource.service["@id"] + "/info.json"
+                                                } else if (manifest.logo["@id"]) {
+                                                    var resultLink = manifest.logo["@id"].split("/")[0] + "//"
+
+                                                    for (let index = 1; index < manifest.logo["@id"].split("/").length - 4; index++) {
+                                                        resultLink += manifest.logo["@id"].split("/")[index] + "/";
+                                                    }
+
+                                                    resultLink += "/info.json"
+                                                } else {
+                                                    Swal.fire({
+                                                        title: "Impossible de lire le manifest",
+                                                        showCancelButton: true,
+                                                        showConfirmButton: false,
+                                                        cancelButtonText: 'OK',
+                                                        icon: 'warning',
+                                                    })
                                                 }
 
-                                                resultLink += "/info.json"
+                                                // var annotations = []
+
+                                                // if (manifest.sequences[0].canvases && manifest.sequences[0].canvases.length > 0) {
+                                                //     manifest.sequences[0].canvases.forEach(canva => {
+                                                //         annotations.push(canva.images[0])
+                                                //     });
+                                                // } 
+                                                // insertInLS(`${projectID}_annotations`, JSON.stringify(annotations))
+
+                                                project = buildJsonProjectWithManifest(projectID, document.getElementById("project_name").value, document.getElementById("project_desc").value, resultLink)
+
                                             } else {
-                                                Swal.fire({
-                                                    title: "Impossible de lire le manifest",
-                                                    showCancelButton: true,
-                                                    showConfirmButton: false,
-                                                    cancelButtonText: 'OK',
-                                                    icon: 'warning',
-                                                })
+                                                project = buildJsonProjectWithManifest(projectID, document.getElementById("project_name").value, document.getElementById("project_desc").value, manifest_url)
                                             }
 
-                                            // var annotations = []
 
-                                            // if (manifest.sequences[0].canvases && manifest.sequences[0].canvases.length > 0) {
-                                            //     manifest.sequences[0].canvases.forEach(canva => {
-                                            //         annotations.push(canva.images[0])
-                                            //     });
-                                            // } 
-                                            // insertInLS(`${projectID}_annotations`, JSON.stringify(annotations))
+                                            if (localStorage.getItem("adno_projects") === undefined || localStorage.getItem("adno_projects") === null) {
 
-                                            project = buildJsonProjectWithManifest(projectID, document.getElementById("project_name").value, document.getElementById("project_desc").value, resultLink)
+                                                // If projects in local storage don't exist create the array
+                                                var projects = []
+                                                projects.push(projectID)
+
+
+                                                // Création du projet dans le localStorage
+                                                insertInLS(projectID, JSON.stringify(project))
+
+                                                // Insertion de l'ID du projet créé dans le tableau des projets
+                                                insertInLS("adno_projects", JSON.stringify(projects))
+                                            } else {
+
+                                                // Création du projet dans le localStorage
+                                                insertInLS(projectID, JSON.stringify(project))
+
+                                                // Insertion de l'ID du projet créé dans le tableau des projets
+                                                projects = JSON.parse(localStorage.getItem("adno_projects"))
+                                                projects.push(projectID)
+                                                insertInLS("adno_projects", JSON.stringify(projects))
+                                            }
+
+                                            localStorage.removeItem("adno_image_url")
+                                            this.props.history.push("/project/" + projectID)
 
                                         } else {
-                                            project = buildJsonProjectWithManifest(projectID, document.getElementById("project_name").value, document.getElementById("project_desc").value, manifest_url)
+                                            Swal.fire({
+                                                title: "Projet non IIIF détecté, veuillez renseigner un projet IIIF",
+                                                showCancelButton: false,
+                                                showConfirmButton: true,
+                                                confirmButtonText: 'OK',
+                                                icon: 'error'
+                                            })
+                                                .then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        this.props.history.push("/")
+                                                    }
+                                                })
                                         }
 
-
-                                        if (localStorage.getItem("adno_projects") === undefined || localStorage.getItem("adno_projects") === null) {
-
-                                            // If projects in local storage don't exist create the array
-                                            var projects = []
-                                            projects.push(projectID)
-
-
-                                            // Création du projet dans le localStorage
-                                            insertInLS(projectID, JSON.stringify(project))
-
-                                            // Insertion de l'ID du projet créé dans le tableau des projets
-                                            insertInLS("adno_projects", JSON.stringify(projects))
-                                        } else {
-
-                                            // Création du projet dans le localStorage
-                                            insertInLS(projectID, JSON.stringify(project))
-
-                                            // Insertion de l'ID du projet créé dans le tableau des projets
-                                            projects = JSON.parse(localStorage.getItem("adno_projects"))
-                                            projects.push(projectID)
-                                            insertInLS("adno_projects", JSON.stringify(projects))
-                                        }
-
-                                        localStorage.removeItem("adno_image_url")
-                                        this.props.history.push("/project/" + projectID)
                                     })
 
                                 } else {
@@ -218,7 +239,7 @@ class NewProject extends Component {
         }
 
         return (
-            <form className="form-new-project">
+            <form className="form-new-project" >
 
                 <label className="input-group new_project_input">
                     <span className="new_project_span">Titre</span>
@@ -234,8 +255,8 @@ class NewProject extends Component {
                     <span className="new_project_span">URL du Manifest</span>
                     <input id="manifest_url" className="input input-bordered w-full" value={localStorage.getItem("adno_image_url")} type="text" disabled={true} placeholder="liendumanifest.json" />
                 </label>
-             
-              
+
+
                 <div className="new_project_btns">
                     <button id="annuler_creation" type="submit" className="btn btn-error" onClick={() => { localStorage.removeItem("adno_image_url"), this.props.history.push("/") }}>Annuler</button>
                     <button id="valider_creation" type="submit" className="btn btn-success" onClick={(e) => createProj(e)}>Créer mon projet</button>
