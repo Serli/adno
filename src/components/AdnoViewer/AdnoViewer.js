@@ -53,7 +53,8 @@ class AdnoViewer extends Component {
 
 
             // Create the dataURI linked to the annotations
-            const dataURI = "data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(newAnnos))));
+            // const dataURI = "data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(newAnnos))));
+            const dataURI = "data:application/json;base64," + btoa(JSON.stringify(newAnnos));
 
 
             // Create and display an annona storyboard 
