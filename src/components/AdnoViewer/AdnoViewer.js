@@ -34,7 +34,12 @@ class AdnoViewer extends Component {
         var actualProj = localStorage.getItem(this.props.match.params.id)
 
 
-        var newAnnos =
+
+        // Check if there is at least one annotation
+        if (annos && JSON.parse(annos).length > 0) {
+
+
+            var newAnnos =
             (
                 JSON.parse(annos).map(annotation => {
                     var newAnno = annotation;
@@ -43,9 +48,6 @@ class AdnoViewer extends Component {
                     return newAnno
                 })
             )
-
-        // Check if there is at least one annotation
-        if (annos && JSON.parse(annos).length > 0) {
 
             this.setState({ annotations: JSON.parse(annos), selectedProject: JSON.parse(actualProj) })
 

@@ -91,7 +91,7 @@
 }
 
 #openseadragon1{
-    height: 780px;
+    height: 880px;
 }
 
 .adno-editor-annotations{
@@ -103,7 +103,13 @@
     border-radius: 10px;
 }
 
-
+#toolbar-container{
+    position: absolute;
+    z-index: 99999999999;
+    background: white;
+    right: 0px;
+    width: 300px;
+}
 
 @media (min-width: 1440px) and (max-width: 1680px) {
     .adno-editor-annotations{
@@ -113,6 +119,9 @@
 
 
 @media (min-width: 1060px) and (max-width: 1440px) {
+    #openseadragon1 {
+        height: 700px;
+    }
 
     .adno-editor{
         margin: auto;
@@ -124,6 +133,10 @@
 }
 
 @media (max-width: 1060px) {
+    #openseadragon1 {
+        height: 650px;
+    }
+
     .left-bar{
         width: 25vw !important;
     }

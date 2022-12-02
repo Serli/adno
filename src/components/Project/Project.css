@@ -1,3 +1,7 @@
+.adno-project-view {
+    transition: all 1s ease 0s;
+}
+
 .adno-viewer-leftbar{
     width: 20vw;
     background-color: white;
@@ -22,18 +26,18 @@
     top: 10vh;
 }
 
-.adno-viewer-rightbar-without-annos{
-    width: 90vw;
-    margin: 0 5vw;
-    position: absolute;
-    top: 10vh;
+.dl-btn{
+    background: #303640;
+    color: white;
 }
 
+/*
 #image_iiif{
     height: 750px;
     width: 98% !important;
     margin: auto;
 }
+*/
 
 #image_iiif .openseadragon-container{
     border-radius: 10px !important;
@@ -41,12 +45,6 @@
 
 #image_iiif_annotations #storyboard_viewer {
     padding-bottom: 0px !important;
-}
-
-#image_iiif_annotations #storyboard_viewer .seadragonbox {
-    width: 100%;
-    height: 780px;
-    display: inline-block;
 }
 
 .subbutton-success{
@@ -205,13 +203,6 @@
         margin-right: 30px;
     }
 
-    .adno-viewer-rightbar-without-annos {
-        width: 95vw;
-        margin: 1% auto;
-        position: relative;
-        top: 0;
-    }
-
     .adno-viewer-rightbar{
         top: 12vh;
         height: 470px !important;
@@ -226,11 +217,13 @@
         left: 2vw;
     }
 
+    /*
     #image_iiif{
         height: 780px !important;
         margin: auto;
         padding-bottom: 2%;
     }
+    */
 
     #image_iiif_annotations #storyboard_viewer .seadragonbox {
         width: 100%;

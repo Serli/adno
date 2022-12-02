@@ -19,8 +19,8 @@
     border-bottom-left-radius: 10px;
 }
 .project-view-card{
-    margin: 10px 0;
-    border: 1px solid #4d6f94;
+    margin: 15px 0;
+    border: 2px solid #4d6f94;
 }
 
 .project-view-card .card-body{
@@ -54,6 +54,22 @@
     cursor: pointer;
 }
 
+.project_vw_btns{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 100px;
+    margin-top: 20px;
+}
+
+.project_vw_btns > div > button {
+    margin: 0 10px;
+}
+
+.project_vw_btns > div > a {
+    margin: 0 10px;
+}
+
 @media (max-width: 1440px) {
     .buttons-group-proj-view{
         width: 90%;
@@ -61,14 +77,23 @@
     }
 
     .project-card-img {
-        width: 450px;
+        width: 400px;
         justify-content: center;
         align-items: center;
         display: flex;
     }
+
+    .project_vw_btns{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-top: 20px;
+        margin-right: 0px;
+    }
+
 }
 
-@media (max-width: 800px){
+@media (max-width: 1040px){
     .card-side {
         flex-direction: column;
         align-items: stretch;
@@ -88,11 +113,11 @@
         margin-top: 15px;
     }
 
-    .card-actions {
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 0.5rem;
+    .project_vw_btns{
         display: flex;
-        justify-content: center;
+        align-items: center;
+        justify-content: flex-start;
+        margin-top: 20px;
+        margin-right: 0px;
     }
 }

@@ -23,3 +23,22 @@
 .rich-card-editor .card-body{
     width: 100%;
 }
+
+.rich-card-editor-btns{
+    width: 20%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    margin: auto;
+}
+
+@media (max-width: 1440px){
+    .rich-card-editor{
+        height: 80vh;
+    }
+
+    .rich-card-editor-btns{
+        width: 30%;
+    }
+}

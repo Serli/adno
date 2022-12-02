@@ -105,7 +105,6 @@ class AnnotationCards extends Component {
 
         return (
             <>
-                <h3 className="adno-nb-annos"> {this.props.annotations.length} annotation(s) trouvée(s)</h3>
 
                 <div className="list_annotations">
 
@@ -124,15 +123,16 @@ class AnnotationCards extends Component {
                     <label className="label">
                         <span className="label-text">Auteur</span>
                     </label>
-                    <input type="text" placeholder="Renseignez ici l'auteur" className="input input-bordered w-full max-w-xs" alue={this.props.selectedProject.editor} onChange={(e) => this.updateProjectEditor(e.target.value)} />
+                    <input type="text" placeholder="Renseignez ici l'auteur" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.autor} onChange={(e) => this.updateProjectAutor(e.target.value)} />
 
                     <label className="label">
                         <span className="label-text">Editeur</span>
                     </label>
-                    <input type="text" placeholder="Renseignez ici l'editeur" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.autor} onChange={(e) => this.updateProjectAutor(e.target.value)} />
+                    <input type="text" placeholder="Renseignez ici l'editeur" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.editor} onChange={(e) => this.updateProjectEditor(e.target.value)} />
 
                     <small id="autosaving-txt" class="form-text text-muted">Les données que vous saisissez sont enregistrées automatiquement</small>
 
+                    <h3 className="adno-nb-annos"> {this.props.annotations.length} annotation(s) trouvée(s)</h3>
 
 
                     {

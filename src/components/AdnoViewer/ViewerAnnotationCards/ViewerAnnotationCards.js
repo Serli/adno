@@ -109,7 +109,7 @@ class ViewerAnnotationCards extends Component {
                         <label className="label">
                             <span className="label-text">Auteur</span>
                         </label>
-                        <input type="text" className="input input-bordered w-full max-w-xs" alue={this.props.selectedProject.editor} disabled />
+                        <input type="text" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.autor} disabled />
                     </>
                 }
 
@@ -119,7 +119,7 @@ class ViewerAnnotationCards extends Component {
                         <label className="label">
                             <span className="label-text">Editeur</span>
                         </label>
-                        <input type="text" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.autor} disabled />
+                        <input type="text" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.editor} disabled />
                     </>
                 }
 

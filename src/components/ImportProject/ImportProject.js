@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 
 // Import FontAwesome and icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faCancel, faCheck, faCheckCircle, faUpload } from "@fortawesome/free-solid-svg-icons";
 
 // Import popup alerts
 import Swal from "sweetalert2";
@@ -19,16 +19,16 @@ class ImportProject extends Component {
         super(props);
         this.state = {
             isimporting: false,
-            loadedProject: ""
+            loadedProject: "",
+            labelImportValue: "Importer un projet"
         }
     }
 
 
     // Function to cancel import
     cancelImport = () => {
-        this.setState({ isimporting: false })
+        this.setState({ isimporting: false, labelImportValue: "Importer un projet" })
         document.getElementById("selectFiles_1").value = ""
-        document.getElementById("label-upload").innerHTML = "Importer un projet"
     }
 
     render() {
@@ -49,20 +49,27 @@ class ImportProject extends Component {
         }
 
         return (
-            <div className="import_project">
+            <div className={this.state.isimporting ?  "importing_project" : "import_project"}    >
 
-                <label className="adno-upload-file" id="label-upload" htmlFor="selectFiles_1"> <FontAwesomeIcon icon={faUpload} /> Importer un projet</label>
+                <div className="tooltip" data-tip="Importer un projet">
+                    <label className="btn btn-md btn-secondar" id="label-upload" htmlFor="selectFiles_1"> <FontAwesomeIcon icon={faUpload} /> {this.state.labelImportValue}</label>
+                </div>
 
                 <input accept="application/json" type="file" id="selectFiles_1" onChange={(e) => {
                     this.setState({ isimporting: true, loadedProject: e.target.files[0] })
-                    document.getElementById("label-upload").innerHTML = "Fichier selectionné : " + e.target.files[0].name
+                    this.setState({labelImportValue: "Fichier selectionné : " + e.target.files[0].name})
                 }} />
 
                 {
                     this.state.isimporting &&
                     <div className="import-btns">
-                        <button className="import-btn import-reset" disabled={!this.state.isimporting} onClick={() => this.cancelImport()}>Annuler l'importation</button>
-                        <button id="import_1" className="import-btn import-confirm" disabled={!this.state.isimporting} onClick={() => loadImportedProj()}>Importer mon projet</button>
+                        <div className="tooltip" data-tip="Annuler l'importation">
+                            <button className="btn btn-md btn-error" disabled={!this.state.isimporting} onClick={() => this.cancelImport()}><FontAwesomeIcon icon={faCancel} /></button>
+                        </div>
+
+                        <div className="tooltip" data-tip="Valider l'importation">
+                            <button className="btn btn-md btn-success" disabled={!this.state.isimporting} onClick={() => loadImportedProj()}><FontAwesomeIcon icon={faCheckCircle} /></button>
+                        </div>
                     </div>
                 }
 

@@ -142,16 +142,24 @@ class ProjectView extends Component {
 
 
 
-                    <div className="card-actions project_vw_btns">
+                    <div className="project_vw_btns">
                         {
                             process.env.ADNO_MODE === "FULL" &&
-                            <div className="full-mode-buttons">
+                            <div className="tooltip" data-tip="Supprimer">
                                 <button type="button" className="btn btn-md	btn-error" onClick={() => deleteProj(this.props.project.id)}>    <FontAwesomeIcon icon={faTrash} />  </button>
                             </div>
                         }
-                        <button type="button" className="btn btn-md btn-error" onClick={() => duplicate(this.props.project.id)}><FontAwesomeIcon icon={faCopy} /></button>
-                        <button type="button" className="btn btn-md btn-primary" onClick={() => this.props.history.push("/project/" + this.props.project.id)}> <FontAwesomeIcon icon={faMagnifyingGlass} />  {process.env.ADNO_MODE === "FULL" && <p> / <FontAwesomeIcon icon={faPenToSquare} /> </p>} </button>
-                        <a id={"download_btn_" + this.props.project.id} href={createExportProjectJsonFile(this.props.project.id)} download={this.props.project.title + ".json"} className="btn btn-md btn-secondar"> <FontAwesomeIcon icon={faDownload} />  </a>
+                        <div className="tooltip" data-tip="Dupliquer">
+                            <button type="button" className="btn btn-md btn-accent" onClick={() => duplicate(this.props.project.id)}><FontAwesomeIcon icon={faCopy} /></button>
+                        </div>
+
+                        <div className="tooltip" data-tip="Prévisualiser / Editer">
+                            <button type="button" className="btn btn-md btn-primary" onClick={() => this.props.history.push("/project/" + this.props.project.id)}> <FontAwesomeIcon icon={faMagnifyingGlass} />  {process.env.ADNO_MODE === "FULL" && <p> / <FontAwesomeIcon icon={faPenToSquare} /> </p>} </button>
+                        </div>
+
+                        <div className="tooltip" data-tip="Télécharger">
+                            <a id={"download_btn_" + this.props.project.id} href={createExportProjectJsonFile(this.props.project.id)} download={this.props.project.title + ".json"} className="btn btn-md btn-secondar"> <FontAwesomeIcon icon={faDownload} />  </a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -34,14 +34,12 @@ class Project extends Component {
 
 
     openNav() {
-        document.getElementById("mySidebar").style.width = "350px";
-        document.getElementById("adno-viewer").style.marginLeft = "350px";
+        document.getElementById("adno-project-view").style.marginLeft = "350px";
         document.getElementById("right-card").style.width = "75%"
     }
 
     closeNav() {
-        document.getElementById("mySidebar").style.width = "0";
-        document.getElementById("adno-viewer").style.marginLeft = "0";
+        document.getElementById("adno-project-view").style.marginLeft = "0";
         document.getElementById("right-card").style.width = "100%"
     }
 
@@ -61,7 +59,7 @@ class Project extends Component {
 
     render() {
         return (
-            <div className="adno-viewer" id="adno-viewer">
+            <div className="adno-project-view" id="adno-project-view">
 
 
                 {
@@ -74,6 +72,7 @@ class Project extends Component {
 
 
                 <SidebarAnnotations
+                    sidebarStatus={this.state.sidebarOpened}
                     closeNav={() => {
                         this.setState({ sidebarOpened: false })
                         this.closeNav()
@@ -87,14 +86,26 @@ class Project extends Component {
 
                 <div className="navbar bg-neutral text-neutral-content">
 
-                    {
-                        !this.state.sidebarOpened &&
-                        <button class="openbtn" onClick={() => {
-                            this.setState({ sidebarOpened: true })
-                            this.openNav()
-                        }}>☰</button>
 
-                    }
+                    <label className="btn btn-circle swap swap-rotate">
+
+                        <input type="checkbox" checked={this.state.sidebarOpened}
+                            onClick={() => {
+                                if(this.state.sidebarOpened){
+                                    this.setState({ sidebarOpened: false })
+                                    this.closeNav()
+                                }else{
+                                    this.setState({ sidebarOpened: true })
+                                    this.openNav()
+                                }
+                               
+                            }} />
+
+                        <svg className="swap-off fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" /></svg>
+
+                        <svg className="swap-on fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" /></svg>
+
+                    </label>
 
                     <Link to={"/"} className="btn btn-ghost normal-case text-xl">Adno</Link>
 
@@ -103,7 +114,7 @@ class Project extends Component {
                         <div className="dl_toggle">
                             {
                                 this.state.selectedProject.id &&
-                                <a id={"download_btn_" + this.state.selectedProject.id} href={createExportProjectJsonFile(this.state.selectedProject.id)} download={this.state.selectedProject.title + ".json"} className="btn btn-secondary btn-md"> <FontAwesomeIcon icon={faDownload} /> </a>
+                                <a id={"download_btn_" + this.state.selectedProject.id} href={createExportProjectJsonFile(this.state.selectedProject.id)} download={this.state.selectedProject.title + ".json"} className="btn btn-md dl-btn"> <FontAwesomeIcon icon={faDownload} /> </a>
                             }
                             <label className="cursor-pointer label label-toggle">
                                 <label>Mode édition</label>
@@ -129,7 +140,7 @@ class Project extends Component {
 
                 <div className="adno-viewer-rightbar-without-annos">
                     <div className="col">
-                        <div id="right-card" className="card mb-3">
+                        <div id="right-card">
                             <div className="card">
 
                                 {/* {

@@ -97,7 +97,7 @@
 }
 
 #create_project_2{
-    width: 30%;
+    width: 150px;
     margin-left: 15px;
 }
 
@@ -112,7 +112,7 @@
         flex-direction: column;
         align-items: center;
         overflow: auto;
-        height: 62vh;
+        height: 80vh;
     }
 
     #container_with_projects {

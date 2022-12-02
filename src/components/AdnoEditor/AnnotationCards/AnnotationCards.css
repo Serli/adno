@@ -1,7 +1,6 @@
 .list_annotations{
     display: flex;
     flex-direction: column;
-    width: 100%;
 }
 
 .anno-card{
@@ -19,11 +18,21 @@
 }
 
 .adno-card-title{
-    overflow-wrap: break-word;
+    flex-wrap: wrap !important;
+    display: block !important;
+    overflow-wrap: anywhere;
 }
 
 .anno-cards{
     display: flex;
     justify-content: space-between;
     width: 90%;
+}
+
+.label-text{
+    color: white;
+}
+
+#autosaving-txt{
+    color: white;
 }
