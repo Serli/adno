@@ -114,80 +114,6 @@ export const isValidUrl = (url) => {
   return true;
 };
 
-export const getYoutubeVideoID = (url) => {
-
-  if (isValidUrl(url)) {
-    if (url.indexOf("https://www.youtube.com/watch?v=") !== -1) {
-      return url.split("https://www.youtube.com/watch?v=")[1]
-    } else {
-      return ""
-    }
-  } else {
-    return ""
-  }
-}
-
-export const buildYoutubeEmbed = (url, params) => {
-
-
-  // params.forEach(param => {
-  //     console.log(param);
-  // });
-
-  let embed = `https://www.youtube.com/embed/${getYoutubeVideoID(url)}`;
-
-  let iframe_ytb = document.createElement("iframe")
-  iframe_ytb.src = embed;
-
-  return iframe_ytb;
-
-}
-
-export const buildAudioPlayer = (source_url) => {
-  // let source_url = `https://www.youtube.com/embed/${getYoutubeVideoID(url)}`;
-
-  let audio_player = document.createElement("audio")
-  let audio_source = document.createElement("source")
-  audio_source.src = source_url
-  audio_player.appendChild(audio_source)
-  audio_player.controls = true;
-
-  return audio_player;
-}
-
-const buildWideImg = (source) => {
-  let wideImg = document.createElement("img")
-
-  wideImg.src = source
-
-  wideImg.style.height = '650px'
-  wideImg.style.position = 'absolute'
-  wideImg.style.top = "10vh"
-  wideImg.style.width = "80vw"
-  wideImg.style.zIndex = 100000
-  wideImg.style.left = "10vw"
-  wideImg.style.right = "10vw"
-
-  wideImg.ondblclick = function () {
-    this.remove()
-  }
-
-  document.querySelector("body").appendChild(wideImg)
-
-}
-
-export const buildImage = (source_url) => {
-  let image = document.createElement("img")
-  image.style.width = '200px';
-  image.style.height = '150px';
-  image.src = source_url
-  image.ondblclick = function () {
-    buildWideImg(source_url)
-  }
-
-  return image;
-}
-
 export const get_url_extension = (url) => {
   return url.split(/[#?]/)[0].split('.').pop().trim();
 }
@@ -230,8 +156,8 @@ export const buildProjectAdnoFormat = (title, description, manifest) => {
       "@context": "http://www.w3.org/ns/anno.jsonld",
       "id": generateUUID(),
       "type": "AnnotationCollection",
-      "label": title,
-      "subject": description,
+      "title": title,
+      "description": description,
       "date": createDate(),
       "modified": createDate(),
       "source": manifest,
@@ -263,8 +189,8 @@ export const createExportProjectJsonFile = (projectID) => {
     "@context": "http://www.w3.org/ns/anno.jsonld",
     "id": project.id,
     "type": "AnnotationCollection",
-    "label": project.title,
-    "subject": project.description,
+    "title": project.title,
+    "description": project.description,
     "autor": project.autor || "",
     "editor": project.editor || "",
     "rights": project.rights || "",
@@ -295,11 +221,11 @@ export const importProjectJsonFile = (loadedProject) => {
     if (imported_project.hasOwnProperty("@context")
       && imported_project.hasOwnProperty("date")
       && imported_project.hasOwnProperty("id")
-      && imported_project.hasOwnProperty("label")
+      && imported_project.hasOwnProperty("title")
       && imported_project.hasOwnProperty("type")
       && imported_project.hasOwnProperty("modified")
       && imported_project.hasOwnProperty("source")
-      && imported_project.hasOwnProperty("subject")
+      && imported_project.hasOwnProperty("description")
       && imported_project.hasOwnProperty("total")
     ) {
 
@@ -312,8 +238,8 @@ export const importProjectJsonFile = (loadedProject) => {
 
       let proj = {
         "id": imported_project.id,
-        "title": imported_project.label,
-        "description": imported_project.subject,
+        "title": imported_project.title,
+        "description": imported_project.description,
         "creation_date": imported_project.date,
         "last_update": imported_project.modified,
         "manifest_url": imported_project.source,

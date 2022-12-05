@@ -142,7 +142,6 @@ class ProjectView extends Component {
 
                     <div className="project_vw_btns">
                         {
-                            process.env.ADNO_MODE === "FULL" &&
                             <div className="tooltip" data-tip="Supprimer">
                                 <button type="button" className="btn btn-md	btn-error" onClick={() => deleteProj(this.props.project.id)}>    <FontAwesomeIcon icon={faTrash} />  </button>
                             </div>

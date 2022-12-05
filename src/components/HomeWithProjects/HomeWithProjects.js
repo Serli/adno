@@ -91,41 +91,6 @@ class HomeWithProjects extends Component {
             }
         }
 
-        // Function to remove all projects in the localStorage
-        const deleteAllProjects = () => {
-            Swal.fire({
-                title: 'Êtes-vous sûr de vouloir supprimer tous vos projets ?',
-                showCancelButton: true,
-                showConfirmButton: true,
-                cancelButtonText: 'Annuler',
-                confirmButtonText: 'Oui, supprimer mes projets',
-                icon: 'warning',
-            })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        JSON.parse(localStorage.getItem("adno_projects")).forEach(project => {
-                            localStorage.removeItem(project)
-                            localStorage.removeItem(project + "_annotations")
-                        });
-
-                        localStorage.removeItem("adno_projects")
-
-                        Swal.fire({
-                            title: 'Vos projets ont été supprimés avec succès !',
-                            showCancelButton: false,
-                            showConfirmButton: true,
-                            cancelButtonText: 'OK',
-                            icon: 'success',
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.reload()
-                            }
-                        })
-
-                    }
-                })
-        }
-
         return (
             <div id="container_with_projects" className="adno_container">
 

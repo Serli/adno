@@ -23,8 +23,8 @@ class Project extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            annotations: [],
-            selectedProject: {},
+            annotations: JSON.parse(localStorage.getItem(`${this.props.match.params.id}_annotations`)) || [],
+            selectedProject: JSON.parse(localStorage.getItem(this.props.match.params.id)),
             editingMode: false,
             sidebarOpened: false,
             updateAnnotation: false,
@@ -32,34 +32,15 @@ class Project extends Component {
         }
     }
 
-
-    openNav() {
-        document.getElementById("adno-project-view").style.marginLeft = "350px";
-        document.getElementById("right-card").style.width = "75%"
-    }
-
-    closeNav() {
-        document.getElementById("adno-project-view").style.marginLeft = "0";
-        document.getElementById("right-card").style.width = "100%"
-    }
-
     componentDidMount() {
-
         if (!checkIfProjectExists(this.props.match.params.id)) {
             this.props.history.push("/")
         }
-        // Find annotations from the localStorage in JSON format
-
-        var annos = JSON.parse(localStorage.getItem(`${this.props.match.params.id}_annotations`)) || []
-        var actualProj = JSON.parse(localStorage.getItem(this.props.match.params.id))
-
-        // Save to local state the project and annotations if founded
-        this.setState({ annotations: annos, selectedProject: actualProj })
     }
 
     render() {
         return (
-            <div className="adno-project-view" id="adno-project-view">
+            <div className={this.state.sidebarOpened ? "adno-project-view-sb-opened" : "adno-project-view"}>
 
 
                 {
@@ -75,7 +56,6 @@ class Project extends Component {
                     sidebarStatus={this.state.sidebarOpened}
                     closeNav={() => {
                         this.setState({ sidebarOpened: false })
-                        this.closeNav()
                     }
                     }
                     openRichEditor={(annotation) => this.setState({ updateAnnotation: true, selectedAnnotation: annotation })}
@@ -93,10 +73,8 @@ class Project extends Component {
                             onChange={() => {
                                 if (this.state.sidebarOpened) {
                                     this.setState({ sidebarOpened: false })
-                                    this.closeNav()
                                 } else {
                                     this.setState({ sidebarOpened: true })
-                                    this.openNav()
                                 }
 
                             }} />
@@ -123,7 +101,6 @@ class Project extends Component {
 
                                         if (!this.state.sidebarOpened && !this.state.editingMode) {
                                             this.setState({ sidebarOpened: true })
-                                            this.openNav()
                                         }
 
                                         this.setState({ editingMode: !this.state.editingMode })
@@ -140,14 +117,13 @@ class Project extends Component {
 
                 <div className="adno-viewer-rightbar-without-annos">
                     <div className="col">
-                        <div id="right-card">
+                        <div className={this.state.sidebarOpened ? "right-card-opened" : "right-card-closed"}>
                             <div className="card">
                                 {
                                     !this.state.updateAnnotation
                                         && this.state.editingMode ?
                                         <AdnoEditor updateAnnos={(annos) => this.setState({ annotations: annos })} openRichEditor={(annotation) => this.setState({ updateAnnotation: true, selectedAnnotation: annotation })} closeNav={() => {
                                             this.setState({ sidebarOpened: false })
-                                            this.closeNav()
                                         }} />
                                         : !this.state.updateAnnotation &&
                                         <AdnoViewer updateAnnos={(annos) => this.setState({ annotations: annos })} />

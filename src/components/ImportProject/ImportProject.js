@@ -31,25 +31,25 @@ class ImportProject extends Component {
         document.getElementById("selectFiles_1").value = ""
     }
 
-    render() {
-        const loadImportedProj = () => {
-            if (this.state.loadedProject && this.state.loadedProject.type === "application/json") {
-                // Call function to load the project
-                importProjectJsonFile(this.state.loadedProject)
+    loadImportedProj = () => {
+        if (this.state.loadedProject && this.state.loadedProject.type === "application/json") {
+            // Call function to load the project
+            importProjectJsonFile(this.state.loadedProject)
 
-            } else {
-                Swal.fire({
-                    title: 'Impossible de lire ce type de fichier !',
-                    showCancelButton: true,
-                    showConfirmButton: false,
-                    cancelButtonText: 'OK',
-                    icon: 'warning',
-                })
-            }
+        } else {
+            Swal.fire({
+                title: 'Impossible de lire ce type de fichier !',
+                showCancelButton: true,
+                showConfirmButton: false,
+                cancelButtonText: 'OK',
+                icon: 'warning',
+            })
         }
+    }
 
+    render() {
         return (
-            <div className={this.state.isimporting ?  "importing_project" : "import_project"}    >
+            <div className={this.state.isimporting ? "importing_project" : "import_project"}    >
 
                 <div className="tooltip" data-tip="Importer un projet">
                     <label className="btn btn-md btn-secondar" id="label-upload" htmlFor="selectFiles_1"> <FontAwesomeIcon icon={faUpload} /> {this.state.labelImportValue}</label>
@@ -57,7 +57,7 @@ class ImportProject extends Component {
 
                 <input accept="application/json" type="file" id="selectFiles_1" onChange={(e) => {
                     this.setState({ isimporting: true, loadedProject: e.target.files[0] })
-                    this.setState({labelImportValue: "Fichier selectionné : " + e.target.files[0].name})
+                    this.setState({ labelImportValue: "Fichier selectionné : " + e.target.files[0].name })
                 }} />
 
                 {
@@ -68,7 +68,7 @@ class ImportProject extends Component {
                         </div>
 
                         <div className="tooltip" data-tip="Valider l'importation">
-                            <button className="btn btn-md btn-success" disabled={!this.state.isimporting} onClick={() => loadImportedProj()}><FontAwesomeIcon icon={faCheckCircle} /></button>
+                            <button className="btn btn-md btn-success" disabled={!this.state.isimporting} onClick={() => this.loadImportedProj()}><FontAwesomeIcon icon={faCheckCircle} /></button>
                         </div>
                     </div>
                 }

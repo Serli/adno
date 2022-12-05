@@ -2,6 +2,11 @@
     transition: all 1s ease 0s;
 }
 
+.adno-project-view-sb-opened{
+    margin-left: 350px;
+    transition: all 1s ease 0s;
+}
+
 .adno-viewer-leftbar{
     width: 20vw;
     background-color: white;
@@ -30,14 +35,6 @@
     background: #303640;
     color: white;
 }
-
-/*
-#image_iiif{
-    height: 750px;
-    width: 98% !important;
-    margin: auto;
-}
-*/
 
 #image_iiif .openseadragon-container{
     border-radius: 10px !important;
@@ -116,7 +113,6 @@
     transform: translateX(26px);
   }
   
-  /* Rounded sliders */
   .slider.round {
     border-radius: 34px;
   }
@@ -188,6 +184,14 @@
     margin-left: 20px;
 }
 
+.right-card-closed{
+    width: 100%;
+}
+
+.right-card-opened{
+    width: 75%;
+}
+
 @media (min-width: 840px) and (max-width: 1440px) { 
     .label-toggle{
         display: flex;
@@ -216,14 +220,6 @@
         width: 20vw;
         left: 2vw;
     }
-
-    /*
-    #image_iiif{
-        height: 780px !important;
-        margin: auto;
-        padding-bottom: 2%;
-    }
-    */
 
     #image_iiif_annotations #storyboard_viewer .seadragonbox {
         width: 100%;
