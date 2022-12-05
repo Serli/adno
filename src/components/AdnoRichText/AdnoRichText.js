@@ -27,14 +27,14 @@ class AdnoRichText extends Component {
     super(props);
     this.state = {
       isDeleting: false,
-      selectedTags:  this.props.selectedAnnotation.body && this.props.selectedAnnotation.body.filter(anno => anno.purpose === "tagging").reduce(   (a, b) => [...a, b.value], []) || []
+      selectedTags:  this.props.selectedAnnotation.body && this.props.selectedAnnotation.body.length > 0 && this.props.selectedAnnotation.body.filter(anno => anno.purpose === "tagging").reduce(   (a, b) => [...a, b.value], []) || []
     }
   }
 
   editor = new EditorJS({
     holder: "editorJS",
     data: {
-      "blocks": this.props.selectedAnnotation.body ? this.props.selectedAnnotation.body.filter(anno => anno.type === "AdnoRichText")[0].value : []
+      "blocks": this.props.selectedAnnotation.body && this.props.selectedAnnotation.body.filter(anno => anno.type === "AdnoRichText")[0] ? this.props.selectedAnnotation.body.filter(anno => anno.type === "AdnoRichText")[0].value : []
     },
     tools: {
       embed: {
