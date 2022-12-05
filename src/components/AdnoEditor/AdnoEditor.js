@@ -104,7 +104,7 @@ class AdnoEditor extends Component {
                 }
 
                 // Update the last update date for the selected project
-                selected_project.last_update = new Date()
+                selected_project.last_update = createDate()
                 insertInLS(selected_project.id, JSON.stringify(selected_project))
 
                 // Update annotations linked to the selected project in the localStorage

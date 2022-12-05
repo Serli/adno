@@ -10,7 +10,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Swal from "sweetalert2";
 
 // JS Utils 
-import "../../../../Utils/customElems.js";
 import { buildTagsList, createDate, insertInLS } from "../../../../Utils/utils";
 
 //Imports CSS
@@ -42,6 +41,10 @@ class AnnotationCards extends Component {
         insertInLS(this.props.selectedProject.id, JSON.stringify({ ...this.props.selectedProject, "editor": newEditor, "modified": createDate() }))
     }
 
+    updateProjectRights(rights) {
+        this.props.updateProject({ ...this.props.selectedProject, "rights": rights })
+        insertInLS(this.props.selectedProject.id, JSON.stringify({ ...this.props.selectedProject, "rights": rights, "modified": createDate() }))
+    }
 
     render() {
         // Function to move an annotation up one place
@@ -124,13 +127,20 @@ class AnnotationCards extends Component {
                         <span className="label-text">Auteur</span>
                     </label>
                     <input type="text" placeholder="Renseignez ici l'auteur" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.autor} onChange={(e) => this.updateProjectAutor(e.target.value)} />
-
+                    
                     <label className="label">
                         <span className="label-text">Editeur</span>
                     </label>
                     <input type="text" placeholder="Renseignez ici l'editeur" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.editor} onChange={(e) => this.updateProjectEditor(e.target.value)} />
 
-                    <small id="autosaving-txt" class="form-text text-muted">Les données que vous saisissez sont enregistrées automatiquement</small>
+
+                    <label className="label">
+                        <span className="label-text">Attribution des droits</span>
+                    </label>
+                    <input type="text" placeholder="Renseignez ici les droits de l'oeuvre" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.rights} onChange={(e) => this.updateProjectRights(e.target.value)} />
+
+
+                    <small id="autosaving-txt" className="form-text text-muted">Les données que vous saisissez sont enregistrées automatiquement</small>
 
                     <h3 className="adno-nb-annos"> {this.props.annotations.length} annotation(s) trouvée(s)</h3>
 

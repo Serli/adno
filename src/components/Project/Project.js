@@ -90,7 +90,7 @@ class Project extends Component {
                     <label className="btn btn-circle swap swap-rotate">
 
                         <input type="checkbox" checked={this.state.sidebarOpened}
-                            onClick={() => {
+                            onChange={() => {
                                 if (this.state.sidebarOpened) {
                                     this.setState({ sidebarOpened: false })
                                     this.closeNav()
@@ -119,7 +119,7 @@ class Project extends Component {
                             <label className="cursor-pointer label label-toggle">
                                 <label>Mode édition</label>
                                 <input type="checkbox" className="toggle toggle-lg toggle-success" value={this.state.editingMode}
-                                    onClick={() => {
+                                    onChange={() => {
 
                                         if (!this.state.sidebarOpened && !this.state.editingMode) {
                                             this.setState({ sidebarOpened: true })

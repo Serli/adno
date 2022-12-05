@@ -46,16 +46,16 @@ class ViewerAnnotationCards extends Component {
                     </>
                 }
 
-
                 {
                     this.props.selectedProject.manifest_url &&
                     <>
                         <label className="label">
-                            <span className="label-text">manifest_url</span>
+                            <span className="label-text">Source</span>
                         </label>
                         <input type="text" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.manifest_url} disabled />
                     </>
                 }
+
                 {
                     this.props.selectedProject.img_url &&
                     <>
@@ -68,18 +68,32 @@ class ViewerAnnotationCards extends Component {
                 { this.props.selectedProject.creation_date &&
                     <>
                         <label className="label">
-                            <span className="label-text">creation_date</span>
+                            <span className="label-text">Date de création</span>
                         </label>
                         <input type="text" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.creation_date} disabled />
                     </>
 
                 }
                 {
-                    this.props.selectedProject.modified && <>
+                    this.props.selectedProject.last_update && <>
                         <label className="label">
-                            <span className="label-text">modified</span>
+                            <span className="label-text">Dernière modification</span>
                         </label>
-                        <input type="text" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.modified} disabled />
+                        <input type="text" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.last_update} disabled />
+                    </>
+                }
+
+                <label className="label">
+                    <span className="label-text">Format</span>
+                </label>
+                <input type="text" className="input input-bordered w-full max-w-xs" value="Adno" disabled />
+
+                {
+                    this.props.selectedProject.rights && <>
+                        <label className="label">
+                            <span className="label-text">Droits attribués</span>
+                        </label>
+                        <input type="text" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.rights} disabled />
                     </>
                 }
 
@@ -123,7 +137,7 @@ class ViewerAnnotationCards extends Component {
                     </>
                 }
 
-                <h3 className="adno-viewer-nb-annos"> {this.props.annotations.length} annotation(s) trouvée(s)</h3>
+                <h3 className="adno-viewer-nb-annos"> {this.props.annotations.length < 1 ? "Aucune" : this.props.annotations.length} {`annotation${this.props.annotations.length > 1 ? "s": ""} trouvée${this.props.annotations.length > 1 ? "s": ""}`}</h3>
 
                 {this.props.annotations.map((annotation, index) => {
                     return (
@@ -132,10 +146,6 @@ class ViewerAnnotationCards extends Component {
                                 <h6 className="card-subtitle mb-2 text-muted"> {buildTagsList(annotation)} </h6>
 
                                 <h5 className="card-title adno-card-title">{annotation.body[0] && annotation.body[0].value ? ReactHtmlParser(annotation.body[0].value) : "Aucun titre"}</h5>
-
-                                {/* <h6>{annotation.body.filter(anno => anno.purpose === "commenting").length - 1} réponse(s) associée(s)</h6> */}
-
-                                {/* <TTS text={stripHtml(annotation.body[0].value)} /> */}
                             </div >
                         </div >
                     )

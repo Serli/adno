@@ -39,8 +39,8 @@ export function generateExamplePainting(title, description, manifest_url) {
     "id": projectID,
     "title": title,
     "description": description,
-    "creation_date": new Date(),
-    "last_update": new Date(),
+    "creation_date": createDate(),
+    "last_update": createDate(),
     "manifest_url": manifest_url
   }
 
@@ -232,8 +232,8 @@ export const buildProjectAdnoFormat = (title, description, manifest) => {
       "type": "AnnotationCollection",
       "label": title,
       "subject": description,
-      "date": new Date(),
-      "modified": new Date(),
+      "date": createDate(),
+      "modified": createDate(),
       "source": manifest,
       "editor": "",
       "autor": "",
@@ -267,6 +267,7 @@ export const createExportProjectJsonFile = (projectID) => {
     "subject": project.description,
     "autor": project.autor || "",
     "editor": project.editor || "",
+    "rights": project.rights || "",
     "date": project.creation_date,
     "modified": project.last_update,
     "source": project.manifest_url ? project.manifest_url : project.img_url,
@@ -303,7 +304,7 @@ export const importProjectJsonFile = (loadedProject) => {
     ) {
 
       // Generate a new ID and new last_update
-      imported_project.modified = new Date()
+      imported_project.modified = createDate(),
       imported_project.id = generateUUID()
 
       let projects = JSON.parse(localStorage.getItem("adno_projects"))
@@ -317,7 +318,8 @@ export const importProjectJsonFile = (loadedProject) => {
         "last_update": imported_project.modified,
         "manifest_url": imported_project.source,
         "autor": imported_project.autor || "",
-        "editor": imported_project.editor || ""
+        "editor": imported_project.editor || "",
+        "rights": imported_project.rights || ""
       }
 
       let annos = imported_project.total !== 0 ? imported_project.first.items : []
