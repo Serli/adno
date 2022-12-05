@@ -138,9 +138,7 @@ class ProjectView extends Component {
                     <p className="card-text">{this.props.project.description ? this.props.project.description : "Aucune description disponible pour ce projet"}</p>
                     <p className="card-text"><small className="text-muted">Créé le {this.props.project.creation_date}</small></p>
                     <p className="card-text"><small className="text-muted">Dernière mise à jour : {this.props.project.last_update}</small></p>
-                    <p className="card-text"><small className="text-muted">  <div className="badge badge-primary badge-lg">{this.state.nbAnnotations}</div> annotation(s)</small></p>
-
-
+                    <p className="card-text"><small className="text-muted">  <span className="badge badge-primary badge-lg">{this.state.nbAnnotations}</span> annotation(s)</small></p>
 
                     <div className="project_vw_btns">
                         {

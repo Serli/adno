@@ -91,14 +91,14 @@ class Project extends Component {
 
                         <input type="checkbox" checked={this.state.sidebarOpened}
                             onClick={() => {
-                                if(this.state.sidebarOpened){
+                                if (this.state.sidebarOpened) {
                                     this.setState({ sidebarOpened: false })
                                     this.closeNav()
-                                }else{
+                                } else {
                                     this.setState({ sidebarOpened: true })
                                     this.openNav()
                                 }
-                               
+
                             }} />
 
                         <svg className="swap-off fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" /></svg>
@@ -142,18 +142,6 @@ class Project extends Component {
                     <div className="col">
                         <div id="right-card">
                             <div className="card">
-
-                                {/* {
-                                    !process.env.ADNO_MODE === "FULL" || !this.state.editingMode &&
-                                    <div className="project-body-left">
-                                        {this.state.selectedProject.title && <p id="project_title" className="card-text">Titre : {this.state.selectedProject.title}</p>}
-                                        {this.state.selectedProject.description && <p id="project_desc" className="card-text">Description : {this.state.selectedProject.description}</p>}
-                                        {this.state.selectedProject.editor && <p id="project_editor" className="card-text">Editeur : {this.state.selectedProject.editor}</p>}
-                                        {this.state.selectedProject.autor && <p id="project_autor" className="card-text">Auteur :{this.state.selectedProject.autor}</p>}
-                                    </div>
-                                } */}
-
-
                                 {
                                     !this.state.updateAnnotation
                                         && this.state.editingMode ?
@@ -164,7 +152,6 @@ class Project extends Component {
                                         : !this.state.updateAnnotation &&
                                         <AdnoViewer updateAnnos={(annos) => this.setState({ annotations: annos })} />
                                 }
-
                             </div>
                         </div>
                     </div>

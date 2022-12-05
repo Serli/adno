@@ -130,37 +130,28 @@ class HomeWithProjects extends Component {
             <div id="container_with_projects" className="adno_container">
 
                 <h1>ADNO</h1>
-                
-                {
-                    process.env.ADNO_MODE === "FULL" &&
-                    <form id="myForm">
-                        <div className="input-group mb-3 add_url">
-                            <span className="input-group-text" id="basic-addon1"> <FontAwesomeIcon icon={faLink} /> URL</span>
-                            <input type="text" id="adno_image_url_2" className="input input-bordered input-primary w-full" value={this.state.adno_image_url} onChange={(e) => this.setState({ adno_image_url: e.target.value })}
-                                placeholder="Renseignez ici votre fichier info.json ou votre image jpg/png" />
-                        </div>
 
-                        <div className="tooltip" data-tip="Créer un nouveau projet">
-                            <button id="create_project_2" type="submit" className="btn btn-success" onClick={(e) => newProject(e)}> <FontAwesomeIcon icon={faAdd} /> </button>
-                        </div>
-                        
-                        <ImportProject projects={this.state.projects} updateProjects={(updatedList) => this.setState({ projects: updatedList, adno_image_url: "" })} />
-                    </form>
-                }
+                <form id="myForm">
+                    <div className="input-group mb-3 add_url">
+                        <span className="input-group-text" id="basic-addon1"> <FontAwesomeIcon icon={faLink} /> URL</span>
+                        <input type="text" id="adno_image_url_2" className="input input-bordered input-primary w-full" value={this.state.adno_image_url} onChange={(e) => this.setState({ adno_image_url: e.target.value })}
+                            placeholder="Renseignez ici votre fichier info.json ou votre image jpg/png" />
+                    </div>
+
+                    <div className="tooltip" data-tip="Créer un nouveau projet">
+                        <button id="create_project_2" type="submit" className="btn btn-success" onClick={(e) => newProject(e)}> <FontAwesomeIcon icon={faAdd} /> </button>
+                    </div>
+
+                    <ImportProject projects={this.state.projects} updateProjects={(updatedList) => this.setState({ projects: updatedList, adno_image_url: "" })} />
+                </form>
 
 
                 {
                     this.state.projects && this.state.projects.length > 0 ?
-                        <div>
-
-                            <div className="homewpbar">
-                                <h2>Vos Projets</h2>
-                                {/* <button className="btn btn-error" onClick={() => deleteAllProjects()}> <FontAwesomeIcon icon={faTrashAlt} /> Supprimer mes projets</button> */}
-                            </div>
-
-
+                        <>
+                            <h2>Vos Projets</h2>
                             <ProjectsList projects={this.state.projects} />
-                        </div>
+                        </>
                         :
                         <p>Aucun projet disponible pour le moment</p>
                 }

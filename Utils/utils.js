@@ -265,8 +265,8 @@ export const createExportProjectJsonFile = (projectID) => {
     "type": "AnnotationCollection",
     "label": project.title,
     "subject": project.description,
-    "autor": project.autor || "",
-    "editor": project.editor || "",
+    "autor": project.autor || "",
+    "editor": project.editor || "",
     "date": project.creation_date,
     "modified": project.last_update,
     "source": project.manifest_url ? project.manifest_url : project.img_url,
@@ -316,8 +316,8 @@ export const importProjectJsonFile = (loadedProject) => {
         "creation_date": imported_project.date,
         "last_update": imported_project.modified,
         "manifest_url": imported_project.source,
-        "autor": imported_project.autor || "",
-        "editor": imported_project.editor || ""
+        "autor": imported_project.autor || "",
+        "editor": imported_project.editor || ""
       }
 
       let annos = imported_project.total !== 0 ? imported_project.first.items : []
@@ -347,10 +347,10 @@ export function checkProjectAttributes(imported_project) {
 }
 
 
-export function duplicateProject(projectID){
+export function duplicateProject(projectID) {
   const project = JSON.parse(localStorage.getItem(projectID))
-  const project_annos = JSON.parse(localStorage.getItem(`${projectID}_annotations`)) || []
-  
+  const project_annos = JSON.parse(localStorage.getItem(`${projectID}_annotations`)) || []
+
   const target = {};
 
   Object.assign(target, project);
@@ -367,6 +367,6 @@ export function duplicateProject(projectID){
   insertInLS("adno_projects", JSON.stringify(projects))
 }
 
-export function createDate(){
+export function createDate() {
   return new Date().toISOString().slice(0, 10);
 }
