@@ -1,26 +1,15 @@
-import CheckList from '@editorjs/checklist';
-import Code from '@editorjs/code';
-import Delimiter from '@editorjs/delimiter';
 import EditorJS from "@editorjs/editorjs";
-import Embed from '@editorjs/embed';
 import Header from '@editorjs/header';
-import Image from '@editorjs/image';
-import InlineCode from '@editorjs/inline-code';
 import LinkTool from '@editorjs/link';
-import List from '@editorjs/list';
-import Marker from '@editorjs/marker';
 import Quote from '@editorjs/quote';
-import Raw from '@editorjs/raw';
-import Table from '@editorjs/table';
-import Warning from '@editorjs/warning';
 import { faCheckCircle, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Paragraph from "editorjs-paragraph-with-alignment";
 import { Component } from "react";
 import { TagsInput } from 'react-tag-input-component';
 import { insertInLS } from '../../../Utils/utils';
-
-import "./AdnoRichText.css"
+import "./AdnoRichText.css";
+import RichEditorImage from "./RichEditorImage/RichEditorImage";
 
 class AdnoRichText extends Component {
   constructor(props) {
@@ -37,7 +26,7 @@ class AdnoRichText extends Component {
       "blocks": this.props.selectedAnnotation.body && this.props.selectedAnnotation.body.filter(anno => anno.type === "AdnoRichText")[0] ? this.props.selectedAnnotation.body.filter(anno => anno.type === "AdnoRichText")[0].value : []
     },
     tools: {
-      embed:  Embed,
+      image: RichEditorImage,
       paragraph: {
         class: Paragraph,
         inlineToolbar: true,
@@ -51,7 +40,7 @@ class AdnoRichText extends Component {
           defaultLevel: 1
         }
       },
-      quote: Quote,
+      quote: Quote
     }
   });
 
@@ -75,6 +64,9 @@ class AdnoRichText extends Component {
             let html_tag = `<h${block.data.level}>`;
             let html_closing_tag = `</h${block.data.level}>`;
             txt += `${html_tag}${block.data.text}${html_closing_tag}`;
+            break;
+          case "image":
+            txt += `<img src="${block.data.url}"</img>`;
             break;
           default:
             txt += `<p>${block.data.text}</p>`;
@@ -146,31 +138,6 @@ class AdnoRichText extends Component {
             {this.state.isDeleting && <button className="btn btn-success" onClick={() => { this.setState({ isDeleting: false }), this.deleteAnnotation(), this.props.closeRichEditor() }}> <FontAwesomeIcon icon={faCheckCircle} /> Confirm</button>}
             <button className="btn" onClick={() => this.saveAnnotationText()}><FontAwesomeIcon icon={faSave} /> Save</button>
           </div>
-
-
-
-          {/* <button onClick={async () => {
-
-            var editorData = await this.editor.save()
-
-            editorData.blocks.push( {
-              "id": "P98LibqdoP",
-              "type": "image",
-              "data": {
-                "file": {
-                  "url": "https://codex.so/public/app/img/external/codex2x.png"
-                },
-                "caption": "",
-                "withBorder": false,
-                "stretched": false,
-                "withBackground": false
-              }
-            }
-          )
-
-          this.editor.render(editorData)
-
-          }}>ADD new blocks</button> */}
 
 
           {/* <button onClick={() => this.editor.save().then(data => console.log(data))}>Click</button> */}
