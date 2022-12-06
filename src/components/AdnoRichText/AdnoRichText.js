@@ -27,7 +27,7 @@ class AdnoRichText extends Component {
     super(props);
     this.state = {
       isDeleting: false,
-      selectedTags:  this.props.selectedAnnotation.body && this.props.selectedAnnotation.body.length > 0 && this.props.selectedAnnotation.body.filter(anno => anno.purpose === "tagging").reduce(   (a, b) => [...a, b.value], []) || []
+      selectedTags: this.props.selectedAnnotation.body && this.props.selectedAnnotation.body.length > 0 && this.props.selectedAnnotation.body.filter(anno => anno.purpose === "tagging").reduce((a, b) => [...a, b.value], []) || []
     }
   }
 
@@ -37,27 +37,21 @@ class AdnoRichText extends Component {
       "blocks": this.props.selectedAnnotation.body && this.props.selectedAnnotation.body.filter(anno => anno.type === "AdnoRichText")[0] ? this.props.selectedAnnotation.body.filter(anno => anno.type === "AdnoRichText")[0].value : []
     },
     tools: {
-      embed: {
-        class: Embed,
-        inlineToolbar: true
-      },
-      table: Table,
+      embed:  Embed,
       paragraph: {
         class: Paragraph,
         inlineToolbar: true,
       },
-      list: List,
-      warning: Warning,
-      code: Code,
       linkTool: LinkTool,
-      image: Image,
-      raw: Raw,
-      header: Header,
+      header: {
+        class: Header,
+        config: {
+          placeholder: 'Votre titre',
+          levels: [1, 2, 3],
+          defaultLevel: 1
+        }
+      },
       quote: Quote,
-      marker: Marker,
-      checklist: CheckList,
-      delimiter: Delimiter,
-      inlineCode: InlineCode,
     }
   });
 
@@ -104,15 +98,15 @@ class AdnoRichText extends Component {
 
 
       let allTags = this.state.selectedTags.map(tag => {
-        return(
-           {
+        return (
+          {
             "type": "TextualBody",
             "value": tag,
             "purpose": "tagging"
           }
         )
       })
-      
+
       let newBody = [current_anno, current_anno_with_blocks, ...allTags]
 
       // annos.filter(anno => anno.id === this.props.selectedAnnotation.id)[0].body = [current_anno, current_anno_with_blocks]
@@ -143,7 +137,7 @@ class AdnoRichText extends Component {
 
           <TagsInput
             value={this.state.selectedTags}
-            onChange={(tags) => this.setState({selectedTags: tags})}
+            onChange={(tags) => this.setState({ selectedTags: tags })}
             placeHolder="Ajouter un tag"
           />
 
@@ -152,6 +146,34 @@ class AdnoRichText extends Component {
             {this.state.isDeleting && <button className="btn btn-success" onClick={() => { this.setState({ isDeleting: false }), this.deleteAnnotation(), this.props.closeRichEditor() }}> <FontAwesomeIcon icon={faCheckCircle} /> Confirm</button>}
             <button className="btn" onClick={() => this.saveAnnotationText()}><FontAwesomeIcon icon={faSave} /> Save</button>
           </div>
+
+
+
+          {/* <button onClick={async () => {
+
+            var editorData = await this.editor.save()
+
+            editorData.blocks.push( {
+              "id": "P98LibqdoP",
+              "type": "image",
+              "data": {
+                "file": {
+                  "url": "https://codex.so/public/app/img/external/codex2x.png"
+                },
+                "caption": "",
+                "withBorder": false,
+                "stretched": false,
+                "withBackground": false
+              }
+            }
+          )
+
+          this.editor.render(editorData)
+
+          }}>ADD new blocks</button> */}
+
+
+          {/* <button onClick={() => this.editor.save().then(data => console.log(data))}>Click</button> */}
 
         </div>
       </div>

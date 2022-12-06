@@ -104,7 +104,7 @@
 
 @media (min-width: 1060px) and (max-width: 1440px) {
     #openseadragon1 {
-        height: 700px;
+        height: calc(100vh - 6rem);
     }
 }
 

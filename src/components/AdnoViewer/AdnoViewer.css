@@ -159,7 +159,7 @@
 
     #image_iiif_annotations #storyboard_viewer .seadragonbox {
         width: 100%;
-        height: 650px;
+        height: calc(100vh - 136px);
         display: inline-block;
     }
 
