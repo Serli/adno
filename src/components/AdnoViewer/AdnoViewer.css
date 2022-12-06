@@ -23,7 +23,12 @@
 }
 
 .adno-viewer-rightbar-without-annos{
-    width: 100vw;
+    width: calc(100% - 350px);
+    position: absolute;
+}
+
+.adno-viewer-rightbar-without-annos-sbclosed{
+    width: 100%;
     position: absolute;
 }
 
@@ -133,14 +138,6 @@
   }
 
 @media (min-width: 840px) and (max-width: 1440px) { 
-
-    .adno-viewer-rightbar-without-annos {
-        width: 100vw;
-        /* margin: 1% auto; */
-        position: relative;
-        top: 0;
-    }
-
     .adno-viewer-rightbar{
         top: 12vh;
         height: 470px !important;

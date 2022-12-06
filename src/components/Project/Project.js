@@ -117,7 +117,7 @@ class Project extends Component {
                 </div>
 
 
-                <div className="adno-viewer-rightbar-without-annos">
+                <div className={this.state.sidebarOpened ? "adno-viewer-rightbar-without-annos" : "adno-viewer-rightbar-without-annos-sbclosed" }>
                     <div className="col">
                         <div className={this.state.sidebarOpened ? "right-card-opened" : "right-card-closed"}>
                             <div className="card">
