@@ -2,7 +2,7 @@ import { Component } from "react";
 import { withRouter } from "react-router";
 
 // Import FontAwesome and icons
-import { faAd, faAdd, faBook, faLink, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faAdd, faLink } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Import popup alerts

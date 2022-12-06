@@ -1,11 +1,8 @@
 import { Component } from 'react';
 import { withRouter } from "react-router";
 
-// Import React components
-import TTS from "../../AdnoEditor/TTS/TTS"
-
 // Import Utils
-import { buildTagsList, stripHtml } from "../../../../Utils/utils";
+import { buildTagsList } from "../../../../Utils/utils";
 import ReactHtmlParser from 'react-html-parser';
 
 // Import CSS

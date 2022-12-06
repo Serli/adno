@@ -1,12 +1,8 @@
 import { Component } from "react";
 import { withRouter } from "react-router";
 
-// Import FontAwesome and icons
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faDownload, faEye } from "@fortawesome/free-solid-svg-icons";
-
 // Import utils
-import { checkIfProjectExists, createDate, createExportProjectJsonFile, generateUUID, insertInLS } from "../../../Utils/utils";
+import { checkIfProjectExists, createDate, generateUUID, insertInLS } from "../../../Utils/utils";
 
 // Import CSS
 import "./AdnoEditor.css";
@@ -118,43 +114,7 @@ class AdnoEditor extends Component {
                 anno.saveSelected();
 
 
-            });
-
-
-            // Manage update of annotation
-            // anno.on('updateAnnotation', (upated_anno) => {
-
-
-            //     let annotations = JSON.parse(localStorage.getItem(`${selected_project.id}_annotations`))
-
-            //     let selected_anno = annotations.filter(anno => anno.id === upated_anno.id)[0]
-
-            //     Object.assign(selected_anno, upated_anno);
-
-            //     // Update the last update in the project
-            //     selected_project.last_update = new Date()
-            //     insertInLS(selected_project.id, JSON.stringify(selected_project))
-
-            //     // Save the updated annotation in the localStorage
-            //     insertInLS(`${selected_project.id}_annotations`, JSON.stringify(annotations))
-
-            //     this.setState({ annotations })
-            // });
-
-            // anno.on('deleteAnnotation', (del_anno) => {
-            //     let annotations = JSON.parse(localStorage.getItem(`${selected_project.id}_annotations`))
-
-            //     if (annotations && annotations.length === 1) {
-            //         localStorage.removeItem(`${selected_project.id}_annotations`)
-            //         this.setState({ annotations: annotations.filter(anno => anno.id !== del_anno.id) })
-            //     } else {
-            //         // Delete the annotation in the localStorage
-            //         insertInLS(`${selected_project.id}_annotations`, JSON.stringify(annotations.filter(anno => anno.id !== del_anno.id)))
-            //         this.setState({ annotations: annotations.filter(anno => anno.id !== del_anno.id) })
-            //     }
-
-            // })
-
+            })
 
             anno.on('selectAnnotation', (annotation) => {
                 this.props.closeNav()
@@ -166,20 +126,7 @@ class AdnoEditor extends Component {
         return (
             <div>
                 <div id="toolbar-container"></div>
-
-                {
-                    this.state.annotations && this.state.annotations.length >= 1 ?
-                        <div className="adno-editor-annotations">
-                            <div id="openseadragon1"></div>
-                        </div>
-                        :
-                        <div className="adno-editor">
-                            <div id="openseadragon1"></div>
-                        </div>
-                }
-
-
-
+                <div id="openseadragon1"></div>
             </div>
         )
     }

@@ -1,16 +1,13 @@
 import { Component } from "react";
 import { withRouter } from "react-router-dom";
 
-// Import FontAwesome and icons
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faBook, faEdit, faEye } from "@fortawesome/free-solid-svg-icons";
-
 // Import utils
 import { checkIfProjectExists } from "../../../Utils/utils";
 
 // Import libraries
 import "../../libraries/annona-reworked/js/storyboard";
 import "../../libraries/openseadragon/openseadragon.min.js";
+
 // Imports CSS
 import "./AdnoViewer.css";
 

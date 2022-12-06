@@ -3,10 +3,10 @@ import { Link, withRouter } from "react-router-dom";
 
 // Import FontAwesome and icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faDownload, faHome } from "@fortawesome/free-solid-svg-icons";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
 
 // Import utils
-import { checkIfProjectExists, createDate, createExportProjectJsonFile, insertInLS } from "../../../Utils/utils";
+import { checkIfProjectExists, createExportProjectJsonFile } from "../../../Utils/utils";
 
 // Import libraries
 import "../../libraries/annona-reworked/js/storyboard";
@@ -14,6 +14,8 @@ import "../../libraries/openseadragon/openseadragon.min.js";
 
 // Imports CSS
 import "./Project.css";
+
+// Import Components
 import AdnoViewer from "../AdnoViewer/AdnoViewer";
 import AdnoEditor from "../AdnoEditor/AdnoEditor";
 import SidebarAnnotations from "../SidebarAnnotations/SidebarAnnotations";
