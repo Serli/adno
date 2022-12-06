@@ -34,15 +34,20 @@ class ImportProject extends Component {
     loadImportedProj = () => {
         if (this.state.loadedProject && this.state.loadedProject.type === "application/json") {
             // Call function to load the project
-            importProjectJsonFile(this.state.loadedProject)
+            importProjectJsonFile(this.state.loadedProject, this.cancelImport)
 
         } else {
             Swal.fire({
                 title: 'Impossible de lire ce type de fichier !',
-                showCancelButton: true,
-                showConfirmButton: false,
-                cancelButtonText: 'OK',
-                icon: 'warning',
+                showCancelButton: false,
+                showConfirmButton: true,
+                confirmButtonText: 'OK',
+                icon: 'error',
+            })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    console.log("confirmed");
+                }
             })
         }
     }

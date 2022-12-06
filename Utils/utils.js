@@ -210,7 +210,7 @@ export const createExportProjectJsonFile = (projectID) => {
 }
 
 
-export const importProjectJsonFile = (loadedProject) => {
+export const importProjectJsonFile = (loadedProject, cancelImport) => {
   let fr = new FileReader();
 
   fr.readAsText(loadedProject)
@@ -230,7 +230,7 @@ export const importProjectJsonFile = (loadedProject) => {
     ) {
 
       // Generate a new ID and new last_update
-      imported_project.modified = createDate(),
+      imported_project.modified = createDate()
       imported_project.id = generateUUID()
 
       let projects = JSON.parse(localStorage.getItem("adno_projects"))
@@ -257,12 +257,16 @@ export const importProjectJsonFile = (loadedProject) => {
       window.location.reload()
 
     } else {
-      Swal.fire({
-        title: "Impossible de lire le fichier",
-        showCancelButton: true,
-        showConfirmButton: false,
-        cancelButtonText: 'OK',
-        icon: 'warning',
+        Swal.fire({
+          title: 'Impossible de lire ce type de fichier !',
+          showCancelButton: false,
+          showConfirmButton: true,
+          confirmButtonText: 'OK',
+          icon: 'error',
+        }).then((result) => {
+          if (result.isConfirmed) {
+              cancelImport()
+          }
       })
     }
 
