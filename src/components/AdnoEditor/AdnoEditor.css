@@ -102,6 +102,10 @@
     width: 300px;
 }
 
+.toolbar-with-metadatas{
+    z-index: 1 !important;
+}
+
 @media (min-width: 1060px) and (max-width: 1440px) {
     #openseadragon1 {
         height: calc(100vh - 6rem);

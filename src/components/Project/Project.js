@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 
 // Import FontAwesome and icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import { faDownload, faFile, faFilePen, faHome } from "@fortawesome/free-solid-svg-icons";
 
 // Import utils
 import { checkIfProjectExists, createExportProjectJsonFile } from "../../../Utils/utils";
@@ -20,6 +20,8 @@ import AdnoViewer from "../AdnoViewer/AdnoViewer";
 import AdnoEditor from "../AdnoEditor/AdnoEditor";
 import SidebarAnnotations from "../SidebarAnnotations/SidebarAnnotations";
 import AdnoRichText from "../AdnoRichText/AdnoRichText";
+import ProjectMetadatas from "./ProjectMetadatas/ProjectMetadatas";
+import ProjectEditMetadatas from "./ProjectEditMetadatas/ProjectEditMetadatas";
 
 class Project extends Component {
     constructor(props) {
@@ -28,9 +30,10 @@ class Project extends Component {
             annotations: JSON.parse(localStorage.getItem(`${this.props.match.params.id}_annotations`)) || [],
             selectedProject: JSON.parse(localStorage.getItem(this.props.match.params.id)),
             editingMode: false,
-            sidebarOpened: false,
+            sidebarOpened: true,
             updateAnnotation: false,
-            selectedAnnotation: {}
+            selectedAnnotation: {},
+            showProjectMetadatas: false
         }
     }
 
@@ -43,6 +46,14 @@ class Project extends Component {
     render() {
         return (
             <div className={this.state.sidebarOpened ? "adno-project-view-sb-opened" : "adno-project-view"}>
+
+                {
+                    this.state.showProjectMetadatas && this.state.editingMode ?
+                        <ProjectEditMetadatas updateProject={(updatedProject) => this.setState({ selectedProject: updatedProject })} selectedProject={this.state.selectedProject} closeProjectMetadatas={() => this.setState({ showProjectMetadatas: false })} />
+                        :
+                        this.state.showProjectMetadatas && !this.state.editingMode &&
+                        <ProjectMetadatas selectedProject={this.state.selectedProject} closeProjectMetadatas={() => this.setState({ showProjectMetadatas: false })} />
+                }
 
 
                 {
@@ -68,30 +79,14 @@ class Project extends Component {
 
                 <div className="navbar bg-neutral text-neutral-content">
 
-
-                    <label className="btn btn-circle swap swap-rotate">
-
-                        <input type="checkbox" checked={this.state.sidebarOpened}
-                            onChange={() => {
-                                if (this.state.sidebarOpened) {
-                                    this.setState({ sidebarOpened: false })
-                                } else {
-                                    this.setState({ sidebarOpened: true })
-                                }
-
-                            }} />
-
-                        <svg className="swap-off fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" /></svg>
-
-                        <svg className="swap-on fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" /></svg>
-
-                    </label>
-
-                    <Link to={"/"} className="btn btn-ghost normal-case text-xl">Adno</Link>
+                    <Link to={"/"} className="btn btn-ghost normal-case text-xl"> <FontAwesomeIcon icon={faHome} /> </Link>
+                    <p>{this.state.selectedProject.title} {this.state.selectedProject.autor && `(${this.state.selectedProject.autor})`} </p>
 
                     {
                         process.env.ADNO_MODE === "FULL" &&
                         <div className="dl_toggle">
+                            <button onClick={() => this.setState({ showProjectMetadatas: true })} className="btn btn-accent"><FontAwesomeIcon icon={this.state.editingMode ? faFilePen : faFile} /></button>
+
                             {
                                 this.state.selectedProject.id &&
                                 <a id={"download_btn_" + this.state.selectedProject.id} href={createExportProjectJsonFile(this.state.selectedProject.id)} download={this.state.selectedProject.title + ".json"} className="btn btn-md dl-btn"> <FontAwesomeIcon icon={faDownload} /> </a>
@@ -117,14 +112,14 @@ class Project extends Component {
                 </div>
 
 
-                <div className={this.state.sidebarOpened ? "adno-viewer-rightbar-without-annos" : "adno-viewer-rightbar-without-annos-sbclosed" }>
+                <div className={this.state.sidebarOpened ? "adno-viewer-rightbar-without-annos" : "adno-viewer-rightbar-without-annos-sbclosed"}>
                     <div className="col">
                         <div className={this.state.sidebarOpened ? "right-card-opened" : "right-card-closed"}>
                             <div className="card">
                                 {
                                     !this.state.updateAnnotation
                                         && this.state.editingMode ?
-                                        <AdnoEditor updateAnnos={(annos) => this.setState({ annotations: annos })} openRichEditor={(annotation) => this.setState({ updateAnnotation: true, selectedAnnotation: annotation })} closeNav={() => {
+                                        <AdnoEditor showMetadatas={this.state.showProjectMetadatas} updateAnnos={(annos) => this.setState({ annotations: annos })} openRichEditor={(annotation) => this.setState({ updateAnnotation: true, selectedAnnotation: annotation })} closeNav={() => {
                                             this.setState({ sidebarOpened: false })
                                         }} />
                                         : !this.state.updateAnnotation &&

@@ -122,10 +122,15 @@ class AdnoEditor extends Component {
             })
         }
     }
+
+    componentDidUpdate() {
+        console.log(this.props.showMetadatas);
+    }
+
     render() {
         return (
             <div>
-                <div id="toolbar-container"></div>
+                <div id="toolbar-container" className={this.props.showMetadatas && "toolbar-with-metadatas"}></div>
                 <div id="openseadragon1"></div>
             </div>
         )

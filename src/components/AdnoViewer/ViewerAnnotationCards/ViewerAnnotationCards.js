@@ -33,7 +33,7 @@ class ViewerAnnotationCards extends Component {
     render() {
         return (
             <div className="adno-viewer-list-annos">
-                {
+                {/* {
                     this.props.selectedProject.id &&
                     <>
                         <label className="label">
@@ -132,7 +132,7 @@ class ViewerAnnotationCards extends Component {
                         </label>
                         <input type="text" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.editor} disabled />
                     </>
-                }
+                } */}
 
                 <h3 className="adno-viewer-nb-annos"> {this.props.annotations.length < 1 ? "Aucune" : this.props.annotations.length} {`annotation${this.props.annotations.length > 1 ? "s": ""} trouvée${this.props.annotations.length > 1 ? "s": ""}`}</h3>
 

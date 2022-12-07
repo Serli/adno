@@ -21,30 +21,32 @@ class AnnotationCards extends Component {
     }
 
     // Update project values
-    updateProjectTitle(newTitle) {
-        this.props.updateProject({ ...this.props.selectedProject, "title": newTitle })
-        insertInLS(this.props.selectedProject.id, JSON.stringify({ ...this.props.selectedProject, "title": newTitle, "modified": createDate() }))
-    }
+    
+    
+    // updateProjectTitle(newTitle) {
+    //     this.props.updateProject({ ...this.props.selectedProject, "title": newTitle })
+    //     insertInLS(this.props.selectedProject.id, JSON.stringify({ ...this.props.selectedProject, "title": newTitle, "modified": createDate() }))
+    // }
 
-    updateProjectDesc(newDesc) {
-        this.props.updateProject({ ...this.props.selectedProject, "description": newDesc })
-        insertInLS(this.props.selectedProject.id, JSON.stringify({ ...this.props.selectedProject, "description": newDesc, "modified": createDate() }))
-    }
+    // updateProjectDesc(newDesc) {
+    //     this.props.updateProject({ ...this.props.selectedProject, "description": newDesc })
+    //     insertInLS(this.props.selectedProject.id, JSON.stringify({ ...this.props.selectedProject, "description": newDesc, "modified": createDate() }))
+    // }
 
-    updateProjectAutor(newAutor) {
-        this.props.updateProject({ ...this.props.selectedProject, "autor": newAutor })
-        insertInLS(this.props.selectedProject.id, JSON.stringify({ ...this.props.selectedProject, "autor": newAutor, "modified": createDate() }))
-    }
+    // updateProjectAutor(newAutor) {
+    //     this.props.updateProject({ ...this.props.selectedProject, "autor": newAutor })
+    //     insertInLS(this.props.selectedProject.id, JSON.stringify({ ...this.props.selectedProject, "autor": newAutor, "modified": createDate() }))
+    // }
 
-    updateProjectEditor(newEditor) {
-        this.props.updateProject({ ...this.props.selectedProject, "editor": newEditor })
-        insertInLS(this.props.selectedProject.id, JSON.stringify({ ...this.props.selectedProject, "editor": newEditor, "modified": createDate() }))
-    }
+    // updateProjectEditor(newEditor) {
+    //     this.props.updateProject({ ...this.props.selectedProject, "editor": newEditor })
+    //     insertInLS(this.props.selectedProject.id, JSON.stringify({ ...this.props.selectedProject, "editor": newEditor, "modified": createDate() }))
+    // }
 
-    updateProjectRights(rights) {
-        this.props.updateProject({ ...this.props.selectedProject, "rights": rights })
-        insertInLS(this.props.selectedProject.id, JSON.stringify({ ...this.props.selectedProject, "rights": rights, "modified": createDate() }))
-    }
+    // updateProjectRights(rights) {
+    //     this.props.updateProject({ ...this.props.selectedProject, "rights": rights })
+    //     insertInLS(this.props.selectedProject.id, JSON.stringify({ ...this.props.selectedProject, "rights": rights, "modified": createDate() }))
+    // }
 
     render() {
         // Function to move an annotation up one place
@@ -111,7 +113,7 @@ class AnnotationCards extends Component {
 
                 <div className="list_annotations">
 
-                    <label className="label">
+                    {/* <label className="label">
                         <span className="label-text">Titre</span>
                     </label>
                     <input type="text" placeholder="Votre titre" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.title} onChange={(e) => this.updateProjectTitle(e.target.value)} />
@@ -140,7 +142,7 @@ class AnnotationCards extends Component {
                     <input type="text" placeholder="Renseignez ici les droits de l'oeuvre" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.rights} onChange={(e) => this.updateProjectRights(e.target.value)} />
 
 
-                    <small id="autosaving-txt" className="form-text text-muted">Les données que vous saisissez sont enregistrées automatiquement</small>
+                    <small id="autosaving-txt" className="form-text text-muted">Les données que vous saisissez sont enregistrées automatiquement</small> */}
 
                     <h3 className="adno-nb-annos"> {this.props.annotations.length} annotation(s) trouvée(s)</h3>
 

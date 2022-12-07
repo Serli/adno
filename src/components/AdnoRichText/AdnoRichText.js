@@ -66,7 +66,9 @@ class AdnoRichText extends Component {
             txt += `${html_tag}${block.data.text}${html_closing_tag}`;
             break;
           case "image":
-            txt += `<img src="${block.data.url}"</img>`;
+            if (block.data && block.data.url !== "") {
+              txt += `<img src="${block.data.url}"</img>`;
+            }
             break;
           default:
             txt += `<p>${block.data.text}</p>`;
@@ -138,10 +140,7 @@ class AdnoRichText extends Component {
             {this.state.isDeleting && <button className="btn btn-success" onClick={() => { this.setState({ isDeleting: false }), this.deleteAnnotation(), this.props.closeRichEditor() }}> <FontAwesomeIcon icon={faCheckCircle} /> Confirm</button>}
             <button className="btn" onClick={() => this.saveAnnotationText()}><FontAwesomeIcon icon={faSave} /> Save</button>
           </div>
-
-
-          {/* <button onClick={() => this.editor.save().then(data => console.log(data))}>Click</button> */}
-
+          
         </div>
       </div>
     )

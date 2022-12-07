@@ -20,7 +20,9 @@ class RichEditorImage {
     
         input.placeholder = 'Paste an image URL...';
         input.value = this.data && this.data.url ? this.data.url : '';
-    
+
+        this.data && this.data.url && this.createImage(this.data.url);
+
         input.addEventListener('paste', (event) => {
           this.createImage(event.clipboardData.getData('text'));
         });
@@ -32,16 +34,21 @@ class RichEditorImage {
         const image = document.createElement('img');
 
         image.src = url;
+        
+        // We clean the latest img
+        for (let index = 0; index <  this.wrapper.children.length; index++) {
+          if(this.wrapper.children[index].tagName.toUpperCase() === "IMG"){
+            this.wrapper.children[index].remove()
+          }
+        }
 
-        this.wrapper.innerHTML = '';
         this.wrapper.appendChild(image);
     }
 
     save(blockContent){
-        const img = blockContent.querySelector('img');
-    
+         const img = blockContent.querySelector('img');
         return {
-          url: img.src
+          url: img && img.src || ""
         }
       }
 }
