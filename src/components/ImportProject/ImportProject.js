@@ -31,11 +31,10 @@ class ImportProject extends Component {
         document.getElementById("selectFiles_1").value = ""
     }
 
-    loadImportedProj = () => {
+    loadImportedProj = (event) => {
         if (this.state.loadedProject && this.state.loadedProject.type === "application/json") {
             // Call function to load the project
-            importProjectJsonFile(this.state.loadedProject, this.cancelImport)
-
+            importProjectJsonFile(event, this.state.loadedProject, this.cancelImport)
         } else {
             Swal.fire({
                 title: 'Impossible de lire ce type de fichier !',
@@ -73,7 +72,7 @@ class ImportProject extends Component {
                         </div>
 
                         <div className="tooltip" data-tip="Valider l'importation">
-                            <button className="btn btn-md btn-success" disabled={!this.state.isimporting} onClick={() => this.loadImportedProj()}><FontAwesomeIcon icon={faCheckCircle} /></button>
+                            <button className="btn btn-md btn-success" disabled={!this.state.isimporting} onClick={(event) => {this.loadImportedProj(event)}}><FontAwesomeIcon icon={faCheckCircle} /></button>
                         </div>
                     </div>
                 }

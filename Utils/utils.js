@@ -210,7 +210,9 @@ export const createExportProjectJsonFile = (projectID) => {
 }
 
 
-export const importProjectJsonFile = (loadedProject, cancelImport) => {
+export const importProjectJsonFile = (event, loadedProject, cancelImport) => {
+  event.preventDefault()
+  
   let fr = new FileReader();
 
   fr.readAsText(loadedProject)
@@ -256,7 +258,8 @@ export const importProjectJsonFile = (loadedProject, cancelImport) => {
 
       window.location.reload()
 
-    } else {
+    } 
+    else {
         Swal.fire({
           title: 'Impossible de lire ce type de fichier !',
           showCancelButton: false,
