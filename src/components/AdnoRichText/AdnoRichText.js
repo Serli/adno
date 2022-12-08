@@ -10,6 +10,7 @@ import { TagsInput } from 'react-tag-input-component';
 import { insertInLS } from '../../../Utils/utils';
 import "./AdnoRichText.css";
 import RichEditorImage from "./RichEditorImage/RichEditorImage";
+import WikiSearch from "./Wikidata/WikiSearch";
 
 class AdnoRichText extends Component {
   constructor(props) {
@@ -27,6 +28,7 @@ class AdnoRichText extends Component {
     },
     tools: {
       image: RichEditorImage,
+      wikidata: WikiSearch,
       paragraph: {
         class: Paragraph,
         inlineToolbar: true,
@@ -55,7 +57,6 @@ class AdnoRichText extends Component {
   }
 
   saveAnnotationText = () => {
-
     let txt = "";
     this.editor.save().then(outputData => {
       outputData.blocks.forEach(block => {
@@ -68,6 +69,12 @@ class AdnoRichText extends Component {
           case "image":
             if (block.data && block.data.url !== "") {
               txt += `<img src="${block.data.url}"</img>`;
+            }
+            break;
+          case "wikidata":
+            if (block.data) {
+              txt += `<img src="${block.data.imgUrl}"</img>`;
+              txt += `<a href="${block.data.wiki_link}" target="_blank">${block.data.title}(${block.data.description})</a>`;
             }
             break;
           default:
@@ -136,11 +143,11 @@ class AdnoRichText extends Component {
           />
 
           <div className="rich-card-editor-btns">
-            {!this.state.isDeleting && <button className="btn btn-error" onClick={() => this.setState({ isDeleting: true })}> <FontAwesomeIcon icon={faTrash} /> Delete </button>}
-            {this.state.isDeleting && <button className="btn btn-success" onClick={() => { this.setState({ isDeleting: false }), this.deleteAnnotation(), this.props.closeRichEditor() }}> <FontAwesomeIcon icon={faCheckCircle} /> Confirm</button>}
-            <button className="btn" onClick={() => this.saveAnnotationText()}><FontAwesomeIcon icon={faSave} /> Save</button>
+            {!this.state.isDeleting && <button className="btn btn-error" onClick={() => this.setState({ isDeleting: true })}> <FontAwesomeIcon icon={faTrash} /> Supprimer </button>}
+            {this.state.isDeleting && <button className="btn btn-success" onClick={() => { this.setState({ isDeleting: false }), this.deleteAnnotation(), this.props.closeRichEditor() }}> <FontAwesomeIcon icon={faCheckCircle} /> Confirmer </button>}
+            <button className="btn" onClick={() => this.saveAnnotationText()}><FontAwesomeIcon icon={faSave} /> Enregistrer </button>
           </div>
-          
+
         </div>
       </div>
     )

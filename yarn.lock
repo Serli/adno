@@ -2245,6 +2245,18 @@ weak-lru-cache@^1.2.2:
   resolved "https://registry.yarnpkg.com/weak-lru-cache/-/weak-lru-cache-1.2.2.tgz#fdbb6741f36bae9540d12f480ce8254060dccd19"
   integrity sha512-DEAoo25RfSYMuTGc9vPJzZcZullwIqRDSI9LOy+fkCJPi6hykCnfKaXTuPBDuXAUcqHXyOgFtHNp/kB2FjYHbw==
 
+wikibase-sdk@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/wikibase-sdk/-/wikibase-sdk-8.1.0.tgz#415102154bc53bb60c0b67152807dbcd615d7981"
+  integrity sha512-aDKqAzFM+D6MQ7dSL4O6NQ0EmWGC/K7/Ngby9mBXCfAyxTzF+50y/qqio+UC5Rlm4CeE49ON894A+abjthWNcw==
+
+wikidata-sdk@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/wikidata-sdk/-/wikidata-sdk-8.1.0.tgz#b0a9cd7d9c29f57ad5f9cbcecff772dcf3306bc1"
+  integrity sha512-8v0dnY56JDRUd8YMrvSQeMjWJW5I2a2FVhm7h9Y0P9J11HrB3/utMAKaBwGOPPEMwsyjVZUvAskByepTtNvH3g==
+  dependencies:
+    wikibase-sdk "^8.1.0"
+
 xtend@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.2.tgz#bb72779f5fa465186b1f438f674fa347fdb5db54"

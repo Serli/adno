@@ -108,7 +108,7 @@ class AdnoEditor extends Component {
 
                 this.props.updateAnnos(annotations)
 
-                this.props.closeNav()
+                //this.props.closeNav()
                 this.props.openRichEditor(newAnnotation)
 
                 anno.saveSelected();
@@ -117,7 +117,7 @@ class AdnoEditor extends Component {
             })
 
             anno.on('selectAnnotation', (annotation) => {
-                this.props.closeNav()
+                //this.props.closeNav()
                 this.props.openRichEditor(annotation)
             })
         }
