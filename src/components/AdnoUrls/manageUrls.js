@@ -15,7 +15,6 @@ export async function manageUrls(props, url) {
                 }
             })
             .catch(err => {
-                console.log(err);
                 Swal.fire({
                     title: `Erreur détectée : ${err.message}`,
                     showCancelButton: false,
@@ -45,8 +44,6 @@ export async function manageUrls(props, url) {
                     let manifest = JSON.parse(data)
 
                     if (manifest.format && manifest.format === "Adno") {
-                        console.log("format adno");
-
                         insertInLS("adno_image_url", url)
 
                         Swal.fire({
@@ -59,11 +56,7 @@ export async function manageUrls(props, url) {
                         })
                             .then((result) => {
                                 if (result.isConfirmed) {
-                                    console.log("Importation en cours...");
                                     let projectID = generateUUID();
-                                    console.log(projectID);
-
-                                    // console.log(manifest.hasAttribute("source") && manifest.hasAttribute("label") && manifest.hasAttribute("subject"));
 
                                     let project = buildJsonProjectWithManifest(projectID, manifest.label, manifest.subject, manifest.source)
 

@@ -75,9 +75,6 @@ class AdnoEditor extends Component {
 
             //Manage creation of new annotation
             anno.on('createSelection', (annotation) => {
-
-                console.log("createSelection", annotation);
-
                 var annotations = JSON.parse(localStorage.getItem(`${selected_project.id}_annotations`))
 
                 // reorganize properties 
@@ -121,10 +118,6 @@ class AdnoEditor extends Component {
                 this.props.openRichEditor(annotation)
             })
         }
-    }
-
-    componentDidUpdate() {
-        console.log(this.props.showMetadatas);
     }
 
     render() {

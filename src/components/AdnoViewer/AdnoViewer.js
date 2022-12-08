@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { withRouter } from "react-router-dom";
+import Swal from "sweetalert2";
 
 // Import utils
 import { checkIfProjectExists } from "../../../Utils/utils";
@@ -37,24 +38,44 @@ class AdnoViewer extends Component {
 
 
             var newAnnos =
-            (
-                JSON.parse(annos).map(annotation => {
-                    var newAnno = annotation;
-                    newAnno.body = annotation.body.filter(annoBody => annoBody.type !== "AdnoRichText");
+                (
+                    JSON.parse(annos).map(annotation => {
+                        var newAnno = annotation;
+                        newAnno.body = annotation.body.filter(annoBody => annoBody.type !== "AdnoRichText");
 
-                    return newAnno
-                })
-            )
+                        return newAnno
+                    })
+                )
 
             this.setState({ annotations: JSON.parse(annos), selectedProject: JSON.parse(actualProj) })
 
 
             // Create the dataURI linked to the annotations
-            // const dataURI = "data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(newAnnos))));
-            const dataURI = "data:application/json;base64," + btoa(JSON.stringify(newAnnos));
 
-            // Create and display an annona storyboard 
-            document.getElementById("image_iiif").innerHTML = '<iiif-storyboard  styling="toggleoverlay: true; tts:false;" annotationurl="' + dataURI + '"></iiif-storyboard>';
+
+            
+            try {
+                btoa(JSON.stringify(newAnnos))
+
+                const dataURI = "data:application/json;base64," + btoa(JSON.stringify(newAnnos));
+
+                // Create and display an annona storyboard 
+                document.getElementById("image_iiif").innerHTML = '<iiif-storyboard  styling="toggleoverlay: true; tts:false;" annotationurl="' + dataURI + '"></iiif-storyboard>';
+            } catch (error) {
+                Swal.fire({
+                    title: 'Impossible de lire les annotations (Caractères interdits)',
+                    showCancelButton: false,
+                    confirmButtonText: 'Ok',
+                    icon: 'warning',
+                })
+                    .then((result) => {
+                        if (result.isConfirmed) {
+                            this.props.history.push("/")
+                        }
+                    })
+            }
+
+
 
         } else {
             if (checkIfProjectExists(this.props.match.params.id) && JSON.parse(localStorage.getItem(this.props.match.params.id)).manifest_url) {

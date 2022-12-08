@@ -45,7 +45,7 @@ class ImportProject extends Component {
             })
             .then((result) => {
                 if (result.isConfirmed) {
-                    console.log("confirmed");
+                    this.cancelImport()
                 }
             })
         }
