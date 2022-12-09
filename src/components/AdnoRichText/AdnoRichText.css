@@ -56,6 +56,10 @@
     display: block;
 }
 
+.ce-toolbar__settings-btn{
+    display: block;
+}
+
 .ce-toolbar__actions {
     padding-right: 5px;
     display: flex;
