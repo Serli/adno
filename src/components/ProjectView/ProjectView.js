@@ -150,9 +150,17 @@ class ProjectView extends Component {
                             <button type="button" className="btn btn-md btn-accent" onClick={() => duplicate(this.props.project.id)}><FontAwesomeIcon icon={faCopy} /></button>
                         </div>
 
-                        <div className="tooltip" data-tip="Prévisualiser / Editer">
-                            <button type="button" className="btn btn-md btn-primary" onClick={() => this.props.history.push("/project/" + this.props.project.id)}> <FontAwesomeIcon icon={faMagnifyingGlass} />  {process.env.ADNO_MODE === "FULL" && <p> / <FontAwesomeIcon icon={faPenToSquare} /> </p>} </button>
-                        </div>
+                        {
+                            process.env.ADNO_MODE === "FULL" ?
+                                <div className="tooltip" data-tip="Prévisualiser / Editer">
+                                    <button type="button" className="btn btn-md btn-primary" onClick={() => this.props.history.push("/project/" + this.props.project.id)}> <FontAwesomeIcon icon={faMagnifyingGlass} />  {process.env.ADNO_MODE === "FULL" && <p> / <FontAwesomeIcon icon={faPenToSquare} /> </p>} </button>
+                                </div>
+                                :
+                                <div className="tooltip" data-tip="Prévisualiser">
+                                    <button type="button" className="btn btn-md btn-primary" onClick={() => this.props.history.push("/project/" + this.props.project.id)}> <FontAwesomeIcon icon={faMagnifyingGlass} /></button>
+                                </div>
+                        }
+
 
                         <div className="tooltip" data-tip="Télécharger">
                             <a id={"download_btn_" + this.props.project.id} href={createExportProjectJsonFile(this.props.project.id)} download={this.props.project.title + ".json"} className="btn btn-md btn-secondar"> <FontAwesomeIcon icon={faDownload} />  </a>

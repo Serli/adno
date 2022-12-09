@@ -28,7 +28,7 @@ class AdnoRichText extends Component {
     },
     tools: {
       image: RichEditorImage,
-      wikidata: WikiSearch,
+      // wikidata: WikiSearch,
       paragraph: {
         class: Paragraph,
         inlineToolbar: true,

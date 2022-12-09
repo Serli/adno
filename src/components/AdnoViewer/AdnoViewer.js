@@ -55,8 +55,6 @@ class AdnoViewer extends Component {
 
             
             try {
-                btoa(JSON.stringify(newAnnos))
-
                 const dataURI = "data:application/json;base64," + btoa(JSON.stringify(newAnnos));
 
                 // Create and display an annona storyboard 
@@ -66,7 +64,7 @@ class AdnoViewer extends Component {
                     title: 'Impossible de lire les annotations (Caractères interdits)',
                     showCancelButton: false,
                     confirmButtonText: 'Ok',
-                    icon: 'warning',
+                    icon: 'error',
                 })
                     .then((result) => {
                         if (result.isConfirmed) {

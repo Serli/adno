@@ -1,37 +1,36 @@
+import { faCancel, faSave } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Component } from "react";
+import Swal from "sweetalert2";
 import { createDate, insertInLS } from "../../../../Utils/utils";
+import "./ProjectEditMetadatas.css"
 
 class ProjectEditMetadatas extends Component {
-    // Update project values
-    updateProjectTitle(newTitle) {
-        this.props.updateProject({ ...this.props.selectedProject, "title": newTitle })
-        insertInLS(this.props.selectedProject.id, JSON.stringify({ ...this.props.selectedProject, "title": newTitle, "modified": createDate() }))
+    constructor(props){
+        super(props);
+        this.state = {
+            project: this.props.selectedProject,
+            isDeleting: false
+        }
     }
 
-    updateProjectDesc(newDesc) {
-        this.props.updateProject({ ...this.props.selectedProject, "description": newDesc })
-        insertInLS(this.props.selectedProject.id, JSON.stringify({ ...this.props.selectedProject, "description": newDesc, "modified": createDate() }))
-    }
+    updateProjectMetadatas = () => {
+        this.props.updateProject(this.state.project)
+        insertInLS(this.state.project.id, JSON.stringify(this.state.project))
+        this.props.closeProjectMetadatas()
 
-    updateProjectAutor(newAutor) {
-        this.props.updateProject({ ...this.props.selectedProject, "autor": newAutor })
-        insertInLS(this.props.selectedProject.id, JSON.stringify({ ...this.props.selectedProject, "autor": newAutor, "modified": createDate() }))
-    }
-
-    updateProjectEditor(newEditor) {
-        this.props.updateProject({ ...this.props.selectedProject, "editor": newEditor })
-        insertInLS(this.props.selectedProject.id, JSON.stringify({ ...this.props.selectedProject, "editor": newEditor, "modified": createDate() }))
-    }
-
-    updateProjectRights(rights) {
-        this.props.updateProject({ ...this.props.selectedProject, "rights": rights })
-        insertInLS(this.props.selectedProject.id, JSON.stringify({ ...this.props.selectedProject, "rights": rights, "modified": createDate() }))
+        Swal.fire({
+            title: "Projet édité avec succés !",
+            showCancelButton: false,
+            confirmButtonText: 'Ok',
+            icon: 'success',
+        })
     }
 
     render() {
         return (
             <div className="project-metadatas-backdrop">
-                <div className="project-metadatas-container">
+                <form className="project-metadatas-container" onSubmit={(e) => {e.preventDefault(), this.updateProjectMetadatas(e)}}>
 
 
                     <div className="card-actions justify-end">
@@ -46,36 +45,37 @@ class ProjectEditMetadatas extends Component {
                         <label className="label">
                             <span className="label-text">Titre</span>
                         </label>
-                        <input type="text" placeholder="Votre titre" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.title} onChange={(e) => this.updateProjectTitle(e.target.value)} />
+                        <input type="text" placeholder="Votre titre" className="input input-bordered w-full max-w-xs" value={this.state.project.title} onChange={(e) => this.setState({project: {...this.state.project, title: e.target.value}})} />
 
 
                         <label className="label">
                             <span className="label-text">Description</span>
                         </label>
-                        <input type="text" placeholder="Renseignez ici la description" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.description} onChange={(e) => this.updateProjectDesc(e.target.value)} />
+                        <input type="text" placeholder="Renseignez ici la description" className="input input-bordered w-full max-w-xs" value={this.state.project.description} onChange={(e) => this.setState({project: {...this.state.project, description: e.target.value}})} />
 
 
                         <label className="label">
                             <span className="label-text">Auteur</span>
                         </label>
-                        <input type="text" placeholder="Renseignez ici l'auteur" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.autor} onChange={(e) => this.updateProjectAutor(e.target.value)} />
+                        <input type="text" placeholder="Renseignez ici l'auteur" className="input input-bordered w-full max-w-xs" value={this.state.project.autor} onChange={(e) => this.setState({project: {...this.state.project, autor: e.target.value}})}/>
 
                         <label className="label">
                             <span className="label-text">Editeur</span>
                         </label>
-                        <input type="text" placeholder="Renseignez ici l'editeur" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.editor} onChange={(e) => this.updateProjectEditor(e.target.value)} />
+                        <input type="text" placeholder="Renseignez ici l'editeur" className="input input-bordered w-full max-w-xs" value={this.state.project.editor} onChange={(e) => this.setState({project: {...this.state.project, editor: e.target.value}})} />
 
 
                         <label className="label">
                             <span className="label-text">Attribution des droits</span>
                         </label>
-                        <input type="text" placeholder="Renseignez ici les droits de l'oeuvre" className="input input-bordered w-full max-w-xs" value={this.props.selectedProject.rights} onChange={(e) => this.updateProjectRights(e.target.value)} />
+                        <input type="text" placeholder="Renseignez ici les droits de l'oeuvre" className="input input-bordered w-full max-w-xs" value={this.state.project.rights} onChange={(e) => this.setState({project: {...this.state.project, rights: e.target.value}})} />
 
 
-                        <small id="autosaving-txt" className="form-text text-muted">Les données que vous saisissez sont enregistrées automatiquement</small>
-
+                        <div className="metadata-editor-btns">
+                             <button type="submit" className="btn" ><FontAwesomeIcon icon={faSave} />  Enregistrer </button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         )
     }

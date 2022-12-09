@@ -290,6 +290,7 @@ export function duplicateProject(projectID) {
 
   Object.assign(target, project);
 
+  target.title += " (copie)"
   target.id = generateUUID()
   target.last_update = createDate()
   target.creation_date = createDate()
