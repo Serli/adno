@@ -22,6 +22,7 @@ class AdnoRichText extends Component {
   }
 
   editor = new EditorJS({
+    autofocus: true,
     holder: "editorJS",
     data: {
       "blocks": this.props.selectedAnnotation.body && this.props.selectedAnnotation.body.filter(anno => anno.type === "AdnoRichText")[0] ? this.props.selectedAnnotation.body.filter(anno => anno.type === "AdnoRichText")[0].value : []

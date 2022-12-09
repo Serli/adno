@@ -33,6 +33,37 @@
     margin: auto;
 }
 
+
+.ce-block__content{
+    width: 90%;
+    max-width: 90%;
+}
+
+.ce-toolbar__content {
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.ce-toolbar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 6px;
+    -webkit-transition: opacity .1s ease;
+    transition: opacity .1s ease;
+    will-change: opacity,top;
+    display: block;
+}
+
+.ce-toolbar__actions {
+    padding-right: 5px;
+    display: flex;
+    position: relative;
+    left: 0;
+    opacity: 1 !important
+}
+
 @media (max-width: 1440px){
     .rich-card-editor{
         height: 80vh;
