@@ -144,7 +144,7 @@ class AnnotationCards extends Component {
 
                     <small id="autosaving-txt" className="form-text text-muted">Les données que vous saisissez sont enregistrées automatiquement</small> */}
 
-                    <h3 className="adno-nb-annos"> {this.props.annotations.length} annotation(s) trouvée(s)</h3>
+                    {/* <h3 className="adno-nb-annos"> {this.props.annotations.length} annotation(s) trouvée(s)</h3> */}
 
 
                     {
@@ -159,7 +159,7 @@ class AnnotationCards extends Component {
                                         <h6 className="card-subtitle mb-2 text-muted"> {buildTagsList(annotation)} </h6>
 
                                         <div className="anno-cards">
-                                            <button className="btn btn-sm btn-danger" onClick={() => deleteAnnotation(index)}> <FontAwesomeIcon icon={faTrashAlt} /></button>
+                                            <button className="btn btn-sm btn-error" onClick={() => deleteAnnotation(index)}> <FontAwesomeIcon icon={faTrashAlt} /></button>
                                             <button className="btn btn-sm btn-success" onClick={() => this.props.openRichEditor(annotation)}> <FontAwesomeIcon icon={faEdit} /></button>
                                             {index < this.props.annotations.length - 1 ? <button className="btn btn-sm btn-primary" onClick={() => annoSwitchDown(index)}> <FontAwesomeIcon icon={faDownLong} /> </button> : <></>}
                                             {index > 0 ? <button className="btn btn-sm btn-primary" onClick={() => annoSwitchUp(index)}> <FontAwesomeIcon icon={faUpLong} /> </button> : <></>}
