@@ -2,7 +2,7 @@ import { Component } from "react";
 import { withRouter } from "react-router";
 
 // Import FontAwesome icons
-import { faCopy, faDownload, faMagnifyingGlass, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faCopy, faDownload, faMagnifyingGlass, faMinusCircle, faPenToSquare, faPlusCircle, faPlusSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Import popup alerts
@@ -20,7 +20,8 @@ class ProjectView extends Component {
         this.state = {
             nbAnnotations: 0,
             imgSource: "",
-            imgWidth: 0
+            imgWidth: 0,
+            moreOptions: false
         }
     }
 
@@ -140,16 +141,8 @@ class ProjectView extends Component {
                     <p className="card-text"><small className="text-muted">Dernière mise à jour : {this.props.project.last_update}</small></p>
                     <p className="card-text"><small className="text-muted">  <span className="badge badge-primary badge-lg">{this.state.nbAnnotations}</span> annotation(s)</small></p>
 
-                    <div className="project_vw_btns">
-                        {
-                            <div className="tooltip" data-tip="Supprimer">
-                                <button type="button" className="btn btn-md	btn-error" onClick={() => deleteProj(this.props.project.id)}>    <FontAwesomeIcon icon={faTrash} />  </button>
-                            </div>
-                        }
-                        <div className="tooltip" data-tip="Dupliquer">
-                            <button type="button" className="btn btn-md btn-accent" onClick={() => duplicate(this.props.project.id)}><FontAwesomeIcon icon={faCopy} /></button>
-                        </div>
 
+                    <div className="project_vw_btns">
                         {
                             process.env.ADNO_MODE === "FULL" ?
                                 <div className="tooltip" data-tip="Prévisualiser / Editer">
@@ -161,10 +154,27 @@ class ProjectView extends Component {
                                 </div>
                         }
 
-
-                        <div className="tooltip" data-tip="Télécharger">
-                            <a id={"download_btn_" + this.props.project.id} href={createExportProjectJsonFile(this.props.project.id)} download={this.props.project.title + ".json"} className="btn btn-md btn-secondar"> <FontAwesomeIcon icon={faDownload} />  </a>
+                        <div className="tooltip" data-tip="Afficher plus d'options">
+                            <button type="button" className="btn btn-md" onClick={() => this.setState({ moreOptions: !this.state.moreOptions })}>  {this.state.moreOptions ? <FontAwesomeIcon icon={faMinusCircle} /> : <FontAwesomeIcon icon={faPlusCircle} />} </button>
                         </div>
+
+                        {
+                            this.state.moreOptions &&
+                            <>
+
+                                <div className="tooltip" data-tip="Supprimer">
+                                    <button type="button" className="btn btn-md btn-outline btn-error" onClick={() => deleteProj(this.props.project.id)}>    <FontAwesomeIcon icon={faTrash} />  </button>
+                                </div>
+                                <div className="tooltip" data-tip="Dupliquer">
+                                    <button type="button" className="btn btn-md btn-outline btn-info" onClick={() => duplicate(this.props.project.id)}><FontAwesomeIcon icon={faCopy} /></button>
+                                </div>
+
+                                <div className="tooltip" data-tip="Télécharger">
+                                    <a id={"download_btn_" + this.props.project.id} href={createExportProjectJsonFile(this.props.project.id)} download={this.props.project.title + ".json"} className="btn btn-md btn-outline btn-success"> <FontAwesomeIcon icon={faDownload} />  </a>
+                                </div>
+
+                            </>
+                        }
                     </div>
                 </div>
             </div>
