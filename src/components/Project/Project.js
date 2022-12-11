@@ -79,13 +79,13 @@ class Project extends Component {
 
                 <div className="navbar bg-neutral text-neutral-content">
 
-                    <Link to={"/"} className="btn btn-ghost normal-case text-xl"> <FontAwesomeIcon icon={faHome} /> </Link>
+                    <Link to={"/"} className="btn btn-ghost normal-case"> <FontAwesomeIcon icon={faHome} /> </Link>
                     {
                         this.state.selectedProject.id &&
-                        <a id={"download_btn_" + this.state.selectedProject.id} href={createExportProjectJsonFile(this.state.selectedProject.id)} download={this.state.selectedProject.title + ".json"} className="btn btn-md dl-btn"> <FontAwesomeIcon icon={faDownload} /> </a>
+                        <a id={"download_btn_" + this.state.selectedProject.id} href={createExportProjectJsonFile(this.state.selectedProject.id)} download={this.state.selectedProject.title + ".json"} className="btn btn-md"> <FontAwesomeIcon icon={faDownload} /> </a>
                     }
 
-                    <button onClick={() => this.setState({ showProjectMetadatas: true })} className="btn btn-accent"><FontAwesomeIcon icon={this.state.editingMode ? faFilePen : faFile} /></button>
+                    <button onClick={() => this.setState({ showProjectMetadatas: true })} className="btn btn-md"><FontAwesomeIcon icon={this.state.editingMode ? faFilePen : faFile} /></button>
 
 
                     <p>{this.state.selectedProject.title} {this.state.selectedProject.autor && `(${this.state.selectedProject.autor})`} </p>
