@@ -100,7 +100,7 @@ class HomeWithProjects extends Component {
                     <div className="input-group mb-3 add_url">
                         <span className="input-group-text" id="basic-addon1"> <FontAwesomeIcon icon={faLink} /> URL</span>
                         <input type="text" id="adno_image_url_2" className="input input-bordered input-primary w-full" value={this.state.adno_image_url} onChange={(e) => this.setState({ adno_image_url: e.target.value })}
-                            placeholder="Renseignez ici votre fichier info.json ou votre image jpg/png" />
+                            placeholder="Renseignez ici l'URL de votre fichier (Manifest, image statique, projet adno...)" />
                     </div>
 
                     <div className="tooltip" data-tip="Créer un nouveau projet">

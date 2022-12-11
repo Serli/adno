@@ -61,18 +61,19 @@ class ImportProject extends Component {
 
                 <input accept="application/json" type="file" id="selectFiles_1" onChange={(e) => {
                     this.setState({ isimporting: true, loadedProject: e.target.files[0] })
-                    this.setState({ labelImportValue: "Fichier selectionné : " + e.target.files[0].name })
+                    // this.setState({ labelImportValue: "Fichier selectionné : " + e.target.files[0].name })
+                    this.setState({ labelImportValue: "1 Fichier selectionné"})
                 }} />
 
                 {
                     this.state.isimporting &&
                     <div className="import-btns">
-                        <div className="tooltip" data-tip="Annuler l'importation">
-                            <button className="btn btn-md btn-error" disabled={!this.state.isimporting} onClick={() => this.cancelImport()}><FontAwesomeIcon icon={faCancel} /></button>
-                        </div>
-
                         <div className="tooltip" data-tip="Valider l'importation">
                             <button className="btn btn-md btn-success" disabled={!this.state.isimporting} onClick={(event) => {this.loadImportedProj(event)}}><FontAwesomeIcon icon={faCheckCircle} /></button>
+                        </div>
+
+                        <div className="tooltip" data-tip="Annuler l'importation">
+                            <button className="btn btn-md btn-error" disabled={!this.state.isimporting} onClick={() => this.cancelImport()}><FontAwesomeIcon icon={faCancel} /></button>
                         </div>
                     </div>
                 }
