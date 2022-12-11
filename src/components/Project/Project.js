@@ -80,17 +80,21 @@ class Project extends Component {
                 <div className="navbar bg-neutral text-neutral-content">
 
                     <Link to={"/"} className="btn btn-ghost normal-case text-xl"> <FontAwesomeIcon icon={faHome} /> </Link>
+                    {
+                        this.state.selectedProject.id &&
+                        <a id={"download_btn_" + this.state.selectedProject.id} href={createExportProjectJsonFile(this.state.selectedProject.id)} download={this.state.selectedProject.title + ".json"} className="btn btn-md dl-btn"> <FontAwesomeIcon icon={faDownload} /> </a>
+                    }
+
+                    <button onClick={() => this.setState({ showProjectMetadatas: true })} className="btn btn-accent"><FontAwesomeIcon icon={this.state.editingMode ? faFilePen : faFile} /></button>
+
+
                     <p>{this.state.selectedProject.title} {this.state.selectedProject.autor && `(${this.state.selectedProject.autor})`} </p>
 
                     {
                         process.env.ADNO_MODE === "FULL" &&
                         <div className="dl_toggle">
-                            <button onClick={() => this.setState({ showProjectMetadatas: true })} className="btn btn-accent"><FontAwesomeIcon icon={this.state.editingMode ? faFilePen : faFile} /></button>
 
-                            {
-                                this.state.selectedProject.id &&
-                                <a id={"download_btn_" + this.state.selectedProject.id} href={createExportProjectJsonFile(this.state.selectedProject.id)} download={this.state.selectedProject.title + ".json"} className="btn btn-md dl-btn"> <FontAwesomeIcon icon={faDownload} /> </a>
-                            }
+
                             <label className="cursor-pointer label label-toggle">
                                 <label>Mode édition</label>
                                 <input type="checkbox" className="toggle toggle-lg toggle-success" value={this.state.editingMode}
