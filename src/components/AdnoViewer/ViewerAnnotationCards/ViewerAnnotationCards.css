@@ -42,4 +42,12 @@
 
 .btn-show-more{
     margin-top: 10px;
+    gap: 10px;
+}
+
+.btn-line-one-card{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
 }

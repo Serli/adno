@@ -5,7 +5,7 @@ import { buildTagsList } from "../../../../../Utils/utils";
 import ReactHtmlParser from 'react-html-parser';
 import OneCardFullView from "./OneCardFullView";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faBullseye, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 class OneCardView extends Component {
     constructor(props) {
@@ -40,12 +40,16 @@ class OneCardView extends Component {
                 <h5 className="card-title adno-card-title">{this.annotationBody()}</h5>
 
 
-                {
-                    this.props.annotation.body.filter(anno => anno.type === "AdnoRichText")[0] &&
-                    this.props.annotation.body.filter(anno => anno.type === "AdnoRichText")[0].value.length > 2 &&
-                    <button type="button" className="btn btn-outline btn-info btn-sm btn-show-more" onClick={() => this.setState({ fullView: true })}> Voir <FontAwesomeIcon icon={faPlusCircle} /></button>
-                }
+                <div className="btn-line-one-card">
 
+                    {
+                        this.props.annotation.body.filter(anno => anno.type === "AdnoRichText")[0] &&
+                        this.props.annotation.body.filter(anno => anno.type === "AdnoRichText")[0].value.length > 2 &&
+                        <button type="button" className="btn btn-outline btn-info btn-sm btn-show-more" onClick={() => this.setState({ fullView: true })}> Voir <FontAwesomeIcon icon={faPlusCircle} /></button>
+                    }
+
+                    <button type="button" onClick={() => this.props.clickOnTarget()} className="btn btn-outline btn-success btn-sm btn-show-more"> <FontAwesomeIcon icon={faBullseye} /></button>
+                </div>
 
                 {
                     this.state.fullView &&

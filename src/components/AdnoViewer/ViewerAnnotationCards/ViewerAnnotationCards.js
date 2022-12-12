@@ -25,6 +25,9 @@ class ViewerAnnotationCards extends Component {
         this.setState({ currentAnno: -1 })
     }
 
+    clickOnTarget(index){
+        this.state.currentAnno === index ? this.unselectAnno() : this.selectAnno(index)
+    }
 
 
     render() {
@@ -32,8 +35,8 @@ class ViewerAnnotationCards extends Component {
             <div className="adno-viewer-list-annos">
                 {this.props.annotations.map((annotation, index) => {
                     return (
-                        <div key={`viewer_anno_${index}`} onClick={() => this.state.currentAnno === index ? this.unselectAnno() : this.selectAnno(index)} className={this.state.currentAnno === index ? "adno-viewer-card selectedAnno" : "adno-viewer-card"}>
-                            <OneCardView annotation={annotation} />
+                        <div key={`viewer_anno_${index}`} className={this.state.currentAnno === index ? "adno-viewer-card selectedAnno" : "adno-viewer-card"}>
+                            <OneCardView annotation={annotation} clickOnTarget={() => this.clickOnTarget(index)} />
                         </div>
                     )
                 })}
