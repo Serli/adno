@@ -1,6 +1,8 @@
 .list_annotations{
     display: flex;
     flex-direction: column;
+    height: 100vh;
+    overflow: auto;
 }
 
 .anno-card{
@@ -25,8 +27,9 @@
 
 .anno-cards{
     display: flex;
-    justify-content: space-between;
-    width: 90%;
+    justify-content: left;
+    gap: 15px;
+    width: 100%;
 }
 
 .label-text{
