@@ -76,7 +76,7 @@ class Project extends Component {
                         }
                         metadatasModal={this.state.showProjectMetadatas}
                         openRichEditor={(annotation) => this.setState({ updateAnnotation: true, selectedAnnotation: annotation })}
-                        editingMode={this.state.editingMode}
+                        editingMode={this.props.editMode}
                         annotations={this.state.annotations}
                         updateAnnos={(updated_annos) => this.setState({ annotations: updated_annos })}
                         selectedProject={this.state.selectedProject}

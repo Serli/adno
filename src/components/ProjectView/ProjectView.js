@@ -2,7 +2,7 @@ import { Component } from "react";
 import { withRouter } from "react-router";
 
 // Import FontAwesome icons
-import { faCopy, faDownload, faEye, faMagnifyingGlass, faMinusCircle, faPenToSquare, faPlusCircle, faPlusSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faCopy, faDownload, faEye, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Import popup alerts
@@ -20,8 +20,7 @@ class ProjectView extends Component {
         this.state = {
             nbAnnotations: 0,
             imgSource: "",
-            imgWidth: 0,
-            moreOptions: false
+            imgWidth: 0
         }
     }
 
@@ -151,41 +150,22 @@ class ProjectView extends Component {
 
                         {
                             process.env.ADNO_MODE === "FULL" &&
-                                <div className="tooltip" data-tip="Editer">
-                                    <button type="button" className="btn btn-md btn-primary" onClick={() => this.props.history.push(`/project/${this.props.project.id}/edit`)}> <FontAwesomeIcon icon={faPenToSquare} /> </button>
-                                </div>
+                            <div className="tooltip" data-tip="Editer">
+                                <button type="button" className="btn btn-md btn-primary" onClick={() => this.props.history.push(`/project/${this.props.project.id}/edit`)}> <FontAwesomeIcon icon={faPenToSquare} /> </button>
+                            </div>
                         }
 
+                        <div className="tooltip" data-tip="Supprimer">
+                            <button type="button" className="btn btn-md btn-outline btn-error" onClick={() => deleteProj(this.props.project.id)}>    <FontAwesomeIcon icon={faTrash} />  </button>
+                        </div>
+                        <div className="tooltip" data-tip="Dupliquer">
+                            <button type="button" className="btn btn-md btn-outline btn-info" onClick={() => duplicate(this.props.project.id)}><FontAwesomeIcon icon={faCopy} /></button>
+                        </div>
 
+                        <div className="tooltip" data-tip="Télécharger">
+                            <a id={"download_btn_" + this.props.project.id} href={createExportProjectJsonFile(this.props.project.id)} download={this.props.project.title + ".json"} className="btn btn-md btn-outline btn-success"> <FontAwesomeIcon icon={faDownload} />  </a>
+                        </div>
 
-                        {
-                            this.state.moreOptions ?
-                                <div className="tooltip" data-tip="Cacher les options">
-                                    <button type="button" className="btn btn-md" onClick={() => this.setState({ moreOptions: !this.state.moreOptions })}>  {this.state.moreOptions ? <FontAwesomeIcon icon={faMinusCircle} /> : <FontAwesomeIcon icon={faPlusCircle} />} </button>
-                                </div>
-                                :
-                                <div className="tooltip" data-tip="Afficher plus d'options">
-                                    <button type="button" className="btn btn-md" onClick={() => this.setState({ moreOptions: !this.state.moreOptions })}>  {this.state.moreOptions ? <FontAwesomeIcon icon={faMinusCircle} /> : <FontAwesomeIcon icon={faPlusCircle} />} </button>
-                                </div>
-                        }
-
-                        {
-                            this.state.moreOptions &&
-                            <>
-
-                                <div className="tooltip" data-tip="Supprimer">
-                                    <button type="button" className="btn btn-md btn-outline btn-error" onClick={() => deleteProj(this.props.project.id)}>    <FontAwesomeIcon icon={faTrash} />  </button>
-                                </div>
-                                <div className="tooltip" data-tip="Dupliquer">
-                                    <button type="button" className="btn btn-md btn-outline btn-info" onClick={() => duplicate(this.props.project.id)}><FontAwesomeIcon icon={faCopy} /></button>
-                                </div>
-
-                                <div className="tooltip" data-tip="Télécharger">
-                                    <a id={"download_btn_" + this.props.project.id} href={createExportProjectJsonFile(this.props.project.id)} download={this.props.project.title + ".json"} className="btn btn-md btn-outline btn-success"> <FontAwesomeIcon icon={faDownload} />  </a>
-                                </div>
-
-                            </>
-                        }
                     </div>
                 </div>
             </div>
