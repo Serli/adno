@@ -9,7 +9,7 @@ class SidebarAnnotations extends Component {
     render() {
 
         return (
-            <div id="mySidebar" className={this.props.sidebarStatus ? "sidebar-opened" : "sidebar"}>
+            <div id="mySidebar" className={this.props.sidebarStatus && this.props.editingMode ? "sidebar-opened-w-modal" : this.props.sidebarStatus && !this.props.editingMode ? "sidebar-opened" : "sidebar"}>
                 {
                     this.props.editingMode ?
                         <AnnotationCards updateProject={(updatedProject) => this.props.updateProject(updatedProject)} selectedProject={this.props.selectedProject} openRichEditor={(annotation) => { this.props.openRichEditor(annotation) }} annotations={this.props.annotations} updateAnnos={(updated_annos) => this.props.updateAnnos(updated_annos)} />

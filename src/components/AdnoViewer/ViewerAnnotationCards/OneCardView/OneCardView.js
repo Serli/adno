@@ -3,20 +3,19 @@ import { Component } from "react";
 // Import Utils
 import { buildTagsList } from "../../../../../Utils/utils";
 import ReactHtmlParser from 'react-html-parser';
+import OneCardFullView from "./OneCardFullView";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 class OneCardView extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            fullView: false
+        }
     }
 
-    componentDidMount() {
-
-        this.printItesm()
-
-
-    }
-
-    printItesm = () => {
+    annotationBody = () => {
         if (this.props.annotation.body[0] && this.props.annotation.body[0].value) {
             let txt = ReactHtmlParser(this.props.annotation.body[0].value)
 
@@ -24,7 +23,7 @@ class OneCardView extends Component {
 
             if (filteredTXT && filteredTXT.length > 1) {
                 return [filteredTXT[0], filteredTXT[1]]
-            }else{
+            } else {
                 return filteredTXT
             }
 
@@ -33,14 +32,25 @@ class OneCardView extends Component {
         }
 
     }
-
-
     render() {
         return (
             <div className="anno-card-body">
                 <h6 className="card-subtitle mb-2 text-muted"> {buildTagsList(this.props.annotation)} </h6>
 
-                <h5 className="card-title adno-card-title">{this.printItesm()}</h5>
+                <h5 className="card-title adno-card-title">{this.annotationBody()}</h5>
+
+
+                {
+                    this.props.annotation.body.filter(anno => anno.type === "AdnoRichText")[0] &&
+                    this.props.annotation.body.filter(anno => anno.type === "AdnoRichText")[0].value.length > 2 &&
+                    <button type="button" className="btn btn-outline btn-info btn-sm btn-show-more" onClick={() => this.setState({ fullView: true })}> Voir <FontAwesomeIcon icon={faPlusCircle} /></button>
+                }
+
+
+                {
+                    this.state.fullView &&
+                    <OneCardFullView fullAnnotation={this.props.annotation} closeFullView={() => this.setState({ fullView: false })} />
+                }
             </div >
         )
     }

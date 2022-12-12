@@ -12,6 +12,8 @@
     width: 100%;
     flex-direction: column;
     display: flex;
+    overflow: auto;
+    height: 100%;
 }
 
 .adno-viewer-card{
@@ -36,4 +38,8 @@
 
 .selectedAnno{
     border: 2px solid gold !important;
+}
+
+.btn-show-more{
+    margin-top: 10px;
 }
