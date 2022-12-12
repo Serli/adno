@@ -47,7 +47,6 @@ class AdnoRichText extends Component {
     }
   });
 
-
   deleteAnnotation = () => {
     var annotationID = this.props.selectedAnnotation.id
     var annos = this.props.annotations;

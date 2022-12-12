@@ -45,7 +45,7 @@ class Project extends Component {
 
     render() {
         return (
-            <div className={this.state.sidebarOpened ? "adno-project-view-sb-opened" : "adno-project-view"}>
+            <div className={this.state.annotations.length > 0 ? "adno-project-view-sb-opened" : "adno-project-view"}>
 
                 {
                     this.state.showProjectMetadatas && this.state.editingMode ?
@@ -64,19 +64,26 @@ class Project extends Component {
                 }
 
 
+                {
+                    this.state.annotations.length > 0 &&
 
-                <SidebarAnnotations
-                    sidebarStatus={this.state.sidebarOpened}
-                    closeNav={() => {
-                        this.setState({ sidebarOpened: false })
-                    }
-                    }
-                    metadatasModal={this.state.showProjectMetadatas}
-                    openRichEditor={(annotation) => this.setState({ updateAnnotation: true, selectedAnnotation: annotation })}
-                    editingMode={this.state.editingMode} annotations={this.state.annotations} updateAnnos={(updated_annos) => this.setState({ annotations: updated_annos })}
-                    selectedProject={this.state.selectedProject}
-                    updateProject={(updatedProject) => this.setState({ selectedProject: updatedProject })}
-                />
+                    <SidebarAnnotations
+                        sidebarStatus={this.state.sidebarOpened}
+                        closeNav={() => {
+                            this.setState({ sidebarOpened: false })
+                        }
+                        }
+                        metadatasModal={this.state.showProjectMetadatas}
+                        openRichEditor={(annotation) => this.setState({ updateAnnotation: true, selectedAnnotation: annotation })}
+                        editingMode={this.state.editingMode}
+                        annotations={this.state.annotations}
+                        updateAnnos={(updated_annos) => this.setState({ annotations: updated_annos })}
+                        selectedProject={this.state.selectedProject}
+                        updateProject={(updatedProject) => this.setState({ selectedProject: updatedProject })}
+                    />
+                }
+
+
 
                 <div className="navbar bg-neutral text-neutral-content">
 
@@ -99,14 +106,7 @@ class Project extends Component {
                             <label className="cursor-pointer label label-toggle">
                                 <label>Mode édition</label>
                                 <input type="checkbox" className="toggle toggle-lg toggle-success" value={this.state.editingMode}
-                                    onChange={() => {
-
-                                        if (!this.state.sidebarOpened && !this.state.editingMode) {
-                                            this.setState({ sidebarOpened: true })
-                                        }
-
-                                        this.setState({ editingMode: !this.state.editingMode })
-                                    }}
+                                    onChange={() => this.setState({ editingMode: !this.state.editingMode })}
                                     checked={this.state.editingMode} />
                             </label>
 
@@ -117,7 +117,7 @@ class Project extends Component {
                 </div>
 
 
-                <div className={this.state.sidebarOpened ? "adno-viewer-rightbar-without-annos" : "adno-viewer-rightbar-without-annos-sbclosed"}>
+                <div className={this.state.annotations.length > 0 ? "adno-viewer-rightbar-without-annos" : "adno-viewer-rightbar-without-annos-sbclosed"}>
                     <div className="col">
                         <div className={this.state.sidebarOpened ? "right-card-opened" : "right-card-closed"}>
                             <div className="card">

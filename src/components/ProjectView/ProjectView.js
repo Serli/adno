@@ -137,9 +137,9 @@ class ProjectView extends Component {
                 <div className="card-body">
                     <h2 className="card-title">{this.props.project.title}</h2>
                     <p className="card-text">{this.props.project.description ? this.props.project.description : "Aucune description disponible pour ce projet"}</p>
-                    <p className="card-text"><small className="text-muted">Créé le {this.props.project.creation_date}</small></p>
-                    <p className="card-text"><small className="text-muted">Dernière mise à jour : {this.props.project.last_update}</small></p>
-                    <p className="card-text"><small className="text-muted">  <span className="badge badge-primary badge-lg">{this.state.nbAnnotations}</span> annotation(s)</small></p>
+                    <p className="card-text"><small className="text-muted">Créé le {new Date(this.props.project.creation_date).toLocaleDateString()}</small></p>
+                    <p className="card-text"><small className="text-muted">Dernière mise à jour le  {new Date(this.props.project.last_update).toLocaleDateString()}</small></p>
+                    <p className="card-text"><small className="text-muted">  <span className="badge badge-primary badge-lg">{this.state.nbAnnotations > 0 ? this.state.nbAnnotations : "Aucune"} annotation{this.state.nbAnnotations > 1 && "s"}</span> </small></p>
 
 
                     <div className="project_vw_btns">
@@ -154,9 +154,18 @@ class ProjectView extends Component {
                                 </div>
                         }
 
-                        <div className="tooltip" data-tip="Afficher plus d'options">
-                            <button type="button" className="btn btn-md" onClick={() => this.setState({ moreOptions: !this.state.moreOptions })}>  {this.state.moreOptions ? <FontAwesomeIcon icon={faMinusCircle} /> : <FontAwesomeIcon icon={faPlusCircle} />} </button>
-                        </div>
+
+
+                        {
+                            this.state.moreOptions ?
+                                <div className="tooltip" data-tip="Cacher les options">
+                                    <button type="button" className="btn btn-md" onClick={() => this.setState({ moreOptions: !this.state.moreOptions })}>  {this.state.moreOptions ? <FontAwesomeIcon icon={faMinusCircle} /> : <FontAwesomeIcon icon={faPlusCircle} />} </button>
+                                </div>
+                                :
+                                <div className="tooltip" data-tip="Afficher plus d'options">
+                                    <button type="button" className="btn btn-md" onClick={() => this.setState({ moreOptions: !this.state.moreOptions })}>  {this.state.moreOptions ? <FontAwesomeIcon icon={faMinusCircle} /> : <FontAwesomeIcon icon={faPlusCircle} />} </button>
+                                </div>
+                        }
 
                         {
                             this.state.moreOptions &&
