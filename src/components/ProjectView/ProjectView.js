@@ -2,7 +2,7 @@ import { Component } from "react";
 import { withRouter } from "react-router";
 
 // Import FontAwesome icons
-import { faCopy, faDownload, faMagnifyingGlass, faMinusCircle, faPenToSquare, faPlusCircle, faPlusSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faCopy, faDownload, faEye, faMagnifyingGlass, faMinusCircle, faPenToSquare, faPlusCircle, faPlusSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Import popup alerts
@@ -143,14 +143,16 @@ class ProjectView extends Component {
 
 
                     <div className="project_vw_btns">
+
+
+                        <div className="tooltip" data-tip="Prévisualiser">
+                            <button type="button" className="btn btn-md btn-primary" onClick={() => this.props.history.push(`/project/${this.props.project.id}/view`)}> <FontAwesomeIcon icon={faEye} />   </button>
+                        </div>
+
                         {
-                            process.env.ADNO_MODE === "FULL" ?
-                                <div className="tooltip" data-tip="Prévisualiser / Editer">
-                                    <button type="button" className="btn btn-md btn-primary" onClick={() => this.props.history.push("/project/" + this.props.project.id)}> <FontAwesomeIcon icon={faMagnifyingGlass} />  {process.env.ADNO_MODE === "FULL" && <p> / <FontAwesomeIcon icon={faPenToSquare} /> </p>} </button>
-                                </div>
-                                :
-                                <div className="tooltip" data-tip="Prévisualiser">
-                                    <button type="button" className="btn btn-md btn-primary" onClick={() => this.props.history.push("/project/" + this.props.project.id)}> <FontAwesomeIcon icon={faMagnifyingGlass} /></button>
+                            process.env.ADNO_MODE === "FULL" &&
+                                <div className="tooltip" data-tip="Editer">
+                                    <button type="button" className="btn btn-md btn-primary" onClick={() => this.props.history.push(`/project/${this.props.project.id}/edit`)}> <FontAwesomeIcon icon={faPenToSquare} /> </button>
                                 </div>
                         }
 

@@ -39,7 +39,7 @@ class AdnoRichText extends Component {
         class: Header,
         config: {
           placeholder: 'Votre titre',
-          levels: [1, 2, 3],
+          levels: [1, 2],
           defaultLevel: 1
         }
       },

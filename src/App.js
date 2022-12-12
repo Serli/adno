@@ -38,30 +38,34 @@ export default class App extends Component {
 
     render() {
         return (
-                <HashRouter history={history}>
-                    <Switch>
-                        <Route exact path="/new">
-                            <NewProject />
-                        </Route>
+            <HashRouter history={history}>
+                <Switch>
+                    <Route exact path="/new">
+                        <NewProject />
+                    </Route>
 
-                        <Route exact path="/project/:id">
-                            <Project />
-                        </Route>
-                        
-                        <Route exact path="/search">
-                            <AdnoUrls />
-                        </Route>
-                        
-                        <Route exact path="/">
-                            <HomeWithProjects />
-                        </Route>
+                    <Route exact path="/project/:id/edit">
+                        <Project editMode={true}/>
+                    </Route>
 
-                        <Route>
-                            <NotFound />
-                        </Route>
+                    <Route exact path="/project/:id/view">
+                        <Project editMode={false} />
+                    </Route>
 
-                    </Switch>
-                </HashRouter>
+                    <Route exact path="/search">
+                        <AdnoUrls />
+                    </Route>
+
+                    <Route exact path="/">
+                        <HomeWithProjects />
+                    </Route>
+
+                    <Route>
+                        <NotFound />
+                    </Route>
+
+                </Switch>
+            </HashRouter>
         );
     }
 

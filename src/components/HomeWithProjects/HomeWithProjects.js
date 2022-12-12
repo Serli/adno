@@ -94,7 +94,7 @@ class HomeWithProjects extends Component {
         return (
             <div id="container_with_projects" className="adno_container">
 
-                <h1>ADNO</h1>
+                <h1>ADNO BETA</h1>
 
                 <form id="myForm">
                     <div className="input-group mb-3 add_url">

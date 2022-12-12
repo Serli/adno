@@ -38,6 +38,7 @@ class Project extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props.editMode);
         if (!checkIfProjectExists(this.props.match.params.id)) {
             this.props.history.push("/")
         }
@@ -48,10 +49,10 @@ class Project extends Component {
             <div className={this.state.annotations.length > 0 ? "adno-project-view-sb-opened" : "adno-project-view"}>
 
                 {
-                    this.state.showProjectMetadatas && this.state.editingMode ?
+                    this.state.showProjectMetadatas && this.props.editMode ?
                         <ProjectEditMetadatas updateProject={(updatedProject) => this.setState({ selectedProject: updatedProject })} selectedProject={this.state.selectedProject} closeProjectMetadatas={() => this.setState({ showProjectMetadatas: false })} />
                         :
-                        this.state.showProjectMetadatas && !this.state.editingMode &&
+                        this.state.showProjectMetadatas && !this.props.editMode &&
                         <ProjectMetadatas selectedProject={this.state.selectedProject} closeProjectMetadatas={() => this.setState({ showProjectMetadatas: false })} />
                 }
 
@@ -93,7 +94,7 @@ class Project extends Component {
                         <a id={"download_btn_" + this.state.selectedProject.id} href={createExportProjectJsonFile(this.state.selectedProject.id)} download={this.state.selectedProject.title + ".json"} className="btn btn-md"> <FontAwesomeIcon icon={faDownload} /> </a>
                     }
 
-                    <button onClick={() => this.setState({ showProjectMetadatas: true })} className="btn btn-md"><FontAwesomeIcon icon={this.state.editingMode ? faFilePen : faFile} /></button>
+                    <button onClick={() => this.setState({ showProjectMetadatas: true })} className="btn btn-md"><FontAwesomeIcon icon={this.props.editMode ? faFilePen : faFile} /></button>
 
 
                     <p>{this.state.selectedProject.title} {this.state.selectedProject.autor && `(${this.state.selectedProject.autor})`} </p>
@@ -105,9 +106,16 @@ class Project extends Component {
 
                             <label className="cursor-pointer label label-toggle">
                                 <label>Mode édition</label>
-                                <input type="checkbox" className="toggle toggle-lg toggle-success" value={this.state.editingMode}
-                                    onChange={() => this.setState({ editingMode: !this.state.editingMode })}
-                                    checked={this.state.editingMode} />
+                                <input type="checkbox" className="toggle toggle-lg toggle-success" value={this.props.editMode}
+                                    onChange={() => {
+                                        if (this.props.editMode) {
+                                            this.props.history.push(`/project/${this.props.match.params.id}/view`)
+                                        } else {
+                                            this.props.history.push(`/project/${this.props.match.params.id}/edit`)
+                                        }
+                                    }
+                                    }
+                                    checked={this.props.editMode} />
                             </label>
 
 
@@ -123,11 +131,11 @@ class Project extends Component {
                             <div className="card">
                                 {
                                     !this.state.updateAnnotation
-                                        && this.state.editingMode ?
+                                        && this.props.editMode ?
                                         <AdnoEditor showMetadatas={this.state.showProjectMetadatas} updateAnnos={(annos) => this.setState({ annotations: annos })} openRichEditor={(annotation) => this.setState({ updateAnnotation: true, selectedAnnotation: annotation })} closeNav={() => {
                                             this.setState({ sidebarOpened: false })
                                         }} />
-                                        : !this.state.updateAnnotation &&
+                                        : !this.state.updateAnnotation  && !this.props.editMode &&
                                         <AdnoViewer updateAnnos={(annos) => this.setState({ annotations: annos })} />
                                 }
                             </div>

@@ -63,7 +63,6 @@
 .ce-toolbar__actions {
     padding-right: 5px;
     display: flex;
-    position: relative;
     left: 0;
     opacity: 1 !important
 }
